@@ -1,0 +1,16 @@
+<card-group datasource="{datasource}" card-click="gotoview" hide-count-search="true" can-search="false" can-sort="false" id="ynjwk">
+  <border-layout slot="item" fill-parent="true" padding="false" vertical-overflow="hidden" hidden="{!item}" id="q7kpj">
+    <start direction="row" background-color="ui-01" vertical-align="center" shrink="0" id="a5prx">
+      <button icon="carbon:close--outline" kind="ghost" hidden="{item.closehide}" on-click="clearvalue" on-click-arg="{item}" padding="false" id="yav4w"/>
+    </start>
+    <middle direction="column" background-color="ui-01" horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="ma68d">
+      <label label="{item.label}" required="{item.requiredstate}" theme="14-regular" id="vpw2g"/>
+      <label label="{item.value}" hidden="{item.showvaluefield}" id="zqvxd"/>
+      <button kind="secondary" hidden="{item.showbutton1field}" icon="maximo:document--attachments" on-click="gotoviewBtn" on-click-arg="{item.viewindex}" tag-value="{app.state.attachCount}" tag-type="dark-gray" id="w2jeb"/>
+      <label label="{item.desc}" hidden="{item.showdescfield}" id="m73v2"/>
+    </middle>
+    <end direction="row" background-color="ui-01" horizontal-align="end" vertical-align="center" id="w7z7j">
+      <button icon="carbon:chevron--right" kind="ghost" on-click="gotoviewBtn" on-click-arg="{item.viewindex}" padding="false" id="qwz5p"/>
+    </end>
+  </border-layout>
+</card-group>

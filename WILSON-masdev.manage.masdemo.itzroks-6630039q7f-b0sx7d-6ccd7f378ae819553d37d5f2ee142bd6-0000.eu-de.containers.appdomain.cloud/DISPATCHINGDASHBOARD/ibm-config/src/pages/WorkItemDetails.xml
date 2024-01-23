@@ -1,0 +1,414 @@
+<box direction="column" id="xnd6z">
+  <tabs id="jgmzr" type="default" selected="{page.params.selectedTab}">
+    <tab label="Graphical View" id="g5jz2">
+      <box padding-top="1" fill-parent="true" id="xqz55">
+        <treegrid
+          debug=""
+          layoutDatasource="{dispatchdef}"
+          datasource="{dispatchdata}"
+          loading="{!page.state.dispatchloaded}"
+          id="vj5_q"
+        />
+      </box>
+    </tab>
+    <tab hidden="true" label="Emergency Work (3)" id="e5d39">
+      <box padding-top="0.5" padding-bottom="1" id="amj_e">
+        <table
+          datasource="emergencyworkds"
+          can-resize="false"
+          display-row-count="false"
+          can-reorder-columns="false"
+          can-filter="true"
+          can-search="false"
+          id="b3gyy"
+        >
+          <view-manager
+            size="medium"
+            for-table="b3gyy"
+            auto-save="false"
+            id="q2zd5"
+          >
+            <view-manager-item
+              datasource="emergencyworkds"
+              title="Assigned"
+              id="a3385"
+            />
+            <view-manager-item
+              datasource="emergencyworkds"
+              title="Unassigned"
+              id="vze28"
+            />
+            <view-manager-item
+              datasource="emergencyworkds"
+              title="All"
+              id="qkm99"
+            />
+          </view-manager>
+          <toolbar-actions id="ym5vv">
+            <button
+              hidden="false"
+              icon="carbon:download"
+              on-click="{app.toast('Download action button clicked')}"
+              kind="ghost"
+              slot="action-button"
+              hover-tooltip="Download"
+              id="pgrp6"
+            />
+            <button
+              hidden="false"
+              icon="carbon:restart"
+              on-click="{onReload}"
+              kind="ghost"
+              slot="action-button"
+              hover-tooltip="Refresh"
+              id="hj5kh"
+            />
+          </toolbar-actions>
+          <table-column
+            name="work_record"
+            label="Work record"
+            id="wegmw"
+            width="350"
+          >
+            <link label="{item.work_record}" page="" id="z_rd3" />
+            <label
+              theme="field"
+              label="{item.issue}"
+              spacing="none"
+              padding="none"
+              id="r9zwd"
+            />
+          </table-column>
+          <table-column name="resource" width="300" label="Resource" id="g82mg">
+            <box id="a2xpn" children-sizes="20, 88">
+              <image
+                src="./common/images/alpaca.jpg"
+                allow-popup="false"
+                width="35"
+                external="false"
+                readonly="true"
+                id="jr0lk5"
+              />
+              <box id="yxwyz" fill-parent="true" direction="column">
+                <label
+                  label="Jim Smith"
+                  spacing="none"
+                  padding="none"
+                  id="m5m_d"
+                />
+                <label
+                  theme="field"
+                  label="Second class electrician"
+                  spacing="none"
+                  padding="none"
+                  id="y3gvw"
+                />
+              </box>
+            </box>
+          </table-column>
+          <table-column name="status" label="Status" id="zam_p" width="200" />
+          <table-column name="duration" label="Duration" id="jfrep" />
+          <table-column
+            name="location"
+            label="Location"
+            id="e24fb"
+            width="150"
+          />
+          <table-column
+            name="priority"
+            label="Priority"
+            id="e784bb"
+            width="150"
+          >
+            <tag-group
+              hidden="{item.priority != 1}"
+              type="dark-gray"
+              align="start"
+              wrap="true"
+              tags="{[{label: `Priority ${item.priority}`, type: 'red'}]}"
+              id="g6bpw"
+            />
+            <tag-group
+              hidden="{item.priority == 1}"
+              type="dark-gray"
+              align="start"
+              wrap="true"
+              tags="{[{label: `Priority ${item.priority}`, type: 'gray'}]}"
+              id="xvxj8"
+            />
+          </table-column>
+          <table-column
+            name="date_assigned"
+            label="Date assigned"
+            id="n4v8m"
+            width="250"
+          />
+          <table-column name="assigned_by" label="Assigned by" id="n4zz3m" />
+          <row-actions id="n9ny4g">
+            <row-action
+              on-action="{app.toast(`Coming soon`)}"
+              label="Placeholder"
+              icon="carbon:add"
+              overflow="true"
+              id="gvkg4"
+            />
+          </row-actions>
+        </table>
+      </box>
+    </tab>
+    <tab label="Assignment issues" id="x3baz">
+      <box padding-top="0.5" padding-bottom="1" id="dgw5w">
+        <table
+          datasource="skdactivityunscheduledDS"
+          can-resize="true"
+          display-row-count="true"
+          can-reorder-columns="false"
+          can-filter="true"
+          can-search="false"
+          no-data-message="No assignment issues"
+          can-download="true"
+          id="dgp7_"
+        >
+          <toolbar-actions id="mndpn">
+            <button
+              icon="carbon:undo"
+              on-click="onUndo"
+              kind="ghost"
+              slot="action-button"
+              hover-tooltip="Undo"
+              label=""
+              id="xnwn3"
+            />
+            <button
+              kind="secondary"
+              on-click="onSave"
+              slot="action-button"
+              hover-tooltip="Save"
+              disabled="{!datasource.state.canSave || page.state.disableSaveButton}"
+              label="Save"
+              id="vzwq7"
+            />
+          </toolbar-actions>
+          <table-column
+            name="id"
+            placeholder-text="Work record"
+            label="Work record"
+            width="220"
+            id="bkmj9"
+          >
+            <box direction="column" id="kwqtkk" fill-parent="true">
+              <icon-group
+                padding="{0}"
+                error-icon="{item.computedIssueIcon}"
+                error-label="{item.wonum}"
+                id="r8fkw"
+                has-error="true"
+                error-label-align="right"
+              />
+              <label
+                theme="field"
+                label="{item.name}"
+                spacing="none"
+                padding="none"
+                id="egen6"
+              />
+            </box>
+          </table-column>
+          <table-column
+            name="craft"
+            label="Craft"
+            can-sort="true"
+            width="180"
+            id="yagkd"
+          >
+            <box direction="column" fill-parent="true" id="z92md">
+              <smart-input
+                enable-custom-field="true"
+                select-lookup-attribute="craft"
+                hide-label="true"
+                value="{item.craft}"
+                loading="{item.craftLoading}"
+                placeholder="Lookup"
+                theme="dark"
+                id="vmjd9"
+                on-smart-lookup-click="openLookup"
+                on-smart-lookup-click-arg="{{assignmentid:item.assignmentid, lookupId: 'craft_lookup'}}"
+                enable-lookup-buttongroup="true"
+              />
+            </box>
+          </table-column>
+          <table-column name="skillLevel" label="Skill level" id="mbbe9">
+            <box direction="column" fill-parent="true" id="w7pgy">
+              <label
+                theme="field"
+                label="{item.skilllevel}"
+                spacing="none"
+                padding="none"
+                id="d2bxv"
+              />
+            </box>
+          </table-column>
+          <table-column
+            name="laborcode"
+            label="Labor"
+            can-sort="true"
+            width="180"
+            id="ww744"
+          >
+            <box direction="column" fill-parent="true" id="xj_8x">
+              <smart-input
+                select-lookup-attribute="laborcode"
+                enable-custom-field="true"
+                hide-label="true"
+                placeholder="Lookup"
+                enable-lookup-buttongroup="true"
+                theme="dark"
+                value="{item.laborcode}"
+                loading="{item.laborcodeLoading}"
+                id="a5epn"
+                on-smart-lookup-click="openLookup"
+                on-smart-lookup-click-arg="{{assignmentid:item.assignmentid, lookupId: 'labor_lookup'}}"
+              />
+            </box>
+          </table-column>
+          <table-column
+            name="crewType"
+            label="Crew type"
+            can-sort="true"
+            width="180"
+            id="q3zma"
+          >
+            <box direction="column" fill-parent="true" id="nmgvr">
+              <smart-input
+                enable-custom-field="true"
+                select-lookup-attribute="crewtype"
+                hide-label="true"
+                value="{item.amcrewtype}"
+                placeholder="Lookup"
+                enable-lookup-buttongroup="true"
+                theme="dark"
+                id="ynx9z"
+                loading="{item.amcrewtypeLoading}"
+                on-smart-lookup-click="openLookup"
+                on-smart-lookup-click-arg="{{assignmentid:item.assignmentid, lookupId: 'crewType_lookup'}}"
+              />
+            </box>
+          </table-column>
+          <table-column
+            name="crew"
+            label="Crew"
+            can-sort="true"
+            width="180"
+            id="n481m"
+          >
+            <box direction="column" fill-parent="true" id="x8qpz">
+              <smart-input
+                enable-custom-field="true"
+                select-lookup-attribute="crew"
+                hide-label="true"
+                value="{item.amcrew}"
+                placeholder="Lookup"
+                enable-lookup-buttongroup="true"
+                theme="dark"
+                loading="{item.amcrewLoading}"
+                on-smart-lookup-click="openLookup"
+                on-smart-lookup-click-arg="{{assignmentid:item.assignmentid, lookupId: 'crew_lookup'}}"
+                id="ej42j"
+              />
+            </box>
+          </table-column>
+          <table-column
+            name="scheduledStart"
+            placeholder-text="Scheduled start"
+            label="Scheduled start"
+            width="250"
+            id="z89w4"
+          >
+            <box
+              direction="column"
+              padding-top="{0.2}"
+              padding-bottom="{0.2}"
+              fill-parent="true"
+              id="dj7xy"
+            >
+              <smart-input
+                theme="dark"
+                value="{item.scheduledate}"
+                hide-label="true"
+                show-verbose="false"
+                id="bj3k4s"
+              />
+            </box>
+          </table-column>
+          <table-column
+            name="laborhrs"
+            placeholder-text="Duration"
+            label="Duration"
+            width="130"
+            align="start"
+            id="rxgmv"
+          >
+            <box
+              direction="column"
+              padding-top="{0.4}"
+              fill-parent="true"
+              id="ay8ja"
+            >
+              <smart-input
+                hide-label="true"
+                id="durationInput"
+                theme="dark"
+                value="{item.laborhrs}"
+                hide-step-buttons="true"
+                min="0"
+              />
+            </box>
+          </table-column>
+          <table-column
+            name="modified"
+            label="Modified"
+            can-filter="false"
+            can-sort="true"
+            width="110"
+            id="jgmae"
+          >
+            <box direction="column" fill-parent="true" id="nvn37">
+              <label
+                theme="field"
+                label="{item.computeChanged ? 'Yes' : 'No'}"
+                spacing="none"
+                padding="none"
+                id="ed_kq"
+              />
+            </box>
+          </table-column>
+          <table-details id="qrbjx">
+            <box direction="column" padding="1" id="e86p3">
+              <repeat
+                datasource="skdactivityunscheduledDS[schedulingerrors]"
+                id="zz5q3"
+              >
+                <box direction="column" slot="item" id="gp3kw">
+                  <label
+                    spacing="none"
+                    label="Error message"
+                    theme="field"
+                    id="ypnjq"
+                    hidden="{index > 0}"
+                  />
+                  <inline-notification
+                    title="{item.valmsg ? item.valmsg : item.reasoncode}"
+                    subtitle="{item.reasoncode_description}"
+                    kind="error"
+                    id="gazd8"
+                    hide-close-button="true"
+                  />
+                </box>
+              </repeat>
+            </box>
+          </table-details>
+        </table>
+      </box>
+    </tab>
+  </tabs>
+</box>

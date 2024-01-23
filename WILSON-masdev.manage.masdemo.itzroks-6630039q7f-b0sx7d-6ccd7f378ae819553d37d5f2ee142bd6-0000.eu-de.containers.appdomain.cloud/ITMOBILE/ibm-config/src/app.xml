@@ -1,0 +1,694 @@
+<maximo-application product-name="Maximo" product-name-adaptive="Maximo" controller="AppController" title="Issues and Transfers" id="itmobile" version="8.11.0.0" theme="touch" default-log-level="trace">
+  <menu slot="navigation-items" id="xdrdn">
+    <menu-item label="Issues and Transfers" icon="maximo:inventory-issue" page="main" id="rxa6e"/>
+  </menu>
+  <states id="q96_w">
+    <state name="param_requestnum" type="string" id="g3z44"/>
+    <state name="param_siteid" type="string" id="qmmwb"/>
+    <state name="allinvuses" type="object" value="{[]}" id="xn38y"/>
+    <state name="allreserveditems" type="object" value="{[]}" id="envvn"/>
+    <state name="reservationLoaded" type="boolean" value="false" id="mbp96"/>
+    <state name="selectedInvUseDSName" type="string" id="ne65a"/>
+    <state name="invUseDSTotalCount" type="number" id="x74k2"/>
+    <state name="isBackFromInvUsePage" type="boolean" value="false" id="y2apy"/>
+    <state name="isFromReservedItemsPage" type="boolean" value="true" id="vxgnw"/>
+  </states>
+  <maximo-datasource id="invUseDS" object-structure="MXAPIINVUSE" saved-query="MOBILEINVUSAGELIST" controller="InventoryUsageDataController" selection-mode="none">
+    <schema id="xwx36">
+      <attribute name="href" id="ab5v4"/>
+      <attribute name="anywhererefid" id="wyze8"/>
+      <attribute name="invuseid" unique-id="true" id="evwpe"/>
+      <attribute name="invusenum" searchable="true" index="true" id="wq4kw"/>
+      <attribute name="siteid" index="true" id="kg8g_"/>
+      <attribute name="usetype" id="xzbkv"/>
+      <attribute name="status" searchable="true" id="g7q5d"/>
+      <attribute name="fromstoreloc" searchable="true" id="yaavj"/>
+      <attribute name="orgid" id="v7wpz"/>
+      <attribute name="computedStatusLabel" computed-function="computedStatusLabel" id="qrw6a"/>
+      <attribute name="computedDueDate" computed-function="computedDueDate" id="g7apv"/>
+      <attribute name="computedFromStoreroom" computed-function="computedFromStoreroom" id="mjnr8"/>
+      <attribute name="computedShipmentlineCounts" computed-function="computedShipmentlineCounts" id="jv5ja"/>
+      <attribute name="description" searchable="true" id="qwkd8"/>
+      <attribute name="invuseline{*, anywhererefid, localref, href, invuselinesplit{*, anywhererefid}, rel.item{rotating,conditionenabled,lottype}, rel.invreserve{rel.item{rotating,conditionenabled},requestedby,requireddate,requestnum,reservedqty,invreserveid}}" id="p43az"/>
+      <attribute name="invuseline._dbcount--invuselinecount" id="wbbqd"/>
+    </schema>
+    <maximo-datasource-override id="invUseDS4Cal_local" saved-query="CREATEDLOCALLY" pre-load="false" order-by="invusenum" id-attribute="invuseid" selection-mode="single" page-size="20" offline-immediate-download="false" controller="InventoryUsageDataController"/>
+  </maximo-datasource>
+  <maximo-datasource id="reservationsListDS" object-structure="MXAPIINVRES" saved-query="MOBILERESLISTISSUE" order-by="itemnum" controller="ReservationsListDataController" selection-mode="multiple" clear-selection-on-search="false" offline-immediate-download="true">
+    <schema id="w5d59">
+      <attribute name="invreserveid" unique-id="true" id="p78rz"/>
+      <attribute name="siteid" index="true" id="e4mb9"/>
+      <attribute name="requestnum" index="true" id="vmpa6"/>
+      <attribute name="itemnum" searchable="true" id="zvm9k"/>
+      <attribute name="itemsetid" id="kdrnd"/>
+      <attribute name="itemtype" id="y4y7p"/>
+      <attribute name="item" id="v5ba2">
+        <attribute name="description--itemdesc" searchable="true" id="dmbgj"/>
+        <attribute name="rotating" id="bdrpv"/>
+        <attribute name="conditionenabled" id="mm96_"/>
+        <attribute name="lottype--lottype" id="bgm9e"/>
+      </attribute>
+      <attribute name="assetnum" id="pk8gk"/>
+      <attribute name="oplocation" id="m3w5k"/>
+      <attribute name="requestedby" id="qgn2m"/>
+      <attribute name="mrnum" searchable="true" id="ydkar"/>
+      <attribute name="wonum" searchable="true" id="rjaze"/>
+      <attribute name="location" searchable="true" id="z479z"/>
+      <attribute name="storelocsiteid" id="vbgz5"/>
+      <attribute name="tostoreloc" id="a2w2w"/>
+      <attribute name="reservedqty" searchable="true" id="g5be5"/>
+      <attribute name="calqty" persistent="false" searchable="false" id="vqz36"/>
+      <attribute name="binnum" searchable="true" id="rndmq"/>
+      <attribute name="requireddate" id="yey7z"/>
+      <attribute name="pendingqty" id="qjvmj"/>
+      <attribute name="restype" id="bdq57"/>
+      <attribute name="conditioncode" id="da83n"/>
+      <attribute name="computedDueDate" computed-function="_computeDueDate" type="STRING" id="yk8pg"/>
+      <attribute name="glaccount" id="p5wdy"/>
+    </schema>
+    <maximo-datasource-override id="reservationsListDS_cal" pre-load="false" order-by="itemnum" id-attribute="invreserveid" selection-mode="multiple" page-size="20" offline-immediate-download="false"/>
+  </maximo-datasource>
+  <maximo-datasource id="synonymdomainDS" lookup-data="true" id-attribute="domainid" object-structure="mxapisynonymdomain" where="domainid=&quot;INVUSESTATUS&quot;">
+    <schema id="wgwqq">
+      <attribute name="value" searchable="true" id="p9bv9"/>
+      <attribute name="maxvalue" searchable="true" id="bgye2"/>
+      <attribute name="description" searchable="true" id="zen8b"/>
+      <attribute name="domainid" searchable="true" id="yj9yw"/>
+      <attribute name="valueid" unique-id="true" searchable="true" id="kq62b"/>
+      <attribute name="siteid" searchable="true" id="jj3m6"/>
+      <attribute name="orgid" searchable="true" id="arvym"/>
+      <attribute name="defaults" id="n4bqk"/>
+    </schema>
+    <maximo-datasource-override id="synonymdomainDS_type" where="domainid=&quot;INVUSETYPE&quot;"/>
+  </maximo-datasource>
+  <pages id="pages">
+    <page id="main" controller="SubMenuPageController">
+      <header-template title="Issues and Transfers" show-current-page-in-bread-crumb="false" id="mk7v8"/>
+      <box direction="column" background-color="ui-01" padding="0.5" id="ag_nj">
+        <list id="b3wx4">
+          <list-item label="Issue reserved items" on-item-click="subMenuListGoto" on-item-click-arg="reservationsList" id="v942e">
+            <border-layout fill-parent="true" background-color="ui-01" padding="0.5" id="jxq7d">
+              <end width="20" horizontal-overflow="hidden" id="w8yjn">
+                <box vertical-align="end" direction="row" horizontal-align="end" fill-parent="true" id="av858">
+                  <icon icon="carbon:chevron--right" id="g8jza"/>
+                </box>
+              </end>
+            </border-layout>
+          </list-item>
+        </list>
+      </box>
+      <box direction="column" background-color="ui-01" padding="0.5" id="zm93x">
+        <list id="nz4x4">
+          <list-item label="Inventory usage records" on-item-click="subMenuListGoto" on-item-click-arg="invUsageList" id="ax94j">
+            <border-layout fill-parent="true" padding="true" id="r_2pm">
+              <end width="20" horizontal-overflow="hidden" id="kr8_j">
+                <box vertical-align="end" direction="row" horizontal-align="end" fill-parent="true" id="y93y9">
+                  <icon icon="carbon:chevron--right" id="b4q78"/>
+                </box>
+              </end>
+            </border-layout>
+          </list-item>
+        </list>
+      </box>
+    </page>
+    <page id="reservationsList" controller="ReservationsListPageController">
+      <states id="ra4d8">
+        <state name="addmoreitems" type="boolean" value="false" id="mej73"/>
+        <state name="computedPageTitle" type="string" id="r_bpn"/>
+        <state name="computedActionButton" type="string" id="qwywq"/>
+        <state name="reservedItemsInvUsage" type="string" id="vvqd5"/>
+      </states>
+      <label label="Issues and Transfers" id="yeadg"/>
+      <header-template title="{page.state.computedPageTitle}" hide-breadcrumb="true" icon-name="carbon:close" icon-action="goBack" title-column-width="{page.state.breadcrumbWidth ? page.state.breadcrumbWidth : app.state.screen.size === 'md' ? 60 : app.state.screen.size === 'lg' ? 40 : app.state.screen.size === 'xlg' ? 30 : 80}" id="y5wq3">
+        <button slot="buttons" label="{page.state.computedActionButton}" icon="carbon:shopping--cart" on-click="selectToIssue" id="r_9_g"/>
+      </header-template>
+      <content-docker docked-position="top" docked-to-header="true" id="j4xa6">
+        <data-list datasource="reservationsListDS" show-search="true" show-count="true" enable-barcode-scanner="true" readers="{[`ean_reader`]}" search-placeholder-text="Search record list" border="true" tight="true" id="yvr6_">
+          <button slot="actions" icon="carbon:renew" on-click="forceUpdateDatasource" disabled="{page.state.addmoreitems}" id="j2436"/>
+          <list-item id="xkxv5">
+            <border-layout fill-parent="true" padding="true" top-border="true" id="p2v9k">
+              <top direction="column" horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="jpqbq">
+                <adaptive-row id="q97k7">
+                  <adaptive-column small-width="100" medium-width="100" large-width="75" id="evdpd">
+                    <box padding="0.5" children-hide-overflow="true" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="ngmb6">
+                      <label label="{item.itemnum}" theme="16-bold" padding="none" id="zaar8"/>
+                      <label label="{item.itemdesc}" wrap="true" padding="none" id="q5__d"/>
+                    </box>
+                  </adaptive-column>
+                  <adaptive-column small-width="100" medium-width="100" large-width="25" id="edeqj">
+                    <box padding="0.5" children-hide-overflow="true" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="d__dg">
+                      <field value="{item.calqty}" hide-label="true" padding="none" id="qenam"/>
+                    </box>
+                  </adaptive-column>
+                </adaptive-row>
+              </top>
+              <middle horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="ym6ep">
+                <adaptive-row id="pqddk">
+                  <adaptive-column small-width="100" medium-width="100" large-width="25" id="g32_q">
+                    <box hidden="{!item.wonum}" padding="0.5" children-hide-overflow="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="pz3pe">
+                      <field label="Work Order" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 'top' : 'default'}" label-placement="top" value="{item.wonum}" id="ndbx7"/>
+                    </box>
+                    <box hidden="{!item.mrnum}" padding="0.5" children-hide-overflow="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="n7mnw">
+                      <field label="MR Number" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 'top' : 'default'}" label-placement="top" value="{item.mrnum}" id="enabk"/>
+                    </box>
+                  </adaptive-column>
+                  <adaptive-column small-width="100" medium-width="100" large-width="25" id="p35z5">
+                    <box padding="0.5" children-hide-overflow="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="g92w3">
+                      <field label="Bin" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 'none' : 'default'}" label-placement="top" value="{item.binnum}" id="r6773"/>
+                    </box>
+                  </adaptive-column>
+                  <adaptive-column small-width="100" medium-width="100" large-width="25" id="rddmn">
+                    <box padding="0.5" children-hide-overflow="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="g46ap">
+                      <field label="Due date" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 'none' : 'default'}" label-placement="top" value="{item.computedDueDate}" id="nz2yk"/>
+                    </box>
+                  </adaptive-column>
+                </adaptive-row>
+              </middle>
+            </border-layout>
+          </list-item>
+        </data-list>
+      </content-docker>
+    </page>
+    <page id="invUsageList" controller="InventoryUsageListPageController">
+      <header-template title="Inventory usage records" hide-breadcrumb="true" icon-name="carbon:close" icon-action="goback" id="vxwea"/>
+      <content-docker docked-position="top" docked-to-header="true" id="yxkav">
+        <data-list datasource="{app.device.isMaximoMobile ? 'invUseDS4Cal_local' : 'invUseDS'}" show-count="{true}" show-search="true" enable-barcode-scanner="true" readers="{[`ean_reader`]}" search-placeholder-text="Search record list" border="true" tight="true" id="pr7x8">
+          <button slot="actions" icon="carbon:renew" on-click="forceUpdateDatasource" id="k5pvv"/>
+          <list-item id="wg_nq">
+            <border-layout fill-parent="true" padding="true" top-border="true" id="aw__d">
+              <top direction="column" horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="az5kd">
+                <border-layout fill-parent="true" id="xpr2p">
+                  <start shrink="1" id="r7vja">
+                    <box padding="0.5" children-hide-overflow="true" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="qd_72">
+                      <label label="{item.invusenum}" theme="16-bold" padding="none" id="g7kqw"/>
+                      <label label="{item.description}" padding="none" id="nd73p"/>
+                    </box>
+                  </start>
+                  <end shrink="0" horizontal-align="end" id="wrkay">
+                    <box children-hide-overflow="true" direction="row" vertical-align="center" horizontal-align="end" id="x7dy5">
+                      <tag-group tags="{item.computedStatusLabel}" id="e32r5"/>
+                      <button icon="carbon:chevron--right" on-click="gotoDetails" on-click-arg="{item}" id="mz6be"/>
+                    </box>
+                  </end>
+                </border-layout>
+              </top>
+              <middle horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="z7pwm">
+                <border-layout fill-parent="true" padding="true" id="n_34v">
+                  <top horizontal-overflow="hidden" horizontal-align="start" vertical-align="start" id="wz9_k">
+                    <box padding-top="0.5" padding-bottom="0.5" id="w5d9q">
+                      <label label="{item.computedDueDate}" padding="none" id="wqrap"/>
+                    </box>
+                  </top>
+                  <start shrink="0" horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="pmbnb">
+                    <box padding-start="0.5" id="ab74v">
+                      <icon icon="carbon:location" id="vzrb4"/>
+                    </box>
+                  </start>
+                  <middle shrink="1" horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="yyw5g">
+                    <box children-hide-overflow="true" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="end" horizontal-align="start" id="q73pr">
+                      <label label="{item.computedFromStoreroom}" padding="none" id="p29ww"/>
+                      <label label="{item.computedShipmentlineCounts}" padding="none" id="b__q3"/>
+                    </box>
+                  </middle>
+                </border-layout>
+              </middle>
+            </border-layout>
+          </list-item>
+        </data-list>
+      </content-docker>
+    </page>
+    <page id="invUsage" controller="InventoryUsagePageController">
+      <states id="a73n6">
+        <state name="invusagedesc" value="" type="string" id="d97yn"/>
+        <state name="invusagefromstoreloc" value="" type="string" id="naq6q"/>
+        <state name="invusageorgid" value="" type="string" id="yy72n"/>
+        <state name="invusagesiteid" value="" type="string" id="yy7jm"/>
+        <state name="invuseid" value="" type="number" id="pem36"/>
+        <state name="isSaving" type="boolean" value="false" id="wpk69"/>
+        <state name="enableSave" type="boolean" value="false" id="aq98m"/>
+        <state name="addingmoreitems" type="boolean" value="false" id="xbe46"/>
+        <state name="itemsInvUsage" type="string" id="gvzjz"/>
+        <state name="previousItemsInvUsage" type="string" id="z_gdr"/>
+        <state name="draftInvUsage" type="boolean" value="true" id="pdqpd"/>
+        <state name="issuedItem" type="boolean" value="false" id="eyqar"/>
+        <state name="lots" value="" type="string" id="dkq6k"/>
+        <state name="clearedAfterInitialLoading" type="boolean" value="false" id="rgkkq"/>
+        <state name="assetrefreshing" type="boolean" value="false" id="ak6ge"/>
+        <state name="binrefreshing" type="boolean" value="false" id="gk6kj"/>
+      </states>
+      <json-datasource id="jsoninusageDS" pre-load="false" src="{[]}" selection-mode="none">
+        <schema id="gn2n6">
+          <attribute name="invuselinenum" id="qjgbb"/>
+          <attribute name="requestnum" id="e7yz2"/>
+          <attribute name="invuseid" id="b9bdp"/>
+          <attribute name="invuselineid" id="gaq72"/>
+          <attribute name="quantity" type="NUMBER" id="dnmdy"/>
+          <attribute name="invreserveid" id="xv2_p"/>
+          <attribute name="fromstoreloc" id="e2d54"/>
+          <attribute name="rel.rotatingassets{*}" id="q8q3x"/>
+          <attribute name="asset" id="wv357">
+            <attribute name="assetnum" id="z4j7g"/>
+            <attribute name="description" id="qk3y5"/>
+          </attribute>
+          <attribute name="fromlot" id="qk8x5"/>
+          <attribute name="tolot" id="xvq4k"/>
+          <attribute name="displaycolor" id="k7gaa"/>
+          <attribute name="_id" unique-id="true" id="ynb8v"/>
+        </schema>
+      </json-datasource>
+      <json-datasource id="lotsFilteredByBinDS" pre-load="false" src="{[]}" selection-mode="single" id-attribute="invbalancesid"/>
+      <json-datasource id="invsplitjsonDS" pre-load="false" src="{[]}" selection-mode="none" controller="InventoryUsageDataController">
+        <schema id="zww7b">
+          <attribute name="invuselinesplitid" unique-id="true" id="zqxbz"/>
+          <attribute name="frombin" id="enwqb"/>
+          <attribute name="fromlot" id="rmjna"/>
+          <attribute name="quantity" type="NUMBER" id="m4yj3"/>
+          <attribute name="rotassetnum" id="g5a3x"/>
+          <attribute name="displayedQuantity" computed-function="computedSplitQuantity" id="qbqkz"/>
+          <attribute name="displayedBin" computed-function="computedSplitBin" id="k8y5n"/>
+        </schema>
+      </json-datasource>
+      <maximo-datasource id="assetLookupDS" offline-immediate-download="true" lookup-data="true" object-structure="MXAPIASSET" saved-query="MOBILEASSET" selection-mode="multiple" geometry-format="geojson">
+        <schema id="ynk_5">
+          <attribute name="itemnum" searchable="true" id="rzqm9"/>
+          <attribute name="assetuid" unique-id="true" id="y6a7w"/>
+          <attribute name="assetnum" searchable="true" id="ax6b6"/>
+          <attribute name="description" searchable="true" id="mm_5w"/>
+          <attribute name="assethealth" searchable="true" id="rp_gd"/>
+          <attribute name="assettag" searchable="true" id="nwz6x">
+            <lookup-map name="assettag" id="jda3e">
+              <lookup-return lookup-field="displayValue" datasource-field="assettag" id="bgbp3"/>
+              <lookup-return lookup-field="value" datasource-field="assettag" id="pqpdp"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="assettype" searchable="true" id="y83be">
+            <lookup-map name="assettype" id="pq6k7">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="nwv8w"/>
+              <lookup-return lookup-field="value" datasource-field="value" id="r3e7b"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="binnum" searchable="true" id="yngn7"/>
+          <attribute name="isrunning" searchable="false" id="n_vzb"/>
+          <attribute name="itemnum" searchable="true" id="vkyy2">
+            <lookup-map name="assetitemnum" id="qvbba">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="n3dra"/>
+              <lookup-return lookup-field="value" datasource-field="itemnum" id="kwp6z"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="location" searchable="true" id="j_p8p">
+            <lookup-map name="assetloc" id="a4jze">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="ay8m_"/>
+              <lookup-return lookup-field="value" datasource-field="location" id="xmj28"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="location.description--locationdesc" searchable="true" id="gkezk"/>
+          <attribute name="manufacturer" searchable="true" id="ezv4p">
+            <lookup-map name="assetmanufacturer" id="gexka">
+              <lookup-return lookup-field="displayValue" datasource-field="name" id="jaqxm"/>
+              <lookup-return lookup-field="value" datasource-field="company" id="yjmyr"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="priority" searchable="true" id="a86bp"/>
+          <attribute name="serialnum" searchable="true" id="b2a32">
+            <lookup-map name="assetserialnum" id="xxnw6">
+              <lookup-return lookup-field="displayValue" datasource-field="serialnum" id="r8j58"/>
+              <lookup-return lookup-field="value" datasource-field="serialnum" id="pkwjx"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="siteid" searchable="true" id="qa6j4"/>
+          <attribute name="vendor" searchable="true" id="z349m"/>
+          <attribute name="assetchildren" child-relationship="children" id="k6bb2"/>
+          <attribute name="location.glaccount--locglaccount" searchable="true" id="zvnp3"/>
+          <attribute name="autolocate" id="krpvd"/>
+          <attribute name="parent" searchable="true" id="xmker"/>
+          <attribute name="status" searchable="true" id="ngzmj">
+            <lookup-map name="assetstatus" id="pzerj">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="jx58d"/>
+              <lookup-return lookup-field="value" datasource-field="value" id="wyd5n"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="failurecode" searchable="true" id="j8wyv"/>
+          <attribute name="location.locpriority--locpriority" id="dmarb"/>
+          <attribute name="location.failurecode--locfailurecode" id="pw595"/>
+          <attribute name="rel.failurelist{failurelist,failurecode.description,failurecode.failurecode}" id="jrvdr"/>
+          <attribute name="rel.assetmeter{metername,active,rollover,lastreading,readingtype,lastreadingdate,measureunitid,meter.measureunit.description--unitdescription,sequence}" id="zp6y9"/>
+          <attribute name="classstructure.hierarchypath" id="raarn"/>
+          <attribute name="asset_parent.description--parentassetdesc" id="k43xe"/>
+          <attribute name="serviceaddress.formattedaddress--formattedaddress" searchable="true" id="m96dn"/>
+          <attribute name="statusdesc.description--assetstatusdesc" id="wyrx2"/>
+          <attribute name="assetmeter" id="e_2vk">
+            <attribute name="_dbcount--assetmetercount" id="evm3w"/>
+          </attribute>
+          <attribute name="rel.assetspec{assetattrid,measureunitid,numvalue,alnvalue,assetattribute.description--assetattributedesc,displaysequence}" id="v2728"/>
+          <attribute name="assetspec" id="qga_d">
+            <attribute name="_dbcount--assetspeccount" id="pm5q8"/>
+          </attribute>
+        </schema>
+      </maximo-datasource>
+      <maximo-datasource id="inventbalDS" pre-load="true" saved-query="ACTIVEITEMSITE" object-structure="mxapiinvbal" lookup-data="true" selection-mode="single">
+        <schema id="v7dnz">
+          <attribute name="invbalancesid" unique-id="true" id="m22z2"/>
+          <attribute name="siteid" searchable="true" id="z683_"/>
+          <attribute name="itemnum" searchable="true" id="aqea5"/>
+          <attribute name="location" searchable="true" id="xvyzn"/>
+          <attribute name="binnum" searchable="true" id="mjej6"/>
+          <attribute name="curbal" searchable="true" id="evykd"/>
+          <attribute name="lotnum" searchable="true" id="kjzbn"/>
+          <attribute name="conditioncode" id="a8qzj"/>
+        </schema>
+      </maximo-datasource>
+      <maximo-datasource id="issuetoLookupDS" offline-immediate-download="true" pre-load="true" saved-query="SERVICEREQUEST" object-structure="mxapiperson" lookup-data="true" selection-mode="single">
+        <schema id="arjnd">
+          <attribute name="personid" unique-id="true" id="yym5m"/>
+          <attribute name="displayname" searchable="true" id="z4_7m"/>
+        </schema>
+      </maximo-datasource>
+      <header-template title="{page.state.title}" hide-breadcrumb="true" icon-name="carbon:close" icon-action="closeInvUsagePage" title-column-width="{page.state.breadcrumbWidth ? page.state.breadcrumbWidth : app.state.screen.size === 'sm' ? 65 : app.state.screen.size === 'md' ? 60 : app.state.screen.size === 'lg' ? 40 : app.state.screen.size === 'xlg' ? 30 : 70}" id="b7wxv">
+        <button slot="buttons" label="Save" icon="carbon:save" kind="secondary" on-click="saveInventoryUsage" disabled="{(!page.state.enableSave)}" loading="{page.state.isSaving}" id="v7_kg"/>
+        <button slot="buttons" label="Issue" icon="carbon:checkmark" on-click="issueInventoryUsage" disabled="{page.state.draftInvUsage || page.state.issuedItem || page.state.invalidInput || page.state.readonlyState}" id="nnpgp"/>
+      </header-template>
+      <content-docker docked-position="top" docked-to-header="true" id="rxpw4">
+        <label label="Description" id="mey5a"/>
+        <box direction="row" vertical-align="center" horizontal-align="start" padding-start="1" padding-top="0.5" padding-bottom="0.5" background-color="field-01" fill-parent="true" id="x39dr">
+          <text-input id="invusagedesc" label="Inventory usage description" value="{page.state.invusagedesc}" on-change="computeEnableSave" readonly="{page.state.readonlyState}" required="true"/>
+        </box>
+        <box direction="row" vertical-align="center" padding-start="1" padding-top="0.5" padding-bottom="0.5" id="bgr33">
+          <data-list datasource="jsoninusageDS" show-count="true" show-search="false" enable-barcode-scanner="false" readers="{[`ean_reader`]}" search-placeholder-text="Search record list" border="true" tight="true" id="xx397">
+            <button slot="actions" icon="Carbon:add" disabled="{page.state.issuedItem}" on-click="openSelectReservedItems" id="a4v2r"/>
+            <list-item id="y9pwp">
+              <border-layout fill-parent="true" padding="true" top-border="true" id="gezz6">
+                <top direction="column" horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="ed_bn">
+                  <adaptive-row id="ebxn8">
+                    <adaptive-column small-width="100" medium-width="100" large-width="57" id="z_57k">
+                      <box padding="0.5" children-hide-overflow="true" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="x5_x6">
+                        <label label="{item.itemnum}" theme="16-bold" padding="none" id="x4jkw"/>
+                        <label label="{item.description}" padding="none" wrap="true" id="r44v8"/>
+                      </box>
+                    </adaptive-column>
+                    <adaptive-column small-width="80" medium-width="85" large-width="33" id="ybee6">
+                      <box padding="0.5" children-hide-overflow="true" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="p8mnd">
+                        <smart-input value="{item.quantity}" min="0" step="1" hide-step-buttons="false" theme="dark" hide-label="true" invalid="{item.haswarning}" invalid-text="{item.errormsgtext}" readonly="{page.state.readonlyState}" on-change="validateInput" on-change-arg="{item}" id="vrmkp"/>
+                      </box>
+                    </adaptive-column>
+                    <adaptive-column small-width="20" medium-width="15" large-width="10" small-horizontal-align="end" medium-horizontal-align="end" large-horizontal-align="end" id="zazk_">
+                      <box padding="0.5" children-hide-overflow="true" direction="column" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" horizontal-align="end" id="dm4q4">
+                        <button icon="carbon:delete" disabled="{page.state.readonlyState || page.state.issuedItem}" on-click="showDelConfirmation" on-click-arg="{item}" id="kyn7d"/>
+                      </box>
+                    </adaptive-column>
+                  </adaptive-row>
+                </top>
+                <middle horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="mv6ww">
+                  <adaptive-row id="vbbj9">
+                    <adaptive-column small-width="100" medium-width="100" large-width="15" id="gx4bm">
+                      <box padding="0.5" children-hide-overflow="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="rykmn">
+                        <field label="Line" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 'top' : 'default'}" label-placement="top" value="{item.invuselinenum}" field-color="{item.displaycolor}" id="xmr9a"/>
+                      </box>
+                    </adaptive-column>
+                    <adaptive-column small-width="100" medium-width="100" large-width="15" id="qedwq">
+                      <box padding="0.5" children-hide-overflow="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="p3_b2">
+                        <field label="Work Order" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 'top' : 'default'}" label-placement="top" value="{item.refwo}" field-color="{item.displaycolor}" id="qjv_v"/>
+                      </box>
+                    </adaptive-column>
+                    <adaptive-column small-width="100" medium-width="100" large-width="20" id="nw_v2">
+                      <box padding="0.5" children-hide-overflow="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="kby9z">
+                        <field label="Bin" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 'none' : 'default'}" label-placement="top" value="{item.frombin}" id="ajmgy"/>
+                      </box>
+                    </adaptive-column>
+                    <adaptive-column small-width="100" medium-width="100" large-width="20" id="v3_ge">
+                      <box padding="0.5" children-hide-overflow="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="e5y_2">
+                        <field label="Quantity due" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 'none' : 'default'}" label-placement="top" value="{item.calqty}" id="v_9mz"/>
+                      </box>
+                    </adaptive-column>
+                    <adaptive-column small-width="80" medium-width="90" large-width="20" id="j66_e">
+                      <box padding="0.5" children-hide-overflow="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="b4_x9">
+                        <field label="Due date" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 'none' : 'default'}" label-placement="top" value="{item.computedDueDate}" id="z46g6"/>
+                      </box>
+                    </adaptive-column>
+                    <adaptive-column small-width="20" medium-width="10" large-width="10" small-horizontal-align="end" medium-horizontal-align="end" large-horizontal-align="end" id="kdbmr">
+                      <box fill-parent="true" children-hide-overflow="true" vertical-align="center" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" horizontal-align="end" id="rp8a9">
+                        <button icon="carbon:chevron--right" on-click="openDetailsLineItem" on-click-arg="{item}" id="d8x7a"/>
+                      </box>
+                    </adaptive-column>
+                  </adaptive-row>
+                </middle>
+              </border-layout>
+            </list-item>
+          </data-list>
+        </box>
+      </content-docker>
+      <dialogs id="dwvv9">
+        <dialog id="sysMsgDialog_invuselinedel" title="System message" primary-action-text="Yes" secondary-action-text="Cancel" on-primary-action="onUserConfirmationYes" on-primary-action-arg="{{'item': jsoninusageDS.item}}" on-secondary-action="onUserConfirmationNo">
+          <label wrap="true" label="{page.state.dialogBMXMessage}" id="ymqp_"/>
+        </dialog>
+        <dialog id="sysMsgDialog_invuse_saveerr" title="Save Error">
+          <label wrap="true" label="{page.state.saveErr}" id="n29jk"/>
+        </dialog>
+        <dialog id="sysMsgDialog_invuse_saveValidationErr" title="{page.state.saveValidationErr_title}">
+          <box id="vw2k5">
+            <panel id="qdmyb">
+              <box padding="1" padding-top="2" padding-start="3" direction="row" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="d_x46">
+                <label wrap="true" label="{page.state.saveValidationErr}" padding="default" id="dz39m"/>
+              </box>
+              <box padding="1" padding-start="3" direction="row" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="gr9a8">
+                <label wrap="true" label="{page.state.saveValidationErr_lineinfo}" padding="default" id="d__33"/>
+              </box>
+            </panel>
+          </box>
+        </dialog>
+        <sliding-drawer id="invUsageLineItemDetails" on-close-action="onDetailClose" header-chevron="true" align="start" header-text="Item" content-padding="false">
+          <button icon="carbon:split-screen" hidden="{invsplitjsonDS.state.totalCount > 0 || page.state.invUsageLineItem.item.rotating}" slot="header-button" kind="secondary" on-click="configSplit" on-click-arg="{false}" id="dr9nr"/>
+          <box id="payz4">
+            <panel id="b78gk">
+              <box padding="0.5" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="qpbyy">
+                <label theme="16-bold" label="Item" padding="default" id="xeg2n"/>
+                <field value="{page.state.invUsageLineItem.description}" padding="default" id="n3g_3"/>
+              </box>
+              <box padding="0.5" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="pxq8v">
+                <label theme="16-bold" label="Quantity due" padding="default" id="v5_av"/>
+                <field value="{page.state.invUsageLineItem.calqty}" padding="default" id="mqy2z"/>
+              </box>
+              <box padding="0.5" direction="column" hidden="{invsplitjsonDS.state.totalCount > 0}" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="xgd_2">
+                <border-layout padding="false" fill-parent="true" id="pv4_x">
+                  <middle width="70" vertical-align="center" horizontal-overflow="hidden" id="wge92">
+                    <box direction="column" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="v7va3">
+                      <label theme="16-bold" label="Quantity to issue" padding="default" id="m7xa3"/>
+                    </box>
+                  </middle>
+                  <end width="30" horizontal-overflow="hidden" horizontal-align="end" id="reqn4">
+                    <number-input value="{page.state.invUsageLineItem.quantity}" readonly="{page.state.readonlyState}" min="0" step="1" hide-step-buttons="true" theme="dark" id="qrxav"/>
+                  </end>
+                </border-layout>
+              </box>
+              <box padding="0.5" direction="column" hidden="{invsplitjsonDS.state.totalCount > 0 || page.state.invUsageLineItem.item.rotating}" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="k4myr">
+                <border-layout padding="false" fill-parent="true" id="raqw3">
+                  <middle width="70" vertical-align="center" horizontal-overflow="hidden" id="jwamw">
+                    <box direction="column" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="przb3">
+                      <label theme="16-bold" label="From Bin" padding="default" id="k4dyy"/>
+                      <field value="{page.state.invUsageLineItem.frombin}" id="wevnr"/>
+                    </box>
+                  </middle>
+                  <end width="30" vertical-align="center" horizontal-overflow="hidden" horizontal-align="end" id="ewr7r">
+                    <box vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="bq_7z">
+                      <button icon="carbon:chevron--right" on-click="openBinLookup" on-click-arg="{false}" id="b9kdp"/>
+                    </box>
+                  </end>
+                </border-layout>
+              </box>
+              <box padding="0.5" direction="column" hidden="{!(page.state.invUsageLineItem.lottype === 'LOT' || page.state.invUsageLineItem.item.lottype === 'LOT')}" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="jk743">
+                <border-layout padding="false" fill-parent="true" id="m6vva">
+                  <middle width="70" vertical-align="center" horizontal-overflow="hidden" id="pgzwr">
+                    <box direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="madak">
+                      <label theme="16-bold" label="Lot" padding="default" id="baezy"/>
+                      <field value="{page.state.invUsageLineItem.fromlot}" id="gn62m"/>
+                    </box>
+                  </middle>
+                  <end width="30" vertical-align="center" horizontal-overflow="hidden" horizontal-align="end" id="ne6wy">
+                    <box vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="b47_b">
+                      <button icon="carbon:chevron--right" disabled="{!page.state.invUsageLineItem._notSaved}" on-click="openLotLookup" id="wpk_x"/>
+                    </box>
+                  </end>
+                </border-layout>
+              </box>
+              <box padding="0.5" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" hidden="{!(page.state.invUsageLineItem.item.conditionenabled||!(!page.state.invUsageLineItem.item.length || !page.state.invUsageLineItem.item[0].conditionenabled))}" id="zngkv">
+                <label theme="16-bold" label="Condition" padding="default" id="xjakk"/>
+                <field value="{page.state.invUsageLineItem.fromconditioncode}" id="pwk96"/>
+              </box>
+              <box padding-end="0.5" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" hidden="{(!page.state.invUsageLineItem.item.rotating)}" id="gzpzp">
+                <border-layout padding="false" fill-parent="true" id="g44d6">
+                  <middle width="70" vertical-align="center" horizontal-overflow="hidden" id="nb9x4">
+                    <box direction="column" vertical-align="center" fill-parent-horizontal="true" id="x9j7j">
+                      <label theme="20-regular" wrap="true" label="Assets" padding="default" id="knz7v"/>
+                    </box>
+                  </middle>
+                  <end width="30" horizontal-overflow="hidden" vertical-align="center" horizontal-align="end" id="mk7qb">
+                    <button icon="Carbon:add" on-click="openAssetLookup" loading="{page.state.loadingAsset}" id="zr5yx"/>
+                  </end>
+                </border-layout>
+                <data-list padding="{false}" datasource="invsplitjsonDS" show-count="{false}" show-search="false" enable-barcode-scanner="false" border="true" tight="true" hidden="{!invsplitjsonDS.state.itemCount}" id="nzm2j">
+                  <list-item id="xjmz7">
+                    <border-layout padding="{false}" fill-parent="true" id="rgwrk">
+                      <start horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="gyxrw">
+                        <box direction="column" fill-parent="true" id="vkm74">
+                          <box id="k473y">
+                            <label label="{item.rotassetnum}" theme="16-bold" id="vx58g"/>
+                          </box>
+                          <box id="pmnw2">
+                            <label label="{item.displayedBin}" id="gddnr"/>
+                          </box>
+                        </box>
+                      </start>
+                      <end width="30" horizontal-overflow="hidden" vertical-align="center" horizontal-align="end" id="akx9p">
+                        <button icon="Carbon:delete" hidden="true" on-click="deleteAsset" on-click-arg="{item}" id="p4bpg"/>
+                      </end>
+                    </border-layout>
+                  </list-item>
+                </data-list>
+                <box fill-parent-horizontal="true" background-color="ui-01" hidden="{invsplitjsonDS.state.itemCount}" id="zg7_r">
+                  <label label="No asset" id="w2y8b"/>
+                </box>
+              </box>
+              <box padding="0.5" direction="column" hidden="{!invsplitjsonDS.state.totalCount || page.state.invUsageLineItem.item.rotating}" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" id="qrw5_">
+                <border-layout padding="{false}" fill-parent="true" id="n957_">
+                  <start vertical-align="center" horizontal-align="start" id="rmj7p">
+                    <box vertical-align="center" horizontal-align="start" id="x9g3q">
+                      <label theme="20-regular" wrap="true" label="Split items" padding="default" id="nqkn8"/>
+                    </box>
+                  </start>
+                  <end vertical-align="center" horizontal-align="end" id="mngyk">
+                    <box vertical-align="center" horizontal-align="end" id="vy7pn">
+                      <button icon="carbon:add" on-click="configSplit" on-click-arg="{false}" id="a9yka"/>
+                    </box>
+                  </end>
+                </border-layout>
+                <data-list padding="{false}" datasource="invsplitjsonDS" show-count="{false}" show-search="false" enable-barcode-scanner="false" border="true" tight="true" id="vvb74">
+                  <list-item id="x4n47">
+                    <border-layout padding="{false}" fill-parent="true" top-border="true" id="z6zew">
+                      <start vertical-align="center" horizontal-align="start" id="m7e_j">
+                        <box direction="column" vertical-align="center" horizontal-align="start" id="e22gv">
+                          <label theme="16-bold" label="{item.displayedQuantity}" id="jd6g3"/>
+                          <label label="{item.displayedBin}" id="wqzqa"/>
+                        </box>
+                      </start>
+                      <end vertical-align="center" horizontal-align="end" id="najaw">
+                        <box vertical-align="center" horizontal-align="start" id="n5w54">
+                          <button icon="carbon:chevron--right" on-click="configSplit" on-click-arg="{item}" id="jra2_"/>
+                        </box>
+                      </end>
+                    </border-layout>
+                  </list-item>
+                </data-list>
+              </box>
+              <box padding="0.5" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="xqzx4">
+                <label theme="16-bold" label="Due date" padding="default" id="pdzvw"/>
+                <field value="{page.state.invUsageLineItem.computedDueDate}" padding="default" id="xg8gp"/>
+              </box>
+              <box padding="0.5" direction="row" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent="true" id="w9xa9">
+                <label theme="20-regular" wrap="true" label="Issue to" padding="default" id="px6q9"/>
+              </box>
+              <box padding="0.5" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="bpz8e">
+                <label theme="16-bold" label="Work order" padding="default" id="n8e96"/>
+                <field value="{page.state.invUsageLineItem.refwo}" id="jakrq"/>
+              </box>
+              <box padding="0.5" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="a75wj">
+                <label theme="16-bold" label="Location" padding="default" id="xzvaz"/>
+                <field value="{page.state.invUsageLineItem.location}" id="amd9j"/>
+              </box>
+              <box padding="0.5" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="kxyp7">
+                <label theme="16-bold" label="Asset" padding="default" id="vxjwk"/>
+                <field value="{page.state.invUsageLineItem.assetnum}" id="pr29v"/>
+              </box>
+              <box padding="0.5" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="ypq9e">
+                <border-layout padding="{false}" fill-parent="true" id="me29q">
+                  <start vertical-align="center" horizontal-align="start" id="eppmw">
+                    <box direction="column" vertical-align="center" horizontal-align="start" id="vjx_q">
+                      <label theme="16-bold" label="Person" padding="default" id="p8wvk"/>
+                      <field value="{page.state.invUsageLineItem.issuetoDisplay}" id="dvraj"/>
+                    </box>
+                  </start>
+                  <end vertical-align="center" horizontal-align="end" id="x3gag">
+                    <box vertical-align="center" horizontal-align="end" id="rm4e3">
+                      <button icon="carbon:chevron--right" on-click="openIssuetoLookup" id="yyq7z"/>
+                    </box>
+                  </end>
+                </border-layout>
+              </box>
+              <box padding="0.5" direction="column" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" vertical-align="center" fill-parent-horizontal="true" background-color="ui-01" id="bzv_m">
+                <label theme="16-bold" label="Requisition" padding="default" id="a4n9v"/>
+                <field value="{page.state.invUsageLineItem.mrnum}" id="x93aw"/>
+              </box>
+            </panel>
+          </box>
+        </sliding-drawer>
+        <sliding-drawer id="invUsageLineSplitItem" on-close-action="onSplitClose" align="start" header-text="Split item" content-padding="{false}">
+          <!--button icon="carbon:delete" hidden="{page.state.prevBin === null || page.state.prevQty === null}" slot="header-button" kind="secondary" on-click="deleteSplit" on-click-arg="{false}" id="x98_a"/-->
+          <button icon="carbon:delete" hidden="true" slot="header-button" kind="secondary" on-click="deleteSplit" on-click-arg="{false}" id="x98_a"/>
+          <button icon="carbon:checkmark" slot="header-button" kind="primary" on-click="closeDrawer" id="k4bw6"/>
+          <box direction="column" padding="0.5" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" fill-parent="true" id="qxzzw">
+            <box id="nxg7p">
+              <border-layout padding="{false}" background-color="ui-01" fill-parent="true" id="xzwve">
+                <start vertical-align="center" horizontal-align="start" id="rge6m">
+                  <box direction="column" vertical-align="center" fill-parent="true" id="qdegx">
+                    <label label="Quantity" theme="16-bold" padding="default" id="xzj6x"/>
+                  </box>
+                </start>
+                <end width="30" vertical-align="center" horizontal-align="end" id="z8b97">
+                  <box direction="column" vertical-align="center" fill-parent="true" id="dzd7p">
+                    <number-input value="{page.state.invUsageLineSplitItem.quantity}" min="0" hide-step-buttons="true" id="rzvav"/>
+                  </box>
+                </end>
+              </border-layout>
+            </box>
+            <box padding-top="0.25" id="qzgnq">
+              <border-layout padding="{false}" background-color="ui-01" fill-parent="true" id="jbvwa">
+                <start vertical-align="center" horizontal-align="start" id="z47km">
+                  <box direction="column" vertical-align="center" fill-parent="true" id="z_q6e">
+                    <label theme="16-bold" label="From Bin" padding="default" id="m45rz"/>
+                    <field value="{page.state.invUsageLineSplitItem.frombin}" hide-label="true" id="ky34q"/>
+                  </box>
+                </start>
+                <end vertical-align="center" horizontal-align="end" id="d6_3r">
+                  <box direction="column" vertical-align="center" fill-parent="true" id="ze3kr">
+                    <button icon="carbon:chevron--right" on-click="openBinLookup" on-click-arg="{page.state.invUsageLineSplitItem}" id="vdw2p"/>
+                  </box>
+                </end>
+              </border-layout>
+            </box>
+          </box>
+        </sliding-drawer>
+        <lookup id="assetLookup" width="99" datasource="assetLookupDS" on-close-action="selectAssets" show-search="true" lookup-attributes="{['description', 'assetnum', 'binnum']}" show-count="true" lookup-heading="Asset" enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}"/>
+        <lookup id="binLookup" width="99" datasource="inventbalDS" on-item-click="chooseBinNumber" show-search="true" lookup-attributes="{['binnum', 'curbal']}" show-count="true" lookup-heading="Bin" enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}"/>
+        <lookup id="lotLookup" width="99" datasource="lotsFilteredByBinDS" on-item-click="chooseLotNumber" show-search="true" lookup-attributes="{['lotnum']}" show-count="true" lookup-heading="Lot" enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}"/>
+        <lookup id="issuetoLookup" width="99" datasource="issuetoLookupDS" on-item-click="chooseIssueto" show-search="true" lookup-attributes="{['displayname']}" show-count="true" lookup-heading="Issue To" enable-barcode-scanner="false"/>
+      </dialogs>
+    </page>
+  </pages>
+  <messages id="q_y_p">
+    <message id="dueDate" text="Due date {0}"/>
+    <message id="fromStoreroom" text="From storeroom {0}"/>
+    <message id="shipmentlineCounts" text="{0} usage lines"/>
+    <message id="invusage_issued" text="Inventory usage Issued"/>
+    <message id="invusage_saved" text="Inventory usage Saved"/>
+    <message id="createInvUsage" text="Create inventory usage"/>
+    <message id="AssetBin" text="From bin: {0}"/>
+    <message id="splitBin" text="From bin: {0}"/>
+    <message id="splitQuantity" text="Quantity: {0}"/>
+    <message id="notAvailable" text="N/A"/>
+    <message id="quantityNotMatch" text="The sum of split quantities should equal to the quantity set in inventory usage line."/>
+    <message id="delConfirmBmxLabel" text="Are you sure you want to delete the Item?"/>
+    <message id="onlySupportReservedItems" text="Items without reservations must be issued from the Inventory Usage application."/>
+    <message id="invalidSplit_dialog_title" text="Invalid Split"/>
+    <message id="invalidGLAccount_dialog_title" text="Invalid Charge Account"/>
+    <message id="invalidGLAccount" text="Some inventory usage lines have missing or invalid charge account information and cannot be issued."/>
+    <message id="invalid_invuse_lines" text="(Usage lines - {0}) * From the Inventory Usage application, issue the inventory usage record to provide the missing information."/>
+    <message id="invalidRotAsset_dialog_title" text="Invalid Rotating Asset"/>
+    <message id="invalidRotAsset" text="Some inventory usage lines have missing or invalid rotating assets and cannot be issued."/>
+    <message id="invalid_invuse_lines_rotasset" text="(Usage lines - {0}) * from the Inventory Usage application, issue the inventory usage record to provide the missing information."/>
+    <message id="invalidlot_dialog_title" text="Invalid Lot"/>
+    <message id="lotValueNotSet" text="The value of Lot is empty."/>
+    <message id="invalid_invuse_lines_lot" text="Usage lines - {0} - from the Inventory Usage application. Please set the missing Lot values."/>
+    <message id="expectnumber" text="Enter a number greater than zero."/>
+    <message id="exceedreserved" text="The number cannot exceed total reserved amount."/>
+    <message id="addReservedItems" text="Add reserved items"/>
+    <message id="issuesReservedItems" text="Issues reserved items"/>
+  </messages>
+</maximo-application>

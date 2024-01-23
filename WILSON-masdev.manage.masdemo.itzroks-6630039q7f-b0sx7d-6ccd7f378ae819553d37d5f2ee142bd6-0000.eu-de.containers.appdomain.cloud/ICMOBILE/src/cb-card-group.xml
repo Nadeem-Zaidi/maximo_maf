@@ -1,0 +1,14 @@
+<card-group datasource="{page.state.selectedDS}" show-refresh="true" disconnected="{false}" refresh-disconnected-message="This feature is not available while offline" can-search="true" enable-barcode-scanner="true" readers="{[`ean_reader`]}" timeout="{45}" hide-count-search="{false}" empty-set-string="No count books found" sub-label="Check that the user’s default storeroom is defined. If you are offline, try again when you are online." id="yz_p9">
+  <ic-card-template id="iccardtemplate" chevron-kind="{'ghost'}" slot="item" show-chevron="{true}" on-chevron-click="showCBDetail" on-chevron-click-arg="{item}">
+    <wrapped-text slot="slot1" size="large" label="{item.description}" sub-label="{item.countbooknum}" id="b5d2g"/>  
+    <tag-group slot="slot2" align="start" tags="{item.computedTags}" hidden="{!item.computedTags}" id="zdnpm"/>
+    <icon fill="green" slot="slot3" icon="{item.computedCountedIcon}" size="24" hidden="{!item.computedCountedIcon}" id="kk2vz"/>
+    <field slot="slot4" wrap="true" hide-label="true" value="{item.computedCountedMessage}" hidden="{!item.computedCountedMessage}" id="reyn7"/>
+    <box slot="slot9" id="jydm4">
+      <icon fill="yellow" icon="{item.computedOverdueIcon}" size="24" hidden="{!item.computedOverdueIcon}" id="b389q"/>
+      <field wrap="false" hide-label="true" field-color="{((!item.computedOverdueIcon) ? '' : 'red60')}" value="{item.computedOverdueMessage}" hidden="{!item.computedOverdueMessage}" id="ajb8v"/>
+    </box>
+    <field slot="slot10" label="Due" label-placement="top" value="{[{'value': item.latestdue, 'type': 'date'}]}" padding="top" wrap="true" hidden="{!item.latestdue}" id="dwgk5"/>
+    <field slot="slot10" label="Last Count" label-placement="top" value="{[{'value': item.lastcount, 'type': 'date'}]}" padding="top" wrap="true" hidden="{!item.lastcount}" id="dgq4a"/>
+  </ic-card-template>
+</card-group>

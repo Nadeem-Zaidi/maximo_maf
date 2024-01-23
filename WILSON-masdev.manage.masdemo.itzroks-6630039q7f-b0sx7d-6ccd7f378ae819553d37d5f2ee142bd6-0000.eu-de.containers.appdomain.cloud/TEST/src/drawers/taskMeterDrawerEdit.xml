@@ -1,0 +1,109 @@
+<panel id="j3337">
+  <panel id="e52ev">
+    <box background-color="field-01" fill-parent-horizontal="true" hidden="{page.state.newReading}" id="k9anz">
+      <box padding=".5" direction="column" fill-parent-horizontal="true" id="xy5ng">
+        <smart-input label="Date" value="{woPlanTaskDetailds.item.computedMeterCurDate}" on-blur="validateMeterDateDetail" on-blur-arg="{item}" id="av57k"/>
+        <smart-input label="Time" value="{woPlanTaskDetailds.item.computedMeterCurTime}" on-blur="validateMeterTimeDetail" on-blur-arg="{{'datasource': woPlanTaskDetailds}}" id="g8a2q"/>
+      </box>
+    </box>
+    <data-list datasource="{page.state.assetMeterData}" show-search="false" title="{page.state.assetMeterHeader}" hidden="{!page.state.assetMeterData.state.itemCount}" id="m_zd4">
+      <border-layout slot="item" fill-parent="true" padding="false" id="jg6v9">
+        <start horizontal-overflow="hidden" id="xrvqd">
+          <box fill-child="true" padding-end=".5" fill-parent="true" children-sizes="100" id="awvjv">
+            <border-layout fill-parent="true" padding="true" id="manjb">
+              <top id="en4ra">
+                <field value="{item.metername}" padding="top" override-required="true" field-class-name="16-bold" hide-label="true" qualifier="{item.unitdescription ? item.unitdescription : item.measureunitid}" id="e6997"/>
+              </top>
+              <start width="100" vertical-align="center" horizontal-overflow="hidden" id="yz78b">
+                <box direction="row" hidden="{item.meter.metertype_maxvalue ==='CHARACTERISTIC'}" padding-bottom=".5" children-sizes="100" vertical-align="center" fill-parent="true" fill-child="true" id="w3xe3">
+                  <border-layout fill-parent="true" width="100" padding="false" id="e2v46">
+                    <top background-color="ui-01" horizontal-overflow="hidden" id="rmb3k">
+                      <box children-sizes="100" fill-child="true" fill-parent="true" id="ymw9y">
+                        <field value="{item.meter.description}" padding="top" field-class-name="16-bold" hide-label="true" id="jqj_x"/>
+                      </box>
+                    </top>
+                    <start id="amz4d">
+                      <box direction="column" children-sizes="100" padding-top="{item.newreadingFlag? 1 : 0}" vertical-align="center" fill-parent="true" fill-child="true" id="yaxpj">
+                        <smart-input value="{item.newreading}" input-kind="DECIMAL" on-blur="onFocusReadings" on-blur-arg="{item}" hide-step-buttons="true" theme="dark" hide-label="true" label="" hidden="{item.newreadingFlag}" id="ay2j5"/>
+                      </box>
+                    </start>
+                  </border-layout>
+                </box>
+                <box direction="row" hidden="{item.meter.metertype_maxvalue !=='CHARACTERISTIC'}" padding-bottom=".5" children-sizes="100" vertical-align="center" fill-parent="true" fill-child="true" id="p9qd5">
+                  <border-layout fill-parent="true" padding="true" id="x8qjj">
+                    <top background-color="ui-01" horizontal-overflow="hidden" id="zxymk">
+                      <box children-sizes="100" fill-child="true" fill-parent="true" id="gq_mz">
+                        <field value="{item.meter.description}" padding="top" field-class-name="16-bold" hide-label="true" id="b69n7"/>
+                      </box>
+                    </top>
+                    <start width="70" id="dbwz9">
+                      <box direction="column" children-sizes="100" horizontal-align="end" padding-top="1" padding-bottom="{item.meter.metertype_maxvalue ==='CHARACTERISTIC'? '0.5' : '0'}" vertical-align="center" fill-parent-horizontal="true" fill-child="true" id="dr8y7">
+                        <field value="{item.newreading}" padding="none" hide-label="true" hidden="{item.meter.metertype_maxvalue !=='CHARACTERISTIC'}" id="zprxr"/>
+                      </box>
+                    </start>
+                    <end id="b8bdw">
+                      <box vertical-align="center" hidden="{item.meter.metertype_maxvalue !=='CHARACTERISTIC'}" direction="row" horizontal-align="end" fill-parent="true" id="v4qjm">
+                        <button icon="carbon:chevron--right" kind="ghost" on-click="openMeterTaskLookupDetail" on-click-arg="{{'item': item, 'datasource': page.state.assetMeterData}}" disabled="{item.newreadingFlag}" padding="false" id="xw44d"/>
+                      </box>
+                    </end>
+                  </border-layout>
+                </box>
+              </start>
+            </border-layout>
+          </box>
+        </start>
+      </border-layout>
+    </data-list>
+  </panel>
+  <panel id="pbz3_">
+    <box padding-top="1" id="wx3gq"/>
+    <data-list datasource="{page.state.locationMeterData}" show-search="false" title="{page.state.locationMeterHeader}" hidden="{!page.state.locationMeterData.state.itemCount}" id="d5e6_">
+      <border-layout slot="item" fill-parent="true" padding="false" id="v25b8">
+        <top id="pem3j">
+          <field value="{item.metername}" padding="top" override-required="true" field-class-name="16-bold" hide-label="true" qualifier="{item.unitdescription ? item.unitdescription : item.measureunitid}" id="qzgwz"/>
+        </top>
+        <start horizontal-overflow="hidden" id="j77_k">
+          <box fill-child="true" padding-end=".5" fill-parent="true" children-sizes="100" id="a26qy">
+            <border-layout fill-parent="true" padding="true" id="xm8ym">
+              <start width="100" vertical-align="center" horizontal-overflow="hidden" id="k6pg9">
+                <box direction="row" hidden="{item.meter.metertype_maxvalue ==='CHARACTERISTIC'}" padding-bottom=".5" children-sizes="100" vertical-align="center" fill-parent="true" fill-child="true" id="zj5q4">
+                  <border-layout fill-parent="true" width="100" padding="false" id="vdgrq">
+                    <top background-color="ui-01" horizontal-overflow="hidden" id="g872w">
+                      <box children-sizes="100" fill-child="true" fill-parent="true" id="z35nk">
+                        <field value="{item.meter.description}" padding="top" field-class-name="16-bold" hide-label="true" id="q28p6"/>
+                      </box>
+                    </top>
+                    <start id="m3gbd">
+                      <box direction="column" children-sizes="100" vertical-align="center" fill-parent="true" fill-child="true" id="aa_2k">
+                        <smart-input value="{item.newreading}" input-kind="DECIMAL" on-blur="onFocusReadings" on-blur-arg="{item}" hide-step-buttons="true" theme="dark" hide-label="true" label="" hidden="{item.meter.metertype_maxvalue ==='CHARACTERISTIC'}" id="wqrwb"/>
+                      </box>
+                    </start>
+                  </border-layout>
+                </box>
+                <box direction="row" hidden="{item.meter.metertype_maxvalue !=='CHARACTERISTIC'}" padding-bottom=".5" children-sizes="100" vertical-align="center" fill-parent="true" fill-child="true" id="rw448">
+                  <border-layout fill-parent="true" padding="true" id="a4vkv">
+                    <top background-color="ui-01" horizontal-overflow="hidden" id="yrx2j">
+                      <box children-sizes="100" fill-child="true" fill-parent="true" id="xyexp">
+                        <field value="{item.meter.description}" padding="top" field-class-name="16-bold" hide-label="true" id="mnm2m"/>
+                      </box>
+                    </top>
+                    <start width="{item.newreadingFlag? 70 : 100}" horizontal-overflow="hidden" id="pwy6a">
+                      <box direction="column" children-sizes="100" horizontal-align="end" padding-top="1" padding-bottom="{item.meter.metertype_maxvalue ==='CHARACTERISTIC'? '0.5' : '0'}" vertical-align="center" fill-parent-horizontal="true" fill-child="true" id="med6w">
+                        <field value="{item.newreading}" padding="bottom" hide-label="true" hidden="{item.meter.metertype_maxvalue !=='CHARACTERISTIC'}" id="jjv89"/>
+                      </box>
+                    </start>
+                    <end id="xyr9p">
+                      <box vertical-align="center" hidden="{item.meter.metertype_maxvalue !=='CHARACTERISTIC'}" direction="row" horizontal-align="end" fill-parent="true" id="v4753">
+                        <button icon="carbon:chevron--right" kind="ghost" on-click="openMeterTaskLookupDetail" on-click-arg="{{'item': item, 'datasource': page.state.locationMeterData}}" padding="false" id="v5ja4"/>
+                      </box>
+                    </end>
+                  </border-layout>
+                </box>
+              </start>
+            </border-layout>
+          </box>
+        </start>
+      </border-layout>
+    </data-list>
+  </panel>
+</panel>

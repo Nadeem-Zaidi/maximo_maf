@@ -1,0 +1,68 @@
+<maximo-application product-name="Maximo Application Suite" title="API Keys" id="apikey" version="8.11.0.0" default-log-level="error" documentation-link="https://www.ibm.com/docs/en/maximo-manage/continuous-delivery" controller="AppController">
+  <messages id="bz3m3">
+    <message id="copiedtoclipboard" text="Copied to clipboard"/>
+  </messages>
+  <pages id="pages">
+    <page id="main" controller="ApiKeyPageController">
+      <states id="wb5pk">
+        <state name="selectedPage" type="number" value="0" id="jemeg"/>
+        <state name="cardGroupSelectedPanel" type="number" value="1" id="jxb4j"/>
+      </states>
+      <header-template title="API Keys" sub-title="API keys enable users to access and interact with this application by using REST API calls." hide-breadcrumb="true" id="n42_7"/>
+      <maximo-datasource id="apikeyds" object-structure="mxapiapikey" selection-mode="none" where="clientcert=0">
+        <schema id="w8_7z">
+          <attribute name="apikeytokenid" unique-id="true" id="eara2"/>
+          <attribute name="userid" searchable="true" required="true" id="ag_mk"/>
+          <attribute name="apikey" id="kx3eq"/>
+          <attribute name="expiration" required="true" sortable="false" id="n9q45"/>
+        </schema>
+      </maximo-datasource>
+      <maximo-datasource id="createapikeyds" page-size="1" object-structure="mxapiapikey" selection-mode="none">
+        <schema id="xrx9w">
+          <attribute name="apikeytokenid" unique-id="true" id="b_p5e"/>
+          <attribute name="userid" searchable="true" id="qx9e8"/>
+          <attribute name="apikey" id="d2mve"/>
+        </schema>
+      </maximo-datasource>
+      <maximo-datasource id="useridlookupds" object-structure="mxapiapikey" selection-mode="single" lookup="userid" order-by="userid">
+        <schema id="v5qrk">
+          <attribute name="userid" searchable="true" unique-id="true" id="rwbgb"/>
+          <attribute name="person.displayname" id="mqek3"/>
+        </schema>
+      </maximo-datasource>
+      <dialogs id="ndg7b">
+        <lookup id="useridlookup" datasource="useridlookupds" lookup-heading="User" show-count="true" show-search="true" tight="true" columns="{['userid', 'person.displayname']}" lookup-attributes="{['userid', 'person.displayname']}"/>
+      </dialogs>
+      <dialogs id="b2z35">
+        <dialog id="createapikeydialog" title="Add API key" on-primary-action="handleCreateNewApiKey" primary-action-text="Create" primary-button-disabled="{!apikeyds.state.canSave}" on-secondary-action="{apikeyds.popNewItem()}" secondary-action-text="Cancel" on-close-action="{apikeyds.popNewItem()}">
+          <box direction="column" fill-parent="true" id="e9yn4">
+            <label label="Select the user that the API key is for." id="rb39j"/>
+            <smart-input label="User" lookup="useridlookup" enable-lookup-buttongroup="true" select-lookup-attribute="userid" value="{apikeyds.item.userid}" id="zbarq"/>
+            <smart-input label="Token expiry in minutes" id="kn9bm" value="{apikeyds.item.expiration}"/>
+          </box>
+        </dialog>
+      </dialogs>
+      <card-group datasource="apikeyds" show-refresh="true" panel-index="{page.state.cardGroupSelectedPanel}" id="ydvrq">
+        <button slot="actions" icon="carbon:add" on-click="handleCreateApiKey" label="Add API key" kind="primary" id="a_xx_"/>
+        <card slot="item" id="z4mgb">
+          <label theme="header-small" label="{item.userid}" id="m6__m"/>
+          <field label-placement="top" label="API key" value="{item.apikey}" id="qgp97"/>
+          <link label="Copy key" on-click="handleCopyApiKey" on-click-arg="{{'item':item}}" id="wq3jj"/>
+          <button-group align="end" id="g5np7">
+            <button kind="ghost" icon="carbon:delete" on-click="handleDeleteApiKey" on-click-arg="{{'item':item}}" id="gvm5w"/>
+          </button-group>
+        </card>
+        <table slot="table" id="yj66w">
+          <table-column name="userid" id="k7jr4"/>
+          <table-column name="apikey" label="API key" id="v4dwz"/>
+          <row-actions id="wb7ne">
+            <!-- actions where we just show toasts when they are clicked -->
+            <row-action on-action="handleCopyApiKey" label="Copy key" icon="carbon:copy" overflow="false" id="v5r2a"/>
+            <!-- action where we override the arg and pass in additional data this is handled in the RefAppController deleteAction() method -->
+            <row-action on-action="handleDeleteApiKey" label="Delete" icon="carbon:delete" overflow="false" id="nbb55"/>
+          </row-actions>
+        </table>
+      </card-group>
+    </page>
+  </pages>
+</maximo-application>

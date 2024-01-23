@@ -1,0 +1,9 @@
+{
+  "name": "@maximo/SAMPLEAPP",
+  "author": "Maximo Dev <maximodev@us.ibm.com>",
+  "version": "8.11.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {},
+  "scripts": {}
+}

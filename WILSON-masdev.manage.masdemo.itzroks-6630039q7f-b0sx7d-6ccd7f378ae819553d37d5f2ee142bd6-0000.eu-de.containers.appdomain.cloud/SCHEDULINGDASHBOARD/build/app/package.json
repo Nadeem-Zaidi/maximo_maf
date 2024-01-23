@@ -1,0 +1,9 @@
+{
+  "name": "{{app_name}}",
+  "author": "{{author}}",
+  "version": "{{version}}",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {},
+  "scripts": {}
+}

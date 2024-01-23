@@ -1,0 +1,1064 @@
+<maximo-application navigator-tile-order="300" controller="AppController" theme="touch" product-name="Maximo" product-name-adaptive="Maximo" title="Service Requests" id="srmobile" version="8.11.0.0" default-log-level="error" user-menu-enabled="true" nav-initial-open-state="false">
+  <properties id="nba7e">
+    <property name="mxe.mobile.travel.prompt" id="rnmkq"/>
+    <property name="mxe.mobile.travel.radius" id="m4z4e"/>
+    <property name="mxe.mobile.travel.navigation" id="rrbw3"/>
+    <property name="sr.default.classstructureid" id="q59g2"/>
+    <property name="sr.default.priority" id="v2ez6"/>
+    <property name="sr.high.priority" id="wdj4e"/>
+    <property name="sr.filter.site" id="wx9bv"/>
+  </properties>
+  <menu slot="navigation-items" id="k9p4v">
+    <menu-item label="Service Requests" icon="maximo:service--request" page="main" id="w6_yq"/>
+    <menu-item action-type="add" label="Create Service Request" icon="maximo:add--record" page="newRequest" id="e8w5x"/>
+  </menu>
+  <states id="j84j6">
+    <state name="cacheExpiryMs" type="number" value="10000" id="xan5r"/>
+    <state name="maxvarCoordinate" type="string" value="XY" id="nbz_p"/>
+    <state name="isMobileContainer" type="boolean" value="false" id="akkj7"/>
+    <state name="selectedTopCategory" type="string" id="wd3m4"/>
+    <state name="topcategorydesc" type="string" id="ygba6"/>
+    <state name="selectedSubCategory" type="string" id="avyz5"/>
+    <state name="subcategory" type="string" id="m_vm_"/>
+    <state name="subcatDisplayIcon" type="object" id="yy82q"/>
+    <state name="currSubCategoryID" type="string" id="ym8my"/>
+    <state name="currSubCategoryDesc" type="string" id="vmrdz"/>
+    <state name="backPageName" type="string" id="g9n5w"/>
+    <state name="isback" type="boolean" value="false" id="be2_k"/>
+    <state name="isUpdateFromBack" type="boolean" value="false" id="m8xgr"/>
+    <state name="isFromDescribleReq" type="string" value="N" id="y2d3d"/>
+    <state name="pagelist" type="object" value="{[]}" id="beak6"/>
+    <state name="lastCurrSelectedID" value="0" type="number" id="w8wrk"/>
+    <state name="lastCurrSelectedDesc" value="" type="string" id="x9mry"/>
+    <state name="isMapValid" type="boolean" value="false" id="jq2xd"/>
+    <state name="attachCount" value="0" type="number" id="way_v"/>
+    <state name="valuesaved" value="false" type="boolean" id="k_r2k"/>
+    <state name="refreshActiveRequests" value="false" type="boolean" id="va2a7"/>
+    <state name="sysProp" type="object" id="yegkx">
+      <state name="filterSite" type="string" value="0" id="xmmqv"/>
+      <state name="defaultPriority" type="number" value="3" id="bkp_6"/>
+      <state name="highPriority" type="number" value="2" id="nxqr2"/>
+      <state name="defaultClassstructure" type="string" value="" id="m9r3d"/>
+    </state>
+    <state name="synonym" type="object" id="wrbb7">
+      <state name="loading" type="boolean" value="false" id="rzn39"/>
+      <state name="newSRStatus" type="object" id="wxpzz"/>
+      <state name="srClass" type="object" id="rw3b4"/>
+      <state name="activeSrStatusList" type="object" id="vk5x6"/>
+      <state name="completedSrStatusList" type="object" id="wg8p8"/>
+    </state>
+    <state name="canLoad" type="object" id="br22y">
+      <state name="sr" type="boolean" value="false" id="pmdze"/>
+      <state name="doclinks" type="boolean" value="false" id="wy5v_"/>
+      <state name="worklog" type="boolean" value="false" id="y2dr4"/>
+      <state name="ticketspec" type="boolean" value="false" id="ewyd2"/>
+      <state name="categories" type="boolean" value="false" id="a55j9"/>
+      <state name="assignedto" type="boolean" value="false" id="dm69x"/>
+    </state>
+    <state name="selectedSR" type="object" id="gaab2"/>
+  </states>
+  <maximo-datasource id="synonymdomainDS" offline-immediate-download="true" lookup-data="true" object-structure="mxapisynonymdomain" saved-query="MOBILEDOMAIN">
+    <schema id="bn686">
+      <attribute name="value" id="xp2e9"/>
+      <attribute name="maxvalue" searchable="true" id="g58pj"/>
+      <attribute name="description" id="wwwzq"/>
+      <attribute name="domainid" searchable="true" id="m2ebr"/>
+      <attribute name="valueid" unique-id="true" searchable="true" id="aakrv"/>
+      <attribute name="siteid" searchable="true" id="r27qk"/>
+      <attribute name="orgid" searchable="true" id="wz5gx"/>
+      <attribute name="defaults" searchable="true" id="avz96"/>
+    </schema>
+  </maximo-datasource>
+  <maximo-datasource id="alndomainDS" offline-immediate-download="true" lookup-data="true" object-structure="mxapialndomain" selection-mode="single">
+    <schema id="a65_p">
+      <attribute name="value" searchable="true" id="xpbp2"/>
+      <attribute name="description" id="naa79"/>
+      <attribute name="domainid" searchable="true" id="gngyn"/>
+      <attribute name="valueid" unique-id="true" searchable="true" id="rjex4"/>
+      <attribute name="siteid" searchable="true" id="pnw5r"/>
+      <attribute name="orgid" searchable="true" id="k5jyd"/>
+    </schema>
+    <maximo-datasource-override id="stateProvinceList" where="domainid=&quot;STATEPROVINCE&quot;" mobile-qbe-filter="{{'domainid': '=STATEPROVINCE'}}"/>
+  </maximo-datasource>
+  <maximo-datasource id="tableDomainDS" offline-immediate-download="true" lookup-data="true" object-structure="MXAPITABLEDOMAIN" selection-mode="single" cache-expiry-ms="{app.state.cacheExpiryMs}" page-size="5000">
+    <schema id="pq8k3">
+      <attribute name="value" searchable="true" id="e93yv"/>
+      <attribute name="description" searchable="true" id="xabb_"/>
+      <attribute name="domainid" id="q5b8d"/>
+      <attribute name="siteid" id="rx9nd"/>
+      <attribute name="orgid" id="er7gn"/>
+    </schema>
+  </maximo-datasource>
+  <maximo-datasource id="defaultSetDs" offline-immediate-download="true" lookup-data="true" object-structure="mxapiorganization" saved-query="MOBILEORG">
+    <schema id="bveym">
+      <attribute name="itemsetid" id="x4pne"/>
+      <attribute name="orgid" unique-id="true" searchable="true" id="mr8av"/>
+      <attribute name="rel.maxvars{*}" id="yd8ea"/>
+    </schema>
+  </maximo-datasource>
+  <maximo-datasource id="tktemplateds" offline-immediate-download="true" lookup-data="true" object-structure="mxapitktemplate" saved-query="SERVICEREQUESTTKTEMPLATE" order-by="sortorder" cache-expiry-ms="{app.state.cacheExpiryMs}">
+    <schema id="eybab">
+      <attribute name="class" searchable="true" id="w6nvg"/>
+      <attribute name="class_description" searchable="true" id="d3gzw"/>
+      <attribute name="classstructureid" searchable="true" index="true" id="peq2n"/>
+      <attribute name="description" searchable="true" id="ry4xb"/>
+      <attribute name="ownergroup" id="pyavb"/>
+      <attribute name="sortorder" id="zd7_9"/>
+      <attribute name="status" id="vv7x6"/>
+      <attribute name="templateid" unique-id="true" index="true" id="eaa3j"/>
+      <attribute name="tktemplateid" unique-id="true" id="kp84b"/>
+      <attribute name="instractions--instructions" id="p4n36"/>
+      <attribute name="instractions_longdescription--longinstructions" id="k5gkv"/>
+      <attribute name="rel.tktemplatespec{*,assetattribute.description--assetattributedesc,assetattribute.datatype--assetattributedatatype,assetattribute.domainid--assetattributedomainid}" id="m85zw"/>
+      <attribute name="orgid" id="p8x53"/>
+    </schema>
+    <maximo-datasource-override id="checktktds" offline-immediate-download="true" lookup-data="true" saved-query="SERVICEREQUESTTKTEMPLATE" selection-mode="single" order-by="sortorder" cache-expiry-ms="{app.state.cacheExpiryMs}"/>
+    <maximo-datasource-override id="tktempds" offline-immediate-download="true" lookup-data="true" saved-query="SERVICEREQUESTTKTEMPLATE" selection-mode="single" cache-expiry-ms="{app.state.cacheExpiryMs}"/>
+    <maximo-datasource-override id="typeValidationDS" offline-immediate-download="true" lookup-data="true" saved-query="SERVICEREQUESTTKTEMPLATE" selection-mode="single" cache-expiry-ms="{app.state.cacheExpiryMs}"/>
+  </maximo-datasource>
+  <json-datasource id="tktemplatedsui" src="{[]}"/>
+  <maximo-datasource id="allcategoryds" object-structure="mxapitkclass" offline-immediate-download="true" lookup-data="true" saved-query="MOBILECLASSSTRUCTURE" selection-mode="single" order-by="sortorder" controller="CategoryDataController" page-size="25" can-load="{app.state.isMobileContainer||app.state.canLoad.categories}">
+    <schema id="aqpwv">
+      <attribute name="classificationid" searchable="true" id="en5e5"/>
+      <attribute name="classificationdesc" searchable="true" id="wa5x6"/>
+      <attribute name="classstructureid" unique-id="true" index="true" id="jgp6e"/>
+      <attribute name="classstructureuid" id="jd3ar"/>
+      <attribute name="description" searchable="true" id="kwe8r"/>
+      <attribute name="haschildren" id="q5d5x"/>
+      <attribute name="show" id="r37za"/>
+      <attribute name="sortorder" id="zg2xx"/>
+      <attribute name="useclassindesc" id="zw82r"/>
+      <attribute name="_id" id="r_k_d"/>
+      <attribute name="_imagelibref" id="v2dw7"/>
+      <attribute name="siteid" id="qavrg"/>
+      <attribute name="orgid" id="qdyd3"/>
+      <attribute name="parent" index="true" searchable="true" id="qdye8"/>
+      <attribute name="rel.classusewith{objectname}" id="en5e2"/>
+      <attribute name="hierarchypath" id="en5ex"/>
+      <attribute name="displayIcon" local="true" id="ad68d"/>
+      <attribute name="classusewithsr" id="r_e2k">
+        <attribute name="_exists--usewithsr" index="true" id="d7re7"/>
+      </attribute>
+    </schema>
+    <maximo-datasource-override id="subcategoryds" offline-immediate-download="true" lookup-data="true" saved-query="MOBILECLASSSTRUCTURE" selection-mode="single" order-by="sortorder" cache-expiry-ms="{app.state.cacheExpiryMs}"/>
+    <maximo-datasource-override id="categoryValidationDS" offline-immediate-download="true" lookup-data="true" saved-query="MOBILECLASSSTRUCTURE" cache-expiry-ms="{app.state.cacheExpiryMs}"/>
+  </maximo-datasource>
+  <maximo-datasource id="srDS" offline-immediate-download="true" object-structure="mxapisr" saved-query="SERVICEREQUEST" order-by="reportdate desc" controller="SRDataController" selection-mode="single" auto-save="false" geometry-format="geojson" can-load="{app.state.canLoad.sr}" page-size="5">
+    <schema id="gjw7p">
+      <!-- IDs -->
+      <attribute name="ticketid" searchable="true" id="pgmxz"/>
+      <attribute name="ticketuid" unique-id="true" searchable="false" id="a763x"/>
+      <attribute name="class" searchable="false" id="z8x9a"/>
+      <attribute name="orgid" searchable="false" id="zj9_a"/>
+      <attribute name="siteid" searchable="false" id="n3pjg"/>
+      <!-- Dates -->
+      <attribute name="reportdate" searchable="false" sub-type="DATETIME" id="k8av2"/>
+      <attribute name="targetfinish" searchable="false" sub-type="DATETIME" id="qm_je"/>
+      <!-- Description -->
+      <attribute name="description" searchable="true" id="ej423"/>
+      <attribute name="description_longdescription" searchable="false" id="b4aw4"/>
+      <attribute name="computedSRDescription" computed-function="computedSRDescription" id="e7qm4"/>
+      <!-- Status -->
+      <attribute name="status" searchable="true" id="wdbj8"/>
+      <attribute name="status_description" searchable="false" id="nxdbv"/>
+      <attribute name="status_maxvalue" id="j6wea"/>
+      <attribute name="historyflag" id="x8a6q"/>
+      <!-- Category and type -->
+      <attribute name="classstructureid" id="dzzab"/>
+      <attribute name="templateid" id="yjgbb"/>
+      <attribute name="rel.ticketspecclass{*}" id="dxbrb"/>
+      <!-- Location -->
+      <attribute name="location" searchable="true" id="aj6be"/>
+      <attribute name="location.description--locationdesc" searchable="false" id="egx54"/>
+      <attribute name="autolocate" id="j8ada"/>
+      <!-- Asset -->
+      <attribute name="assetnum" searchable="true" id="m3z5g"/>
+      <attribute name="asset.description--assetdesc" searchable="false" id="pr9vv"/>
+      <attribute name="assetorgid" id="d_r6v"/>
+      <attribute name="assetsiteid" id="pv6px"/>
+      <!-- Person -->
+      <attribute name="reportedby" id="ndqkv"/>
+      <attribute name="reportedbyid" id="de4gj"/>
+      <attribute name="reportedbyname" id="rk_8j"/>
+      <attribute name="reportedphone" id="x3rq2"/>
+      <attribute name="reportedemail" id="j4rrr"/>
+      <attribute name="affectedperson" id="m64qp"/>
+      <attribute name="affectedphone" id="a_k59"/>
+      <attribute name="affectedemail" id="jxav_"/>
+      <!-- Priority -->
+      <attribute name="reportedpriority" searchable="true" id="ge9nk"/>
+      <attribute name="reportedpriority_description" searchable="false" id="bw9r8"/>
+      <attribute name="computedSRStatusPriority" computed-function="computedSRStatusPriority" id="mgz7e"/>
+      <!-- Service Address -->
+      <attribute name="serviceaddress.formattedaddress--formattedaddress" searchable="true" id="b2wr8"/>
+      <attribute name="serviceaddress.streetaddress--streetaddress" id="q32g8"/>
+      <attribute name="serviceaddress.city--city" id="xvv25"/>
+      <attribute name="serviceaddress.stateprovince--stateprovince" id="b3qwk"/>
+      <attribute name="serviceaddress.latitudey--latitudey" id="a7da6"/>
+      <attribute name="serviceaddress.longitudex--longitudex" id="gw62x"/>
+      <!-- Relationships -->
+      <attribute name="relatedwo" id="qpk5v">
+        <attribute name="_exists--relatedwoexists" id="znn8z"/>
+      </attribute>
+      <attribute name="uxworklog" id="ag9ae">
+        <attribute name="_dbcount--worklogcount" id="w74m3"/>
+      </attribute>
+      <attribute name="doclinks_srmobile" id="zv694">
+        <attribute name="_dbcount--doclinkscount" id="eyjrv"/>
+      </attribute>
+      <attribute name="computedWorklogCount" computed-function="computedWorklogCount" id="x9v9e"/>
+      <attribute name="computedDoclinksCount" computed-function="computedDoclinksCount" id="zrw8x"/>
+    </schema>
+    <maximo-datasource id="worklogDS" relationship="uxworklog" object-name="worklog" depends-on="srDS" selection-mode="none" notify-when-parent-loads="true" cache-expiry-ms="{app.state.cacheExpiryMs}" can-load="{app.state.canLoad.worklog}">
+      <schema id="xr5ym">
+        <attribute name="createdate" id="qmebe"/>
+        <attribute name="description" id="gmkmb"/>
+        <attribute name="description_longdescription" id="gmb4n"/>
+        <attribute name="createby" id="xgxmj"/>
+        <attribute name="logtype" id="k7vz6"/>
+        <attribute name="clientviewable" id="zg64j"/>
+        <attribute name="worklogid" unique-id="true" id="gmdye"/>
+        <attribute name="anywhererefid" id="n7wzy"/>
+        <attribute name="person.displayname--displayname" id="qe78e"/>
+      </schema>
+    </maximo-datasource>
+    <maximo-datasource id="attachmentDS" attachment="true" relationship="doclinks" depends-on="srDS" selection-mode="none" can-load="{app.state.canLoad.doclinks}" controller="AttachmentDataController">
+      <schema id="xad42">
+        <attribute name="*" id="yyb44"/>
+      </schema>
+    </maximo-datasource>
+    <maximo-datasource id="tkServiceAddressDS" relationship="serviceaddress" object-name="txserviceaddress" depends-on="srDS" selection-mode="none" notify-when-parent-loads="true" cache-expiry-ms="{app.state.cacheExpiryMs}">
+      <schema id="d4j34">
+        <attribute name="ticketid" id="b7p_x"/>
+        <attribute name="tkserviceaddressid" unique-id="true" id="qvap2"/>
+        <attribute name="class" id="yggkw"/>
+        <attribute name="formattedaddress" id="qw7my"/>
+        <attribute name="streetaddress" id="n2xng"/>
+        <attribute name="city" id="kpk78"/>
+        <attribute name="stateprovince" id="pv7dr"/>
+        <attribute name="latitudey" id="yxdyd"/>
+        <attribute name="longitudex" id="bjjav"/>
+      </schema>
+    </maximo-datasource>
+    <maximo-datasource id="srSpecDS" object-name="ticketspec" selection-mode="none" relationship="ticketspecclass" depends-on="srDS" cache-expiry-ms="{app.state.cacheExpiryMs}" can-load="{app.state.canLoad.ticketspec}">
+      <schema id="q8k63">
+        <attribute name="ticketid" id="w33gw"/>
+        <attribute name="ticketspecid" unique-id="true" id="b_zdv"/>
+        <attribute name="assetattrid" id="kzad7"/>
+        <attribute name="assetattribute.description" id="m4xqy"/>
+        <attribute name="alnvalue" id="bkder"/>
+        <attribute name="numvalue" id="azva2"/>
+        <attribute name="tablevalue" id="agx7g"/>
+        <attribute name="datevalue" id="r2_ev"/>
+      </schema>
+    </maximo-datasource>
+    <maximo-datasource id="srOwnerPersonDS" relationship="ownerperson" depends-on="srDS" notify-when-parent-loads="true" cache-expiry-ms="{app.state.cacheExpiryMs}" can-load="{app.state.canLoad.assignedto}">
+      <schema id="xjwk6">
+        <attribute name="displayname" id="a8w8z"/>
+        <attribute name="_imagelibref" id="qrxwy"/>
+        <attribute name="_id" unique-id="true" id="rp94m"/>
+      </schema>
+    </maximo-datasource>
+    <maximo-datasource id="srOwnerGroupDS" relationship="srpersongroup" depends-on="srDS" notify-when-parent-loads="true" cache-expiry-ms="{app.state.cacheExpiryMs}" can-load="{app.state.canLoad.assignedto}">
+      <schema id="egj5j">
+        <attribute name="description" id="q_a8m"/>
+        <attribute name="persongroup" id="jmyyg"/>
+      </schema>
+    </maximo-datasource>
+  </maximo-datasource>
+  <pages id="pages">
+    <page padding="true" id="main" path="/servicerequests" title="My active requests" icon="carbon:list" hidden="{app.state.pageLoading}" controller="SRPageController">
+      <states id="nmvrw">
+        <state name="selectedSwitch" value="0" type="number" id="w886y"/>
+        <state name="selectedDropdown" value="activerequests" type="string" id="e3kxe"/>
+        <state name="firstLogin" value="false" type="boolean" id="zyv6v"/>
+        <state name="previousPage" type="string" value="" id="wj43q"/>
+        <state name="emptystring" type="string" value="" id="e2n5w"/>
+      </states>
+      <json-datasource id="unsyncedrequests" src="{[]}" selection-mode="single" id-attribute="ticketid" auto-save="false" controller="SRDataController" cache-expiry-ms="{app.state.cacheExpiryMs}">
+        <schema id="yjypb">
+          <attribute name="ticketid" id="vvnmy"/>
+          <attribute name="ticketuid" unique-id="true" id="a5x82"/>
+          <attribute name="assetnum" id="pepxk"/>
+          <attribute name="location" id="ga3w2"/>
+          <attribute name="description" id="z5vz6"/>
+          <attribute name="description_longdescription" id="mx6gn"/>
+          <attribute name="computedSRStatusPriority" local="true" id="z7wg3"/>
+          <attribute name="computedSRDescription" local="true" id="p9_4q"/>
+          <attribute name="status_description" id="xkxe8"/>
+        </schema>
+      </json-datasource>
+      <dialogs id="w8n5y">
+        <sliding-drawer id="srIndexWorkLogDrawer" align="start" header-text="Work Log" content-padding="false">
+          <chat-log messages="{page.state.chatLogGroupData}" is-config-btn="true" visibility-checkbox="false" on-click="saveWorkLog" loading="{page.state.chatLogLoading}" can-enter-note="{!page.state.chatLogReadOnly}" id="jqawp"/>
+        </sliding-drawer>
+        <dialog id="sysMsgDialog_srpage" title="Cancel Service Request?" primary-action-text="Yes" secondary-action-text="No" on-primary-action="cancelSR" on-primary-action-arg="{{'item': app.state.selectedSR, 'action': page.state.userDialog}}" primary-kind="ghost">
+          <label wrap="true" label="{page.state.dialogBMXMessage}" id="rnz_d"/>
+        </dialog>
+      </dialogs>
+      <header-template hide-breadcrumb="true" content-switcher-selected-index="{page.state.selectedSwitch}" title-column-width="{page.state.breadcrumbWidth ? page.state.breadcrumbWidth : app.state.screen.size === 'md' ? 60 : app.state.screen.size === 'lg' ? 40 : app.state.screen.size === 'xlg' ? 30 : 80}" id="zewd_">
+        <dropdown slot="dropdown" background-color="white" selected-item="{page.state.selectedDropdown}" on-change="loadSRListData" on-change-arg="{page.state.selectedDropdown}" hide-unselected-placeholder="true" id="rzvz4">
+          <dropdown-item value="activerequests" text="Active requests" id="njkmd"/>
+          <dropdown-item value="completedrequests" text="Completed requests" id="jxr9k"/>
+          <dropdown-item value="unsyncedrequests" text="SR created on device" hidden="{!app.device.isMaximoMobile}" id="m6pad"/>
+        </dropdown>
+        <button slot="buttons" icon="carbon:add" kind="primary" on-click="openNewRequestPage" padding="false" id="yp2b9"/>
+      </header-template>
+      <stacked-panel selected-index="{page.state.selectedSwitch}" id="qzfnm">
+        <panel id="ea95m">
+          <include src="./sr-card-group.xml" id="zyw7g"/>
+        </panel>
+        <panel id="r4nev">
+          <label label="TODO" id="kpaja"/>
+        </panel>
+      </stacked-panel>
+    </page>
+    <page id="srDetails" title="Service Request" controller="SRDetailsController">
+      <states id="w8ng4">
+        <state name="worklogCount" value="0" type="number" id="ep_vj"/>
+        <state name="doclinksCount" value="0" type="number" id="vd98g"/>
+      </states>
+      <json-datasource id="srDetailSpecDSui" src="{[]}" selection-mode="none"/>
+      <dialogs id="bq4gq">
+        <dialog id="srDetailsDialog" title="Long description" size="lg">
+          <rich-text-viewer content="{app.state.selectedSR.description_longdescription}" id="vpa4q"/>
+        </dialog>
+        <sliding-drawer id="srWorkLogDrawer" align="start" header-text="Work Log" content-padding="false">
+          <chat-log messages="{page.state.chatLogGroupData}" is-config-btn="true" visibility-checkbox="false" on-click="saveWorkLog" loading="{page.state.chatLogLoading}" can-enter-note="{!page.state.chatLogReadOnly}" id="y3emv"/>
+        </sliding-drawer>
+      </dialogs>
+      <header-template title-column-width="{page.state.breadcrumbWidth ? page.state.breadcrumbWidth : app.state.screen.size === 'md' ? 60 : app.state.screen.size === 'lg' ? 40 : app.state.screen.size === 'xlg' ? 30 : 80}" id="e2w2a"/>
+      <adaptive-row id="j3jq_">
+        <adaptive-column small-width="100" medium-width="50" large-width="65" id="zvpa7">
+          <wrapped-text size="large" label="{app.state.selectedSR.computedSRDescription}" truncation-type="end" id="xdakd"/>
+        </adaptive-column>
+        <adaptive-column small-width="100" medium-width="50" large-width="35" small-horizontal-align="start" medium-horizontal-align="end" large-horizontal-align="end" id="g6aqg">
+          <tag-group type="white" hidden="{!app.state.selectedSR.status}" align="start" tags="{[{label: `${app.state.selectedSR.status_description}`}]}" id="wgm6z"/>
+          <tag-group type="dark-gray" hidden="{!app.state.selectedSR.reportedpriority}" align="start" tags="{[{label: `${app.state.selectedSR.reportedpriority_description}`}]}" id="papjx"/>
+        </adaptive-column>
+      </adaptive-row>
+      <box vertical-align="center" direction="column" horizontal-align="start" background-color="field-01" padding="0.5" id="r66b7">
+        <border-layout padding="false" background-color="field-01" fill-parent="true" top-border="true" id="bzvkq">
+          <top id="wvvdn">
+            <label label="Details" theme="20-regular" id="qgjmb"/>
+          </top>
+          <middle id="x9gn_">
+            <border-layout fill-parent="true" id="w5bpb">
+              <top id="a259b">
+                <adaptive-row id="xkbz4">
+                  <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="me3gg">
+                    <box direction="row" fill-child="true" fill-parent="true" id="bx_58">
+                      <rich-text-viewer content="{app.state.selectedSR.description_longdescription}" padding="0.5" content-limit="256" id="azj3w"/>
+                    </box>
+                  </adaptive-column>
+                  <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="wy59v">
+                    <border-layout id="dkgdb">
+                      <middle id="wnj_9">
+                        <box padding-top=".5" padding-start=".5" padding-end=".5" direction="row" horizontal-align="start" vertical-align="start" id="zern7">
+                          <field icon-label="carbon:asset" padding="none" value="{[app.state.selectedSR.assetnum, app.state.selectedSR.assetdesc]}" hide-label="true" wrap="true" id="qj_3n"/>
+                        </box>
+                        <box direction="row" padding-top=".5" padding-start=".5" padding-end=".5" id="gye4q">
+                          <field icon-label="carbon:location" padding="none" value="{[app.state.selectedSR.location, app.state.selectedSR.locationdesc]}" hide-label="true" wrap="true" id="n4e3p"/>
+                        </box>
+                      </middle>
+                    </border-layout>
+                  </adaptive-column>
+                </adaptive-row>
+              </top>
+            </border-layout>
+          </middle>
+          <bottom id="vek4w">
+            <box direction="column" id="e_57_">
+              <repeat datasource="srDetailSpecDSui" id="jp37v">
+                <box direction="column" slot="item" id="b3kza">
+                  <field field-class-name="16-bold" hide-label="true" padding="none" value="{item.assetattribute.description}" wrap="true" id="maqan"/>
+                  <field value="{item.alnvalue}" hide-label="true" hidden="{!item.alnvalue}" wrap="true" id="kqdzk"/>
+                  <field value="{item.numvalue}" hide-label="true" hidden="{!item.numvalue}" wrap="true" id="zkn9k"/>
+                  <field hidden="{!item.datevalue}" wrap="true" id="pqzyd">
+                    <sub-field value="{item.datevalue}" type="date_full_month" id="bqy96"/>
+                  </field>
+                  <field value="{item.tablevalue}" hide-label="true" hidden="{!item.tablevalue}" wrap="true" id="a85dn"/>
+                </box>
+              </repeat>
+            </box>
+          </bottom>
+        </border-layout>
+      </box>
+      <box id="jarw5">
+        <navigator width="100%" theme="ui-05" mode="{app.state.screen.size === 'sm' || page.state.rowsSelected ? 'list' : 'tile'}" fade-background-color="false" id="dbrdx">
+          <navigator-tile tile-label="Comments" pictogram="maximo:document" onclick-action="openWorkLogDrawer" onclick-action-arg="{{'item':app.state.selectedSR}}" badge-value="{page.state.worklogCount}" badge-type="dark-gray" id="avxdx"/>
+          <navigator-tile tile-label="Attachments" pictogram="maximo:document--attachments" onclick-action="openAttachmentPage" onclick-action-arg="{{'item':app.state.selectedSR}}" badge-value="{page.state.doclinksCount}" badge-type="dark-gray" id="pd69g"/>
+        </navigator>
+      </box>
+      <box id="zjjrg">
+        <adaptive-row id="w9myq">
+          <adaptive-column small-width="100" medium-width="100" large-width="33" medium-horizontal-align="start" id="a2vdn">
+            <box padding-start="1" id="zye4n">
+              <field label="Reported By" value="{(app.state.selectedSR.reportedbyname)? app.state.selectedSR.reportedbyname : app.state.selectedSR.reportedby}" wrap="true" id="epz48"/>
+            </box>
+          </adaptive-column>
+          <adaptive-column small-width="100" medium-width="100" large-width="33" medium-horizontal-align="start" id="xxv2q">
+            <box padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '0'}" id="bqz6w">
+              <field label="Reported Date" wrap="true" id="k_mrv">
+                <sub-field value="{app.state.selectedSR.reportdate}" type="date_full_month" id="wrw5n"/>
+              </field>
+              <field wrap="true" id="azby3">
+                <sub-field value="{app.state.selectedSR.reportdate}" type="time" id="vqmg8"/>
+              </field>
+            </box>
+          </adaptive-column>
+          <adaptive-column small-width="100" medium-width="100" large-width="33" medium-horizontal-align="start" id="r4gj4">
+            <box padding-start="1" id="ppy5p">
+              <field label="Service Address" value="{app.state.selectedSR.formattedaddress}" wrap="true" id="ke8rw"/>
+            </box>
+          </adaptive-column>
+        </adaptive-row>
+      </box>
+      <box padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '0' : '.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '0' : '.5'}" background-color="field-01" padding-top=".25" id="kkxyj">
+        <adaptive-row id="kryqy">
+          <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="ekpqm">
+            <box padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" id="b9x7n">
+              <image src="{srOwnerPersonDS.item._imagelibref}" hidden="{!srOwnerPersonDS.item._imagelibref}" id="b688r"/>
+              <field label="Assigned To" value="{srOwnerPersonDS.item.displayname}" hidden="{!srOwnerPersonDS.item.displayname &amp;&amp; srOwnerGroupDS.item.description}" id="x55x6"/>
+              <field label="Assigned To Group" value="{srOwnerGroupDS.item.description}" hidden="{!srOwnerGroupDS.item.description}" id="z9yjq"/>
+            </box>
+          </adaptive-column>
+          <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="xb82y">
+            <box padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '0'}" id="nx425">
+              <field label="Target Completion" wrap="true" id="bj8y9">
+                <sub-field value="{app.state.selectedSR.targetfinish}" type="date_full_month" id="arn7g"/>
+              </field>
+              <field wrap="true" id="g_apb">
+                <sub-field value="{app.state.selectedSR.targetfinish}" type="time" id="qgbwg"/>
+              </field>
+            </box>
+          </adaptive-column>
+        </adaptive-row>
+      </box>
+    </page>
+    <page id="attachments" title="Attachments" padding="true" controller="AttachmentController">
+      <panel id="m6v23">
+        <attachment-list datasource="attachmentDS" hide-when-empty="false" is-editable="{app.state.selectedSR.status_maxvalue !== &quot;RESOLVED&quot; &amp;&amp; app.state.selectedSR.status_maxvalue !== &quot;CLOSED&quot;}" show-search="false" show-managed-header="true" id="wkn3r"/>
+      </panel>
+    </page>
+    <page id="createSR" title="New request" hidden="{!page.state.canLoadPage}" controller="CreateSRController">
+      <states id="a8pz5">
+        <state name="splitViewIndex" value="0" type="number" id="rr8nj"/>
+        <state name="contactrequiredState" value="false" type="boolean" id="y48m_"/>
+        <state name="detailrequiredState" value="false" type="boolean" id="w5552"/>
+        <state name="locationrequiredState" value="false" type="boolean" id="bde8m"/>
+        <state name="assetrequiredState" value="false" type="boolean" id="pr5zq"/>
+        <state name="addressrequiredState" value="false" type="boolean" id="eak4b"/>
+        <state name="contactdetail" type="string" id="vwgpe"/>
+        <state name="contactdetails" type="object" id="q7kpp"/>
+        <state name="lastcategorydesc" type="string" id="x6dwp"/>
+        <state name="ishighpriority" value="false" type="boolean" id="kyk5a"/>
+        <state name="siteid" type="string" id="a7ye4"/>
+        <state name="srdescription" type="string" id="ax6ry"/>
+        <state name="location" type="string" id="qe5wy"/>
+        <state name="locationdesc" type="string" id="ya5bj"/>
+        <state name="assetnum" type="string" id="q5d77"/>
+        <state name="assetdesc" type="string" id="nvbky"/>
+        <state name="assetwhere" type="string" id="bykzm"/>
+        <state name="formattedaddress" type="string" id="yvymy"/>
+        <state name="streetaddress" type="string" id="nnwp7"/>
+        <state name="city" type="string" id="rnvza"/>
+        <state name="stateprovince" type="string" id="m9wwb"/>
+        <state name="latitudey" type="string" id="z6xny"/>
+        <state name="longitudex" type="string" id="dn8r7"/>
+        <state name="mapIsForAsset" type="boolean" value="1" id="weymg"/>
+        <state name="mapSelectDisabled" type="boolean" value="true" id="g3z9r"/>
+        <state name="mapValueSelected" type="object" id="y_arw"/>
+        <state name="newTicketSpecSRC" type="object" value="{[]}" id="g6z3d"/>
+        <state name="useConfirmDialog" type="boolean" value="true" id="rxrrq"/>
+        <state name="assetlocationmismatch" type="boolean" value="false" id="d8nnl"/>
+        <state name="hasInvalidAsset" type="boolean" value="false" id="z5dm4"/>
+        <state name="hasInvalidLocation" type="boolean" value="false" id="rd7dy"/>
+        <state name="canLoadPage" type="boolean" value="false" id="ejkxe"/>
+        <state name="canLoadLocationJsonMap" type="boolean" value="false" id="p4e37"/>
+        <state name="canLoadAssetJsonMap" type="boolean" value="false" id="kzg8g"/>
+        <state name="captureCoordinatesInProg" type="boolean" value="false" id="jq2an"/>
+        <state name="instructions" type="string" id="wyg9z"/>
+        <state name="isAssetEditEnabled" type="boolean" value="false" id="be6rg"/>
+      </states>
+      <custom-datasource id="srattchds" attachment="true" id-attribute="href" data-adapter="AttachmentJSONDataAdapter" pre-load="false" auto-save="false" cache-expiry-ms="{app.state.cacheExpiryMs}" selection-mode="none">
+        <schema id="sdfdJHW">
+          <attribute name="href" title="href" type="STRING" searchable="true" id="g7vxz"/>
+          <attribute name="localref" title="localref" type="STRING" id="x9pne"/>
+          <attribute name="describedBy" title="describedBy" id="zqa32"/>
+          <attribute name="filedata" title="filedata" id="e58p6"/>
+        </schema>
+      </custom-datasource>
+      <maximo-datasource id="personDS" offline-immediate-download="true" lookup-data="true" object-structure="MXAPIPERSON" saved-query="SERVICEREQUEST" selection-mode="single">
+        <schema id="xkvza">
+          <attribute name="personid" searchable="true" unique-id="true" id="pmzye"/>
+          <attribute name="firstname" searchable="true" id="pz3vn"/>
+          <attribute name="lastname" searchable="true" id="pv65p"/>
+          <attribute name="displayname" searchable="true" id="m8qq6"/>
+          <attribute name="loctoservreq" searchable="false" id="v82jq"/>
+          <attribute name="primaryphone" searchable="false" id="y7v42"/>
+          <attribute name="primaryemail" searchable="false" id="az7e9"/>
+          <attribute name="department" searchable="true" id="v82jp"/>
+        </schema>
+      </maximo-datasource>
+      <maximo-datasource id="locationLookupDS" offline-immediate-download="true" lookup-data="true" object-structure="MXAPIOPERLOC" saved-query="MOBILELOCATION" selection-mode="single" geometry-format="geojson" page-size="15">
+        <schema id="zmaq3">
+          <attribute name="locationsid" unique-id="true" id="menw3"/>
+          <attribute name="location" searchable="true" index="true" id="dprab"/>
+          <attribute name="description" searchable="true" id="xg7p9"/>
+          <attribute name="failurecode" id="w_p4x"/>
+          <attribute name="glaccount" searchable="true" id="wa5y4"/>
+          <attribute name="locpriority" searchable="false" id="kaxzm"/>
+          <attribute name="parent" searchable="false" id="pxj85"/>
+          <attribute name="locationchildren" child-relationship="syschildren" id="k7mpn"/>
+          <!-- <attribute name="rel.asset{assetnum,location,description,priority,failurecode}" id="kpbq2"/> Fix performance issue -->
+          <attribute name="locsystem.primarysystem--primarysystem" id="pg4_y"/>
+          <attribute name="systemid" id="eyj5w"/>
+          <attribute name="type" searchable="true" id="anrp6">
+            <lookup-map name="listLocationType" id="qx929">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="zemnj"/>
+              <lookup-return lookup-field="value" datasource-field="value" id="ey87r"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="status" searchable="true" id="gxzyp">
+            <lookup-map name="locationstatus" id="azj7b">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="k4k_7"/>
+              <lookup-return lookup-field="value" datasource-field="value" id="qgx_6"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="siteid" searchable="true" id="x9_rg"/>
+          <attribute name="orgid" searchable="true" id="pnyry"/>
+          <attribute name="autolocate" id="vxy3g"/>
+          <attribute name="rel.failurelist{failurelist,failurecode.description,failurecode.failurecode}" id="a7ek5"/>
+          <attribute name="serviceaddress.latitudey" id="xqjpg"/>
+          <attribute name="serviceaddress.longitudex" id="xn4yj"/>
+          <attribute name="rel.locationmeter{metername,active,rollover,lastreading,readingtype,lastreadingdate,measureunitid,meter.measureunit.description--unitdescription,sequence}" id="yq2wn"/>
+        </schema>
+        <maximo-datasource-override id="locationDS" selection-mode="multiple" offline-immediate-download="true" lookup-data="true" page-size="15"/>
+        <maximo-datasource-override id="locationMapDS" offline-immediate-download="true" lookup-data="true" has-position="true" page-size="5000"/>
+        <maximo-datasource-override id="locationHierarchyDS" offline-immediate-download="true" lookup-data="true" page-size="15"/>
+      </maximo-datasource>
+      <json-datasource id="locationJsonMapDS" src="{[]}" selection-mode="single" id-attribute="locationsid" controller="MapLocationController" can-load="{page.state.canLoadLocationJsonMap}" auto-save="false" order-by="distance" page-size="5000">
+        <schema id="kv67m">
+          <attribute name="_id" id="kx67p"/>
+          <attribute name="locationsid" unique-id="true" id="w9dme"/>
+          <attribute name="location" searchable="true" id="yjzgq"/>
+          <attribute name="description" searchable="true" id="gk2n4"/>
+          <attribute name="status_maxvalue" id="x42_4"/>
+          <attribute name="autolocate" id="awk5_"/>
+          <attribute name="distance" type="NUMBER" id="mmygk"/>
+          <attribute name="latitudey" id="zm3x4"/>
+          <attribute name="longitudex" id="qvndx"/>
+        </schema>
+      </json-datasource>
+      <maximo-datasource id="assetLookupDS" offline-immediate-download="true" lookup-data="true" object-structure="MXAPIASSET" saved-query="MOBILEASSET" selection-mode="single" geometry-format="geojson" page-size="15">
+        <schema id="ynk_5">
+          <attribute name="itemnum" searchable="true" id="zj7q5"/>
+          <attribute name="assetuid" unique-id="true" id="dwj59"/>
+          <attribute name="assetnum" searchable="true" id="k4vr_"/>
+          <attribute name="description" searchable="true" id="npn25"/>
+          <attribute name="assethealth" searchable="true" id="nq6d6"/>
+          <attribute name="assettag" searchable="true" id="wk63p">
+            <lookup-map name="assettag" id="npmx3">
+              <lookup-return lookup-field="displayValue" datasource-field="assettag" id="dxxeb"/>
+              <lookup-return lookup-field="value" datasource-field="assettag" id="dzw8r"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="assettype" searchable="true" id="ypg3j">
+            <lookup-map name="assettype" id="x57w4">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="k_pwy"/>
+              <lookup-return lookup-field="value" datasource-field="value" id="yvzgz"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="binnum" searchable="true" id="n4524"/>
+          <attribute name="isrunning" searchable="false" id="dqbj6"/>
+          <attribute name="itemnum" searchable="true" id="zm3_3">
+            <lookup-map name="assetitemnum" id="zynjx">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="xk98y"/>
+              <lookup-return lookup-field="value" datasource-field="itemnum" id="eqrw4"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="location" searchable="true" id="jnx97">
+            <lookup-map name="assetloc" id="kyd3k" datasource="locationDS">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="jz945"/>
+              <lookup-return lookup-field="value" datasource-field="location" id="xw76b"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="location.description--locationdesc" searchable="true" id="genjm"/>
+          <attribute name="manufacturer" searchable="true" id="kz4z3">
+            <lookup-map name="assetmanufacturer" id="gwnn3">
+              <lookup-return lookup-field="displayValue" datasource-field="name" id="vp22x"/>
+              <lookup-return lookup-field="value" datasource-field="company" id="q2qqb"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="priority" searchable="true" id="vvj78"/>
+          <attribute name="serialnum" searchable="true" id="mk2_2">
+            <lookup-map name="assetserialnum" id="xxnw6">
+              <lookup-return lookup-field="displayValue" datasource-field="serialnum" id="e7j6w"/>
+              <lookup-return lookup-field="value" datasource-field="serialnum" id="b32xz"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="siteid" searchable="true" id="ew2db"/>
+          <attribute name="vendor" searchable="true" id="dn6y4"/>
+          <attribute name="assetchildren" child-relationship="children" id="z7vm3"/>
+          <attribute name="location.glaccount--locglaccount" searchable="true" id="ynjy8"/>
+          <attribute name="autolocate" id="krpvd"/>
+          <attribute name="parent" searchable="true" id="yjv9q"/>
+          <attribute name="status" searchable="true" id="jzndw">
+            <lookup-map name="assetstatus" id="xqq4m">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="aep7n"/>
+              <lookup-return lookup-field="value" datasource-field="value" id="n7are"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="failurecode" searchable="true" id="n78mv"/>
+          <attribute name="location.locpriority--locpriority" id="r6ykk"/>
+          <attribute name="location.failurecode--locfailurecode" id="geexx"/>
+          <attribute name="rel.failurelist{failurelist,failurecode.description,failurecode.failurecode}" id="yx4jk"/>
+          <attribute name="rel.assetmeter{metername,active,rollover,lastreading,readingtype,lastreadingdate,measureunitid,meter.measureunit.description--unitdescription,sequence}" id="zp6y9"/>
+          <attribute name="serviceaddress.formattedaddress--formattedaddress" searchable="true" id="jq27r"/>
+          <attribute name="serviceaddress.latitudey" id="g2xj2"/>
+          <attribute name="serviceaddress.longitudex" id="vjbxj"/>
+          <attribute name="classstructure.hierarchypath" id="jr5_x"/>
+          <attribute name="asset_parent.description--parentassetdesc" id="gbdn7"/>
+          <attribute name="statusdesc.description--assetstatusdesc" id="zd3bm"/>
+          <attribute name="assetmeter" id="z7z88">
+            <attribute name="_dbcount--assetmetercount" id="wy_a8"/>
+          </attribute>
+          <attribute name="rel.assetspec{assetattrid,measureunitid,numvalue,alnvalue,assetattribute.description--assetattributedesc,displaysequence}" id="g2xqm"/>
+          <attribute name="assetspec" id="xqkg8">
+            <attribute name="_dbcount--assetspeccount" id="brmkj"/>
+          </attribute>
+        </schema>
+        <maximo-datasource-override id="assetMapDS" offline-immediate-download="true" lookup-data="true" has-position="true" page-size="5000"/>
+      </maximo-datasource>
+      <json-datasource id="assetJsonMapDS" src="{[]}" selection-mode="single" id-attribute="assetuid" controller="MapAssetController" can-load="{page.state.canLoadAssetJsonMap}" auto-save="false" order-by="distance" page-size="5000">
+        <schema id="mq2av">
+          <attribute name="_id" id="bj8jq"/>
+          <attribute name="assetuid" unique-id="true" id="k79ma"/>
+          <attribute name="assetnum" searchable="true" id="b6dmk"/>
+          <attribute name="description" searchable="true" id="ben3w"/>
+          <attribute name="status_maxvalue" id="jre6r"/>
+          <attribute name="autolocate" id="x4e43"/>
+          <attribute name="distance" type="NUMBER" id="jp5q3"/>
+          <attribute name="latitudey" id="ny8p8"/>
+          <attribute name="longitudex" id="rqq96"/>
+        </schema>
+      </json-datasource>
+      <json-datasource id="SRListds" src="{[]}" selection-mode="single" id-attribute="label">
+        <schema id="dpyn7">
+          <attribute name="label" id="pqyvz"/>
+          <attribute name="viewindex" id="k8k8k"/>
+          <attribute name="value" id="j7eq7"/>
+          <attribute name="requiredstate" id="vampr"/>
+          <attribute name="closehide" id="gxg4p"/>
+          <attribute name="showvaluefield" id="pk2we"/>
+          <attribute name="showbutton1field" id="m_4vy"/>
+          <attribute name="showdescfield" id="qmp7a"/>
+        </schema>
+      </json-datasource>
+      <json-datasource id="SRListDetailsDS" src="{[]}" selection-mode="none" id-attribute="label"/>
+      <json-datasource id="SRListContactDS" src="{[]}" selection-mode="none" id-attribute="label"/>
+      <json-datasource id="SRListLocationDS" src="{[]}" selection-mode="none" id-attribute="label"/>
+      <json-datasource id="SRListAssetDS" src="{[]}" selection-mode="none" id-attribute="label"/>
+      <json-datasource id="SRListSaDS" src="{[]}" selection-mode="none" id-attribute="label"/>
+      <json-datasource id="SRListAttachDS" src="{[]}" selection-mode="none" id-attribute="label"/>
+      <json-datasource id="newTicketSpecJDS" src="{page.state.newTicketSpecSRC}" id-attribute="tktemplatespecid" selection-mode="single" order-by="displaysequence asc">
+        <schema id="m3xkw">
+          <attribute name="ticketid" id="v9qn6"/>
+          <attribute name="templateid" type="STRING" id="n_8gr"/>
+          <attribute name="tktemplatespecid" unique-id="true" id="znab8"/>
+          <attribute name="assetattrid" id="pjq54"/>
+          <attribute name="assetattrid_description" id="wzke2"/>
+          <attribute name="assetattribute.description" id="bbvqz"/>
+          <attribute name="classstructureid" id="axjad"/>
+          <attribute name="refobjectid" id="z27az"/>
+          <attribute name="refobjectname" id="xrerb"/>
+          <attribute name="mandatory" id="b2a8m"/>
+          <attribute name="displaysequence" id="e7yqa"/>
+          <attribute name="alnvalue" sub-type="ALN" id="gx4yk"/>
+          <attribute name="numvalue" sub-type="DECIMAL" id="qyyk5"/>
+          <attribute name="tablevalue" id="wzg7v"/>
+          <attribute name="datevalue" sub-type="DATE" id="eg576"/>
+          <attribute name="assetattributedesc" id="kqm4g"/>
+          <attribute name="assetattributedatatype" id="jmn5z"/>
+          <attribute name="assetattributedatatype_maxvalue" id="p79jn"/>
+          <attribute name="assetattributedomainid" id="nxyma"/>
+        </schema>
+      </json-datasource>
+      <split-view-template managed-header="{true}" id="vnjnn" show-column-at-index="{page.state.splitViewIndex}" on-view-changed="splitViewChanged" header-back-label="New request" header-top-level-back="openPrevPage">
+        <button label="Submit" hidden="{(Number(page.state.splitViewIndex) > 0) &amp;&amp; (app.state.screen.size === 'sm')}" slot="header-buttons" loading="{srDS.state.loading}" icon="carbon:checkmark--filled" disabled="{!srDS.state.canSave}" on-click="createServiceRequest" on-click-arg="{{'item':srDS.item,'datasource':srDS,'page':page,'app':app}}" kind="primary" id="rem3v"/>
+        <button icon="carbon:chevron--left" hidden="{!(Number(page.state.splitViewIndex) > 0) || !(app.state.screen.size === 'sm')}" slot="header-buttons" loading="{srDS.state.loading}" on-click="prevSplitViewPage" on-click-arg="{{'item':srDS.item,'datasource':srDS,'page':page,'app':app}}" kind="ghost" id="ra628"/>
+        <button icon="carbon:chevron--right" hidden="{!(Number(page.state.splitViewIndex) > 0) || !(app.state.screen.size === 'sm')}" slot="header-buttons" loading="{srDS.state.loading}" on-click="nextSplitViewPage" on-click-arg="{{'item':srDS.item,'datasource':srDS,'page':page,'app':app}}" kind="ghost" id="np_dv"/>
+        <split-view-column name="view1" title="New service request" background-color="ui-01" id="gvbn6">
+          <!-- Category selected row -->
+          <border-layout id="krezz" width="100%" padding="false">
+            <middle width="100" background-color="ui-01" vertical-align="center" horizontal-overflow="hidden" horizontal-align="start" id="vadvz">
+              <label label="{app.state.topcategorydesc}" hidden="{!app.state.topcategorydesc}" color="text-02" padding="top" id="rdq6p"/>
+              <label label="{page.state.lastcategorydesc}" hidden="{!page.state.lastcategorydesc}" color="text-02" padding="top" id="bxmqe"/>
+            </middle>
+          </border-layout>
+          <!-- High Priority row -->
+          <box id="rkj7e">
+            <border-layout fill-parent="true" padding="false" vertical-overflow="hidden" id="amz87">
+              <start direction="row" background-color="ui-01" vertical-align="center" shrink="0" id="xjr88"/>
+              <middle direction="column" background-color="ui-01" horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="e5vpz">
+                <box padding-start="0.5" padding-top="0.5" id="er_6z">
+                  <label label="High priority" theme="14-regular" id="v6xx8"/>
+                </box>
+              </middle>
+              <end direction="row" background-color="ui-01" horizontal-align="end" vertical-align="center" id="nar6r">
+                <box padding-end="4.5" id="ag643">
+                  <toggle label="" toggle-label-off="{app.getLocalizedLabel('toggle_onoff_off', 'Off')}" toggle-label-on="{app.getLocalizedLabel('toggle_onoff_on', 'On')}" type="TrueFalse" toggled="{page.state.ishighpriority}" id="aveqw"/>
+                </box>
+              </end>
+            </border-layout>
+          </box>
+          <!-- Details row -->
+          <include src="./sr-attributes-list.xml" datasource="{SRListDetailsDS}" id="rabp7"/>
+          <!-- Contact Person row -->
+          <include src="./sr-attributes-list.xml" datasource="{SRListContactDS}" id="x5x4z"/>
+          <!-- Location row -->
+          <include src="./sr-attributes-list.xml" datasource="{SRListLocationDS}" id="k8qq9"/>
+          <!-- Asset row -->
+          <include src="./sr-attributes-list.xml" datasource="{SRListAssetDS}" id="wxgpv"/>
+          <!-- Service Address row -->
+          <include src="./sr-attributes-list.xml" datasource="{SRListSaDS}" id="gmx2z"/>
+          <!-- Attachment row -->
+          <include src="./sr-attributes-list.xml" datasource="{SRListAttachDS}" id="b_d87"/>
+        </split-view-column>
+        <split-view-column name="view2" id="z8d87" background-color="ui-01">
+          <box hidden="{!page.params.templateid || !tktempds.item.instructions || tktempds.item.longinstructions}" id="bjr84">
+            <box fill-parent="true" background-color="ui-01" id="amzw9">
+              <rich-text-viewer content="{tktempds.item.instructions}" padding=".5" stripped="true" id="vrkyp"/>
+            </box>
+          </box>
+          <box hidden="{!page.params.templateid || !tktempds.item.longinstructions}" id="garb7">
+            <box fill-parent="true" background-color="ui-01" id="dxpm5">
+              <rich-text-viewer content="{tktempds.item.longinstructions}" padding=".5" id="qgk2p"/>
+            </box>
+          </box>
+          <repeat datasource="newTicketSpecJDS" id="nmk94">
+            <box direction="column" slot="item" id="qvzr5">
+              <field field-class-name="16-bold" hide-label="true" padding="none" value="{item.assetattributedesc}" wrap="true" id="vab6e"/>
+              <smart-input value="{item.alnvalue}" required="{item.mandatory}" hide-label="true" select-lookup-attribute="value" enable-lookup-buttongroup="{item.assetattributedomainid !== undefined}" on-smart-lookup-click="handleALNValueSmartLookupClick" on-smart-lookup-click-arg="{{'item':item}}" hidden="{item.assetattributedatatype_maxvalue!=='ALN'}" id="vkv54"/>
+              <smart-input value="{item.numvalue}" required="{item.mandatory}" hide-label="true" hidden="{item.assetattributedatatype_maxvalue!=='NUMERIC'}" id="e8z_y"/>
+              <smart-input value="{item.datevalue}" required="{item.mandatory}" hide-label="true" hidden="{item.assetattributedatatype_maxvalue!=='DATE'}" id="avd6w"/>
+              <smart-input value="{item.tablevalue}" required="{item.mandatory}" hide-label="true" select-lookup-attribute="value" enable-lookup-buttongroup="{item.assetattributedomainid !== undefined}" on-smart-lookup-click="handleTableValueSmartLookupClick" on-smart-lookup-click-arg="{{'item':item}}" hidden="{item.assetattributedatatype_maxvalue!=='MAXTABLE'}" id="b_qwv"/>
+            </box>
+          </repeat>
+          <box vertical-align="center" direction="column" horizontal-align="start" padding=".5" id="drkax">
+            <smart-input label="Summary" value="{srDS.item.description}" required="{srDS.item.description.required}" id="nykzb"/>
+            <smart-input label="Description" value="{srDS.item.description_longdescription}" required="{srDS.item.description_longdescription.required}" rows="10" on-blur="setHubDescription" placeholder="Type or use voice to add a description" id="mw4md"/>
+          </box>
+        </split-view-column>
+        <split-view-column name="view3" background-color="ui-01" id="qyb5g">
+          <border-layout fill-parent="true" id="g_eyv">
+            <middle id="dz3mg">
+              <smart-input label="Full name" value="{srDS.item.affectedusername}" required="{srDS.item.affectedusername.required}" on-blur="setContactPersonHubInfo" placeholder="Enter name" lookup="personLookup" enable-lookup-buttongroup="true" select-lookup-attribute="displayname" invalid="{page.state.hasInvalidPerson}" id="drq75"/>
+              <smart-input label="Phone" value="{srDS.item.affectedphone}" required="{srDS.item.affectedphone.required}" id="vey54"/>
+              <smart-input label="Email" value="{srDS.item.affectedemail}" required="{srDS.item.affectedemail.required}" id="abjnq"/>
+            </middle>
+          </border-layout>
+        </split-view-column>
+        <split-view-column name="view4" background-color="ui-01" id="e6nn3">
+          <box direction="column" id="npeqa">
+            <label label="Location" tooltip-text="Identifies the location for the ticket." id="ya5q6"/>
+            <data-list id="createSRLocationDrilldown" margin="false" on-drill-in="drillInLocation" datasource="locationHierarchyDS" on-item-click="selectLocation" show-search="true" show-count="true" tree-name="Location Tree" hierarchy-drill-in="true" enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}">
+              <button icon="carbon:map" slot="actions" kind="ghost" icon-placement="end" label="{app.state.screen.size === 'max' ? app.options.defaultMessages.locationButtonMap : app.state.screen.size === 'xlg' ? app.options.defaultMessages.locationButtonMap : ''}" on-click="openMapDialog" on-click-arg="{false}" disabled="{!app.state.isMapValid}" id="j9ege"/>
+              <barcode-button icon="maximo:scan" slot="actions" kind="ghost" icon-placement="end" label="{app.state.screen.size === 'max' ? app.options.defaultMessages.locationButtonScan : app.state.screen.size === 'xlg' ? app.options.defaultMessages.locationButtonScan : ''}" on-scan="handleLocationScan" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}" id="p6k2r"/>
+              <button icon="carbon:search" slot="actions" kind="ghost" icon-placement="end" label="{app.state.screen.size === 'max' ? app.options.defaultMessages.locationButtonSearch : app.state.screen.size === 'xlg' ? app.options.defaultMessages.locationButtonSearch : ''}" lookup="locationLookup" id="ew_z5"/>
+              <list-item child-attribute="locationchildren" id="j3p63">
+                <adaptive-row id="gaaxy">
+                  <adaptive-column small-width="33" medium-width="33" large-width="33" xlarge-width="33" id="jd8g5">
+                    <label label="{item.location}" override-required="true" id="kqzdr"/>
+                  </adaptive-column>
+                  <adaptive-column small-width="67" medium-width="67" large-width="67" xlarge-width="67" id="kdb78">
+                    <label label="{item.description}" override-required="true" id="kz3rw"/>
+                  </adaptive-column>
+                </adaptive-row>
+              </list-item>
+              <list-item tree-label-attribute="location" id="v8k58"/>
+              <list-item id="qdddz">
+                <adaptive-row id="yz53j">
+                  <adaptive-column small-width="33" medium-width="33" large-width="33" xlarge-width="33" id="w4anx">
+                    <label label="{item.location}" override-required="true" id="p3wyr"/>
+                  </adaptive-column>
+                  <adaptive-column small-width="67" medium-width="67" large-width="67" xlarge-width="67" id="bak9m">
+                    <label label="{item.description}" override-required="true" id="m_v37"/>
+                  </adaptive-column>
+                </adaptive-row>
+              </list-item>
+            </data-list>
+          </box>
+        </split-view-column>
+        <split-view-column name="view5" background-color="ui-01" id="xnv4e">
+          <box direction="column" id="per2k">
+            <label label="Asset" tooltip-text="Identifies the asset for the ticket." hidden="{page.state.isAssetEditEnabled}" id="e7556"/>
+            <smart-input label="Asset" value="{srDS.item.assetnum}" on-blur="setInvalidState" on-blur-arg="{true}" invalid="{page.state.hasInvalidAsset}" hidden="{!page.state.isAssetEditEnabled}" id="pekg2"/>
+            <data-list id="createSRAsset" margin="false" datasource="assetLookupDS" on-item-click="selectAsset" show-search="true" show-count="true" enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}">
+              <button icon="carbon:erase" slot="actions" kind="ghost" icon-placement="end" label="{app.state.screen.size === 'max' ? app.options.defaultMessages.assetButtonErase : app.state.screen.size === 'xlg' ? app.options.defaultMessages.assetButtonErase : ''}" on-click="enableAssetEdit" on-click-arg="{false}" hidden="{!page.state.isAssetEditEnabled||!app.state.isMobileContainer}" id="gxzkp"/>
+              <button icon="carbon:edit" slot="actions" kind="ghost" icon-placement="end" label="{app.state.screen.size === 'max' ? app.options.defaultMessages.assetButtonEdit : app.state.screen.size === 'xlg' ? app.options.defaultMessages.assetButtonEdit : ''}" on-click="enableAssetEdit" on-click-arg="{true}" hidden="{page.state.isAssetEditEnabled||!app.state.isMobileContainer}" id="j2q3m"/>
+              <button icon="carbon:map" slot="actions" kind="ghost" icon-placement="end" label="{app.state.screen.size === 'max' ? app.options.defaultMessages.locationButtonMap : app.state.screen.size === 'xlg' ? app.options.defaultMessages.locationButtonMap : ''}" on-click="openMapDialog" on-click-arg="{true}" disabled="{!app.state.isMapValid}" id="yrgev"/>
+              <barcode-button icon="maximo:scan" slot="actions" kind="ghost" icon-placement="end" label="{app.state.screen.size === 'max' ? app.options.defaultMessages.locationButtonScan : app.state.screen.size === 'xlg' ? app.options.defaultMessages.locationButtonScan : ''}" on-scan="handleAssetScan" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}" id="ge9zr"/>
+              <button icon="carbon:search" slot="actions" kind="ghost" icon-placement="end" label="{app.state.screen.size === 'max' ? app.options.defaultMessages.locationButtonSearch : app.state.screen.size === 'xlg' ? app.options.defaultMessages.locationButtonSearch : ''}" lookup="assetLookup" id="xn4q3"/>
+              <list-item id="a36bd">
+                <adaptive-row id="amzme">
+                  <adaptive-column small-width="33" medium-width="33" large-width="33" xlarge-width="33" id="be6wq">
+                    <label label="{item.assetnum}" override-required="true" id="mp2p_"/>
+                  </adaptive-column>
+                  <adaptive-column small-width="67" medium-width="67" large-width="67" xlarge-width="67" id="q72b8">
+                    <label label="{item.description}" override-required="true" id="p5y54"/>
+                  </adaptive-column>
+                </adaptive-row>
+              </list-item>
+            </data-list>
+          </box>
+        </split-view-column>
+        <split-view-column name="view6" background-color="ui-01" id="m8m6a">
+          <box direction="column" id="zb5er">
+            <border-layout fill-parent="true" bottom-border="true" id="kz5r7">
+              <top horizontal-align="start" id="ked94">
+                <button-group id="a8ra3">
+                  <button icon="maximo:location-capture" loading="{page.state.captureCoordinatesInProg}" disabled="{!app.geolocation.state.enabled}" action-icon="{page.state.latitudey}" action-icon-name="carbon:checkmark--filled" on-click="saveGPSLocation" kind="secondary" label="Save my GPS location" icon-placement="start" id="ag245"/>
+                </button-group>
+              </top>
+              <middle id="p2a85">
+                <box direction="column" hidden="{!page.state.latitudey}" id="rv3w7">
+                  <smart-input label="Latitude(Y)" value="{srDS.item.latitudey}" readonly="true" id="gbyv7"/>
+                  <smart-input label="Longitude(X)" value="{srDS.item.longitudex}" readonly="true" id="wb7xa"/>
+                </box>
+                <smart-input label="Address Description" value="{srDS.item.formattedaddress}" on-blur="setAddressState" on-blur-arg="{'formattedaddress'}" id="qde4w"/>
+                <smart-input label="Street Address" value="{srDS.item.streetaddress}" on-blur="setAddressState" on-blur-arg="{'streetaddress'}" id="anym9"/>
+                <smart-input label="City" value="{srDS.item.city}" on-blur="setAddressState" on-blur-arg="{'city'}" id="nm52j"/>
+                <smart-input label="State/Province" value="{srDS.item.stateprovince}" on-blur="setAddressState" on-blur-arg="{'stateprovince'}" enable-lookup-buttongroup="true" select-lookup-attribute="{srDS.item.stateprovince}" on-smart-lookup-click="handleALNValueStateProvinceLookupClick" on-smart-lookup-click-arg="{{'item':item}}" auto-complete="on" auto-complete-datasource="stateProvinceList" auto-complete-display-field="value" auto-complete-value-field="value" auto-complete-input-length-limit="1" ignore-domain-validation="false" id="nyjq_"/>
+              </middle>
+            </border-layout>
+          </box>
+        </split-view-column>
+        <split-view-column name="view7" background-color="ui-02" id="majre">
+          <panel id="qe5bd">
+            <attachment-list datasource="{(app.state.isMobileContainer)? 'attachmentDS' : 'srattchds'}" hide-when-empty="false" is-editable="true" show-add-option="true" show-search="false" show-managed-header="false" id="rvqjg"/>
+          </panel>
+        </split-view-column>
+      </split-view-template>
+      <dialogs id="v2px2">
+        <lookup id="alnLookup" show-search="false" lookup-heading="Value" datasource="alndomainDS" border="true" lookup-attributes="{['value','description']}" on-item-click="selectALNValue" height="400" width="60"/>
+        <lookup id="stateProvinceLookup" show-search="false" lookup-heading="Value" datasource="stateProvinceList" border="true" lookup-attributes="{['value','description']}" on-item-click="selectStateProvinceValue" height="400" width="60" reset-datasource="true"/>
+        <lookup id="personLookup" lookup-heading="People" show-search="true" datasource="personDS" on-item-click="selectPerson" border="true" tight="true" lookup-attributes="{['displayname', 'primaryphone', 'department']}" height="400" width="60" reset-datasource="true"/>
+        <lookup-with-filter id="locationLookup" width="99" datasource="locationLookupDS" on-item-click="selectLocation" show-search="true" show-count="true" has-filter="true" lookup-heading="Location" enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}">
+          <list-item id="k29d7">
+            <adaptive-row id="y295n">
+              <adaptive-column small-width="33" medium-width="33" large-width="20" xlarge-width="20" id="w6jm4">
+                <label label="{item.location}" id="xv59z"/>
+              </adaptive-column>
+              <adaptive-column small-width="67" medium-width="67" large-width="40" xlarge-width="40" id="z7wwj">
+                <label label="{item.description}" id="zndv7"/>
+              </adaptive-column>
+              <adaptive-column small-width="33" medium-width="33" large-width="20" xlarge-width="20" id="xnj94">
+                <label label="{item.status}" id="ynqrq"/>
+              </adaptive-column>
+              <adaptive-column small-width="33" medium-width="33" large-width="20" xlarge-width="20" id="wdgr6">
+                <label label="{item.type}" id="km9jy"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="locationDrilldownLookup" width="99" datasource="locationLookupDS" on-item-click="selectLocation" show-search="false" lookup-attributes="{['location','description']}" show-count="false" has-filter="false" lookup-heading="Location" enable-barcode-scanner="false" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}"/>
+        <lookup-with-filter id="assetLookup" width="99" datasource="assetLookupDS" on-item-click="selectAsset" show-search="true" show-count="true" has-filter="true" lookup-heading="Asset" enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}">
+          <list-item id="xw348">
+            <adaptive-row id="x927p">
+              <adaptive-column small-width="33" medium-width="33" large-width="15" xlarge-width="15" id="egvg6">
+                <label label="{item.assetnum}" id="yr9q4"/>
+              </adaptive-column>
+              <adaptive-column small-width="67" medium-width="67" large-width="25" xlarge-width="25" id="k6498">
+                <label label="{item.description}" id="qpz6x"/>
+              </adaptive-column>
+              <adaptive-column small-width="33" medium-width="33" large-width="15" xlarge-width="15" id="q7x8a">
+                <label label="{item.location}" id="zwn4p"/>
+              </adaptive-column>
+              <adaptive-column small-width="67" medium-width="67" large-width="15" xlarge-width="15" id="vzpmn">
+                <label label="{item.itemnum}" id="a64kd"/>
+              </adaptive-column>
+              <adaptive-column small-width="33" medium-width="33" large-width="15" xlarge-width="15" id="qe7jw">
+                <label label="{item.assettag}" id="drqym"/>
+              </adaptive-column>
+              <adaptive-column small-width="67" medium-width="67" large-width="15" xlarge-width="15" id="kvba_">
+                <label label="{item.serialnum}" id="xgwm4"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="tableDomainLookup" show-search="true" lookup-heading="Table Domain" datasource="tableDomainDS" lookup-attributes="{['value','description']}" on-item-click="selectTableValue" reset-datasource="true"/>
+        <dialog id="confirmSubmitYesNo" title="Submit Service Request?" primary-action-text="Submit" secondary-action-text="Cancel" on-primary-action="createServiceRequestSubmit" on-primary-action-arg="{true}" on-secondary-action="createServiceRequestSubmit" on-secondary-action-arg="{false}" primary-kind="ghost">
+          <label wrap="true" label="Please ensure all details for the request are filled in before submitting." id="wx465"/>
+        </dialog>
+        <dialog id="cannotSubmit" title="Required Values" primary-action-text="OK" on-primary-action="close" primary-kind="ghost">
+          <label wrap="true" label="Please fill in all the required fields before submitting." id="eqqe8"/>
+        </dialog>
+        <dialog id="mapDialog" title="Select from the map" size="lg" padding="none" primary-icon="carbon:checkmark" on-primary-action="selectValueFromMap" primary-kind="primary" primary-button-disabled="{page.state.mapSelectDisabled}">
+          <map on-map-initialize="onMapInitialized" show-device-position="true" height="calc(100vh - 10rem)" id="g5bqa" preload="true">
+            <map-layers id="x7m2w">
+              <map-layer name="LOCATION" label="Location" datasource="locationJsonMapDS" hidden="{page.state.mapIsForAsset}" geometry-field-name="autolocate" symbology-handler="createSymbology" legend-handler="retrieveLegends" geometry-field-format="geojson" min-scale="0" max-scale="320000" transparency="0" cluster-tolerance="20" spatial-reference="4326" maximum-features-limit="5000" value-field="location" exclude-fields="_bulkid,_rowstamp,_selected,href" update-when-query-changes="true" id="x9za2"/>
+              <map-layer name="ASSET" label="Asset" datasource="assetJsonMapDS" hidden="{!page.state.mapIsForAsset}" geometry-field-name="autolocate" symbology-handler="createSymbology" legend-handler="retrieveLegends" geometry-field-format="geojson" min-scale="0" max-scale="320000" transparency="0" cluster-tolerance="20" spatial-reference="4326" maximum-features-limit="5000" value-field="assetnum" exclude-fields="_bulkid,_rowstamp,_selected,href" update-when-query-changes="true" id="gwq48"/>
+            </map-layers>
+            <map-events id="mapDialogEvents">
+              <map-click id="mapDialogClick" on-action="handleMapClick" tolerance="2"/>
+              <map-move id="mapDialogMove" on-action="handleMapMove" move-time="200"/>
+            </map-events>
+            <map-overlay hidden="{page.state.mapIsForAsset}" scrollable="true" width="100%" max-height="50%" position="bottom" left="15px" right="15px" top="15px" bottom="0px" type="data-list" id="d4vxa">
+              <data-list datasource="locationJsonMapDS" on-item-click="handleItemClick" search-placeholder-text="Find location" enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}" id="k55xk">
+                <box slot="item" children-hide-overflow="true" fill-child="true" fill-parent="true" id="dnee5">
+                  <adaptive-row id="bndxw">
+                    <adaptive-column small-width="33" medium-width="33" large-width="33" xlarge-width="33" id="p_e9k">
+                      <label label="{item.location}" id="x8_kp"/>
+                    </adaptive-column>
+                    <adaptive-column small-width="67" medium-width="67" large-width="67" xlarge-width="67" id="kd78w">
+                      <label label="{item.description}" id="vmyz6"/>
+                    </adaptive-column>
+                  </adaptive-row>
+                </box>
+              </data-list>
+            </map-overlay>
+            <map-overlay hidden="{!page.state.mapIsForAsset}" scrollable="true" width="100%" max-height="50%" position="bottom" left="15px" right="15px" top="15px" bottom="0px" type="data-list" id="aawvr">
+              <data-list datasource="assetJsonMapDS" on-item-click="handleItemClick" search-placeholder-text="Find asset" enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}" id="wjee3">
+                <box slot="item" children-hide-overflow="true" fill-child="true" fill-parent="true" id="xdjrn">
+                  <adaptive-row id="ex73y">
+                    <adaptive-column small-width="33" medium-width="33" large-width="33" xlarge-width="33" id="w8wpj">
+                      <label label="{item.assetnum}" id="e2b57"/>
+                    </adaptive-column>
+                    <adaptive-column small-width="67" medium-width="67" large-width="67" xlarge-width="67" id="jnbg5">
+                      <label label="{item.description}" id="b5bjy"/>
+                    </adaptive-column>
+                  </adaptive-row>
+                </box>
+              </data-list>
+            </map-overlay>
+            <map-overlay hidden="false" scrollable="false" max-width="100%" left="55px" bottom="55px" top="20px" right="0px" position="top-right" transparent="true" type="map-toolbar" id="kg7gv">
+              <map-toolbar id="qd4qb">
+                <map-toolbar-layer id="j7xma"/>
+                <map-toolbar-mylocation id="wkwzq"/>
+                <map-toolbar-identify do-not-hide-list="{['map-toolbar']}" id="vpqb5"/>
+                <map-toolbar-replica hidden-button="false" mobile-only="true" id="bapqx"/>
+                <map-toolbar-indoor id="r_9_6"/>
+              </map-toolbar>
+            </map-overlay>
+            <map-overlay hidden="false" scrollable="false" max-width="100%" position="top-right" transparent="true" type="map-offlinearea-warning" id="p326e">
+              <map-offlinearea-warning mobile-only="false" id="y23xm"/>
+            </map-overlay>
+          </map>
+        </dialog>
+        <dialog id="sysMsgAssetMismatchDialog" title="System message" primary-action-text="Yes" secondary-action-text="No" on-primary-action="replaceMismatchedAsset">
+          <label wrap="true" label="{page.state.dialogBMXMessage}" id="n56wp"/>
+        </dialog>
+        <dialog id="sysMsgLocationMismatchDialog" title="System message" primary-action-text="Yes" secondary-action-text="No" on-primary-action="replaceMismatchedLocation">
+          <label wrap="true" label="{page.state.dialogBMXMessage}" id="rk9_e"/>
+        </dialog>
+      </dialogs>
+    </page>
+    <page id="newRequest" path="newrequest" controller="NavigatorController">
+      <header-template hide-breadcrumb="true" title="New request" icon-name="carbon:close" icon-action="goBack" id="jz29w"/>
+      <panel id="j5y_5">
+        <navigator-with-search datasource="allcategoryds" datasource-label-field="classificationdesc" datasource-image-field="_imagelibref" mode="" on-click="goNextLayer" on-click-arg="{event}" id="kq82x"/>
+      </panel>
+      <panel id="gnmjg">
+        <border-layout padding="true" fill-parent="true" id="f00t1">
+          <middle id="g4bam" horizontal-overflow="hidden" horizontal-align="center" vertical-align="center">
+            <label label="Can't find what you are looking for?" wrap="true" theme="20-regular" id="wakby"/>
+            <button kind="ghost" icon="maximo:select--end" label="Describe the request" on-click="gotoDetails" on-click-arg="{false}" id="bw9qz"/>
+          </middle>
+        </border-layout>
+      </panel>
+    </page>
+    <page id="SubCategory" path="subcategory" title="{app.state.subcategory}" controller="SubCategoryController">
+      <states id="k5gb3">
+        <state name="initLastSelectedID" value="0" type="number" id="yzw4j"/>
+        <state name="initLastSelectedDesc" value="" type="string" id="wrzv2"/>
+      </states>
+      <header-template hide-breadcrumb="true" title="{app.state.subcategory}" icon-name="carbon:chevron--left" icon-action="goBack" id="ewnb2"/>
+      <panel id="akax9">
+        <box direction="row" vertical-align="center" padding-start="1" padding-top="0.5" padding-bottom="0.5" id="zze26">
+          <label theme="20-regular" label="Subcategory" padding="default" id="yqyzp"/>
+        </box>
+        <data-list datasource="subcategoryds" on-item-click="subcategoryLayer" on-item-click-arg="{event}" show-search="true" search-placeholder-text="Search subcategory" id="z4q5w">
+          <list-item id="qkjnz">
+            <border-layout fill-parent="true" padding="true" id="ay7g5">
+              <middle width="80" horizontal-overflow="hidden" id="k_k7n">
+                <field value="{item.classificationdesc}" field-class-name="16-bold" hide-label="true" wrap="true" id="g59b_"/>
+              </middle>
+              <end width="20" horizontal-overflow="hidden" id="za5n7">
+                <loading id="y7bk7" kind="spinner" active="{!item.displayIcon}"/>
+                <box vertical-align="end" direction="row" horizontal-align="end" fill-parent="true" hidden="{!item.displayIcon}" id="yeqk4">
+                  <icon icon="{item.displayIcon}" id="xy496"/>
+                </box>
+              </end>
+            </border-layout>
+          </list-item>
+        </data-list>
+      </panel>
+      <panel id="mj6w3">
+        <border-layout padding="true" fill-parent="true" id="ngxzv">
+          <bottom horizontal-overflow="hidden" horizontal-align="center" vertical-align="center" id="zen_d">
+            <link label="Describe the request" on-click="gotoDetails" id="j29m2"/>
+          </bottom>
+        </border-layout>
+      </panel>
+    </page>
+    <page id="tktemp" title="Type" controller="TKTemplateController">
+      <header-template hide-breadcrumb="true" title="{app.state.selectedtkt}" icon-name="carbon:chevron--left" icon-action="goBack" id="k3ew4"/>
+      <panel id="x7kny">
+        <box direction="row" vertical-align="center" padding-start="1" padding-top="0.5" padding-bottom="0.5" id="d4e8z">
+          <label theme="20-regular" label="Type" padding="default" id="vgr55"/>
+        </box>
+        <data-list datasource="tktemplatedsui" show-single-select-icon="true" on-item-click="gotoDetailsFromSelectedType" selected-icon="maximo:select--end" unselected-icon="maximo:select--end" show-search="false" id="gzrpz">
+          <list-item id="jywkb" on-item-click="gotoDetailsFromSelectedType" on-item-click-arg="{item.templateid}">
+            <border-layout fill-parent="true" padding="true" id="x2yj2">
+              <middle horizontal-overflow="hidden" id="rjpb9">
+                <field value="{item.description}" field-class-name="16-bold" hide-label="true" wrap="true" id="y49e3"/>
+              </middle>
+            </border-layout>
+          </list-item>
+        </data-list>
+        <border-layout padding="true" fill-parent="true" id="qe3a4">
+          <middle horizontal-overflow="hidden" horizontal-align="center" vertical-align="center" id="jn3yd">
+            <label label="Can't find what you are looking for?" wrap="true" theme="20-regular" id="xrqbb"/>
+            <button kind="ghost" icon="maximo:select--end" label="Describe the request" on-click="gotoDetails" id="mma78"/>
+          </middle>
+        </border-layout>
+      </panel>
+    </page>
+  </pages>
+  <messages id="prydr">
+    <message id="Details" text="Details"/>
+    <message id="ContactPerson" text="Contact person"/>
+    <message id="Location" text="Location"/>
+    <message id="Asset" text="Asset"/>
+    <message id="ServiceAddress" text="Service Address"/>
+    <message id="Attachment" text="Attachment"/>
+    <message id="sr_cannot_cancel_msg" text="Can not cancel. There are related work orders"/>
+    <message id="srCreated_msg" text="Request {0} submitted"/>
+    <message id="srCreated_nonumber_msg" text="Request submitted"/>
+    <message id="srCancelled_msg" text="Request {0} was cancelled"/>
+    <message id="srCancelled_nonumber_msg" text="Request was cancelled"/>
+    <message id="assetLocationMismatch" text="The asset you selected does not reside in the current location. Would you like to update the location to the asset's location?"/>
+    <message id="locationAssetMismatch" text="The location you entered does not contain the current asset. Would you like to update the asset with the asset that resides in this location?"/>
+    <message id="cluster" text="Cluster"/>
+    <message id="inprg" text="In Progress"/>
+    <message id="others" text="Others"/>
+    <message id="new" text="New"/>
+    <message id="operating" text="Operating"/>
+    <message id="invalidLocation" text="Location is invalid"/>
+    <message id="invalidAsset" text="Asset is invalid"/>
+    <message id="mapUnavailableOfflineError" text="Maps can't be used while offline."/>
+    <message id="mapRetrieveLocationError" text="There was an error to retrieve location."/>
+    <message id="mapClusterCannotBeSelected" text="A cluster is not a valid selection."/>
+    <message id="locationButtonMap" text="Map"/>
+    <message id="locationButtonScan" text="Scan"/>
+    <message id="locationButtonSearch" text="Search"/>
+    <message id="assetButtonEdit" text="Edit"/>
+    <message id="assetButtonErase" text="Erase"/>
+    <message id="assetNotFound" text="Asset not found"/>
+    <message id="noCompletedRequests" text="No completed requests"/>
+    <message id="noUnsyncedRequests" text="No unsynced requests"/>
+    <message id="noActiveRequests" text="No active requests"/>
+  </messages>
+</maximo-application>

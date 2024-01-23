@@ -1,0 +1,1247 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InspQuestionGroup Defaults should have default question group 1`] = `
+<div
+  id="undefined_questionGroup_outer_wrapper"
+  style={
+    Object {
+      "display": "none",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="mx--BorderLayout-Box mx--BorderLayout-Box-column mx--color-bg-field-01"
+    data-testid="box"
+    fillparent="true"
+    id="undefined_questionGroup_box_wrapper"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "borderColor": undefined,
+        "borderWidth": undefined,
+        "display": "flex",
+        "flexDirection": "column",
+        "flexShrink": "0",
+        "height": "100%",
+        "justifyContent": "flex-start",
+        "marginBottom": "0.75rem",
+        "padding": "0.5rem 0 0 0.5rem",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "flexBasis": "33.33%",
+          "overflow": "visible",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        id="undefined_questionGroup_ref"
+        style={
+          Object {
+            "marginTop": "",
+            "paddingTop": "",
+            "scrollMarginTop": "8rem",
+          }
+        }
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "flexBasis": "33.33%",
+          "overflow": "visible",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        id="undefined_questionGroup_wrapper"
+        style={
+          Object {
+            "alignItems": "center",
+            "borderBottom": "1px solid #e0e0e0",
+            "display": "flex",
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "margin": "0.5rem 0.5rem 0 0.5rem",
+            "paddingBlockEnd": "1rem",
+          }
+        }
+      >
+        <div
+          className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+          data-testid="box"
+          fillparent="false"
+          id="undefined_questionGroup_box_groupseq"
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": undefined,
+              "borderWidth": undefined,
+              "display": "inline-flex",
+              "flexDirection": "row",
+              "flexShrink": 0,
+              "justifyContent": "flex-start",
+              "minWidth": "3.75rem",
+            }
+          }
+        >
+          <p
+            className="mx--label mx-label-theme-header-large bx--form-item textOverflow mx--label-no-pad"
+            id="undefined_questionGroup_groupseq_label"
+            style={
+              Object {
+                "minHeight": "",
+                "overflow": "hidden",
+                "paddingBotttom": "1px",
+                "textOverflow": "ellipsis",
+                "whiteSpace": "nowrap",
+              }
+            }
+          >
+            undefined.
+          </p>
+        </div>
+        <div
+          className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+          data-testid="box"
+          fillparent="false"
+          id="undefined_questionGroup_box_label"
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": undefined,
+              "borderWidth": undefined,
+              "display": "inline-flex",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "minWidth": "1.25rem",
+            }
+          }
+        />
+        <div
+          className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+          data-testid="box"
+          fillparent="false"
+          id="undefined_questionGroup_box_information_icon"
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": undefined,
+              "borderWidth": undefined,
+              "display": "inline-flex",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "marginLeft": "auto",
+              "paddingRight": "0.5rem",
+            }
+          }
+        >
+          
+        </div>
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "flexBasis": "33.33%",
+          "overflow": "visible",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="mx--BorderLayout-Box mx--BorderLayout-Box-column"
+        data-testid="box"
+        fillparent="false"
+        id="undefined_questionGroup_question_wrapper"
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "borderColor": undefined,
+            "borderWidth": undefined,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "flex-start",
+            "paddingBlockEnd": "0.5rem",
+            "paddingInlineEnd": "0.5rem",
+            "paddingInlineStart": "2.5rem",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "display": "contents",
+              "flexBasis": "auto",
+              "overflow": "visible",
+              "width": "100%",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`InspQuestionGroup should render as expected render question w/o description 1`] = `
+<div
+  id="662_questionGroup_outer_wrapper"
+  style={
+    Object {
+      "display": "",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="mx--BorderLayout-Box mx--BorderLayout-Box-column mx--color-bg-field-01"
+    data-testid="box"
+    fillparent="true"
+    id="662_questionGroup_box_wrapper"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "borderColor": undefined,
+        "borderWidth": undefined,
+        "display": "flex",
+        "flexDirection": "column",
+        "flexShrink": "0",
+        "height": "100%",
+        "justifyContent": "flex-start",
+        "marginBottom": "0.75rem",
+        "padding": "0.5rem 0 0 0.5rem",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "flexBasis": "33.33%",
+          "overflow": "visible",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        id="662_questionGroup_ref"
+        style={
+          Object {
+            "marginTop": "",
+            "paddingTop": "",
+            "scrollMarginTop": "8rem",
+          }
+        }
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "flexBasis": "33.33%",
+          "overflow": "visible",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        id="662_questionGroup_wrapper"
+        style={
+          Object {
+            "alignItems": "center",
+            "borderBottom": "1px solid #e0e0e0",
+            "display": "flex",
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "margin": "0.5rem 0.5rem 0 0.5rem",
+            "paddingBlockEnd": "1rem",
+          }
+        }
+      >
+        <div
+          className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+          data-testid="box"
+          fillparent="false"
+          id="662_questionGroup_box_groupseq"
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": undefined,
+              "borderWidth": undefined,
+              "display": "inline-flex",
+              "flexDirection": "row",
+              "flexShrink": 0,
+              "justifyContent": "flex-start",
+              "minWidth": "3.75rem",
+            }
+          }
+        >
+          <p
+            className="mx--label mx-label-theme-header-large bx--form-item textOverflow mx--label-no-pad"
+            id="662_questionGroup_groupseq_label"
+            style={
+              Object {
+                "minHeight": "",
+                "overflow": "hidden",
+                "paddingBotttom": "1px",
+                "textOverflow": "ellipsis",
+                "whiteSpace": "nowrap",
+              }
+            }
+          >
+            1.
+          </p>
+        </div>
+        <div
+          className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+          data-testid="box"
+          fillparent="false"
+          id="662_questionGroup_box_label"
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": undefined,
+              "borderWidth": undefined,
+              "display": "inline-flex",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "minWidth": "1.25rem",
+            }
+          }
+        />
+        <div
+          className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+          data-testid="box"
+          fillparent="false"
+          id="662_questionGroup_box_information_icon"
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": undefined,
+              "borderWidth": undefined,
+              "display": "inline-flex",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "marginLeft": "auto",
+              "paddingRight": "0.5rem",
+            }
+          }
+        >
+          
+        </div>
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "flexBasis": "33.33%",
+          "overflow": "visible",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="mx--BorderLayout-Box mx--BorderLayout-Box-column"
+        data-testid="box"
+        fillparent="false"
+        id="662_questionGroup_question_wrapper"
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "borderColor": undefined,
+            "borderWidth": undefined,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "flex-start",
+            "paddingBlockEnd": "0.5rem",
+            "paddingInlineEnd": "0.5rem",
+            "paddingInlineStart": "2.5rem",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "display": "contents",
+              "flexBasis": "auto",
+              "overflow": "visible",
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            id="660_question_outer_wrapper"
+            style={
+              Object {
+                "display": "",
+                "width": "100%",
+              }
+            }
+          >
+            <div
+              className="mx--BorderLayout-Box mx--BorderLayout-Box-column mx--color-bg-field-01"
+              data-testid="box"
+              fillparent="true"
+              id="660_question_box_wrapper"
+              style={
+                Object {
+                  "alignItems": "stretch",
+                  "borderColor": undefined,
+                  "borderWidth": undefined,
+                  "display": "flex",
+                  "flexDirection": "column",
+                  "flexShrink": "0",
+                  "height": "100%",
+                  "justifyContent": "flex-start",
+                  "marginBottom": "0rem",
+                  "padding": "0.5rem",
+                  "width": "100%",
+                }
+              }
+            >
+              <div
+                style={
+                  Object {
+                    "flexBasis": "33.33%",
+                    "overflow": "visible",
+                    "width": "100%",
+                  }
+                }
+              >
+                <div
+                  id="660_question_ref"
+                  style={
+                    Object {
+                      "marginTop": "",
+                      "paddingTop": "",
+                      "scrollMarginTop": "8rem",
+                    }
+                  }
+                />
+              </div>
+              <div
+                style={
+                  Object {
+                    "flexBasis": "33.33%",
+                    "overflow": "visible",
+                    "width": "100%",
+                  }
+                }
+              >
+                <div
+                  id="660_question_wrapper"
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "borderBottom": "1px solid #e0e0e0",
+                      "display": "flex",
+                      "flexDirection": "row",
+                      "justifyContent": "flex-start",
+                      "margin": "0",
+                      "padding": "0.5rem 0 0.5rem 0.5rem",
+                    }
+                  }
+                >
+                  <div
+                    className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+                    data-testid="box"
+                    fillparent="false"
+                    id="660_question_box_groupseq"
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "borderColor": undefined,
+                        "borderWidth": undefined,
+                        "display": "inline-flex",
+                        "flexDirection": "row",
+                        "flexShrink": 0,
+                        "justifyContent": "flex-start",
+                        "minWidth": "4rem",
+                      }
+                    }
+                  >
+                    <p
+                      className="mx--label mx-label-theme-medium bx--form-item textOverflow mx--label-no-pad"
+                      id="660_question_groupseq_label"
+                      style={
+                        Object {
+                          "minHeight": "",
+                          "overflow": "hidden",
+                          "paddingBotttom": "1px",
+                          "textOverflow": "ellipsis",
+                          "whiteSpace": "nowrap",
+                        }
+                      }
+                    >
+                      1.1.
+                    </p>
+                  </div>
+                  <div
+                    className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+                    data-testid="box"
+                    fillparent="false"
+                    id="660_question_box_label"
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "borderColor": undefined,
+                        "borderWidth": undefined,
+                        "display": "inline-flex",
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "whiteSpace": "pre-wrap",
+                      }
+                    }
+                  >
+                    <div
+                      className="wrapped-text-container"
+                      id="660_question_description_label_wrappedText-container"
+                    >
+                      <p
+                        className="mx--WrappedText bx--form-item mx--WrappedText-medium mx--wrappedText-default-pad"
+                        id="660_question_description_label"
+                      >
+                        Question 1
+                        
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+                    data-testid="box"
+                    fillparent="false"
+                    id="660_question_box_info"
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "borderColor": undefined,
+                        "borderWidth": undefined,
+                        "display": "inline-flex",
+                        "flexDirection": "row",
+                        "float": "right",
+                        "justifyContent": "flex-end",
+                        "marginLeft": "auto",
+                      }
+                    }
+                  >
+                    
+                  </div>
+                </div>
+              </div>
+              <div
+                style={
+                  Object {
+                    "flexBasis": "33.33%",
+                    "overflow": "visible",
+                    "width": "100%",
+                  }
+                }
+              >
+                <div
+                  className="mx--BorderLayout-Box mx--BorderLayout-Box-column"
+                  data-testid="box"
+                  fillparent="false"
+                  id="660_question_field_wrapper"
+                  style={
+                    Object {
+                      "alignItems": "stretch",
+                      "borderColor": undefined,
+                      "borderWidth": undefined,
+                      "display": "flex",
+                      "flexDirection": "column",
+                      "justifyContent": "flex-start",
+                      "marginTop": "0.5rem",
+                      "padding": "0",
+                    }
+                  }
+                >
+                  <div
+                    style={
+                      Object {
+                        "display": "contents",
+                        "flexBasis": "auto",
+                        "overflow": "visible",
+                        "width": "100%",
+                      }
+                    }
+                  >
+                    <div
+                      id="617_field_ref"
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "display": "flex",
+                          "marginTop": "",
+                          "paddingTop": "",
+                          "scrollMarginTop": "8rem",
+                        }
+                      }
+                    >
+                      <div
+                        id="617_field_input_wrapper"
+                        style={
+                          Object {
+                            "width": "100%",
+                          }
+                        }
+                      >
+                        <div
+                          className="mx--textinput-container"
+                        >
+                          <div
+                            className="bx--form-item bx--text-input-wrapper"
+                          >
+                            <label
+                              className="bx--label"
+                              htmlFor="questionGroup1_qg_questionid660_fg_fieldid617_txt"
+                            >
+                              Field 1
+                            </label>
+                            <div
+                              className="bx--text-input__field-outer-wrapper"
+                            >
+                              <div
+                                className="bx--text-input__field-wrapper"
+                                data-invalid={null}
+                              >
+                                <input
+                                  aria-required="false"
+                                  autoComplete="off"
+                                  className="bx--text-input mx--text-input bx--text-input--md"
+                                  disabled={false}
+                                  id="questionGroup1_qg_questionid660_fg_fieldid617_txt"
+                                  maxLength={250}
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onClick={[Function]}
+                                  onKeyPress={[Function]}
+                                  placeholder="Enter answer"
+                                  style={
+                                    Object {
+                                      "height": "",
+                                      "width": "",
+                                    }
+                                  }
+                                  title="Enter answer"
+                                  type="text"
+                                  value=""
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        onBlurCapture={[Function]}
+                        role="none"
+                        style={
+                          Object {
+                            "display": "content",
+                          }
+                        }
+                      >
+                        <div
+                          className="mx--button-wrapper bx--form-item mx--menubutton mx--menubutton-closed  mx--button-wrapper-no-label"
+                          data-kind="ghost"
+                          onClick={[Function]}
+                          role="presentation"
+                        >
+                          <div
+                            className="mx--button-container"
+                          >
+                            <button
+                              aria-describedby={null}
+                              aria-pressed={null}
+                              className="mx--button mx--menubutton mx--menubutton-closed  mx--button-no-label mx--button-icon iot--btn bx--btn bx--btn--sm bx--btn--ghost"
+                              data-testid="Button"
+                              disabled={false}
+                              hidden={false}
+                              id="617_Menu_button"
+                              onBlur={[Function]}
+                              onClick={[Function]}
+                              onFocus={[Function]}
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              tabIndex={0}
+                              type="button"
+                            >
+                              .
+                              <svg
+                                aria-hidden={true}
+                                className=" mx--rotatable-icon"
+                                description="carbon:overflow-menu--vertical"
+                                focusable="false"
+                                height={20}
+                                id="617_Menu_button_icon"
+                                preserveAspectRatio="xMidYMid meet"
+                                viewBox="0 0 32 32"
+                                width={20}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <circle
+                                  cx="16"
+                                  cy="8"
+                                  r="2"
+                                />
+                                <circle
+                                  cx="16"
+                                  cy="16"
+                                  r="2"
+                                />
+                                <circle
+                                  cx="16"
+                                  cy="24"
+                                  r="2"
+                                />
+                              </svg>
+                            </button>
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            id="661_question_outer_wrapper"
+            style={
+              Object {
+                "display": "",
+                "width": "100%",
+              }
+            }
+          >
+            <div
+              className="mx--BorderLayout-Box mx--BorderLayout-Box-column mx--color-bg-field-01"
+              data-testid="box"
+              fillparent="true"
+              id="661_question_box_wrapper"
+              style={
+                Object {
+                  "alignItems": "stretch",
+                  "borderColor": undefined,
+                  "borderWidth": undefined,
+                  "display": "flex",
+                  "flexDirection": "column",
+                  "flexShrink": "0",
+                  "height": "100%",
+                  "justifyContent": "flex-start",
+                  "marginBottom": "0rem",
+                  "padding": "0.5rem",
+                  "width": "100%",
+                }
+              }
+            >
+              <div
+                style={
+                  Object {
+                    "flexBasis": "33.33%",
+                    "overflow": "visible",
+                    "width": "100%",
+                  }
+                }
+              >
+                <div
+                  id="661_question_ref"
+                  style={
+                    Object {
+                      "marginTop": "",
+                      "paddingTop": "",
+                      "scrollMarginTop": "8rem",
+                    }
+                  }
+                />
+              </div>
+              <div
+                style={
+                  Object {
+                    "flexBasis": "33.33%",
+                    "overflow": "visible",
+                    "width": "100%",
+                  }
+                }
+              >
+                <div
+                  id="661_question_wrapper"
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "borderBottom": "1px solid #e0e0e0",
+                      "display": "flex",
+                      "flexDirection": "row",
+                      "justifyContent": "flex-start",
+                      "margin": "0",
+                      "padding": "0.5rem 0 0.5rem 0.5rem",
+                    }
+                  }
+                >
+                  <div
+                    className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+                    data-testid="box"
+                    fillparent="false"
+                    id="661_question_box_groupseq"
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "borderColor": undefined,
+                        "borderWidth": undefined,
+                        "display": "inline-flex",
+                        "flexDirection": "row",
+                        "flexShrink": 0,
+                        "justifyContent": "flex-start",
+                        "minWidth": "4rem",
+                      }
+                    }
+                  >
+                    <p
+                      className="mx--label mx-label-theme-medium bx--form-item textOverflow mx--label-no-pad"
+                      id="661_question_groupseq_label"
+                      style={
+                        Object {
+                          "minHeight": "",
+                          "overflow": "hidden",
+                          "paddingBotttom": "1px",
+                          "textOverflow": "ellipsis",
+                          "whiteSpace": "nowrap",
+                        }
+                      }
+                    >
+                      1.2.
+                    </p>
+                  </div>
+                  <div
+                    className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+                    data-testid="box"
+                    fillparent="false"
+                    id="661_question_box_label"
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "borderColor": undefined,
+                        "borderWidth": undefined,
+                        "display": "inline-flex",
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "whiteSpace": "pre-wrap",
+                      }
+                    }
+                  >
+                    <div
+                      className="wrapped-text-container"
+                      id="661_question_description_label_wrappedText-container"
+                    >
+                      <p
+                        className="mx--WrappedText bx--form-item mx--WrappedText-medium mx--wrappedText-default-pad"
+                        id="661_question_description_label"
+                      >
+                        Question 2
+                        
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+                    data-testid="box"
+                    fillparent="false"
+                    id="661_question_box_info"
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "borderColor": undefined,
+                        "borderWidth": undefined,
+                        "display": "inline-flex",
+                        "flexDirection": "row",
+                        "float": "right",
+                        "justifyContent": "flex-end",
+                        "marginLeft": "auto",
+                      }
+                    }
+                  >
+                    
+                  </div>
+                </div>
+              </div>
+              <div
+                style={
+                  Object {
+                    "flexBasis": "33.33%",
+                    "overflow": "visible",
+                    "width": "100%",
+                  }
+                }
+              >
+                <div
+                  className="mx--BorderLayout-Box mx--BorderLayout-Box-column"
+                  data-testid="box"
+                  fillparent="false"
+                  id="661_question_field_wrapper"
+                  style={
+                    Object {
+                      "alignItems": "stretch",
+                      "borderColor": undefined,
+                      "borderWidth": undefined,
+                      "display": "flex",
+                      "flexDirection": "column",
+                      "justifyContent": "flex-start",
+                      "marginTop": "0.5rem",
+                      "padding": "0",
+                    }
+                  }
+                >
+                  <div
+                    style={
+                      Object {
+                        "display": "contents",
+                        "flexBasis": "auto",
+                        "overflow": "visible",
+                        "width": "100%",
+                      }
+                    }
+                  >
+                    <div
+                      id="618_field_ref"
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "display": "flex",
+                          "marginTop": "",
+                          "paddingTop": "",
+                          "scrollMarginTop": "8rem",
+                        }
+                      }
+                    >
+                      <div
+                        id="618_field_input_wrapper"
+                        style={
+                          Object {
+                            "width": "100%",
+                          }
+                        }
+                      >
+                        <div
+                          className="mx--textinput-container"
+                        >
+                          <div
+                            className="bx--form-item bx--text-input-wrapper"
+                          >
+                            <label
+                              className="bx--label"
+                              htmlFor="questionGroup1_qg_questionid661_fg_fieldid618_txt"
+                            >
+                              Field 1
+                            </label>
+                            <div
+                              className="bx--text-input__field-outer-wrapper"
+                            >
+                              <div
+                                className="bx--text-input__field-wrapper"
+                                data-invalid={null}
+                              >
+                                <input
+                                  aria-required="false"
+                                  autoComplete="off"
+                                  className="bx--text-input mx--text-input bx--text-input--md"
+                                  disabled={false}
+                                  id="questionGroup1_qg_questionid661_fg_fieldid618_txt"
+                                  maxLength={250}
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onClick={[Function]}
+                                  onKeyPress={[Function]}
+                                  placeholder="Enter answer"
+                                  style={
+                                    Object {
+                                      "height": "",
+                                      "width": "",
+                                    }
+                                  }
+                                  title="Enter answer"
+                                  type="text"
+                                  value=""
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        onBlurCapture={[Function]}
+                        role="none"
+                        style={
+                          Object {
+                            "display": "content",
+                          }
+                        }
+                      >
+                        <div
+                          className="mx--button-wrapper bx--form-item mx--menubutton mx--menubutton-closed  mx--button-wrapper-no-label"
+                          data-kind="ghost"
+                          onClick={[Function]}
+                          role="presentation"
+                        >
+                          <div
+                            className="mx--button-container"
+                          >
+                            <button
+                              aria-describedby={null}
+                              aria-pressed={null}
+                              className="mx--button mx--menubutton mx--menubutton-closed  mx--button-no-label mx--button-icon iot--btn bx--btn bx--btn--sm bx--btn--ghost"
+                              data-testid="Button"
+                              disabled={false}
+                              hidden={false}
+                              id="618_Menu_button"
+                              onBlur={[Function]}
+                              onClick={[Function]}
+                              onFocus={[Function]}
+                              onMouseEnter={[Function]}
+                              onMouseLeave={[Function]}
+                              tabIndex={0}
+                              type="button"
+                            >
+                              .
+                              <svg
+                                aria-hidden={true}
+                                className=" mx--rotatable-icon"
+                                description="carbon:overflow-menu--vertical"
+                                focusable="false"
+                                height={20}
+                                id="618_Menu_button_icon"
+                                preserveAspectRatio="xMidYMid meet"
+                                viewBox="0 0 32 32"
+                                width={20}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <circle
+                                  cx="16"
+                                  cy="8"
+                                  r="2"
+                                />
+                                <circle
+                                  cx="16"
+                                  cy="16"
+                                  r="2"
+                                />
+                                <circle
+                                  cx="16"
+                                  cy="24"
+                                  r="2"
+                                />
+                              </svg>
+                            </button>
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`InspQuestionGroup should render as expected render question w/o inspquestionchild 1`] = `
+<div
+  id="undefined_questionGroup_outer_wrapper"
+  style={
+    Object {
+      "display": "none",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="mx--BorderLayout-Box mx--BorderLayout-Box-column mx--color-bg-field-01"
+    data-testid="box"
+    fillparent="true"
+    id="undefined_questionGroup_box_wrapper"
+    style={
+      Object {
+        "alignItems": "stretch",
+        "borderColor": undefined,
+        "borderWidth": undefined,
+        "display": "flex",
+        "flexDirection": "column",
+        "flexShrink": "0",
+        "height": "100%",
+        "justifyContent": "flex-start",
+        "marginBottom": "0.75rem",
+        "padding": "0.5rem 0 0 0.5rem",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "flexBasis": "33.33%",
+          "overflow": "visible",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        id="undefined_questionGroup_ref"
+        style={
+          Object {
+            "marginTop": "",
+            "paddingTop": "",
+            "scrollMarginTop": "8rem",
+          }
+        }
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "flexBasis": "33.33%",
+          "overflow": "visible",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        id="undefined_questionGroup_wrapper"
+        style={
+          Object {
+            "alignItems": "center",
+            "borderBottom": "1px solid #e0e0e0",
+            "display": "flex",
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "margin": "0.5rem 0.5rem 0 0.5rem",
+            "paddingBlockEnd": "1rem",
+          }
+        }
+      >
+        <div
+          className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+          data-testid="box"
+          fillparent="false"
+          id="undefined_questionGroup_box_groupseq"
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": undefined,
+              "borderWidth": undefined,
+              "display": "inline-flex",
+              "flexDirection": "row",
+              "flexShrink": 0,
+              "justifyContent": "flex-start",
+              "minWidth": "3.75rem",
+            }
+          }
+        >
+          <p
+            className="mx--label mx-label-theme-header-large bx--form-item textOverflow mx--label-no-pad"
+            id="undefined_questionGroup_groupseq_label"
+            style={
+              Object {
+                "minHeight": "",
+                "overflow": "hidden",
+                "paddingBotttom": "1px",
+                "textOverflow": "ellipsis",
+                "whiteSpace": "nowrap",
+              }
+            }
+          >
+            undefined.
+          </p>
+        </div>
+        <div
+          className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+          data-testid="box"
+          fillparent="false"
+          id="undefined_questionGroup_box_label"
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": undefined,
+              "borderWidth": undefined,
+              "display": "inline-flex",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "minWidth": "1.25rem",
+            }
+          }
+        />
+        <div
+          className="mx--BorderLayout-Box mx--BorderLayout-Box-row"
+          data-testid="box"
+          fillparent="false"
+          id="undefined_questionGroup_box_information_icon"
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": undefined,
+              "borderWidth": undefined,
+              "display": "inline-flex",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "marginLeft": "auto",
+              "paddingRight": "0.5rem",
+            }
+          }
+        >
+          
+        </div>
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "flexBasis": "33.33%",
+          "overflow": "visible",
+          "width": "100%",
+        }
+      }
+    >
+      <div
+        className="mx--BorderLayout-Box mx--BorderLayout-Box-column"
+        data-testid="box"
+        fillparent="false"
+        id="undefined_questionGroup_question_wrapper"
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "borderColor": undefined,
+            "borderWidth": undefined,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "flex-start",
+            "paddingBlockEnd": "0.5rem",
+            "paddingInlineEnd": "0.5rem",
+            "paddingInlineStart": "2.5rem",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "display": "contents",
+              "flexBasis": "auto",
+              "overflow": "visible",
+              "width": "100%",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

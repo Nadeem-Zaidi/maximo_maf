@@ -1,0 +1,1457 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InspField Defaults should have default field 1`] = `null`;
+
+exports[`InspField should render as expected empty field 1`] = `null`;
+
+exports[`InspField should render as expected field without fieldtype 1`] = `null`;
+
+exports[`InspField should render as expected not visible field 1`] = `null`;
+
+exports[`InspField should render as expected render number input w/o response 1`] = `null`;
+
+exports[`InspField should render as expected render single option field without options 1`] = `
+<div
+  id="1_field_ref"
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "marginTop": "",
+      "paddingTop": "",
+      "scrollMarginTop": "8rem",
+    }
+  }
+>
+  <div
+    id="1_field_input_wrapper"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  />
+  <div
+    onBlurCapture={[Function]}
+    role="none"
+    style={
+      Object {
+        "display": "content",
+      }
+    }
+  >
+    <div
+      className="mx--button-wrapper bx--form-item mx--menubutton mx--menubutton-closed  mx--button-wrapper-no-label"
+      data-kind="ghost"
+      onClick={[Function]}
+      role="presentation"
+    >
+      <div
+        className="mx--button-container"
+      >
+        <button
+          aria-describedby={null}
+          aria-pressed={null}
+          className="mx--button mx--menubutton mx--menubutton-closed  mx--button-no-label mx--button-icon iot--btn bx--btn bx--btn--sm bx--btn--ghost"
+          data-testid="Button"
+          disabled={false}
+          hidden={false}
+          id="1_Menu_button"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          .
+          <svg
+            aria-hidden={true}
+            className=" mx--rotatable-icon"
+            description="carbon:overflow-menu--vertical"
+            focusable="false"
+            height={20}
+            id="1_Menu_button_icon"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="16"
+              cy="8"
+              r="2"
+            />
+            <circle
+              cx="16"
+              cy="16"
+              r="2"
+            />
+            <circle
+              cx="16"
+              cy="24"
+              r="2"
+            />
+          </svg>
+        </button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`render Multiple choice field with ALN Domain 1`] = `
+<div
+  id="1_field_ref"
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "marginTop": "",
+      "paddingTop": "",
+      "scrollMarginTop": "8rem",
+    }
+  }
+>
+  <div
+    id="1_field_input_wrapper"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="checkbox-group-container"
+    >
+      <div
+        onBlur={[Function]}
+        onBlurCapture={[Function]}
+        onFocusCapture={[Function]}
+        onKeyDown={[Function]}
+        role="none"
+        style={
+          Object {
+            "display": "contents",
+          }
+        }
+      >
+        <div
+          aria-label="Checkbox Group"
+          className="mx--checkboxgrp-wrapper mx--checkboxgrp-wrapper-large"
+          id="inspfalnmo_choice_checkbox"
+          role="group"
+        >
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfalnmo_choice_checkbox_optionidv1"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfalnmo_choice_checkbox_optionidv1_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                checked={false}
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfalnmo_choice_checkbox_optionidv1"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfalnmo_choice_checkbox_optionidv1"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description1
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfalnmo_choice_checkbox_optionidv2"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfalnmo_choice_checkbox_optionidv2_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                checked={false}
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfalnmo_choice_checkbox_optionidv2"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfalnmo_choice_checkbox_optionidv2"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description2
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfalnmo_choice_checkbox_optionidv3"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfalnmo_choice_checkbox_optionidv3_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                checked={false}
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfalnmo_choice_checkbox_optionidv3"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfalnmo_choice_checkbox_optionidv3"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description3
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfalnmo_choice_checkbox_optionidv4"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfalnmo_choice_checkbox_optionidv4_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                checked={false}
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfalnmo_choice_checkbox_optionidv4"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfalnmo_choice_checkbox_optionidv4"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description4
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfalnmo_choice_checkbox_optionidv5"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfalnmo_choice_checkbox_optionidv5_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                checked={false}
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfalnmo_choice_checkbox_optionidv5"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfalnmo_choice_checkbox_optionidv5"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  v5
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div
+    onBlurCapture={[Function]}
+    role="none"
+    style={
+      Object {
+        "display": "content",
+      }
+    }
+  >
+    <div
+      className="mx--button-wrapper bx--form-item mx--menubutton mx--menubutton-closed  mx--button-wrapper-no-label"
+      data-kind="ghost"
+      onClick={[Function]}
+      role="presentation"
+    >
+      <div
+        className="mx--button-container"
+      >
+        <button
+          aria-describedby={null}
+          aria-pressed={null}
+          className="mx--button mx--menubutton mx--menubutton-closed  mx--button-no-label mx--button-icon iot--btn bx--btn bx--btn--sm bx--btn--ghost"
+          data-testid="Button"
+          disabled={false}
+          hidden={false}
+          id="1_Menu_button"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          .
+          <svg
+            aria-hidden={true}
+            className=" mx--rotatable-icon"
+            description="carbon:overflow-menu--vertical"
+            focusable="false"
+            height={20}
+            id="1_Menu_button_icon"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="16"
+              cy="8"
+              r="2"
+            />
+            <circle
+              cx="16"
+              cy="16"
+              r="2"
+            />
+            <circle
+              cx="16"
+              cy="24"
+              r="2"
+            />
+          </svg>
+        </button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`render Multiple choice field with Synonym Domain 1`] = `
+<div
+  id="1_field_ref"
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "marginTop": "",
+      "paddingTop": "",
+      "scrollMarginTop": "8rem",
+    }
+  }
+>
+  <div
+    id="1_field_input_wrapper"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="checkbox-group-container"
+    >
+      <div
+        onBlur={[Function]}
+        onBlurCapture={[Function]}
+        onFocusCapture={[Function]}
+        onKeyDown={[Function]}
+        role="none"
+        style={
+          Object {
+            "display": "contents",
+          }
+        }
+      >
+        <div
+          aria-label="Checkbox Group"
+          className="mx--checkboxgrp-wrapper mx--checkboxgrp-wrapper-large"
+          id="inspfsynmo_choice_checkbox"
+          role="group"
+        >
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfsynmo_choice_checkbox_optionidv1"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfsynmo_choice_checkbox_optionidv1_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                checked={false}
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfsynmo_choice_checkbox_optionidv1"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfsynmo_choice_checkbox_optionidv1"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description1
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfsynmo_choice_checkbox_optionidv2"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfsynmo_choice_checkbox_optionidv2_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                checked={false}
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfsynmo_choice_checkbox_optionidv2"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfsynmo_choice_checkbox_optionidv2"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description2
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfsynmo_choice_checkbox_optionidv3"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfsynmo_choice_checkbox_optionidv3_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                checked={false}
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfsynmo_choice_checkbox_optionidv3"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfsynmo_choice_checkbox_optionidv3"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description3
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfsynmo_choice_checkbox_optionidv4"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfsynmo_choice_checkbox_optionidv4_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                checked={false}
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfsynmo_choice_checkbox_optionidv4"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfsynmo_choice_checkbox_optionidv4"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description4
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfsynmo_choice_checkbox_optionidv5"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfsynmo_choice_checkbox_optionidv5_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                checked={false}
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfsynmo_choice_checkbox_optionidv5"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfsynmo_choice_checkbox_optionidv5"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description5
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div
+    onBlurCapture={[Function]}
+    role="none"
+    style={
+      Object {
+        "display": "content",
+      }
+    }
+  >
+    <div
+      className="mx--button-wrapper bx--form-item mx--menubutton mx--menubutton-closed  mx--button-wrapper-no-label"
+      data-kind="ghost"
+      onClick={[Function]}
+      role="presentation"
+    >
+      <div
+        className="mx--button-container"
+      >
+        <button
+          aria-describedby={null}
+          aria-pressed={null}
+          className="mx--button mx--menubutton mx--menubutton-closed  mx--button-no-label mx--button-icon iot--btn bx--btn bx--btn--sm bx--btn--ghost"
+          data-testid="Button"
+          disabled={false}
+          hidden={false}
+          id="1_Menu_button"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          .
+          <svg
+            aria-hidden={true}
+            className=" mx--rotatable-icon"
+            description="carbon:overflow-menu--vertical"
+            focusable="false"
+            height={20}
+            id="1_Menu_button_icon"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="16"
+              cy="8"
+              r="2"
+            />
+            <circle
+              cx="16"
+              cy="16"
+              r="2"
+            />
+            <circle
+              cx="16"
+              cy="24"
+              r="2"
+            />
+          </svg>
+        </button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`render Multiple choice field without options 1`] = `
+<div
+  id="1_field_ref"
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "marginTop": "",
+      "paddingTop": "",
+      "scrollMarginTop": "8rem",
+    }
+  }
+>
+  <div
+    id="1_field_input_wrapper"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    
+  </div>
+  <div
+    onBlurCapture={[Function]}
+    role="none"
+    style={
+      Object {
+        "display": "content",
+      }
+    }
+  >
+    <div
+      className="mx--button-wrapper bx--form-item mx--menubutton mx--menubutton-closed  mx--button-wrapper-no-label"
+      data-kind="ghost"
+      onClick={[Function]}
+      role="presentation"
+    >
+      <div
+        className="mx--button-container"
+      >
+        <button
+          aria-describedby={null}
+          aria-pressed={null}
+          className="mx--button mx--menubutton mx--menubutton-closed  mx--button-no-label mx--button-icon iot--btn bx--btn bx--btn--sm bx--btn--ghost"
+          data-testid="Button"
+          disabled={false}
+          hidden={false}
+          id="1_Menu_button"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          .
+          <svg
+            aria-hidden={true}
+            className=" mx--rotatable-icon"
+            description="carbon:overflow-menu--vertical"
+            focusable="false"
+            height={20}
+            id="1_Menu_button_icon"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="16"
+              cy="8"
+              r="2"
+            />
+            <circle
+              cx="16"
+              cy="16"
+              r="2"
+            />
+            <circle
+              cx="16"
+              cy="24"
+              r="2"
+            />
+          </svg>
+        </button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`render Single choice field with ALN Domain 1`] = `
+<div
+  id="1_field_ref"
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "marginTop": "",
+      "paddingTop": "",
+      "scrollMarginTop": "8rem",
+    }
+  }
+>
+  <div
+    id="1_field_input_wrapper"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="checkbox-group-container"
+    >
+      <div
+        onBlur={[Function]}
+        onBlurCapture={[Function]}
+        onFocusCapture={[Function]}
+        onKeyDown={[Function]}
+        role="none"
+        style={
+          Object {
+            "display": "contents",
+          }
+        }
+      >
+        <div
+          aria-label="Checkbox Group"
+          className="mx--checkboxgrp-wrapper mx--checkboxgrp-wrapper-large mx--checkboxGroup-single"
+          id="inspfalnso_choice_checkbox"
+          role="group"
+        >
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfalnso_choice_checkbox_optionidv1"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfalnso_choice_checkbox_optionidv1_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfalnso_choice_checkbox_optionidv1"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfalnso_choice_checkbox_optionidv1"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description1
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfalnso_choice_checkbox_optionidv2"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfalnso_choice_checkbox_optionidv2_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfalnso_choice_checkbox_optionidv2"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfalnso_choice_checkbox_optionidv2"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description2
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfalnso_choice_checkbox_optionidv3"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfalnso_choice_checkbox_optionidv3_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfalnso_choice_checkbox_optionidv3"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfalnso_choice_checkbox_optionidv3"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description3
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfalnso_choice_checkbox_optionidv4"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfalnso_choice_checkbox_optionidv4_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfalnso_choice_checkbox_optionidv4"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfalnso_choice_checkbox_optionidv4"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description4
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfalnso_choice_checkbox_optionidv5"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfalnso_choice_checkbox_optionidv5_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfalnso_choice_checkbox_optionidv5"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfalnso_choice_checkbox_optionidv5"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  v5
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    onBlurCapture={[Function]}
+    role="none"
+    style={
+      Object {
+        "display": "content",
+      }
+    }
+  >
+    <div
+      className="mx--button-wrapper bx--form-item mx--menubutton mx--menubutton-closed  mx--button-wrapper-no-label"
+      data-kind="ghost"
+      onClick={[Function]}
+      role="presentation"
+    >
+      <div
+        className="mx--button-container"
+      >
+        <button
+          aria-describedby={null}
+          aria-pressed={null}
+          className="mx--button mx--menubutton mx--menubutton-closed  mx--button-no-label mx--button-icon iot--btn bx--btn bx--btn--sm bx--btn--ghost"
+          data-testid="Button"
+          disabled={false}
+          hidden={false}
+          id="1_Menu_button"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          .
+          <svg
+            aria-hidden={true}
+            className=" mx--rotatable-icon"
+            description="carbon:overflow-menu--vertical"
+            focusable="false"
+            height={20}
+            id="1_Menu_button_icon"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="16"
+              cy="8"
+              r="2"
+            />
+            <circle
+              cx="16"
+              cy="16"
+              r="2"
+            />
+            <circle
+              cx="16"
+              cy="24"
+              r="2"
+            />
+          </svg>
+        </button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`render Single choice field with Synonym Domain 1`] = `
+<div
+  id="1_field_ref"
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "marginTop": "",
+      "paddingTop": "",
+      "scrollMarginTop": "8rem",
+    }
+  }
+>
+  <div
+    id="1_field_input_wrapper"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="checkbox-group-container"
+    >
+      <div
+        onBlur={[Function]}
+        onBlurCapture={[Function]}
+        onFocusCapture={[Function]}
+        onKeyDown={[Function]}
+        role="none"
+        style={
+          Object {
+            "display": "contents",
+          }
+        }
+      >
+        <div
+          aria-label="Checkbox Group"
+          className="mx--checkboxgrp-wrapper mx--checkboxgrp-wrapper-large mx--checkboxGroup-single"
+          id="inspfsynso_choice_checkbox"
+          role="group"
+        >
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfsynso_choice_checkbox_optionidv1"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfsynso_choice_checkbox_optionidv1_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfsynso_choice_checkbox_optionidv1"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfsynso_choice_checkbox_optionidv1"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description1
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfsynso_choice_checkbox_optionidv2"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfsynso_choice_checkbox_optionidv2_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfsynso_choice_checkbox_optionidv2"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfsynso_choice_checkbox_optionidv2"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description2
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfsynso_choice_checkbox_optionidv3"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfsynso_choice_checkbox_optionidv3_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfsynso_choice_checkbox_optionidv3"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfsynso_choice_checkbox_optionidv3"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description3
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfsynso_choice_checkbox_optionidv4"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfsynso_choice_checkbox_optionidv4_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfsynso_choice_checkbox_optionidv4"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfsynso_choice_checkbox_optionidv4"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description4
+                </span>
+              </label>
+            </div>
+          </div>
+          <div
+            className="mx--checkbox-wrapper mx--checkbox-wrapper-large mx--checkbox-checked-large"
+            id="checkBoxWrapperinspfsynso_choice_checkbox_optionidv5"
+            onClick={[Function]}
+          >
+            <div
+              className="mx-checkbox-bar"
+              id="inspfsynso_choice_checkbox_optionidv5_backgroundBar"
+              style={
+                Object {
+                  "backgroundColor": "#EDF5FF",
+                }
+              }
+            />
+            
+            <div
+              className="bx--form-item bx--checkbox-wrapper"
+            >
+              <input
+                className="bx--checkbox"
+                disabled={false}
+                id="inspfsynso_choice_checkbox_optionidv5"
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <label
+                className="bx--checkbox-label mx--check-box-wrapper"
+                htmlFor="inspfsynso_choice_checkbox_optionidv5"
+                title={null}
+              >
+                <span
+                  className="bx--checkbox-label-text"
+                  dir="auto"
+                >
+                  description5
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    onBlurCapture={[Function]}
+    role="none"
+    style={
+      Object {
+        "display": "content",
+      }
+    }
+  >
+    <div
+      className="mx--button-wrapper bx--form-item mx--menubutton mx--menubutton-closed  mx--button-wrapper-no-label"
+      data-kind="ghost"
+      onClick={[Function]}
+      role="presentation"
+    >
+      <div
+        className="mx--button-container"
+      >
+        <button
+          aria-describedby={null}
+          aria-pressed={null}
+          className="mx--button mx--menubutton mx--menubutton-closed  mx--button-no-label mx--button-icon iot--btn bx--btn bx--btn--sm bx--btn--ghost"
+          data-testid="Button"
+          disabled={false}
+          hidden={false}
+          id="1_Menu_button"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          .
+          <svg
+            aria-hidden={true}
+            className=" mx--rotatable-icon"
+            description="carbon:overflow-menu--vertical"
+            focusable="false"
+            height={20}
+            id="1_Menu_button_icon"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="16"
+              cy="8"
+              r="2"
+            />
+            <circle
+              cx="16"
+              cy="16"
+              r="2"
+            />
+            <circle
+              cx="16"
+              cy="24"
+              r="2"
+            />
+          </svg>
+        </button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+`;

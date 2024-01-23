@@ -1,0 +1,17 @@
+{
+  "domains": [
+    {
+      "baseDomain": "ivt.suite.maximo.com",
+      "url": "https://cdn.walkme.com/users/b4036cc68bbc42928888cc504fd8450d/test/walkme_b4036cc68bbc42928888cc504fd8450d_https.js"
+    },
+    {
+      "baseDomain": "fyre.ibm.com",
+      "url": "https://cdn.walkme.com/users/b4036cc68bbc42928888cc504fd8450d/test/walkme_b4036cc68bbc42928888cc504fd8450d_https.js"
+    },
+    {
+      "baseDomain": "localhost",
+      "url": "https://cdn.walkme.com/users/b4036cc68bbc42928888cc504fd8450d/test/walkme_b4036cc68bbc42928888cc504fd8450d_https.js"
+    }
+  ],
+  "defaultUrl": "https://cdn.walkme.com/users/b4036cc68bbc42928888cc504fd8450d/walkme_b4036cc68bbc42928888cc504fd8450d_https.js"
+}

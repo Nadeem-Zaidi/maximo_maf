@@ -1,0 +1,469 @@
+<maximo-application product-name="Maximo Application Suite" title="Manage" id="schedulingdashboard" version="8.11.0.0" default-log-level="error" controller="AppController">
+  <menu slot="navigation-items" id="p5jjk">
+    <menu-item label="Schedule" icon="carbon:calendar--heat-map" page="schedule" id="apjxz"/>
+  </menu>
+  <pages id="pages">
+    <page id="schedule" title="Scheduling dashboard" path="/schedule" controller="ScheduleTablePageController">
+      <states id="r3nrb">
+        <state name="selectedSwitch" value="0" type="number" id="gmre4"/>
+        <state name="selectedDatasource" value="mySchedules" type="string" id="x8rg7"/>
+        <state name="firstLogin" value="false" type="boolean" id="pe3_g"/>
+        <state name="previousPage" type="string" value="" id="zzjaz"/>
+      </states>
+      <maximo-datasource id="skdprojectDS" object-structure="MXAPISKDPROJECT" saved-query="MYSCHEDULES" pre-load="false" controller="ScheduleTableController" selection-mode="single">
+        <schema id="be7wd">
+          <attribute name="scenarioname" title="Scenario" searchable="true" id="dv5ya"/>
+          <attribute name="name" searchable="false" id="jke_3"/>
+          <attribute name="skdprojectid" searchable="false" id="bkxx7"/>
+          <attribute name="description" searchable="true" id="d2qaw"/>
+          <attribute name="description_longdescription" searchable="false" id="qyxay"/>
+          <attribute name="createdby" searchable="true" id="vvd2m"/>
+          <attribute name="usewith" searchable="true" id="dj37k"/>
+          <attribute name="enddateacm" searchable="false" sub-type="DATETIME" type="STRING" id="nwzg3"/>
+          <attribute name="startdateacm" searchable="false" sub-type="DATETIME" type="STRING" id="bqagk"/>
+          <attribute name="duration" searchable="false" id="cccqp"/>
+          <attribute name="computedDuration" computed-function="getDurationString" searchable="false" id="xyxgk"/>
+          <attribute name="projectscenario.scheduletype--scheduletype" searchable="false" id="xyyyz"/>
+          <attribute name="projectscenario.skdpublish--skdpublish" searchable="false" id="ja3vj"/>
+          <attribute name="ScheduleTypeLabel" computed-function="getScheduleTypeLabel" searchable="false" id="x_kp4"/>
+          <attribute name="RunStatusIcon" computed-function="getRunStatusIcon" searchable="false" id="d85b_"/>
+          <attribute name="RunStatusLabel" computed-function="getRunStatusLabel" searchable="false" id="wq4pz"/>
+          <attribute name="RunStatusTime" computed-function="getRunStatusTime" searchable="false" sub-type="DATETIME" type="STRING" id="wq4py"/>
+          <attribute name="RunStatusIconColour" computed-function="getRunStatusIconColour" searchable="false" id="v3pej"/>
+          <attribute name="SKDODMERUNLATEST.status--optimizationstatus" searchable="false" id="j589g"/>
+          <attribute name="SKDODMERUNLATEST.skdodmerunid--skdodmerunid" searchable="false" id="mj63a"/>
+          <attribute name="SKDODMERUNLATEST.endtime--optimizationendtime" searchable="false" sub-type="DATETIME" type="STRING" id="v67_g"/>
+          <attribute name="unscheduled" computed-function="getUnscheduledTaskCount" type="NUMBER" sub-type="INTEGER" searchable="false" id="qr89e"/>
+          <attribute name="lastpublishdate" searchable="false" sub-type="DATETIME" type="STRING" id="v23_z"/>
+          <attribute name="rel.skdscenrunkpi_allresdata{kpiid}" searchable="false" id="ep8jz"/>
+        </schema>
+        <maximo-datasource-override id="mySchedules" saved-query="MYSCHEDULES"/>
+        <maximo-datasource-override id="myCommitSchedules" saved-query="MYCOMMITSCHEDULES"/>
+      </maximo-datasource>
+      <maximo-datasource id="skdodmerunDS" object-structure="MXAPISKDODMERUN" saved-query="LATESTRUNS" pre-load="false">
+        <schema id="k6w5j">
+          <attribute name="skdodmerunid" id="ykw3g"/>
+          <attribute name="rel.SKDSCENARIORUNKPI_RUN_GLOBAL{kpiid,kpivalue,kpidimension}" id="vmxvx"/>
+        </schema>
+      </maximo-datasource>
+      <json-datasource id="jdashboardKPIds" src="{[]}" schema="schema" selection-mode="single">
+        <schema id="rjpbg">
+          <attribute name="unperformedTasks" id="g5_eq"/>
+        </schema>
+      </json-datasource>
+      <header-template margin="none" title="Scheduling dashboard" hide-breadcrumb="true" id="ab3a4">
+        <dropdown slot="dropdown" background-color="white" selected-item="{page.state.selectedDatasource}" hide-unselected-placeholder="true" id="y49am">
+          <dropdown-item value="mySchedules" text="My Schedules" id="jby4d"/>
+          <dropdown-item value="myCommitSchedules" text="My Commit Schedules" id="w2r8m"/>
+        </dropdown>
+      </header-template>
+      <include src="./pages/SchedulingDashboard.xml" id="ek32v"/>
+    </page>
+    <page id="scheduleDetails" path="/scheduleDetails" title="Schedule Details" controller="ScheduleDetailsPageController">
+      <states id="g2r39">
+        <state name="selectedTab" url-enabled="true" value="1" type="number" id="gdjr6"/>
+        <state name="useConfirmDialog" value="true" type="boolean" id="gdjhg6"/>
+        <state name="startTime" type="string" value="" id="vqrpq"/>
+        <state name="timeSpan" type="string" value="14" id="dq6qz"/>
+        <state name="resourceid" type="string" id="d7r74"/>
+      </states>
+      <maximo-datasource id="skdprojActivityDS" object-structure="MXAPISKDPROJACTIVITY" where="skdprojectid={page.params.projectid}" pre-load="false" selection-mode="none">
+        <schema id="m7zkm">
+          <attribute name="name--projectname" searchable="false" id="q2bmn"/>
+        </schema>
+        <maximo-datasource id="skdactivityDS" relationship="SKDACTIVITY" object-name="SKDACTIVITY" pre-load="false" controller="ScheduleDetailsController" selection-mode="none">
+          <schema id="vpq6a">
+            <attribute name="id" searchable="false" id="k37zg"/>
+            <attribute name="name" searchable="false" id="xjjy3"/>
+            <attribute name="skdprojectid" searchable="false" id="npx4m"/>
+            <attribute name="initialized" id="zw65_"/>
+            <attribute name="duration" searchable="false" id="n2gj9"/>
+            <attribute name="sneconstraint" type="STRING" sub-type="DATETIME" searchable="false" id="qq4zx"/>
+            <attribute name="fnlconstraint" type="STRING" sub-type="DATETIME" searchable="false" id="kzxvr"/>
+            <attribute name="wopriority" searchable="false" id="gx_z8"/>
+            <attribute name="interruptible" type="BOOL" searchable="false" id="b9j_2"/>
+            <attribute name="endtime" type="STRING" sub-type="DATETIME" searchable="false" id="w3pkd"/>
+            <attribute name="starttime" type="STRING" sub-type="DATETIME" searchable="false" id="jw4yj"/>
+          </schema>
+        </maximo-datasource>
+      </maximo-datasource>
+      <maximo-datasource id="skdprojectsDS" object-structure="MXAPISKDPROJECT" saved-query="MYSCHEDULES" pre-load="false" selection-mode="none">
+        <schema id="be7we">
+          <attribute name="skdactivityunscheduled.id--id" searchable="false" id="jke_4"/>
+          <attribute name="name--projectname" searchable="false" id="jz293"/>
+          <attribute name="skdactivityunscheduled.name--name" searchable="false" id="bkxx9"/>
+          <attribute name="skdactivityunscheduled.duration--duration" searchable="false" id="bjjt6"/>
+          <attribute name="skdactivityunscheduled.sneconstraint--sne" type="STRING" sub-type="DATETIME" searchable="false" id="jke_5"/>
+          <attribute name="skdactivityunscheduled.fnlconstraint--fnl" type="STRING" sub-type="DATETIME" searchable="false" id="bkyy8"/>
+          <attribute name="skdactivityunscheduled.wopriority--priority" searchable="false" id="bjjt3"/>
+          <attribute name="skdactivityunscheduled.interruptible--interruptible" type="BOOL" searchable="false" id="bxsda"/>
+          <attribute name="SKDODMERUNLATEST.skdodmerunid" id="ygwa5"/>
+          <attribute name="SKDODMERUNLATEST.endtime--optimizationendtime" searchable="false" sub-type="DATETIME" type="STRING" id="qyqbj"/>
+          <attribute name="lastpublishdate" searchable="false" sub-type="DATETIME" type="STRING" id="ea_pe"/>
+        </schema>
+        <maximo-datasource id="skdactivityunscheduledDS" relationship="SKDACTIVITYUNSCHEDULED" object-name="SKDACTIVITY" pre-load="false" controller="ScheduleDetailsController" selection-mode="none">
+          <schema id="mp2g6">
+            <attribute name="id" searchable="false" id="mm566"/>
+            <attribute name="name" searchable="false" id="yzgap"/>
+            <attribute name="skdprojectid" searchable="false" id="zx5vx"/>
+            <attribute name="initialized" id="kpk8b"/>
+            <attribute name="duration" searchable="false" id="p7wjj"/>
+            <attribute name="sneconstraint" type="STRING" sub-type="DATETIME" searchable="false" id="n266y"/>
+            <attribute name="fnlconstraint" type="STRING" sub-type="DATETIME" searchable="false" id="kyer2"/>
+            <attribute name="wopriority" searchable="false" id="w_p_n"/>
+            <attribute name="interruptible" type="BOOL" searchable="false" id="zreqa"/>
+            <attribute name="intshift" type="STRING" searchable="false" id="q8rmn"/>
+            <attribute name="modified" searchable="false" id="jwmg6"/>
+            <attribute name="WORKORDER.wonum--wonum" searchable="false" id="xqpz4"/>
+            <attribute name="WORKORDER.wogroup--wogroup" searchable="false" id="rkwb6"/>
+            <attribute name="WORKORDER.taskid--taskid" searchable="false" id="dmzwb"/>
+            <attribute name="rel.schedulingerrors{reasoncode,taskname,valmsg,reasoncodedescription,skdodmerunid}" searchable="false" id="dpe6n"/>
+            <attribute name="computedIssueIcon" computed-function="computedIssueIcon" id="zmx57"/>
+            <attribute name="hideIssuesSpacing" computed-function="hideIssuesSpacing" id="nexx8"/>
+            <attribute name="computeIssueTitleString" computed-function="getIssueTitleString" id="gmz8_"/>
+            <attribute name="computeChanged" computed="true" id="gvb5n"/>
+          </schema>
+        </maximo-datasource>
+        <maximo-datasource id="resourceLoadTableds" relationship="SKDRESOURCE" order-by="objectname asc" selection-mode="none" notify-when-parent-loads="true" cache-expiry-ms="1" ctx="rlstartTime={page.state.startTime},rltimeSpan={page.state.timeSpan}" controller="ScheduleDetailsController" accumulate="false">
+          <schema id="zk6w6">
+            <attribute name="id" unique-id="true" id="vaa2m"/>
+            <attribute name="name" id="r8kg3"/>
+            <attribute name="skdresourceamcrewt.amcrewtype--resnamecrewtype" id="bwx8m"/>
+            <attribute name="resourcecraftinfo.craft--resnamecraft" id="jawpm"/>
+            <attribute name="skdresourcetoolitem.itemnum--resnametoolitem" id="wek9d"/>
+            <attribute name="resourcename" computed-function="getResourceIDString" id="nw9zg"/>
+            <attribute name="objectname" id="bqmgv"/>
+            <attribute name="refobjtname" id="p8nx9"/>
+            <attribute name="initialized" id="eeky5"/>
+            <attribute name="objectid" id="p_qkx"/>
+            <attribute name="rel.skdresourceviewday{*}" id="qpj7j"/>
+          </schema>
+        </maximo-datasource>
+        <maximo-datasource id="resourceLevelingDs" relationship="SKDRESOURCE" where="id=&quot;{page.state.resourceid}&quot;" order-by="objectname asc" selection-mode="none" notify-when-parent-loads="true" cache-expiry-ms="1" ctx="rlstartTime={page.state.startTime},rltimeSpan={page.state.timeSpan}" accumulate="false">
+          <schema id="myxzx">
+            <attribute name="id" unique-id="true" id="gdn9g"/>
+            <attribute name="name" id="k96xv"/>
+            <attribute name="objectname" id="bmg22"/>
+            <attribute name="refobjtname" id="x4eda"/>
+            <attribute name="initialized" id="dazaa"/>
+            <attribute name="objectid" id="pp474"/>
+            <attribute name="rel.skdresourceviewday{scheduledhrs,resourceid,enddate,load,createddate,skdprojectid,availablehrs,objectname,resourcename,startdate,rel.skdresourceviewday_activity{wopriority,objectname,endtime,starttime,refobjname,interruptible,duration,skdprojectid,name,initialized,objectid,id,status,workorder.wonum--workordernum,sneconstraint,fnlconstraint}}" id="vvbm3"/>
+          </schema>
+        </maximo-datasource>
+        <maximo-datasource id="resourceTypesDS" relationship="SKDRESOURCE" order-by="objectname asc" selection-mode="none" notify-when-parent-loads="true" cache-expiry-ms="1" controller="ScheduleDetailsController" accumulate="false">
+          <schema id="kz372">
+            <attribute name="id" unique-id="true" id="w6pp2"/>
+            <attribute name="name" id="aqe3q"/>
+            <attribute name="skdresourceamcrewt.amcrewtype--resnamecrewtype" id="g5j7x"/>
+            <attribute name="resourcecraftinfo.craft--resnamecraft" id="xb3xk"/>
+            <attribute name="skdresourcetoolitem.itemnum--resnametoolitem" id="rq22k"/>
+            <attribute name="resourcename" computed-function="getResourceIDString" id="ev4nm"/>
+            <attribute name="objectname" id="jp4er"/>
+          </schema>
+        </maximo-datasource>
+        <maximo-datasource id="skdodmerunlatestDS" relationship="SKDODMERUNLATEST" depends-on="skdactivityunscheduledDS" pre-load="false" selection-mode="none">
+          <schema id="py5_y">
+            <attribute name="rel.SKDSCENARIORUNKPI_RUN_GLOBAL{kpiid,kpivalue,kpidimension}" id="peeex"/>
+          </schema>
+        </maximo-datasource>
+        <maximo-datasource id="skdprojectshiftsDS" relationship="SKDPRJSHIFT" pre-load="false">
+          <schema id="wqkx4">
+            <attribute name="shiftnum" searchable="false" id="a9re3"/>
+          </schema>
+        </maximo-datasource>
+        <maximo-datasource id="skdprojectscenarioDS" relationship="PROJECTSCENARIO" where="optscenario=&quot;RESLEVEL&quot;" object-name="SKDPROJECTSCENARIO" depends-on="skdprojectsDS" pre-load="false" selection-mode="none">
+          <schema id="qpr7p">
+            <attribute name="inputname" id="zrrav"/>
+            <attribute name="inputobj" id="kpvrz"/>
+            <attribute name="inputobjid" id="z8prg"/>
+            <attribute name="optscenario" id="mb_8j"/>
+            <attribute name="projectname" id="ye4j3"/>
+            <attribute name="SKDRESLEVELPARAM{*}" id="e88d7"/>
+          </schema>
+        </maximo-datasource>
+      </maximo-datasource>
+      <json-datasource id="jglobalKPIds" src="{[]}" schema="schema" selection-mode="single">
+        <schema id="wq43y">
+          <attribute name="unperformedTasks" id="em86n"/>
+        </schema>
+      </json-datasource>
+      <json-datasource id="jresourceLevelingTaskDS" src="{[]}" schema="schema" selection-mode="single" auto-save="false">
+        <schema id="nqk79">
+          <attribute name="name" id="y2jy4"/>
+          <attribute name="duration" type="NUMBER" sub-type="DURATION" searchable="false" id="gk2g2"/>
+          <attribute name="sneconstraint" type="STRING" sub-type="DATETIME" searchable="false" id="beakq"/>
+          <attribute name="fnlconstraint" type="STRING" sub-type="DATETIME" searchable="false" id="z9ypv"/>
+          <attribute name="wopriority" type="NUMBER" sub-type="INTEGER" searchable="false" id="ebz5g"/>
+          <attribute name="interruptible" type="BOOL" searchable="false" id="w2w8k"/>
+          <attribute name="starttime" type="STRING" sub-type="DATETIME" searchable="false" id="pnp5p"/>
+          <attribute name="status" searchable="false" id="q7emx"/>
+        </schema>
+      </json-datasource>
+      <header-template enable-white-background="true" mode="dynamic" title="{page.params.projectname} schedule" sub-title="{page.params.scheduletype} optimization" hide-breadcrumb="false" show-current-page-in-bread-crumb="{false}" id="d27wn">
+        <link slot="custom-content" label="Last ran on {skdprojectsDS.item.optimizationendtime}" hidden="{!skdprojectsDS.item.optimizationendtime}" page="optimizeSchedule" page-params="{{'href':page.params.scenario, 'projectname':page.params.projectname, 'timelimit':30,'interval':10, 'selectedTab':2,'scheduletype':page.params.scheduletype, 'issuecount':page.params.issuecount, 'startdate':page.params.startdate, 'enddate': page.params.enddate, 'projectid': page.params.projectid}}" id="gyfwq"/>
+        <button-group slot="menu-button-action" id="v7n9m">
+          <button icon="carbon:information" id="gwqee" hidden="{!skdprojectsDS.item.lastpublishdate}">
+            <tooltip id="q7y79">
+              <label slot="content" theme="header-small" wrap="true" label="Last published on {skdprojectsDS.item.lastpublishdate}" id="wpg9w"/>
+            </tooltip>
+          </button>
+        </button-group>
+        <menu-button slot="menu-button-action" label="Actions" icon="Carbon:chevron--down" id="np2px">
+          <menu-item label="Refresh schedule" theme="default" on-click="onRefresh" id="xd53z"/>
+          <menu-item label="Optimize schedule" on-click="optimizeDialog" theme="default" id="dx5a7"/>
+          <menu-item label="Publish schedule" dialog="publishScheduleDialog" theme="default" id="b62g3"/>
+        </menu-button>
+        <include src="./pages/ScheduleDetails.xml" id="ef32v" slot="tabs"/>
+      </header-template>
+      <dialogs id="rb_62">
+        <sliding-drawer id="detailsSlidingDrawer" is-primary-button-disabled="{page.state.disableSaveOnResourceLeveling}" align="end" header-text="{jresourceLevelingTaskDS.item.name}">
+          <button slot="primary-button" kind="primary" disabled="true" on-click="saveActivityChanges" label="Save changes" id="rp4gp"/>
+          <button slot="secondary-button" kind="secondary" on-click="closeDetailsSlidingDrawer" label="Cancel" id="mkrqr"/>
+          <box direction="column" padding-start="{-0.5}" horizontal-align="start" vertical-align="start" id="r5xqq">
+            <box id="d_p39" padding-bottom="{0.8}">
+              <tag-group type="dark-gray" align="start" wrap="true" tags="{[{label: jresourceLevelingTaskDS.item.status, type: 'green'}]}" id="zxkxn"/>
+            </box>
+            <box direction="column" padding-bottom="{0.8}" padding-end="{4.6}" id="b7nzb">
+              <label label="Priority" theme="field" padding="none" id="nd63b"/>
+              <smart-input theme="dark" value="{jresourceLevelingTaskDS.item.wopriority}" min="0" max="999" hide-step-buttons="false" hide-label="true" id="g86y6"/>
+            </box>
+            <box direction="column" padding-bottom="{0.8}" fill-parent-horizontal="true" id="zy78r">
+              <label label="Duration" theme="field" padding="none" id="n2p9_"/>
+              <smart-input size="medium" hide-label="true" theme="dark" value="{jresourceLevelingTaskDS.item.duration}" input-kind="DURATION" id="qn_5d"/>
+            </box>
+            <box direction="column" padding-bottom="{0.8}" padding-start="{0.1}" id="nymnb">
+              <label label="Scheduled start" theme="field" padding="none" id="a38kq"/>
+              <smart-input theme="dark" value="{jresourceLevelingTaskDS.item.starttime}" hide-label="true" show-verbose="false" id="abbma"/>
+            </box>
+            <box direction="column" padding-bottom="{0.8}" padding-start="{0.1}" id="qyv9w">
+              <label label="Start no earlier than" theme="field" padding="none" id="w432r"/>
+              <smart-input theme="dark" value="{jresourceLevelingTaskDS.item.sneconstraint}" hide-label="true" show-verbose="false" invalid="{jresourceLevelingTaskDS.item.sneconstraint > jresourceLevelingTaskDS.item.fnlconstraint}" id="w742y"/>
+            </box>
+            <box id="n45a8" direction="column" padding-bottom="{0.8}" padding-start="{0.1}">
+              <label label="Finish no later than" theme="field" padding="none" id="b9rg3"/>
+              <smart-input theme="dark" value="{jresourceLevelingTaskDS.item.fnlconstraint}" hide-label="true" show-verbose="false" invalid="{jresourceLevelingTaskDS.item.sneconstraint > jresourceLevelingTaskDS.item.fnlconstraint}" id="j39__"/>
+            </box>
+            <box id="mragw" direction="column" padding-start="{0.1}" padding-bottom="{-0.5}">
+              <label label="Interruptible" theme="field" padding="none" id="zn52e"/>
+            </box>
+            <box direction="column" padding-start="{0.2}" id="x6xm4">
+              <toggle toggled="{jresourceLevelingTaskDS.item.interruptible}" label="" toggle-label-off=" " toggle-label-on=" " type="YesNo" id="xejre"/>
+            </box>
+          </box>
+        </sliding-drawer>
+        <dialog id="publishingInProgressDialog" size="sm" title="Publish schedule" primary-action-text="Go to dashboard" on-primary-action="goToDashboardPage" close-button-hidden="true">
+          <box direction="column" id="m76nd">
+            <box padding-bottom="{1}" id="q8pyg">
+              <label label="Publishing the schedule commits the schedule data to the work records." id="wb3p5"/>
+            </box>
+            <box padding-start="{0.5}" padding-bottom="{1}" id="rdd_y">
+              <inline-loading spinner-placement="start" loading-label="Publishing schedule..." success-label="Published" success="{page.state.publishingcompleted}" id="ajdny"/>
+            </box>
+          </box>
+        </dialog>
+        <dialog size="sm" id="publishScheduleDialog" title="Publish schedule" primary-action-text="Publish" secondary-action-text="Cancel" on-primary-action="handlePublishScheduleInProgress">
+          <label label="Publishing the schedule commits the schedule data to the work records. Do you want to proceed?" id="vrgsa2daw" wrap="true"/>
+        </dialog>
+        <dialog id="optimizeScheduleWithoutSavingDialog" title="Optimize schedule without saving?" primary-action-text="Save and optimize" secondary-action-text="Discard and optimize" on-primary-action="handleSaveAndShowOptimizeDialog" on-secondary-action="showOptimizeDialog">
+          <label label="Changes you made will be lost." id="wk73n"/>
+        </dialog>
+        <dialog padding="none" id="optimizeScheduleDialog" title="Optimize schedule" controller="OptimizeDialogController" primary-action-text="Optimize schedule" secondary-action-text="Cancel" on-primary-action="saveAndGoToOptimizeSchedulePage" on-secondary-action="dialogClosed" on-close-action="dialogClosed">
+          <box direction="column" padding="0" id="qwrya">
+            <box padding-start="0.5" padding-end="0.5" id="r8n7j">
+              <label theme="header-small" label="Scheduling rules" id="gdjvy"/>
+            </box>
+            <adaptive-row id="nazxe">
+              <adaptive-column small-width="100" medium-width="100" large-width="33.33" xlarge-width="33.33" id="nv6_8">
+                <box padding-start="0.5" padding-end="0.5" id="wgkjw">
+                  <toggle label="Match skills?" toggled="{skdprojectscenarioDS.item.skdreslevelparam[0].cmatchskill}" toggle-label-off="Off" toggle-label-on="On" type="TrueFalse" id="bwmj6"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="100" medium-width="100" large-width="33.33" xlarge-width="33.33" id="q7gnr">
+                <box padding-start="0.5" padding-end="0.5" id="q4nmm">
+                  <toggle label="Enforce asset maintenance schedule?" toggled="{skdprojectscenarioDS.item.skdreslevelparam[0].venforceams}" toggle-label-off="Off" toggle-label-on="On" type="TrueFalse" id="v5ded"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="100" medium-width="100" large-width="33.33" xlarge-width="33.33" id="d4e79">
+                <box padding-start="0.5" padding-end="0.5" id="yay24">
+                  <number-input label="Time limit in seconds" value="{skdprojectscenarioDS.item.skdreslevelparam[0].timelimit}" hide-step-buttons="true" min="0" id="yx8nd"/>
+                </box>
+              </adaptive-column>
+            </adaptive-row>
+            <adaptive-row id="jj5rk">
+              <adaptive-column small-width="100" medium-width="100" large-width="33.33" xlarge-width="33.33" id="vyjmz">
+                <box padding-start="0.5" padding-end="0.5" id="wavmb">
+                  <toggle label="Schedule window?" toggled="{skdprojectscenarioDS.item.skdreslevelparam[0].cskdwindow}" toggle-label-off="Off" toggle-label-on="On" type="TrueFalse" id="n5_73"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="100" medium-width="100" large-width="33.33" xlarge-width="33.33" id="d2aep">
+                <box padding-start="0.5" padding-end="0.5" id="mkdvq">
+                  <toggle label="Enforce asset operating schedule?" toggled="{skdprojectscenarioDS.item.skdreslevelparam[0].venforceaos}" toggle-label-off="Off" toggle-label-on="On" type="TrueFalse" id="y9mx9"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="100" medium-width="100" large-width="33.33" xlarge-width="33.33" id="kjgka">
+                <box padding-start="0.5" padding-end="0.5" id="jjz39">
+                  <number-input label="Auto-refresh interval in seconds" value="10" on-change="handleRefreshIntervalChange" hide-step-buttons="true" min="0" id="e8mmr"/>
+                </box>
+              </adaptive-column>
+            </adaptive-row>
+            <adaptive-row id="m637j">
+              <adaptive-column small-width="100" medium-width="100" large-width="33.33" xlarge-width="33.33" id="j7zz_">
+                <box padding-start="0.5" padding-end="0.5" id="w663b">
+                  <dropdown label="Complete high priority work first?" hide-unselected-placeholder="true" selected-item="{skdprojectscenarioDS.item.skdreslevelparam[0].cincludepriority}" id="v_52b">
+                    <dropdown-item value="0" text="Off" id="rvd9v"/>
+                    <dropdown-item value="1" text="Consider" id="v43p8"/>
+                    <dropdown-item value="2" text="Enforce" id="dd8vk"/>
+                  </dropdown>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="100" medium-width="100" large-width="33.33" xlarge-width="33.33" id="yyjxy">
+                <box padding-start="0.5" padding-end="0.5" id="n7xz7">
+                  <toggle label="Enforce location maintenance schedule?" toggled="{skdprojectscenarioDS.item.skdreslevelparam[0].venforcelms}" toggle-label-off="Off" toggle-label-on="On" type="TrueFalse" id="qyzra"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="100" medium-width="100" large-width="33.33" xlarge-width="33.33" id="k_vxn">
+                <box padding-start="0.5" padding-end="0.5" fill-parent="false" id="qj8mg">
+                  <dropdown label="Priority direction" hide-unselected-placeholder="true" selected-item="{skdprojectscenarioDS.item.skdreslevelparam[0].vprioritydir}" id="nw2zq">
+                    <dropdown-item value="ASCENDING" text="Ascending" id="yw3dk"/>
+                    <dropdown-item value="DESCENDING" text="Descending" id="yk2v_"/>
+                  </dropdown>
+                </box>
+              </adaptive-column>
+            </adaptive-row>
+            <adaptive-row id="e6d29">
+              <adaptive-column small-width="100" medium-width="100" large-width="33.33" xlarge-width="33.33" id="k7bza">
+                <box padding-start="0.5" padding-end="0.5" id="qggv2">
+                  <toggle label="Include calendar breaks?" toggled="{skdprojectscenarioDS.item.skdreslevelparam[0].ccalendarbreak}" toggle-label-off="Off" toggle-label-on="On" type="TrueFalse" id="mwev6"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="100" medium-width="100" large-width="33.33" xlarge-width="33.33" id="ed6w_">
+                <box padding-start="0.5" padding-end="0.5" id="mav5p">
+                  <toggle label="Enforce location operating schedule?" toggled="{skdprojectscenarioDS.item.skdreslevelparam[0].venforcelos}" toggle-label-off="Off" toggle-label-on="On" type="TrueFalse" id="ajgeq"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="100" medium-width="100" large-width="33.33" xlarge-width="33.33" id="nzn79">
+                <box padding-start="0.5" padding-end="0.5" id="k_m5_">
+                  <number-input label="Percentage availability" value="{skdprojectscenarioDS.item.skdreslevelparam[0].vperctavail}" hide-step-buttons="true" min="0" max="100" id="dkj4r"/>
+                </box>
+              </adaptive-column>
+            </adaptive-row>
+            <adaptive-row id="ejryg">
+              <adaptive-column small-width="100" medium-width="100" large-width="66.66" xlarge-width="66.66" id="bmjwq">
+                <box padding-start="0.5" padding-end="0.5" id="akm68">
+                  <toggle label="Repair facility window?" toggled="{skdprojectscenarioDS.item.skdreslevelparam[0].crepairwindow}" toggle-label-off="Off" toggle-label-on="On" type="TrueFalse" id="bq6qx"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="100" medium-width="100" large-width="33.33" xlarge-width="33.33" id="pz75g">
+                <box padding-start="0.5" padding-end="0.5" id="dyzp9">
+                  <number-input label="Schedule time buffer minutes" value="{skdprojectscenarioDS.item.skdreslevelparam[0].cassigntimebuffer}" hide-step-buttons="true" min="0" id="zr45k"/>
+                </box>
+              </adaptive-column>
+            </adaptive-row>
+            <adaptive-row id="nb2dk">
+              <adaptive-column small-width="100" medium-width="100" large-width="60" xlarge-width="60" id="mp664">
+                <checkbox-group label="" options="{page.state.optimizeScheduleChekboxOptions}" on-change="handleCronChecked" id="pe_d_"/>
+              </adaptive-column>
+              <adaptive-column small-width="100" medium-width="100" large-width="40" xlarge-width="40" id="vbvga"/>
+            </adaptive-row>
+          </box>
+        </dialog>
+      </dialogs>
+    </page>
+    <page id="optimizeSchedule" path="/optimizeSchedule" title="Optimize schedule" controller="OptimizeSchedulePageController">
+      <maximo-datasource id="skdprojectForOptimizeDS" object-structure="MXAPISKDPROJECT" saved-query="MYSCHEDULES" pre-load="false" selection-mode="none">
+        <schema id="xw_p7">
+          <attribute name="name--projectname" searchable="false" id="x327z"/>
+          <attribute name="id" searchable="false" id="zawny"/>
+        </schema>
+        <maximo-datasource id="skdactivityForOptimizeDS" relationship="SKDACTIVITYUNSCHEDULED" object-name="SKDACTIVITY" pre-load="false" controller="ScheduleDetailsController" selection-mode="none">
+          <schema id="vnx6m">
+            <attribute name="id" searchable="false" id="pmw7n"/>
+          </schema>
+        </maximo-datasource>
+        <maximo-datasource id="skdodmerunForOptimizeDS" relationship="SKDODMERUNLATEST" depends-on="skdactivityForOptimizeDS" pre-load="false" controller="OptimizeSchedulePageController" selection-mode="none">
+          <schema id="v_9mr">
+            <attribute name="status--optimizationstatus" id="xgryk"/>
+            <attribute name="rel.SKDOPASCPSSTATUS{*}" id="rybdg"/>
+            <attribute name="rel.SKDOPASCPSKPI{turnaroundtimedays}" id="gwe4b"/>
+            <attribute name="rel.SKDODMERESOURCESUMMARY{shiftname,skillname,lvl,availablehours,loadhours}" id="gng28"/>
+            <attribute name="rel.SKDOPASCPSALERT{severity,alerttype,message}" id="p32r2"/>
+            <attribute name="computeOptimizationStatusTag" computed-function="computeOptimizationStatusTag" id="bz_k3"/>
+          </schema>
+        </maximo-datasource>
+      </maximo-datasource>
+      <json-datasource id="jOptimizeAlertsDS" src="{[]}" schema="schema" selection-mode="none">
+        <schema id="qy34m">
+          <attribute name="severity" id="jxqdw"/>
+          <attribute name="alerttype" id="gp5dz"/>
+          <attribute name="message" id="rr5by"/>
+        </schema>
+      </json-datasource>
+      <json-datasource id="jOptimizeSummaryDS" src="{[]}" schema="schema" selection-mode="none">
+        <schema id="bykzp">
+          <attribute name="shiftname" id="xqz9e"/>
+          <attribute name="skillname" id="mz4nd"/>
+          <attribute name="lvl" id="vqedj"/>
+          <attribute name="availablehours" id="marej"/>
+          <attribute name="loadhours" id="pv_67"/>
+        </schema>
+      </json-datasource>
+      <header-template enable-white-background="true" mode="dynamic" title="Optimize schedule" sub-title="{page.params.projectname} schedule" hide-breadcrumb="false" show-current-page-in-bread-crumb="{false}" id="p7jgz">
+        <tag-group slot="custom-content" class-name="some-class" type="teal" align="start" wrap="true" tags="{skdodmerunForOptimizeDS.item.computeOptimizationStatusTag}" id="ke8v6"/>
+        <button-group slot="menu-button-action" id="qg93n">
+          <button icon="carbon:renew" on-click="onRefresh" id="a72pa"/>
+          <button icon="carbon:report" id="e6wk4" on-click="openOptimizationProgressDialog" hidden="true"/>
+        </button-group>
+        <button-group slot="menu-button-action" hidden="{skdodmerunForOptimizeDS.item.optimizationstatus==='PROCESSED' || skdodmerunForOptimizeDS.item.optimizationstatus==='STOPPED' || skdodmerunForOptimizeDS.item.optimizationstatus==='STOPPING' || skdodmerunForOptimizeDS.item.optimizationstatus==='FAILED' }" id="wg5q4">
+          <button kind="secondary" on-click="goToDashboardPage" label="Run in background" id="j9dkd"/>
+          <button kind="primary" on-click="stopOptimizationRun" label="Stop" id="p9696"/>
+        </button-group>
+        <button-group slot="menu-button-action" hidden="{skdodmerunForOptimizeDS.item.optimizationstatus === undefined || skdodmerunForOptimizeDS.item.optimizationstatus==='PROCESSING'}" id="nmnpj">
+          <button kind="primary" on-click="goToScheduleDetailsPage" label="Go to schedule" id="rp924"/>
+        </button-group>
+        <include src="./pages/OptimizeSchedule.xml" slot="tabs" id="abwgj"/>
+      </header-template>
+      <dialogs id="zebkj">
+        <dialog id="optimizationProgressLog" size="sm" title="Optimization progress log" secondary-action-text="Stop Optimization" primary-action-text="Close">
+          <box id="er9m9" fill-parent="true">
+            <box id="j9g7x" direction="column" fill-parent="true">
+              <box id="kgk4v" direction="column">
+                <label label="Status" theme="field" id="dmznn"/>
+                <border-layout fill-parent="true" height="250px" vertical-overflow="scroll" horizontal-overflow="hidden" id="bx_q95">
+                  <top id="pqpv2">
+                    <label wrap="true" label="" id="u6h_r4"/>
+                  </top>
+                  <bottom id="j2an4"/>
+                </border-layout>
+              </box>
+              <box id="byvx4" fill-parent="false">
+                <box id="gkyrr">
+                  <button icon="carbon:restart" kind="ghost" label="Clear" id="nax57"/>
+                  <button icon="carbon:renew" kind="ghost" label="Refresh" id="qvzxj"/>
+                </box>
+              </box>
+            </box>
+          </box>
+        </dialog>
+      </dialogs>
+    </page>
+  </pages>
+  <messages id="df33s">
+    <message id="schedule_issue_title" text="{0} Task {1}"/>
+    <message id="duration_label" text="{0} days"/>
+    <message id="schedule_type_label_auto_publish" text="Auto publish"/>
+    <message id="schedule_type_label_auto_optimize" text="Auto optimize"/>
+    <message id="schedule_type_label_manual" text="Manual"/>
+    <message id="activities_refresh_success" text="Record has been refreshed"/>
+    <message id="activities_refresh_failure" text="Failed to refresh"/>
+    <message id="activities_save_success" text="Record has been saved"/>
+    <message id="activities_save_error" text="Failed to save record"/>
+    <message id="optimization_success" text="Optimization started for {0} schedule"/>
+    <message id="optimization_failure" text="Failed to optimize"/>
+    <message id="optimization_params_save_error" text="Failed to save optimizer parameters"/>
+    <message id="optimization_stop_success" text="Optimization stopped for {0} schedule"/>
+    <message id="optimization_stop_failure" text="Failed to stop optimization"/>
+    <message id="optimize_dialog_update_cron_option" text="Update cron task settings with these values"/>
+    <message id="publish_schedule_success" text="You have successfully published the {0} schedule"/>
+    <message id="publish_schedule_failure" text="Failed to publish"/>
+  </messages>
+</maximo-application>

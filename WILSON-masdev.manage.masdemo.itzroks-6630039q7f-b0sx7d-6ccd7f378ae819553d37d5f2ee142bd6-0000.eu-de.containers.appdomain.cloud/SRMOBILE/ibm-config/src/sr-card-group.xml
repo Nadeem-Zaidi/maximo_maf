@@ -1,0 +1,23 @@
+<card-group datasource="{(page.state.selectedDropdown!=='unsyncedrequests')? 'srDS' : 'unsyncedrequests'}" show-refresh="{page.state.selectedDropdown!=='unsyncedrequests'}" disconnected="{!app.state.networkConnected}" refresh-disconnected-message="This feature is not available while offline" enable-barcode-scanner="true" readers="{[`ean_reader`]}" timeout="{45}" hide-count-search="{(page.state.selectedSwitch===1)}" id="jgyq6" card-click="showSRDetail" empty-set-string="{page.state.emptystring}" sub-label="To create a request, tap the plus button.">
+  <sr-card-template id="cardtemplate1" slot="item" chevron-kind="ghost" show-chevron="{page.state.selectedDropdown!=='unsyncedrequests'}" on-chevron-click="showSRDetail" on-chevron-click-arg="{item}">
+    <wrapped-text slot="slot1" size="large" label="{item.computedSRDescription}" id="dxvxa"/>
+    <tag-group slot="slot2" align="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 'start' : 'end'}" tags="{item.computedSRStatusPriority}" id="gkkp4"/>
+    <date-relative slot="slot3" value="{item.reportdate}" type="date_full_month" text-prefix="Reported" hidden="{!item.reportdate}" wrap="true" id="aw99_"/>
+    <rich-text-viewer slot="slot3" content="{item.description_longdescription}" padding="0.5" content-limit="256" stripped="true" id="gp2w7"/>
+    <icon slot="slot4" icon="carbon:asset" id="nebm4"/>
+    <field slot="slot5" value="{[item.assetnum, item.assetdesc]}" hide-label="true" wrap="true" id="a2vp_"/>
+    <icon slot="slot6" icon="carbon:location" id="mvv9v"/>
+    <field slot="slot7" value="{[item.location, item.locationdesc]}" hide-label="true" wrap="true" id="jzk22"/>
+    <box direction="column" slot="slot8" fill-parent="true" fill-child="true" id="b3_d4">
+      <box direction="column" vertical-align="center" fill-parent="true" children-hide-overflow="true" id="w8edj">
+        <box direction="row" fill-parent="true" children-hide-overflow="true" id="qedae">
+          <button-group padding="false" id="rd6e4">
+      <button kind="secondary" icon="carbon:document" on-click="openWorkLogDrawer" on-click-arg="{{'item': item}}" tag-value="{item.computedWorklogCount}" tag-type="dark-gray" hidden="{page.state.selectedDropdown==='unsyncedrequests'}" id="rx989"/>
+      <button kind="secondary" icon="maximo:document--attachments" on-click="openAttachmentPage" on-click-arg="{{'item': item}}" tag-value="{item.computedDoclinksCount}" tag-type="dark-gray" hidden="{page.state.selectedDropdown ==='unsyncedrequests'}" id="kdjpe"/>
+      <button kind="secondary" icon="carbon:delete" on-click="showCancelSRdialog" on-click-arg="{{'item': item}}" hidden="{!(item.status_maxvalue ==='NEW')}" id="mw2rn"/>
+    </button-group>
+        </box>
+      </box>
+    </box>
+  </sr-card-template>
+</card-group>

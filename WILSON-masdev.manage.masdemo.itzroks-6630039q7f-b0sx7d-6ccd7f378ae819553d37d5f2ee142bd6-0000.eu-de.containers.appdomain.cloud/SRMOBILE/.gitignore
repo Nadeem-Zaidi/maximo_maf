@@ -1,0 +1,13 @@
+build/app/build/
+build/app/public
+build/app/src/*
+!build/app/src/serviceWorker.js
+build/app/public/build.html
+src/setupProxy.js
+src/dummy-data.json
+node_modules
+update-dev.sh
+files.txt
+index.html
+
+/coverage

@@ -1,0 +1,711 @@
+<box direction="column" id="xnd6z">
+  <tabs id="jgmzr" selected="{page.state.selectedTab}" type="default">
+    <tab
+      label="Resource utilization"
+      id="g5jz2"
+      on-click="switchTabs"
+      on-click-arg="{{selectedTab: 0}}"
+    >
+      <box direction="column" padding-top="1" id="kwvkk">
+        <box padding-start="0.5" padding-end="0.5" id="z6pjb">
+          <dashboard id="bkfdk">
+            <dashboard-value-tile
+              id="uy3di5"
+              datasource="jglobalKPIds"
+              value-field="performedTasks"
+              unit="work records"
+              title="Scheduled"
+              has-title-wrap="true"
+              nodata-label="No data"
+            />
+            <dashboard-value-tile
+              id="uy3wi2"
+              datasource="jglobalKPIds"
+              value-field="unperformedTasks"
+              unit="work records"
+              title="Scheduling issues"
+              has-title-wrap="true"
+              on-value-click="openSchedulingIssuesTab"
+              nodata-label="No data"
+            />
+            <dashboard-value-tile
+              id="uy24ij"
+              datasource="jglobalKPIds"
+              value-field="resourceUtilization"
+              unit="%"
+              title="Resource utilization"
+              has-title-wrap="true"
+              nodata-label="No data"
+            />
+            <dashboard-value-tile
+              id="uye4ij"
+              datasource="jglobalKPIds"
+              value-field="resourcesNum"
+              title="Total resources"
+              unit="labor/crew"
+              has-title-wrap="true"
+              nodata-label="No data"
+            />
+          </dashboard>
+        </box>
+        <box
+          direction="column"
+          fill-parent="true"
+          padding-top="{'1'}"
+          id="dn7a9"
+        >
+          <data-grid
+            title="Resources"
+            padding="false"
+            cell-height="48"
+            y-axis-width="300"
+            datasource="resourceLoadTableds"
+            start-time="{page.params.startdate}"
+            end-time="{page.params.enddate}"
+            on-before-value="getResourceLoadCellValue"
+            auto-load="true"
+            mode="time-series"
+            id="jvzab"
+            full-height="true"
+            time-span="14D"
+            on-time-range-change="moveNext"
+            no-data="{page.params.nodata}"
+            no-data-message="You don't have any resource utilization data yet."
+            no-data-button-icon="carbon:renew"
+            no-data-button-label="Optimize schedule"
+            no-data-action="optimizeDialog"
+            no-data-sub-label="You must run optimization to view utilization levels by resource."
+            on-cell-action="openResourceLevelingTab"
+          >
+            <data-grid-item type="column-label" id="zg2n9">
+              <link
+                label="{item.resourcename}"
+                on-click="openResourceLevelingTab"
+                on-click-arg="{{startdate: page.params.startdate, resourceid: item.id}}"
+                id="vrndx"
+              />
+            </data-grid-item>
+            <data-grid-item type="cell" id="eknq3">
+              <box
+                fill-parent="true"
+                padding="0.0625"
+                background-color="{value.backgroundColor}"
+                horizontal-align="center"
+                children-hide-overflow="true"
+                size="100"
+                id="xpbxv"
+              >
+                <box
+                  direction="row"
+                  padding="0.5"
+                  id="q8avm"
+                  horizontal-align="center"
+                >
+                  <label
+                    label="{value.load}"
+                    theme="field"
+                    color="{value.textColor}"
+                    id="x2pre"
+                  />
+                </box>
+                <box
+                  padding="1.5"
+                  direction="row"
+                  id="rnjr2"
+                  hidden="{!value.hideText}"
+                />
+              </box>
+            </data-grid-item>
+            <data-grid-item type="cell-tooltip" id="qew4f">
+              <label
+                slot="content"
+                wrap="true"
+                id="jh5jmy"
+                label="{value.scheduledhrs} hrs scheduled"
+              />
+              <label
+                slot="content"
+                wrap="true"
+                label="{value.availablehrs} hrs available"
+                id="qvxny"
+              />
+              <label
+                slot="content"
+                wrap="true"
+                label="{value.utilization}% resource utilization"
+                id="ymyw6"
+              />
+            </data-grid-item>
+            <box direction="row" slot="legend" id="gneew">
+              <icon-group
+                primary-icon="maximo:dot"
+                primary-icon-color="#42BE65"
+                label="95%-100%"
+                id="v94zk"
+              />
+              <icon-group
+                primary-icon="maximo:dot"
+                primary-icon-color="#70DC8C"
+                label="90%-95%"
+                id="pamn3"
+              />
+              <icon-group
+                primary-icon="maximo:dot"
+                primary-icon-color="#A7F0BA"
+                label="80%-90%"
+                id="j5b_d"
+              />
+              <icon-group
+                primary-icon="maximo:dot"
+                primary-icon-color="#F1C21B"
+                label="Under 80%"
+                id="vmbj3"
+              />
+              <icon-group
+                primary-icon="maximo:dot"
+                primary-icon-color="#DA1E28"
+                label="Over 100%"
+                id="q69qx"
+              />
+            </box>
+          </data-grid>
+        </box>
+      </box>
+    </tab>
+    <tab
+      label="Resource leveling"
+      on-click="switchTabs"
+      on-click-arg="{{selectedTab: 1}}"
+      id="x3baz"
+    >
+    <box direction="column" fill-parent="true" padding-top="1" id="grzd3">
+        <data-grid
+          hide-vertical-axis="true"
+          override-default-cell-height="true"
+          highlight-axis="false"
+          padding="true"
+          row-label-color="white0"
+          cell-width="264"
+          datasource="resourceLevelingDs"
+          start-time="{page.params.startdate}"
+          end-time="{page.params.enddate}"
+          default-start-date="{page.state.startTime}"
+          on-before-value="getDataListCellValueDateGridTimeSeries"
+          auto-load="true"
+          mode="time-series"
+          time-span="14D"
+          full-height="true"
+          id="df4fdf"
+        >
+          <data-grid-column name="name" id="xcd3t4" />
+          <data-grid-item type="row-label" id="yu615ht">
+            <status-bar
+              light="false"
+              label="{item.key}"
+              value="{item.hoursUtilized}"
+              id="h67gj"
+            >
+              <status-bar-threshold
+                on-compare="resourceLevelingIsDarkGreen"
+                color="#42BE65"
+                id="bkn27"
+              />
+              <status-bar-threshold
+                on-compare="resourceLevelingIsMediumGreen"
+                color="#70DC8C"
+                id="jwwmy"
+              />
+              <status-bar-threshold
+                on-compare="resourceLevelingIsLightGreen"
+                color="#A7F0BA"
+                id="v69v7"
+              />
+              <status-bar-threshold
+                comparison="lt"
+                value="80"
+                color="#F1C21B"
+                id="m3vdq"
+              />
+              <status-bar-threshold
+                comparison="gt"
+                value="100"
+                color="#DA1E28"
+                icon="carbon:checkmark--filled"
+                id="kbgey"
+              />
+            </status-bar>
+          </data-grid-item>
+          <data-grid-item type="column-label" id="yu65ht">
+            <label label="{label||'Loading....'}" theme="field" id="df4r3" />
+          </data-grid-item>
+          <box
+            direction="row"
+            slot="header-content-start"
+            fill-parent="false"
+            id="wqa6_"
+          >
+            <dropdown
+              datasource="resourceTypesDS"
+              hide-unselected-placeholder="true"
+              hide-label="true"
+              theme="dark"
+              selected-item="{page.state.resourceid}"
+              datasource-value-field="id"
+              datasource-text-field="resourcename"
+              on-change-arg="{page.state.resourceid}"
+              id="vw943"
+            />
+          </box>
+          <data-grid-item type="cell" id="dfgfd3">
+            <box
+              id="sds23"
+              direction="column"
+              fill-parent="true"
+              vertical-overflow="auto"
+              horizontal-overflow="hidden"
+              manage-children="false"
+              flex-shrink="0"
+            >
+              <box
+                id="fsdf3f"
+                hidden="true"
+                direction="column"
+                fill-parent-vertical="false"
+                fill-parent-horizontal="true"
+                vertical-overflow="auto"
+                horizontal-overflow="hidden"
+                manage-children="false"
+                flex-shrink="0"
+              >
+                <drop-zone
+                  no-padding="true"
+                  background-color="ui-02"
+                  datasource="{value.datasource}"
+                  id="a7ri953"
+                  drop-key="datalist"
+                >
+                  <label
+                    label="{value.hoursAvailable + ' hours available'}"
+                    id="vw9i_vb"
+                  />
+                </drop-zone>
+              </box>
+              <data-list
+                theme="dark"
+                show-onhover-scroll="true"
+                datasource="{value.datasource}"
+                tight="true"
+                item-to-open="{page.state.itemToOpen}"
+                show-search="false"
+                id="zxc2cc"
+                empty-set-string="No work records to show"
+                on-item-click="openDetailsSlidingDrawer"
+                hide-single-select-icon="true"
+              >
+                <list-item id="an1pzj" renderer-type="custom">
+                  <border-layout fill-parent="true" id="wxswv6">
+                    <middle
+                      vertical-align="start"
+                      horizontal-overflow="hidden"
+                      id="vns63n"
+                    >
+                      <box direction="row" id="z3eq_e">
+                        <wrapped-text
+                          size="small"
+                          max-length="50"
+                          label="{item.name ? item.name : item.workordernum}"
+                          truncation-type="end"
+                          id="rgveq"
+                        />
+                      </box>
+                      <box direction="row" id="e1b16rr" padding-start="-0.5">
+                        <tag-group
+                          type="dark-gray"
+                          align="start"
+                          wrap="true"
+                          tags="{item.tags}"
+                          id="g16bpw"
+                        />
+                      </box>
+                      <box
+                        direction="row"
+                        id="a71qje"
+                        padding-start="-0.5"
+                        hidden="true"
+                      >
+                        <icon-group
+                          primary-icon="carbon:calendar--heat-map"
+                          placeholder-label=""
+                          id="g8k148"
+                        />
+                        <icon-group
+                          primary-icon="carbon:locked"
+                          placeholder-label=""
+                          id="w_13dz"
+                        />
+                        <icon-group
+                          primary-icon="carbon:column-dependency"
+                          placeholder-label=""
+                          id="jk1ny2"
+                        />
+                        <icon-group
+                          primary-icon="carbon:bee"
+                          placeholder-label=""
+                          id="ndaj_1"
+                        />
+                      </box>
+                      <box
+                        direction="row"
+                        hidden="{item.brokenDependency !== 'true'}"
+                        padding-start="-0.5"
+                        id="p0em2a"
+                      >
+                        <icon-group
+                          id="iconGroup21"
+                          error-icon="Carbon:warning--alt"
+                          has-error="true"
+                          placeholder-label=""
+                          icon-size="20"
+                          error-theme="error"
+                          error-label-align="right"
+                          error-label="Broken dependency"
+                        />
+                      </box>
+                      <box
+                        children-sizes="5, 95"
+                        vertical-align="center"
+                        hidden="{!item.rescheduled}"
+                        id="vrm1v7"
+                      >
+                        <icon id="cnju6" icon="Carbon:information" />
+                        <label
+                          label="{item.rescheduled}"
+                          theme="small"
+                          wrap="true"
+                          id="r55jq"
+                        />
+                      </box>
+                    </middle>
+                    <end
+                      vertical-align="start"
+                      horizontal-overflow="hidden"
+                      id="w21kep"
+                    >
+                      <box
+                        direction="row"
+                        padding-start="-0.5"
+                        padding-top="-0.5"
+                        hidden="true"
+                        id="mz1g4a"
+                      >
+                        <menu-button
+                          id="p6g1g8"
+                          kind="ghost"
+                          icon="Carbon:overflow-menu--vertical"
+                        >
+                          <menu-item
+                            label="View details"
+                            on-click="{app.toast('coming soon')}"
+                            id="vg71a2"
+                          />
+                          <menu-item
+                            label="Lock work order"
+                            on-click="{app.toast('coming soon')}"
+                            id="ym1q4m"
+                          />
+                          <menu-item
+                            label="Commit selected record"
+                            on-click="{app.toast('coming soon')}"
+                            id="zd_ym"
+                          />
+                          <menu-item
+                            label="Move to day..."
+                            dialog="moveToDaySlidingDrawer"
+                            id="e3zp5"
+                          />
+                        </menu-button>
+                      </box>
+                    </end>
+                  </border-layout>
+                </list-item>
+              </data-list>
+            </box>
+          </data-grid-item>
+          <box direction="row" slot="legend" id="dcdf42">
+            <icon-group
+              primary-icon="maximo:dot"
+              primary-icon-color="#42BE65"
+              label="95%-100%"
+              id="vpvep"
+            />
+            <icon-group
+              primary-icon="maximo:dot"
+              primary-icon-color="#70DC8C"
+              label="90%-95%"
+              id="d3d2r"
+            />
+            <icon-group
+              primary-icon="maximo:dot"
+              primary-icon-color="#A7F0BA"
+              label="80%-90%"
+              id="bzz97"
+            />
+            <icon-group
+              primary-icon="maximo:dot"
+              primary-icon-color="#F1C21B"
+              label="Under 80%"
+              id="wg6g_"
+            />
+            <icon-group
+              primary-icon="maximo:dot"
+              primary-icon-color="#DA1E28"
+              label="Over 100%"
+              id="vbge4"
+            />
+          </box>
+        </data-grid> 
+        </box>     
+    </tab>
+   <tab
+      label="Scheduling issues ({page.state.tasksWithIssues})"
+      id="e5d39"
+      on-click="switchTabs"
+      on-click-arg="{{selectedTab: 2}}"
+    >
+      <box padding-top="0.5" padding-bottom="1" id="amj_e">
+        <table
+          datasource="skdactivityunscheduledDS"
+          can-resize="true"
+          display-row-count="true"
+          can-reorder-columns="false"
+          can-filter="true"
+          can-search="false"
+          no-data-message="No scheduling issues"
+          can-download="true"
+          id="b3gyy"
+        >
+          <toolbar-actions id="ym5vv">
+            <button
+              icon="carbon:undo"
+              on-click="onUndo"
+              kind="ghost"
+              slot="action-button"
+              hover-tooltip="Undo"
+              label=""
+              id="hj5kh"
+            />
+            <button
+              kind="secondary"
+              on-click="onSave"
+              slot="action-button"
+              hover-tooltip="Save"
+              disabled="{!datasource.state.canSave || page.state.disableSaveButton}"
+              label="Save"
+              id="fj5kh"
+            />
+          </toolbar-actions>
+          <table-column
+            name="id"
+            placeholder-text="Work record"
+            label="Work record"
+            id="wegmw"
+            width="220"
+          >
+            <box direction="column" id="kwqtkk" fill-parent="true">
+              <icon-group
+                padding="{0}"
+                error-icon="{item.computedIssueIcon}"
+                error-label="{item.computeIssueTitleString}"
+                id="r8fkw"
+                has-error="true"
+                error-label-align="right"
+              />
+              <label
+                theme="field"
+                label="{item.name}"
+                spacing="none"
+                padding="none"
+                id="egen6"
+              />
+            </box>
+          </table-column>
+          <table-column
+            name="duration"
+            placeholder-text="Duration"
+            label="Duration"
+            id="e24fb"
+            width="130"
+            align="start"
+          >
+            <box
+              direction="column"
+              padding-top="{0.4}"
+              fill-parent="true"
+              id="ay8ja"
+            >
+              <smart-input
+                hide-label="true"
+                id="durationInput"
+                theme="dark"
+                value="{item.duration}"
+                hide-step-buttons="true"
+                min="0"
+              />
+            </box>
+          </table-column>
+          <table-column
+            name="sneconstraint"
+            placeholder-text="Start no earlier than"
+            label="Start no earlier than"
+            id="e784bb"
+            width="250"
+          >
+            <box
+              direction="column"
+              padding-top="{0.2}"
+              padding-bottom="{0.2}"
+              fill-parent="true"
+              id="znnym"
+            >
+              <smart-input
+                theme="dark"
+                value="{item.sneconstraint}"
+                hide-label="true"
+                show-verbose="false"
+                id="bjgkvs"
+                invalid="{item.sneconstraint > item.fnlconstraint}"
+              />
+            </box>
+          </table-column>
+          <table-column
+            name="fnlconstraint"
+            placeholder-text="Finish no later than"
+            label="Finish no later than"
+            id="n4v8m"
+            width="250"
+          >
+            <box
+              direction="column"
+              padding-top="{0.2}"
+              padding-bottom="{0.2}"
+              fill-parent="true"
+              id="dj7xy"
+            >
+              <smart-input
+                theme="dark"
+                value="{item.fnlconstraint}"
+                hide-label="true"
+                show-verbose="false"
+                id="bj3k4s"
+                invalid="{item.sneconstraint > item.fnlconstraint}"
+              />
+            </box>
+          </table-column>
+          <table-column
+            name="wopriority"
+            placeholder-text="Priority"
+            label="Priority"
+            align="start"
+            width="120"
+            id="n4zz3m"
+          >
+            <smart-input
+              value="{item.wopriority}"
+              id="bj3gs"
+              min="0"
+              max="999"
+              hide-step-buttons="true"
+              hide-label="true"
+            />
+          </table-column>
+          <table-column
+            name="interruptible"
+            label="Interruptible"
+            can-filter="false"
+            id="n4z82m"
+            width="140"
+          >
+            <box
+              direction="column"
+              padding-start="{0.2}"
+              padding-top="{0.2}"
+              padding-bottom="{0.2}"
+              fill-parent="true"
+              id="r63q9"
+            >
+              <smart-input
+                value="{item.interruptible}"
+                hide-label="true"
+                id="bd_ma"
+              />
+            </box>
+          </table-column>
+          <table-column
+            name="intshift"
+            label="Interruptible shift"
+            can-filter="false"
+            can-sort="true"
+            width="180"
+            id="n481m"
+          >
+            <box direction="column" fill-parent="true" id="x8qpz">
+              <dropdown
+                datasource="skdprojectshiftsDS"
+                hide-unselected-placeholder="true"
+                hide-label="true"
+                selected-item="{item.intshift}"
+                disabled="{!item.interruptible}"
+                datasource-value-field="shiftnum"
+                datasource-text-field="shiftnum"
+                id="mrnz8"
+              />
+            </box>
+          </table-column>
+          <table-column
+            name="modified"
+            label="Modified"
+            can-filter="false"
+            can-sort="true"
+            width="110"
+            id="jgmae"
+          >
+            <box direction="column" fill-parent="true" id="nvn37">
+              <label
+                theme="field"
+                label="{item.computeChanged ? 'Yes' : 'No'}"
+                spacing="none"
+                padding="none"
+                id="ed_kq"
+              />
+            </box>
+          </table-column>
+          <table-details id="qrbjx">
+            <box direction="column" padding="1" id="e86p3">
+              <repeat
+                datasource="skdactivityunscheduledDS[schedulingerrors]"
+                id="zz5q3"
+              >
+                <box direction="column" slot="item" id="gp3kw">
+                  <label
+                    spacing="none"
+                    label="Error message"
+                    theme="field"
+                    id="ypnjq"
+                    hidden="{index > 0}"
+                  />
+                  <inline-notification
+                    title="{item.valmsg ? item.valmsg : item.reasoncode}"
+                    subtitle="{item.reasoncode_description}"
+                    kind="error"
+                    id="gazd8"
+                    hide-close-button="true"
+                  />
+                </box>
+              </repeat>
+            </box>
+          </table-details>
+        </table>
+      </box>
+    </tab>
+  </tabs>
+</box>

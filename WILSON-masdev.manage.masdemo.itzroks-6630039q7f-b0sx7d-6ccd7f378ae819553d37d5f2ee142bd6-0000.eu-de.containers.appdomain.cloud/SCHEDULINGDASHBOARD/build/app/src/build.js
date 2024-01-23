@@ -1,0 +1,45 @@
+
+const buildInfo = {
+  "dateStr": "1/23/2024, 11:05:45 AM",
+  "date": 1706007945175,
+  "dependencies": {
+    "@maximo/graphite-common-solution-components": "2.0.13",
+    "@maximo/map-component": "1.4.33",
+    "@maximo/treegrid": "^0.0.50",
+    "body-parser": "1.19.2",
+    "jsonschema": "^1.4.1",
+    "config": "3.3.7",
+    "cookie-parser": "1.4.6",
+    "dotenv": "^8.2.0",
+    "express": "4.18.1",
+    "express-request-id": "^1.4.1",
+    "extract-zip": "^2.0.1",
+    "garage-utils": "^5.2.0",
+    "uuid": "^8.3.2",
+    "btoa": "1.2.1",
+    "form-data": "4.0.0",
+    "node-fetch": "2.6.7",
+    "xml-js": "^1.6.11",
+    "xml-escape": "^1.1.0",
+    "@babel/preset-react": "7.12.13",
+    "colors": "1.4.0",
+    "audio-recorder-polyfill": "0.4.1",
+    "socket.io-client": "4.5.4",
+    "express-session": "^1.17.0",
+    "connect-flash": "^0.1.1",
+    "memorystore": "^1.6.7",
+    "cors": "^2.8.5",
+    "csrf-csrf": "^2.2.1",
+    "jsonwebtoken": "^9.0.0",
+    "passport": "0.6.0",
+    "passport-oauth2": "^1.6.1",
+    "passport-oauth2-refresh": "^2.1.0",
+    "passport-openidconnect": "^0.1.1",
+    "react-image-gallery": "^1.2.11"
+  },
+  "buildToolsVersion": "2.12.383",
+  "appProcessorVersion": "2.12.383",
+  "version": "8.11.0"
+};
+export default buildInfo;
+      

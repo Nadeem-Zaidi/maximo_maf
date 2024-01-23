@@ -1,0 +1,302 @@
+<box padding-top="1" fill-parent="true" id="kw34x">
+  <box padding-start="0.5" padding-end="0.5" direction="column" id="qnpre">
+    <border-layout fill-parent="true" padding="false" id="x_wdk">
+      <start width="25" background-color="ui-01" id="w84bg">
+        <box id="rpk8k" padding-start="1" padding-top="1" padding-bottom="0.5">
+          <label
+            theme="header-small"
+            label="Status"
+            spacing="none"
+            padding="none"
+            id="wm8rj"
+          />
+        </box>
+        <box direction="column" padding="0.5" id="nvd8x">
+          <box id="grvp9" padding-bottom="1" direction="column">
+            <field
+              label="Solve status"
+              loading="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? false : true}"
+              value="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? skdodmerunForOptimizeDS.item.skdopascpsstatus[0].status : '--'}"
+              id="j782e"
+            />
+          </box>
+          <box id="w56ab" padding-bottom="1" direction="column">
+            <field
+              label="Solutions"
+              loading="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? false : true}"
+              value="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? skdodmerunForOptimizeDS.item.skdopascpsstatus[0].solutions : '--'}"
+              id="j5m2b"
+            />
+          </box>
+          <box padding-bottom="1" direction="column" id="zvn7x">
+            <field
+              label="Solve elapsed"
+              loading="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? false : true}"
+              value="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? skdodmerunForOptimizeDS.item.skdopascpsstatus[0].solveelapsed : '--'}"
+              id="ndm9w"
+            />
+          </box>
+          <box padding-bottom="1" direction="column" id="w8yw4">
+            <field
+              label="Solve time"
+              loading="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? false : true}"
+              value="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? skdodmerunForOptimizeDS.item.skdopascpsstatus[0].solvetime : '--'}"
+              id="wjpd2"
+            />
+          </box>
+          <box padding-bottom="1" direction="column" id="axnpn">
+            <field
+              label="Search status"
+              loading="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? false : true}"
+              value="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? skdodmerunForOptimizeDS.item.skdopascpsstatus[0].searchstatus : '--'}"
+              id="me87k"
+            />
+          </box>
+          <box padding-bottom="1" direction="column" id="v9zje">
+            <field
+              label="Turn-around time in days"
+              loading="{skdodmerunForOptimizeDS.item.skdopascpskpi ? false : true}"
+              value="{skdodmerunForOptimizeDS.item.skdopascpskpi ? skdodmerunForOptimizeDS.item.skdopascpskpi[0].turnaroundtimedays : '--'}"
+              id="nrx5k"
+            />
+          </box>
+          <box padding-bottom="1" direction="column" id="b58ja">
+            <field
+              label="Best solution date"
+              padding="bottom"
+              loading="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? false : true}"
+              id="p_ezy"
+            >
+              <sub-field
+                type="datetime"
+                value="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? skdodmerunForOptimizeDS.item.skdopascpsstatus[0].bestsolutiondate : '--'}"
+                id="akpmy"
+              />
+            </field>
+          </box>
+          <box padding-bottom="1" direction="column" id="z836w">
+            <field
+              label="Best solution elapsed"
+              loading="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? false : true}"
+              value="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? skdodmerunForOptimizeDS.item.skdopascpsstatus[0].bestsolutionelapsed : '--'}"
+              id="yzanx"
+            />
+          </box>
+          <box padding-bottom="1" direction="column" id="wm2ay">
+            <field
+              label="Solve start date"
+              padding="bottom"
+              loading="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? false : true}"
+              id="zmakb"
+            >
+              <sub-field
+                type="datetime"
+                value="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? skdodmerunForOptimizeDS.item.skdopascpsstatus[0].solvestartdate : ''}"
+                id="xyjqa"
+              />
+            </field>
+          </box>
+          <box padding-bottom="1" direction="column" id="ky2b2">
+            <field
+              label="Solve end date"
+              loading="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? false : true}"
+              padding="bottom"
+              id="b2_8p"
+            >
+              <sub-field
+                type="datetime"
+                value="{skdodmerunForOptimizeDS.item.skdopascpsstatus ? skdodmerunForOptimizeDS.item.skdopascpsstatus[0].solveenddate : ''}"
+                id="xnzk4"
+              />
+            </field>
+          </box>
+        </box>
+      </start>
+      <end width="75" id="rbr5x">
+        <box padding-start="1" direction="column" fill-parent="true" id="r4bvz">
+          <box fill-parent="true" padding-bottom="1" id="pr4jy">
+            <box
+              direction="column"
+              background-color="ui-01"
+              fill-parent="true"
+              id="rxmdz"
+            >
+              <table
+                title="Alerts"
+                datasource="jOptimizeAlertsDS"
+                can-resize="false"
+                display-row-count="false"
+                can-reorder-columns="false"
+                can-filter="true"
+                can-search="true"
+                no-data-message="There are no alerts to display"
+                id="bq_d3"
+                fill-parent="true"
+                rows-per-page="5"
+              >
+                <table-column
+                  name="severity"
+                  placeholder-text="Severity"
+                  width="150"
+                  label="Severity"
+                  id="bmn6d"
+                >
+                  <icon-group
+                    hidden="{item.severity !== 'WARNING'}"
+                    primary-icon="carbon:warning--filled"
+                    primary-icon-color="support-03"
+                    label="Warning"
+                    id="pe8nd"
+                  />
+                  <icon-group
+                    hidden="{item.severity !== 'CRITICAL'}"
+                    primary-icon="carbon:error--filled"
+                    primary-icon-color="support-01"
+                    label="Critical"
+                    id="ad6gm"
+                  />
+                  <icon-group
+                    hidden="{item.severity !== 'ERROR'}"
+                    primary-icon="carbon:error--filled"
+                    primary-icon-color="support-01"
+                    label="Error"
+                    id="wb9_2"
+                  />
+                  <icon-group
+                    hidden="{item.severity !== 'INFO'}"
+                    primary-icon="carbon:information--filled"
+                    primary-icon-color="support-04"
+                    label="Info"
+                    id="x945w"
+                  />
+                </table-column>
+                <table-column
+                  name="alertyType"
+                  label="Alert type"
+                  width="300"
+                  can-filter="false"
+                  id="bkjvd"
+                >
+                  <label
+                    theme="field"
+                    label="{item.alerttype}"
+                    spacing="none"
+                    padding="none"
+                    id="ajez_"
+                  />
+                </table-column>
+                <table-column
+                  name="message"
+                  label="Message"
+                  can-filter="false"
+                  id="gga2r"
+                >
+                  <label
+                    theme="field"
+                    label="{item.message}"
+                    spacing="none"
+                    padding="none"
+                    id="qad47"
+                  />
+                </table-column>
+              </table>
+            </box>
+          </box>
+          <box fill-parent="true" id="x75x4">
+            <box
+              direction="column"
+              background-color="ui-01"
+              fill-parent="true"
+              id="k8m7r"
+            >
+              <table
+                title="Optimization summary"
+                datasource="jOptimizeSummaryDS"
+                can-resize="false"
+                display-row-count="false"
+                can-reorder-columns="false"
+                can-filter="true"
+                can-search="true"
+                no-data-message="There are no rows to display"
+                id="ynvq9"
+                fill-parent="true"
+                rows-per-page="5"
+              >
+                <table-column
+                  name="shiftname"
+                  placeholder-text="Shift"
+                  label="Shift"
+                  id="kzmew"
+                >
+                  <label
+                    theme="field"
+                    label="{item.shiftname}"
+                    spacing="none"
+                    padding="none"
+                    id="qy7dn"
+                  />
+                </table-column>
+                <table-column
+                  name="skillname"
+                  placeholder-text="Resource"
+                  label="Resource"
+                  id="mv6wr"
+                >
+                  <label
+                    theme="field"
+                    label="{item.skillname}"
+                    spacing="none"
+                    padding="none"
+                    id="gxg3e"
+                  />
+                </table-column>
+                <table-column
+                  name="lvl"
+                  placeholder-text="Skill level"
+                  label="Skill level"
+                  id="k_g48"
+                >
+                  <label
+                    theme="field"
+                    label="{item.lvl}"
+                    spacing="none"
+                    padding="none"
+                    id="nqegq"
+                  />
+                </table-column>
+                <table-column
+                  name="availablehours"
+                  placeholder-text="Available hours"
+                  label="Available hours"
+                  id="d3b2e"
+                >
+                  <label
+                    theme="field"
+                    label="{item.availablehours}"
+                    spacing="none"
+                    padding="none"
+                    id="dx6x9"
+                  />
+                </table-column>
+                <table-column
+                  name="loadhours"
+                  placeholder-text="Load hours"
+                  label="Load hours"
+                  id="naj4d"
+                >
+                  <label
+                    theme="field"
+                    label="{item.loadhours}"
+                    spacing="none"
+                    padding="none"
+                    id="g39xx"
+                  />
+                </table-column>
+              </table>
+            </box>
+          </box>
+        </box>
+      </end>
+    </border-layout>
+  </box>
+</box>

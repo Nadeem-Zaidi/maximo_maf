@@ -1,0 +1,863 @@
+<maximo-application navigator-tile-order="350" controller="AppController" theme="touch" product-name="Maximo" product-name-adaptive="Maximo" title="Inventory Counting" id="icmobile" version="8.11.0.0" default-log-level="error" user-menu-enabled="true" nav-initial-open-state="false" user-profile-enabled="true">
+  <menu slot="navigation-items" id="xkpj3">
+    <menu-item label="Inventory Counting" icon="maximo:inventory-counting" page="main" id="y24n4"/>
+  </menu>
+  <states id="r24x5">
+    <state name="useConfirmDialog" value="true" type="boolean" id="zv4ax"/>
+    <state name="selectedCountBookDesc" type="string" id="z3drp"/>
+    <state name="param_countbookid" value="0" type="number" id="pnpe6"/>
+    <state name="param_countbooknum" type="string" id="ww2xq"/>
+    <state name="param_allitemcount" type="string" id="rae6x"/>
+    <state name="param_countbooksiteid" type="string" id="geyw5"/>
+    <state name="countbookchanged" value="false" type="boolean" id="nr4vr"/>
+    <state name="param_countbookstatus" type="string" id="eb2jq"/>
+    <state name="param_countbookallitmcount" type="string" id="pgnkv"/>
+    <state name="param_countednumber" type="string" id="a97n4"/>
+    <state name="notcounted_json_items" type="object" value="{[]}" id="p53wy"/>
+    <state name="adhocupdated" value="false" type="boolean" id="p4jrk"/>
+    <state name="allitemsidlist" type="object" value="{[]}" id="mk9qk"/>
+    <state name="notcountedcountbooklinesidlist" type="object" value="{[]}" id="ez3am"/>
+    <state name="countbookidlist" type="object" value="{[]}" id="jy_dk"/>
+    <state name="counteditemidlist4countbook" type="object" value="{[]}" id="n2qv5"/>
+    <state name="counteditemvaluelist4countbook" type="object" value="{[]}" id="bq_eq"/>
+    <state name="counteditemdatelist4countbook" type="object" value="{[]}" id="rpjxn"/>
+    <state name="isback" value="false" type="boolean" id="qmkd9"/>
+    <state name="isbackfromLineInvDetail" value="false" type="boolean" id="b7mjp"/>
+    <state name="reconcileback" value="false" type="boolean" id="eaagz"/>
+    <state name="reconcileloading" type="boolean" value="false" id="v_rea"/>
+    <state name="reconcileneedrefresh" type="boolean" value="false" id="aazqn"/>
+    <state name="countbookds" value="countBookDetailDS_JSON" type="string" id="ady2q"/>
+    <state name="adhocds" value="mxapiinvbalds_json" type="string" id="bq8wd"/>
+    <state name="isMobileContainer" type="boolean" value="false" id="mv5je"/>
+    <state name="canLoadCBDS" type="boolean" value="false" id="pp8me"/>
+    <state name="countbooktabloading" type="boolean" value="false" id="v5nze"/>
+    <state name="canLoadAdhocDS" type="boolean" value="false" id="app_state_canLoadAdhocDS"/>
+    <state name="adhoctabloading" type="boolean" value="false" id="app_state_adhoctabloading"/>
+    <state name="invbaldetailloading" type="boolean" value="true" id="app_state_invbaldetailloading"/>
+    <state name="cntbooklinedetailloading" type="boolean" value="true" id="app_state_cntbooklinedetailloading"/>
+  </states>
+  <maximo-datasource id="synonymdomainDS" lookup-data="true" id-attribute="domainid" object-structure="mxapisynonymdomain" where="domainid=&quot;COUNTBOOKSTATUS&quot;">
+    <schema id="bn686">
+      <attribute name="value" searchable="true" id="xp2e9"/>
+      <attribute name="maxvalue" searchable="true" id="g58pj"/>
+      <attribute name="description" searchable="true" id="wwwzq"/>
+      <attribute name="domainid" searchable="true" id="m2ebr"/>
+      <attribute name="valueid" unique-id="true" searchable="true" id="aakrv"/>
+      <attribute name="siteid" searchable="true" id="r27qk"/>
+      <attribute name="orgid" searchable="true" id="wz5gx"/>
+      <attribute name="defaults" id="avz96"/>
+    </schema>
+  </maximo-datasource>
+  <user-profile slot="user-profile-items" src="{app.state.userProfileImg === null ? app.state.userDefaultImage : app.state.userProfileImg}" size="52" show-status="true" show-toggle-section="{app.state.isEamApp === true ? false : true}" first-name="{app.state.userProfileName}" last-name="{app.state.userProfileLastName}" label="Available to assist" tooltip-text="Indicate if you are available to collaborate with other technicians to help them complete their work." default-toggled="true" on-toggle="toggleAvailable" on-logout="logout" id="r_ya9">
+    <user-profile-center-item id="wzxyg">
+      <list id="gdjjm">
+        <list-item label="{app.state.deviceIdLabel}" hidden="{app.state.isEamApp === true ? true : false}" id="m858m"/>
+      </list>
+    </user-profile-center-item>
+  </user-profile>
+  <pages id="pages">
+    <page id="main" controller="SubMenuPageController">
+      <json-datasource id="subMenuListDS" src="{[]}" items="items" pre-load="true" schema="schema" id-attribute="_id"/>
+      <json-datasource id="subMenuListDS2" src="{[]}" items="items" pre-load="true" schema="schema" id-attribute="_id"/>
+      <header-template title="Inventory counting" show-current-page-in-bread-crumb="false" id="z639b"/>
+      <box direction="column" fill-child="true" id="k72vw">
+        <data-list datasource="subMenuListDS" on-item-click="subMenuListGoto" on-item-click-arg="{event}" show-search="false" no-select-behavior="true" search-placeholder-text="Search submenu" id="d5xry">
+          <list-item id="m4nr9">
+            <border-layout fill-parent="true" padding="true" id="w4797">
+              <middle width="80" horizontal-overflow="hidden" id="e95vg">
+                <field value="{item.label}" field-class-name="16-bold" hide-label="true" id="zv_kd"/>
+              </middle>
+              <end width="20" horizontal-overflow="hidden" id="qqxdk">
+                <box vertical-align="end" direction="row" horizontal-align="end" fill-parent="true" id="anvdv">
+                  <icon icon="carbon:chevron--right" id="qk987"/>
+                </box>
+              </end>
+            </border-layout>
+          </list-item>
+        </data-list>
+        <data-list datasource="subMenuListDS2" on-item-click="subMenuListGoto" hidden="{app.device.isMaximoMobile}" margin="true" on-item-click-arg="{event}" show-search="false" no-select-behavior="true" id="waqwq">
+          <list-item id="rzg_3">
+            <border-layout fill-parent="true" padding="true" id="wj3wb">
+              <middle width="80" horizontal-overflow="hidden" id="k4g6g">
+                <field value="{item.label}" field-class-name="16-bold" hide-label="true" id="vbjvr"/>
+              </middle>
+              <end width="20" horizontal-overflow="hidden" id="y7kqq">
+                <box vertical-align="end" direction="row" horizontal-align="end" fill-parent="true" id="j3_94">
+                  <icon icon="carbon:chevron--right" id="wmzg2"/>
+                </box>
+              </end>
+            </border-layout>
+          </list-item>
+        </data-list>
+      </box>
+    </page>
+    <page id="countBook" controller="CountBookPageController">
+      <states id="wma47">
+        <state name="objectstructure" type="string" id="k5bd4"/>
+        <state name="selectedDS" value="countBookListDS" type="string" id="dgw6y"/>
+      </states>
+      <maximo-datasource id="countBookListDS" object-structure="mxapicntbook" saved-query="MOBILECNTBOOK" order-by="latestdue" id-attribute="countbookid" pre-load="true" selection-mode="single" page-size="20" reset-datasource="true" controller="CountBookListDataController" offline-immediate-download="true">
+        <schema id="pkn7k">
+          <attribute name="siteid" searchable="true" id="x4b8v"/>
+          <attribute name="countbookid" unique-id="true" id="jxz_k"/>
+          <attribute name="countbooknum" searchable="true" id="rnndp"/>
+          <attribute name="description" searchable="true" id="mpdv5"/>
+          <attribute name="status" id="dq349"/>
+          <attribute name="status_description" id="q5kxd"/>
+          <attribute name="latestdue" searchable="true" id="mjpb3"/>
+          <attribute name="lastcount" searchable="true" id="v3ar_"/>
+          <attribute name="lastcountby" id="pqem7"/>
+          <attribute name="numoverdue" id="m2zzj"/>
+          <attribute name="counted" id="mrza4"/>
+          <attribute name="countbookallitm" id="p_a_q">
+            <attribute name="_dbcount--countbookallitmcount" id="vgmk8"/>
+          </attribute>
+          <attribute name="computedCountedMessage" computed-function="computedCountedMessage" id="v3p9q"/>
+          <attribute name="computedCountedIcon" computed-function="computedCountedIcon" id="dpgz2"/>
+          <attribute name="computedTags" computed-function="computedTags" id="agmxa"/>
+          <attribute name="computedOverdueMessage" computed-function="computedOverdueMessage" id="ak_4x"/>
+          <attribute name="computedOverdueIcon" computed-function="computedOverdueIcon" id="zkw6m"/>
+        </schema>
+      </maximo-datasource>
+      <header-template title="Count books" hide-breadcrumb="true" icon-name="carbon:chevron--left" icon-action="goBack" id="bp43z"/>
+      <box direction="column" fill-child="true" id="reprx">
+        <include src="./cb-card-group.xml" id="ek32v"/>
+      </box>
+    </page>
+    <page id="countBookDetail" controller="CountBookDetailPageController">
+      <states id="zk7z4">
+        <state name="selectedTabIndex" value="0" url-enabled="true" type="number" id="d8nad"/>
+        <state name="inprogress_selected" value="true" type="boolean" id="zx5pb"/>
+        <state name="counted_selected" value="false" type="boolean" id="mdprn"/>
+        <state name="count_currentitem" type="object" value="0" url-enabled="true" id="mz4ga"/>
+        <state name="invptol" type="string" value="0" id="xm922"/>
+        <state name="invmtol" type="string" value="0" id="xa737"/>
+        <state name="useConfirmDialog" value="true" type="boolean" id="xg_8q"/>
+        <state name="showcomplete" type="boolean" value="true" id="m8dx4"/>
+        <state name="enablesave" type="boolean" value="false" id="v5jky"/>
+        <state name="completed" type="boolean" value="false" id="w27ej"/>
+        <state name="hasnewcount" type="boolean" value="false" id="w5yze"/>
+        <state name="dsinitialized" type="boolean" value="false" id="be585"/>
+        <state name="needsetup" type="boolean" value="false" id="countbook_page_state_needsetup"/>
+        <state name="isfromsave" type="boolean" value="false" id="countbook_page_state_isfromsave"/>
+        <state name="counteditem_id_value_map_4countbook" type="object" value="{[]}" id="a385a"/>
+        <state name="counteditem_id_date_map_4countbook" type="object" value="{[]}" id="xn945"/>
+        <state name="allitems" type="object" value="{[]}" id="wv5n9"/>
+        <state name="countBookDetailDSALL_Name" type="string" value="countBookDetailDSALL" id="nqgpg"/>
+      </states>
+      <maximo-datasource id="countBookDS" object-structure="mxapicntbook" saved-query="MOBILECNTBOOK" id-attribute="countbookid" selection-mode="single" page-size="20" offline-immediate-download="true">
+        <schema id="d4d66">
+          <attribute name="siteid" searchable="true" id="agzj9"/>
+          <attribute name="countbookid" unique-id="true" id="qv79z"/>
+          <attribute name="countbooknum" id="g356q"/>
+        </schema>
+      </maximo-datasource>
+      <maximo-datasource id="countBookDetailDSALL" object-structure="mxapicntbookline" saved-query="MOBILECNTBOOKLINE" order-by="nextphycntdate,binnum" id-attribute="countbooklineid" controller="CountBookLineDataController" selection-mode="single" page-size="1000" offline-immediate-download="true">
+        <schema id="vakj7">
+          <attribute name="countbooknum" sortable="false" searchable="true" id="nq_aj"/>
+          <attribute name="siteid" sortable="false" searchable="true" id="k_4ej"/>
+          <attribute name="countbooklineid" sortable="false" unique-id="true" index="true" id="dmep3"/>
+          <attribute name="itemnum" index="true" sortable="false" searchable="true" id="yvq7g"/>
+          <attribute name="item.description--itemdesc" sortable="false" searchable="true" id="b49xw"/>
+          <attribute name="assetnum" sortable="false" searchable="true" id="w6v2m"/>
+          <attribute name="asset.serialnum--serialnum" sortable="false" searchable="true" id="rex8d"/>
+          <attribute name="rotating" sortable="false" id="dppav"/>
+          <attribute name="binnum" searchable="true" id="yvr6r">
+            <lookup-map name="cntlinebin" id="y6rwa">
+              <lookup-return lookup-field="displayValue" datasource-field="binnum" id="m5937"/>
+              <lookup-return lookup-field="value" datasource-field="binnum" id="e79jk"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="physcnt" sortable="false" searchable="true" id="w95y8"/>
+          <attribute name="match" sortable="false" id="k98j8"/>
+          <attribute name="recon" sortable="false" id="rz6yq"/>
+          <attribute name="hasphyscnt" sortable="false" searchable="false" id="ngx8x"/>
+          <attribute name="physcntdate" sortable="false" id="pwwy9"/>
+          <attribute name="inventory.abctype--abctype" sortable="false" id="dpkzv"/>
+          <attribute name="lotnum" title="Lot" id="g2nqj">
+            <lookup-map name="cntlinelotnum" id="e7nx2">
+              <lookup-return lookup-field="displayValue" datasource-field="lotnum" id="j5wrx"/>
+              <lookup-return lookup-field="value" datasource-field="lotnum" id="mdzza"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="inventory.issueunit--issueunit" sortable="false" id="v24g6"/>
+          <attribute name="nextphycntdate" title="Count due" searchable="true" id="v3zk5"/>
+          <attribute name="curbal" sortable="false" id="pnebk"/>
+          <attribute name="inventory.invptol--invinvptol" sortable="false" id="eydyr"/>
+          <attribute name="inventory.invmtol--invinvmtol" sortable="false" id="kmm55"/>
+          <attribute name="realinvptol" sortable="false" id="n8wqy"/>
+          <attribute name="realinvmtol" sortable="false" id="x67be"/>
+          <attribute name="accuracy" sortable="false" id="bmpjp"/>
+          <attribute name="maxvar.allowblindcnt" sortable="false" id="zmqpz"/>
+          <attribute name="maxvar.invptol" sortable="false" id="m8jeg"/>
+          <attribute name="maxvar.invmtol" sortable="false" id="y56mw"/>
+          <attribute name="conditioncode" sortable="false" id="emvdp"/>
+          <attribute name="errorvalue" sortable="false" id="vdbm_"/>
+          <attribute name="glcreditaccount" sortable="false" id="na44x"/>
+          <attribute name="adjphyscnt" sortable="false" id="wg64m"/>
+          <attribute name="gldebitaccount" sortable="false" id="qz5kb"/>
+          <attribute name="lastupdateby" sortable="false" id="ak8z2"/>
+          <attribute name="lastupdatedate" sortable="false" id="v_yjy"/>
+          <attribute name="orgid" sortable="false" id="q8k3d"/>
+          <attribute name="tool" sortable="false" id="rv9ka"/>
+          <attribute name="physcntby" sortable="false" id="z44ea"/>
+          <attribute name="errormsgtext" local="true" type="STRING" sortable="false" id="pjjj9"/>
+        </schema>
+        <maximo-datasource-override id="countBookDetailDSALL4Web" pre-load="false" saved-query="MOBILECNTBOOKLINE" where="countbooknum=&quot;{app.state.param_countbooknum}&quot; and siteid=&quot;{app.state.param_countbooksiteid}&quot;" mobile-qbe-filter="{{'countbooknum': app.state.param_countbooknum, 'siteid': app.state.param_countbooksiteid}}" order-by="nextphycntdate,binnum" id-attribute="countbooklineid" controller="CountBookLineDataController" selection-mode="single" page-size="20" offline-immediate-download="false"/>
+        <maximo-datasource-override id="countBookDetailDSALL4Web_Counted" pre-load="false" saved-query="MOBILECNTBOOKLINE" where="countbooknum=&quot;{app.state.param_countbooknum}&quot; and siteid=&quot;{app.state.param_countbooksiteid}&quot;" mobile-qbe-filter="{{'countbooknum': app.state.param_countbooknum, 'siteid': app.state.param_countbooksiteid}}" order-by="nextphycntdate,binnum" id-attribute="countbooklineid" controller="CountBookLineDataController" selection-mode="single" page-size="20" offline-immediate-download="false"/>
+      </maximo-datasource>
+      <json-datasource id="countBookDetailDS_JSON" src="{[]}" items="cbLineItems" can-load="{app.state.canLoadCBDS}" selection-mode="single" controller="CountBookLineDataController" page-size="20" id-attribute="countbooklineid">
+        <schema id="vmrk3">
+          <attribute name="countbooknum" searchable="true" id="jbyz3"/>
+          <attribute name="siteid" searchable="true" id="kev32"/>
+          <attribute name="countbooklineid" unique-id="true" index="true" id="awz3x"/>
+          <attribute name="itemnum" index="true" searchable="true" id="zzqj6"/>
+          <attribute name="item.description--itemdesc" searchable="true" id="wmj7n"/>
+          <attribute name="assetnum" searchable="true" id="jk886"/>
+          <attribute name="asset.serialnum--serialnum" searchable="true" id="q8rn5"/>
+          <attribute name="rotating" id="db_nx"/>
+          <attribute name="binnum" searchable="true" id="d7q_5">
+            <lookup-map name="cntlinebin" id="g2vz9">
+              <lookup-return lookup-field="displayValue" datasource-field="binnum" id="mzmm2"/>
+              <lookup-return lookup-field="value" datasource-field="binnum" id="ay9pd"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="physcnt" type="NUMBER" searchable="true" id="jwjn9"/>
+          <attribute name="match" searchable="true" id="d9xjb"/>
+          <attribute name="recon" searchable="true" id="jaay3"/>
+          <attribute name="hasphyscnt" type="NUMBER" searchable="true" id="bnk94"/>
+          <attribute name="physcntdate" id="jzag3"/>
+          <attribute name="inventory.abctype--abctype" id="pv2y8"/>
+          <attribute name="lotnum" id="ey8rv">
+            <lookup-map name="cntlinelotnum" id="z3__8">
+              <lookup-return lookup-field="displayValue" datasource-field="lotnum" id="gyzvd"/>
+              <lookup-return lookup-field="value" datasource-field="lotnum" id="x3__x"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="inventory.issueunit--issueunit" id="d5kav"/>
+          <attribute name="nextphycntdate" searchable="true" id="dvx_w"/>
+          <attribute name="curbal" id="np2p2"/>
+          <attribute name="inventory.invptol--invinvptol" id="wg2kr"/>
+          <attribute name="inventory.invmtol--invinvmtol" id="jnvk8"/>
+          <attribute name="realinvptol" id="rvnd8"/>
+          <attribute name="realinvmtol" id="xgkm2"/>
+          <attribute name="accuracy" id="bp8p8"/>
+          <attribute name="maxvar.allowblindcnt" id="b746a"/>
+          <attribute name="maxvar.invptol" id="wevaq"/>
+          <attribute name="maxvar.invmtol" id="e663g"/>
+          <attribute name="haswarning" type="BOOL" id="njxbm"/>
+          <attribute name="errormsgtext" local="true" type="STRING" sortable="false" id="ebv6k"/>
+        </schema>
+      </json-datasource>
+      <json-datasource id="countBookDetailDSCounted_JSON" src="{[]}" items="cbLineItems" can-load="{app.state.canLoadCBDS}" selection-mode="single" controller="CountBookLineDataController" page-size="20" id-attribute="countbooklineid">
+        <schema id="jxrn4">
+          <attribute name="countbooknum" searchable="true" id="r8rbx"/>
+          <attribute name="siteid" searchable="true" id="x5nab"/>
+          <attribute name="countbooklineid" unique-id="true" index="true" id="v8z74"/>
+          <attribute name="itemnum" index="true" searchable="true" id="bpkpa"/>
+          <attribute name="item.description--itemdesc" searchable="true" id="rpr4v"/>
+          <attribute name="assetnum" searchable="true" id="bjpyn"/>
+          <attribute name="asset.serialnum--serialnum" searchable="true" id="y7485"/>
+          <attribute name="rotating" id="w2k8p"/>
+          <attribute name="binnum" searchable="true" id="p6bnq">
+            <lookup-map name="cntlinebin" id="mx_9m">
+              <lookup-return lookup-field="displayValue" datasource-field="binnum" id="gq3yr"/>
+              <lookup-return lookup-field="value" datasource-field="binnum" id="dx5gv"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="physcnt" type="NUMBER" searchable="true" id="ng7v2"/>
+          <attribute name="match" searchable="true" id="ng7__"/>
+          <attribute name="recon" searchable="true" id="yjy2m"/>
+          <attribute name="hasphyscnt" type="NUMBER" searchable="true" id="gxpa3"/>
+          <attribute name="physcntdate" id="xqdrb"/>
+          <attribute name="inventory.abctype--abctype" id="x86xv"/>
+          <attribute name="lotnum" id="gkxd3">
+            <lookup-map name="cntlinelotnum" id="xqgpn">
+              <lookup-return lookup-field="displayValue" datasource-field="lotnum" id="zp6ay"/>
+              <lookup-return lookup-field="value" datasource-field="lotnum" id="nmrnx"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="inventory.issueunit--issueunit" id="y29zn"/>
+          <attribute name="nextphycntdate" searchable="true" id="wp2en"/>
+          <attribute name="curbal" id="zvgem"/>
+          <attribute name="inventory.invptol--invinvptol" id="wwa6w"/>
+          <attribute name="inventory.invmtol--invinvmtol" id="pjn7p"/>
+          <attribute name="realinvptol" id="njgjd"/>
+          <attribute name="realinvmtol" id="am49v"/>
+          <attribute name="accuracy" id="ye52v"/>
+          <attribute name="maxvar.allowblindcnt" id="ye45m"/>
+          <attribute name="maxvar.invptol" id="kxgxk"/>
+          <attribute name="maxvar.invmtol" id="z4q9a"/>
+          <attribute name="errormsgtext" local="true" type="STRING" sortable="false" id="raz99"/>
+        </schema>
+      </json-datasource>
+      <header-template title="{app.state.selectedCountBookDesc}" title-column-width="70" hide-breadcrumb="true" icon-name="carbon:chevron--left" icon-action="goBack" id="zep45">
+        <!--button slot="buttons" icon="carbon:renew" on-click="reloadDatasource" id="xn233"/-->
+        <button slot="buttons" label="Complete" icon="carbon:checkmark" kind="ghost" hidden="{!page.state.showcomplete || page.state.completed}" on-click="completeCountbook" id="gj5pz"/>
+        <button slot="buttons" label="Save" disabled="{(!page.state.enablesave &amp;&amp; !page.state.showcomplete) || page.state.completed}" icon="carbon:save" hidden="{!page.state.enablesave}" on-click="savePhyscnt" id="meybr"/>
+        <tabs slot="tabs" selected="{page.state.selectedTabIndex}" use-with-mobile="true" id="zbrem">
+          <tab label="In progress" on-click="switchToInProgressTab" loading="{app.state.countbooktabloading}" selected="{page.state.inprogress_selected}" id="k9w2x">
+            <tag-group slot="badge-type" type="dark-gray" align="start" tags="{[{label: `${app.device.isMaximoMobile?countBookDetailDS_JSON.state.totalCount:countBookDetailDSALL4Web.state.totalCount}`}]}" id="kd7b6"/>
+          </tab>
+          <tab label="Counted" on-click="switchToCountedTab" loading="{app.state.countbooktabloading}" selected="{page.state.counted_selected}" id="z_bnd">
+            <tag-group slot="badge-type" type="dark-gray" align="start" tags="{[{label: `${app.device.isMaximoMobile?countBookDetailDSCounted_JSON.state.totalCount:countBookDetailDSALL4Web_Counted.state.totalCount}`}]}" id="eegem"/>
+          </tab>
+        </tabs>
+      </header-template>
+      <panel hidden="{app.state.countbooktabloading}" id="r7957">
+        <data-list border="false" hidden="{app.state.countbooktabloading || page.state.selectedTabIndex==1}" datasource="{app.device.isMaximoMobile?'countBookDetailDS_JSON':'countBookDetailDSALL4Web'}" show-search="true" no-select-behavior="true" search-placeholder-text="Search items" empty-set-string="No items found." sub-label="Check that the user’s default storeroom is defined. If you are offline, try again when you are online." enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}" id="countbook_count_items">
+          <filter-button slot="actions" datasource="{app.device.isMaximoMobile?'countBookDetailDSALL':'countBookDetailDSALL4Web'}" show-search="true" disabled="{page.state.enablesave}" id="nxjyg"/>
+          <multi-sort-button slot="actions" kind="ghost" datasource="{app.device.isMaximoMobile?'countBookDetailDSALL':'countBookDetailDSALL4Web'}" disabled="{page.state.enablesave || (((!app.device.isMaximoMobile &amp;&amp; countBookDetailDSALL4Web.state.totalCount=='0') || (app.device.isMaximoMobile &amp;&amp; countBookDetailDS_JSON.state.totalCount=='0')) &amp;&amp; page.state.selectedTabIndex==0) || (((!app.device.isMaximoMobile &amp;&amp; countBookDetailDSALL4Web_Counted.state.totalCount=='0') || (app.device.isMaximoMobile &amp;&amp; countBookDetailDSCounted_JSON.state.totalCount=='0')) &amp;&amp; page.state.selectedTabIndex==1)}" icon="Carbon:caret--sort" id="n9z5w"/>
+          <list-item id="ywa_g">
+            <adaptive-row id="b358y">
+              <adaptive-column small-width="75" medium-width="35" large-width="42" id="countbook_items_list_item_r1_c1">
+                <box direction="column" horizontal-align="start" vertical-align="center" fill-child="true" fill-parent="true" children-hide-overflow="true" id="countbook_items_list_item_r1_c1_b1">
+                  <field value="{item.itemnum}" field-class-name="16-bold" hide-label="true" padding="top" id="countbook_items_list_item_r1_c1_b1_f1"/>
+                  <field value="{item.itemdesc}" field-class-name="16-regular" hide-label="true" padding="none" id="countbook_items_list_item_r1_c1_b1_f2_1"/>
+                  <field label="SN" label-placement="start" field-class-name="16-regular" padding="none" id="ge7gm">
+                    <sub-field value="{item.serialnum===null?'':item.serialnum}" id="gvrp_"/>
+                  </field>
+                  <field label="Due" label-placement="start" field-class-name="16-regular" padding="bottom" id="countbook_items_list_item_r1_c1_b1_f3">
+                    <sub-field value="{item.nextphycntdate}" type="date" id="qzww6"/>
+                  </field>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="25" medium-width="15" large-width="10" id="countbook_items_list_item_r1_c2">
+                <box direction="column" horizontal-align="center" vertical-align="center" fill-child="true" id="countbook_items_list_item_r1_c2_b1">
+                  <field value="{item.binnum}" field-class-name="16-regular" hide-label="true" id="countbook_items_list_item_r1_c2_b1_f1"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="15" medium-width="8" large-width="7" id="vaw4e">
+                <box direction="column" horizontal-align="start" vertical-align="center" fill-child="true" id="wmrrd">
+                  <icon-group warning-icon="carbon:warning--alt--filled" warning-theme="light" warning-label-align="right" warning-icon-color="{item.hasphyscnt===0?'white':item.match?'white':'orange'}" has-warning="true" warning-tooltip-text="The physical count does not match the current balance." id="njvbm"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="72" medium-width="30" large-width="30" id="countbook_items_list_item_r1_c3">
+                <box direction="column" horizontal-align="center" vertical-align="center" fill-child="true" id="countbook_items_list_item_r1_c3_b1">
+                  <smart-input min="0" readonly="{page.state.completed}" on-change="validateInput" on-change-arg="{item}" invalid-text="{item.errormsgtext}" hide-step-buttons="true" theme="dark" hide-label="true" value="{item.physcnt}" on-blur="updatePhyscnt" on-blur-arg="{item}" id="countbook_items_list_item_r1_c3_b1_f1"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="13" medium-width="12" large-width="10" id="countbook_items_list_item_r1_c4">
+                <box direction="column" horizontal-align="end" vertical-align="center" fill-child="true" fill-parent="true" id="countbook_items_list_item_r1_c4_b1">
+                  <button icon="carbon:chevron--right" kind="ghost" on-click="gotoDetailsFromSelectedCountBookLine" on-click-arg="{{countbooklineid:item.countbooklineid, itemnum:item.itemnum, href:item.href}}" padding="false" id="countbook_items_list_item_r1_c4_b1_f2"/>
+                </box>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </data-list>
+        <data-list border="false" hidden="{app.state.countbooktabloading || page.state.selectedTabIndex==0}" datasource="{app.device.isMaximoMobile?'countBookDetailDSCounted_JSON':'countBookDetailDSALL4Web_Counted'}" show-search="true" no-select-behavior="true" search-placeholder-text="Search items" empty-set-string="No items found." sub-label="Check that the user’s default storeroom is defined. If you are offline, try again when you are online." enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}" id="rzxq_">
+          <filter-button slot="actions" datasource="{app.device.isMaximoMobile?'countBookDetailDSALL':'countBookDetailDSALL4Web_Counted'}" show-search="true" disabled="{page.state.enablesave}" id="dy348"/>
+          <multi-sort-button slot="actions" kind="ghost" datasource="{app.device.isMaximoMobile?'countBookDetailDSALL':'countBookDetailDSALL4Web_Counted'}" disabled="{page.state.enablesave || (((!app.device.isMaximoMobile &amp;&amp; countBookDetailDSALL4Web.state.totalCount=='0') || (app.device.isMaximoMobile &amp;&amp; countBookDetailDS_JSON.state.totalCount=='0')) &amp;&amp; page.state.selectedTabIndex==0) || (((!app.device.isMaximoMobile &amp;&amp; countBookDetailDSALL4Web_Counted.state.totalCount=='0') || (app.device.isMaximoMobile &amp;&amp; countBookDetailDSCounted_JSON.state.totalCount=='0')) &amp;&amp; page.state.selectedTabIndex==1)}" icon="Carbon:caret--sort" id="mxz9q"/>
+          <list-item id="pnng7">
+            <adaptive-row id="xbygm">
+              <adaptive-column small-width="75" medium-width="35" large-width="42" id="vad2_">
+                <box direction="column" fill-child="true" fill-parent="true" children-hide-overflow="true" id="xxz8e">
+                  <field value="{item.itemnum}" field-class-name="16-bold" hide-label="true" padding="top" id="rdjw3"/>
+                  <field value="{item.itemdesc}" field-class-name="16-regular" hide-label="true" padding="none" id="x84yz"/>
+                  <field label="SN" label-placement="start" field-class-name="16-regular" padding="none" id="zdkdx">
+                    <sub-field value="{item.serialnum===null?'':item.serialnum}" id="gbvaa"/>
+                  </field>
+                  <field label="Due" label-placement="start" field-class-name="16-regular" padding="bottom" id="vevkn">
+                    <sub-field value="{item.nextphycntdate}" type="date" id="reez4"/>
+                  </field>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="25" medium-width="15" large-width="10" id="x7bvk">
+                <box direction="column" horizontal-align="center" vertical-align="center" fill-child="true" id="jd__z">
+                  <field value="{item.binnum}" field-class-name="16-regular" hide-label="true" id="xgy46"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="15" medium-width="8" large-width="7" id="r2z6v">
+                <box direction="column" horizontal-align="start" vertical-align="center" fill-child="true" id="ngqxy">
+                  <icon-group warning-icon="carbon:warning--alt--filled" warning-theme="light" warning-label-align="right" warning-icon-color="{item.hasphyscnt===0?'white':item.match?'white':'orange'}" has-warning="true" warning-tooltip-text="The physical count does not match the current balance." id="mxnqd"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="72" medium-width="30" large-width="30" id="gdppz">
+                <box direction="column" horizontal-align="center" vertical-align="center" fill-child="true" id="bb_q4">
+                  <smart-input min="0" readonly="{page.state.completed}" on-change="validateInput" on-change-arg="{item}" invalid-text="{item.errormsgtext}" hide-step-buttons="true" theme="dark" hide-label="true" value="{item.physcnt}" on-blur="updatePhyscnt" on-blur-arg="{item}" id="apenz"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="13" medium-width="12" large-width="10" id="zgda7">
+                <box direction="column" horizontal-align="end" vertical-align="center" fill-child="true" fill-parent="true" id="g8a6y">
+                  <button icon="carbon:chevron--right" kind="ghost" on-click="gotoDetailsFromSelectedCountBookLine" on-click-arg="{{countbooklineid:item.countbooklineid, itemnum:item.itemnum, href:item.href}}" padding="false" id="jxgkg"/>
+                </box>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </data-list>
+      </panel>
+    </page>
+    <page id="countBookLineInvBalDetail" controller="CountBookLineInvBalDetailPageController">
+      <states id="e4zyr">
+        <state name="param_countbooklineid" value="0" url-enabled="true" type="number" id="v8k97"/>
+        <state name="countbookinvbal_currentitem" type="object" value="0" url-enabled="true" id="n8key"/>
+        <state name="allowblindcnt" type="string" value="0" id="x9avn"/>
+      </states>
+      <maximo-datasource id="countBookDetailDS4MaterialDetail" object-structure="mxapicntbookline" item-url="{page.params.itemhref}" cache-expiry-ms="1">
+        <schema id="k6rk4">
+          <attribute name="countbooknum" searchable="true" id="d4rq7"/>
+          <attribute name="siteid" searchable="true" id="b4xg2"/>
+          <attribute name="countbooklineid" unique-id="true" index="true" id="ydayk"/>
+          <attribute name="itemnum" index="true" searchable="true" id="av2bk"/>
+          <attribute name="countbooklineitem.description--itemdesc" searchable="true" id="wbnbr"/>
+          <attribute name="assetnum" searchable="true" id="j9wjd"/>
+          <attribute name="asset.serialnum--serialnum" searchable="true" id="e3zj7"/>
+          <attribute name="rotating" id="kr24y"/>
+          <attribute name="binnum" searchable="true" id="bzmwg"/>
+          <attribute name="physcnt" searchable="true" id="ege4z"/>
+          <attribute name="match" searchable="true" id="peeay"/>
+          <attribute name="recon" searchable="true" id="xgmwn"/>
+          <attribute name="hasphyscnt" searchable="true" id="r2_7k"/>
+          <attribute name="physcntdate" id="abmpe"/>
+          <attribute name="inventory.abctype--abctype" id="xw3j5"/>
+          <attribute name="lotnum" id="px9z5"/>
+          <attribute name="inventory.issueunit--issueunit" id="epvqg"/>
+          <attribute name="nextphycntdate" searchable="true" id="y5m53"/>
+          <attribute name="curbal" id="pm42x"/>
+          <attribute name="inventory.invptol--invinvptol" id="p3qej"/>
+          <attribute name="inventory.invmtol--invinvmtol" id="zwpxj"/>
+          <attribute name="realinvptol" id="wk8en"/>
+          <attribute name="realinvmtol" id="pqz6v"/>
+          <attribute name="accuracy" id="y3v8x"/>
+          <attribute name="maxvar.allowblindcnt" id="qybyy"/>
+          <attribute name="maxvar.invptol" id="x8egv"/>
+          <attribute name="maxvar.invmtol" id="kawr3"/>
+        </schema>
+        <maximo-datasource id="countBookDetailItemDS" pre-load="false" relationship="countbooklineitem" notify-when-parent-loads="true" cache-expiry-ms="1">
+          <schema id="m2dn4">
+            <attribute name="_id" unique-id="true" id="wregv"/>
+            <attribute name="_imagelibref" id="rmrd9"/>
+          </schema>
+        </maximo-datasource>
+      </maximo-datasource>
+      <!--maximo-datasource id="countBookDetailItemDS" pre-load="false" object-structure="mxapiitem" where="itemnum=&quot;{page.params.itemnum}&quot;" cache-expiry-ms="1">
+        <schema id="m2dn4">
+          <attribute name="_id" unique-id="true" id="wregv"/>
+          <attribute name="_imagelibref" id="rmrd9"/>
+        </schema>
+      </maximo-datasource-->
+      <json-datasource id="countbooklineinvbaldetailjsonds" src="{[]}" selection-mode="single" id-attribute="_id">
+        <schema id="venek">
+          <attribute name="_id" id="re98e"/>
+          <attribute name="label" id="d52qg"/>
+          <attribute name="value" id="wp2_r"/>
+        </schema>
+      </json-datasource>
+      <header-template title="Material detail" hide-breadcrumb="true" icon-name="carbon:close" icon-action="goBack" id="ma623"/>
+      <label hidden="{app.state.cntbooklinedetailloading}" label="{page.state.countbookinvbal_currentitem.itemnum} {page.state.countbookinvbal_currentitem.itemdesc}" id="z9yy3"/>
+      <panel hidden="{app.state.cntbooklinedetailloading}" id="v6ame">
+        <data-list hidden="{app.state.cntbooklinedetailloading}" border="false" datasource="countbooklineinvbaldetailjsonds" show-search="false" no-select-behavior="true" id="countbooklineinvdetail_items">
+          <list-item id="gn788">
+            <toggle hidden="{item.label!=='Rotating'}" label="Rotating" toggled="{item.value}" toggle-label-off="No" toggle-label-on="Yes" readonly="true" type="TrueFalse" id="g5239"/>
+            <box direction="column" fill-child="true" hidden="{item.label==='Rotating'}" id="db7db">
+              <label label="{item.label}" theme="16-bold" id="r3xe8"/>
+              <label label="{item.value}" id="rd6xa"/>
+            </box>
+          </list-item>
+        </data-list>
+      </panel>
+      <box hidden="{app.state.cntbooklinedetailloading}" direction="column" fill-parent="true" background-color="ui-01" id="nx2e5">
+        <border-layout fill-parent="true" id="yzabk">
+          <top id="jag68" horizontal-align="start" vertical-align="center">
+            <box fill-parent="true" id="wvag8">
+              <label label="Photo" theme="16-bold" id="k59g2"/>
+            </box>
+          </top>
+          <middle id="mdwyk" horizontal-align="center" vertical-align="start">
+            <image src="{countBookDetailItemDS.item._imagelibref}" readonly="{app.device.isMaximoMobile?true:false}" title="Add photo" id="rvn82"/>
+          </middle>
+        </border-layout>
+      </box>
+    </page>
+    <page padding="false" id="adHoc" controller="AdHocPageController">
+      <states id="q8evj">
+        <state name="selectedTabIndex" url-enabled="true" value="0" type="number" id="xw5k_"/>
+        <state name="containerTabSelected" url-enabled="true" value="0" type="number" id="b88d2"/>
+        <state name="inprogress_selected" value="true" type="boolean" id="zj69g"/>
+        <state name="counted_selected" value="false" type="boolean" id="xk2pz"/>
+        <state name="useConfirmDialog" value="true" type="boolean" id="bbngv"/>
+        <state name="adhocds_mqbe_filter_v" value="=null" type="string" id="aw_za"/>
+        <state name="clearQBERequested" type="boolean" value="false" id="e5b32"/>
+        <state name="dsinitialized" type="boolean" value="false" id="adhoc_app_state_dsinitialized"/>
+        <state name="needsetup" type="boolean" value="false" id="adhoc_page_state_needsetup"/>
+        <state name="isfromsave" type="boolean" value="false" id="adhoc_page_state_isfromsave"/>
+        <state name="enablesave" type="boolean" value="false" id="mamd6"/>
+        <state name="counteditem_id_value_map_4adhoc" type="object" value="{[]}" id="kz5e_"/>
+        <state name="counteditem_id_date_map_4adhoc" type="object" value="{[]}" id="zrgjm"/>
+        <state name="allitems" type="object" value="{[]}" id="rpbm3"/>
+      </states>
+      <maximo-datasource id="mxapiinvbaldsall" object-structure="mxapiinvbal" id-attribute="invbalancesid" saved-query="MOBILEINVCNT" controller="AdHocDataController" page-size="1000" order-by="nextphycntdate,binnum,itemnum" offline-immediate-download="true">
+        <schema id="eybab">
+          <attribute name="itemnum" index="true" sortable="false" searchable="true" id="meq3k"/>
+          <attribute name="item.description--itemdesc" sortable="false" searchable="true" id="eebep"/>
+          <attribute name="binnum" searchable="true" id="ge6_e">
+            <lookup-map name="invbalbin" id="axwja">
+              <lookup-return lookup-field="displayValue" datasource-field="binnum" id="zvzzr"/>
+              <lookup-return lookup-field="value" datasource-field="binnum" id="dymyb"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="lotnum" searchable="true" id="mzg9z">
+            <lookup-map name="invballotnum" id="ddv35">
+              <lookup-return lookup-field="displayValue" datasource-field="lotnum" id="m68bz"/>
+              <lookup-return lookup-field="value" datasource-field="lotnum" id="y7ye6"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="nextphycntdate" title="Count due" searchable="true" id="rev4e"/>
+          <attribute name="physcnt" sortable="false" id="m8n2k"/>
+          <attribute name="adjustedphyscnt" sortable="false" type="NUMBER" id="aan_8"/>
+          <attribute name="adjustedphyscntdate" sortable="false" id="qbyd_"/>
+          <attribute name="invbalancesid" sortable="false" unique-id="true" index="true" id="agkm8"/>
+          <attribute name="curbal" sortable="false" id="zq4e5"/>
+          <attribute name="notmatchindicator" sortable="false" id="dvzan"/>
+          <attribute name="ownersysid" sortable="false" id="qrgv3"/>
+          <attribute name="pre_date" sortable="false" id="qxqja"/>
+          <attribute name="externalrefid" sortable="false" id="dbkra"/>
+          <attribute name="stagedcurbal" sortable="false" id="kgjjn"/>
+          <attribute name="pre_curbalchange" sortable="false" id="yk7vq"/>
+          <attribute name="pre_curbal" sortable="false" id="dwbnm"/>
+          <attribute name="pickedqty" sortable="false" id="bkn7y"/>
+          <attribute name="sendersysid" sortable="false" id="xd_br"/>
+          <attribute name="orgid" sortable="false" id="kn7xa"/>
+          <attribute name="stagingbin" sortable="false" id="vjm8y"/>
+          <attribute name="itemsetid" sortable="false" id="d6w4z"/>
+          <attribute name="sourcesysid" sortable="false" id="rrerr"/>
+          <attribute name="ownersysid" sortable="false" id="jv55g"/>
+          <attribute name="siteid" sortable="false" id="vxxw_"/>
+          <attribute name="inventory.abctype--abctype" sortable="false" id="dnpv8"/>
+          <attribute name="inventory.issueunit--issueunit" sortable="false" id="xabav"/>
+          <attribute name="location" sortable="false" id="n22n4"/>
+          <attribute name="conditioncode" sortable="false" id="pv_be"/>
+          <attribute name="reconciled" sortable="false" id="kpa4e"/>
+          <attribute name="physcntdate" sortable="false" id="p48j2"/>
+          <attribute name="pre_calccurbal" sortable="false" id="ban45"/>
+        </schema>
+      </maximo-datasource>
+      <json-datasource id="mxapiinvbalds_json" src="{[]}" items="adhocItems" can-load="{app.state.canLoadAdhocDS}" selection-mode="single" controller="AdHocDataController" page-size="20" id-attribute="invbalancesid">
+        <schema id="adhoc_ds_json_schema">
+          <attribute name="itemnum" index="true" searchable="true" id="adhoc_ds_json_itemnum"/>
+          <attribute name="item.description--itemdesc" searchable="true" id="adhoc_ds_json_itemdesc"/>
+          <attribute name="binnum" searchable="true" id="adhoc_ds_json_binnum">
+            <lookup-map name="invbalbin" id="adhoc_ds_json_binnum_lookupmap">
+              <lookup-return lookup-field="displayValue" datasource-field="binnum" id="adhoc_ds_json_binnum_lookupmap_r1"/>
+              <lookup-return lookup-field="value" datasource-field="binnum" id="adhoc_ds_json_binnum_lookupmap_r2"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="lotnum" searchable="true" id="adhoc_ds_json_lotnum">
+            <lookup-map name="invballotnum" id="adhoc_ds_json_lotnum_lookupmap">
+              <lookup-return lookup-field="displayValue" datasource-field="lotnum" id="adhoc_ds_json_lotnum_lookupmap_r1"/>
+              <lookup-return lookup-field="value" datasource-field="lotnum" id="adhoc_ds_json_lotnum_lookupmap_r2"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="nextphycntdate" searchable="true" id="adhoc_ds_json_nextphycntdate"/>
+          <attribute name="physcnt" id="adhoc_ds_json_phycnt"/>
+          <attribute name="adjustedphyscnt" type="NUMBER" id="adhoc_ds_json_adjustedphyscnt"/>
+          <attribute name="adjustedphyscntdate" id="adhoc_ds_json_adjustedphyscntdatee"/>
+          <attribute name="invbalancesid" unique-id="true" index="true" id="adhoc_ds_json_invbalancesid"/>
+          <attribute name="curbal" id="adhoc_ds_json_curbal"/>
+          <attribute name="notmatchindicator" id="adhoc_ds_json_notmatchindicator"/>
+          <attribute name="haswarning" type="BOOL" id="ze85n"/>
+        </schema>
+      </json-datasource>
+      <json-datasource id="mxapiinvbaldscounted_json" src="{[]}" items="adhocItems" can-load="{app.state.canLoadAdhocDS}" selection-mode="single" controller="AdHocDataController" page-size="20" id-attribute="invbalancesid">
+        <schema id="adhoc_dscounted_json_schema">
+          <attribute name="itemnum" index="true" searchable="true" id="adhoc_dscounted_json_itemnum"/>
+          <attribute name="item.description--itemdesc" searchable="true" id="adhoc_dscounted_json_itemdesc"/>
+          <attribute name="binnum" searchable="true" id="adhoc_dscounted_json_binnum">
+            <lookup-map name="invbalbin" id="adhoc_dscounted_json_binnum_lookupmap">
+              <lookup-return lookup-field="displayValue" datasource-field="binnum" id="adhoc_dscounted_json_binnum_lookupmap_r1"/>
+              <lookup-return lookup-field="value" datasource-field="binnum" id="adhoc_dscounted_json_binnum_lookupmap_r2"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="lotnum" searchable="true" id="adhoc_dscounted_json_lotnum">
+            <lookup-map name="invballotnum" id="adhoc_dscounted_json_lotnum_lookupmap">
+              <lookup-return lookup-field="displayValue" datasource-field="lotnum" id="adhoc_dscounted_json_lotnum_lookupmap_r1"/>
+              <lookup-return lookup-field="value" datasource-field="lotnum" id="adhoc_dscounted_json_lotnum_lookupmap_r2"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="nextphycntdate" searchable="true" id="adhoc_dscounted_json_nextphycntdate"/>
+          <attribute name="physcnt" id="adhoc_dscounted_json_phycnt"/>
+          <attribute name="adjustedphyscnt" type="NUMBER" id="adhoc_dscounted_json_adjustedphyscnt"/>
+          <attribute name="adjustedphyscntdate" id="adhoc_dscounted_json_adjustedphyscntdatee"/>
+          <attribute name="invbalancesid" unique-id="true" index="true" id="adhoc_dscounted_json_invbalancesid"/>
+          <attribute name="curbal" id="adhoc_dscounted_json_curbal"/>
+          <attribute name="notmatchindicator" id="adhoc_dscounted_json_notmatchindicator"/>
+        </schema>
+      </json-datasource>
+      <header-template mode="sticky" title="Ad hoc count" title-column-width="70" hide-breadcrumb="true" icon-name="carbon:chevron--left" icon-action="goBack" id="ngg5j">
+        <!--button slot="buttons" icon="carbon:renew" on-click="reloadDatasource" id="x66xw"/-->
+        <button slot="buttons" label="Save" disabled="{!app.state.adhocupdated || !page.state.enablesave}" icon="Carbon:checkmark--outline" on-click="saveHandler" id="xkv_q"/>
+        <tabs slot="tabs" selected="{page.state.selectedTabIndex}" on-selection-change="changeContainerTab" id="k4rzw" use-with-mobile="true">
+          <tab label="In progress" on-click="switchToInProgressTab" loading="{app.state.adhoctabloading}" selected="{page.state.inprogress_selected}" id="inprogress_tab">
+            <tag-group slot="badge-type" type="dark-gray" align="start" tags="{[{label: `${mxapiinvbalds_json.state.totalCount}`}]}" id="pqvzm"/>
+          </tab>
+          <tab label="Counted" on-click="switchToCountedTab" loading="{app.state.adhoctabloading}" selected="{page.state.counted_selected}" id="counted_tab">
+            <tag-group slot="badge-type" type="dark-gray" align="start" tags="{[{label: `${mxapiinvbaldscounted_json.state.totalCount}`}]}" id="vp548"/>
+          </tab>
+        </tabs>
+      </header-template>
+      <panel hidden="{app.state.adhoctabloading}" id="yz6rds_">
+        <data-list hidden="{app.state.adhoctabloading || page.state.selectedTabIndex==1}" datasource="mxapiinvbalds_json" show-search="true" no-select-behavior="true" selected-icon="maximo:select--end" unselected-icon="maximo:select--end" search-placeholder-text="Search items" empty-set-string="No items found." sub-label="Check that the user’s default storeroom is defined. If you are offline, try again when you are online." enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}" id="adhoc_count_items">
+          <filter-button slot="actions" datasource="mxapiinvbaldsall" show-search="true" disabled="{page.state.enablesave}" id="d3ag3"/>
+          <multi-sort-button slot="actions" kind="ghost" datasource="mxapiinvbaldsall" disabled="{app.state.adhocupdated || (mxapiinvbalds_json.state.totalCount=='0' &amp;&amp; page.state.selectedTabIndex==0) || (mxapiinvbaldscounted_json.state.totalCount=='0' &amp;&amp; page.state.selectedTabIndex==1)}" icon="Carbon:caret--sort" id="m2bpv"/>
+          <list-item id="adhoc_list_items">
+            <adaptive-row id="ekb5a">
+              <adaptive-column small-width="75" medium-width="30" large-width="43" id="adhoc_items_list_item_r1_c1">
+                <box direction="column" horizontal-align="start" fill-child="true" fill-parent="true" children-hide-overflow="true" vertical-align="center" id="adhoc_items_list_item_r1_c1_b1">
+                  <field value="{item.itemnum}" field-class-name="16-bold" hide-label="true" padding="top" id="adhoc_items_list_item_r1_c1_b1_f1"/>
+                  <field value="{item.itemdesc}" field-class-name="16-regular" hide-label="true" padding="none" id="adhoc_items_list_item_r1_c1_b1_f2"/>
+                  <field label="Due" label-placement="start" field-class-name="16-regular" padding="bottom" id="r94gk">
+                    <sub-field value="{item.nextphycntdate}" type="date" id="dmy49"/>
+                  </field>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="25" medium-width="17" large-width="10" id="adhoc_items_list_item_r1_c2">
+                <box direction="column" horizontal-align="end" vertical-align="center" fill-child="true" id="adhoc_items_list_item_r1_c2_b1">
+                  <field value="{item.binnum}" field-class-name="16-regular" hide-label="true" id="adhoc_items_list_item_r1_c2_b1_f1"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="15" medium-width="10" large-width="7" id="npj_z">
+                <box direction="column" horizontal-align="start" vertical-align="center" fill-child="true" id="myge4">
+                  <icon-group warning-icon="carbon:warning--alt--filled" warning-theme="light" warning-label-align="right" warning-icon-color="{item.notmatchindicator?'orange':'white'}" has-warning="true" warning-tooltip-text="The physical count does not match the current balance." id="m5ebp"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="72" medium-width="30" large-width="20" id="adhoc_items_list_item_r1_c3">
+                <box padding-start="0" padding="0" direction="column" fill-child="true" id="adhoc_items_list_item_r1_c3_b1">
+                  <smart-input min="0" hide-step-buttons="true" hide-label="true" value="{item.adjustedphyscnt}" on-blur="updatePhyscnt" on-blur-arg="{item}" id="adhoc_items_list_item_r1_c3_b1_f1"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="13" medium-width="13" large-width="10" id="adhoc_items_list_item_r1_c4">
+                <box direction="column" horizontal-align="end" vertical-align="center" fill-parent="true" fill-child="true" id="adhoc_items_list_item_r1_c4_b1">
+                  <button icon="carbon:chevron--right" kind="ghost" on-click="gotoDetailsFromSelectedInvBal" on-click-arg="{{invbalancesid:item.invbalancesid, itemnum:item.itemnum, href:item.href}}" padding="false" id="adhoc_items_list_item_r1_c4_b1_f2"/>
+                </box>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </data-list>
+        <data-list hidden="{app.state.adhoctabloading ||page.state.selectedTabIndex==0}" datasource="mxapiinvbaldscounted_json" show-search="true" no-select-behavior="true" selected-icon="maximo:select--end" unselected-icon="maximo:select--end" search-placeholder-text="Search items" empty-set-string="No items found." sub-label="Check that the user’s default storeroom is defined. If you are offline, try again when you are online." enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}" id="gb7re">
+          <filter-button slot="actions" datasource="mxapiinvbaldsall" show-search="true" disabled="{page.state.enablesave}" id="grgnn"/>
+          <multi-sort-button slot="actions" kind="ghost" datasource="mxapiinvbaldsall" disabled="{app.state.adhocupdated || (mxapiinvbalds_json.state.totalCount=='0' &amp;&amp; page.state.selectedTabIndex==0) || (mxapiinvbaldscounted_json.state.totalCount=='0' &amp;&amp; page.state.selectedTabIndex==1)}" icon="Carbon:caret--sort" id="x8grk"/>
+          <list-item id="adhoc_list2_items">
+            <adaptive-row id="z7rzp">
+              <adaptive-column small-width="75" medium-width="30" large-width="43" id="k57xw">
+                <box direction="column" horizontal-align="start" fill-child="true" fill-parent="true" children-hide-overflow="true" vertical-align="center" id="a_vb5">
+                  <field value="{item.itemnum}" field-class-name="16-bold" hide-label="true" padding="top" id="z8y2y"/>
+                  <field value="{item.itemdesc}" field-class-name="16-regular" hide-label="true" padding="none" id="d5k22"/>
+                  <field label="Due" label-placement="start" field-class-name="16-regular" padding="bottom" id="a4wyn">
+                    <sub-field value="{item.nextphycntdate}" type="date" id="x_n85"/>
+                  </field>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="25" medium-width="17" large-width="10" id="ganab">
+                <box direction="column" horizontal-align="end" vertical-align="center" fill-child="true" id="e8a78">
+                  <field value="{item.binnum}" field-class-name="16-regular" hide-label="true" id="y_vpz"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="15" medium-width="10" large-width="7" id="rq8e3">
+                <box direction="column" horizontal-align="start" vertical-align="center" fill-child="true" id="q_d7k">
+                  <icon-group warning-icon="carbon:warning--alt--filled" warning-theme="light" warning-label-align="right" warning-icon-color="{item.notmatchindicator?'orange':'white'}" has-warning="true" warning-tooltip-text="The physical count does not match the current balance." id="ym__q"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="72" medium-width="30" large-width="20" id="j9rvy">
+                <box padding-start="0" padding="0" direction="column" fill-child="true" id="a_5__">
+                  <smart-input min="0" hide-step-buttons="true" hide-label="true" value="{item.adjustedphyscnt}" on-blur="updatePhyscnt" on-blur-arg="{item}" id="vgb7z"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="13" medium-width="13" large-width="10" id="mkxdb">
+                <box direction="column" horizontal-align="end" vertical-align="center" fill-parent="true" fill-child="true" id="qd3q2">
+                  <button icon="carbon:chevron--right" kind="ghost" on-click="gotoDetailsFromSelectedInvBal" on-click-arg="{{invbalancesid:item.invbalancesid, itemnum:item.itemnum, href:item.href}}" padding="false" id="q4vdw"/>
+                </box>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </data-list>
+      </panel>
+      <!--<dialogs id="v2px2">
+        <dialog id="countNotMatch" title="Warning" secondary-action-text="Recount" secondary-icon="carbon:reset" on-secondary-action="cancel" primary-action-text="Confirm" primary-icon="carbon:checkmark" primary-kind="ghost">
+          <label wrap="true" label="The physical count does not match the current balance. Do you confirm this count?" id="wx465"/>
+        </dialog>
+      </dialogs>-->
+    </page>
+    <page id="invBalDetail" controller="InvBalDetailPageController">
+      <states id="wa4my">
+        <state name="param_invbalancesid" value="0" url-enabled="true" type="number" id="we5jp"/>
+        <state name="invbal_currentitem" type="object" value="0" url-enabled="true" id="evk9m"/>
+        <state name="allowblindcnt" type="string" value="0" id="d_v7b"/>
+        <state name="isFromReconcile" value="false" type="boolean" id="ryj23"/>
+      </states>
+      <maximo-datasource pre-load="false" id="invbalancedetailds" item-url="{page.params.itemhref}" object-structure="mxapiinvbal" order-by="invbalancesid" cache-expiry-ms="1">
+        <schema id="k5prp">
+          <attribute name="itemnum" id="d_zez"/>
+          <attribute name="itemsetid" id="wzpmz"/>
+          <attribute name="item.description--itemdesc" id="jdb2d"/>
+          <attribute name="inventory.abctype--abctype" id="apzp2"/>
+          <attribute name="binnum" searchable="true" id="jkpgp"/>
+          <attribute name="lotnum" id="v_vy2"/>
+          <attribute name="inventory.issueunit--issueunit" id="dwjez"/>
+          <attribute name="curbal" id="n9nnr"/>
+          <attribute name="physcnt" id="g88mb"/>
+          <attribute name="physcntdate" id="p33_m"/>
+          <attribute name="pre_curbalchange" id="k6pvp"/>
+          <attribute name="pre_calccurbal" id="p7pjj"/>
+          <attribute name="invbalancesid" unique-id="true" index="true" id="nk392"/>
+          <attribute name="maxvar.allowblindcnt" id="en2mb"/>
+        </schema>
+        <maximo-datasource id="invBalDetailItemDS" pre-load="false" relationship="item" notify-when-parent-loads="true" cache-expiry-ms="1">
+          <schema id="mrz77">
+            <attribute name="_id" unique-id="true" id="dn8py"/>
+            <attribute name="_imagelibref" id="pwkq3"/>
+          </schema>
+        </maximo-datasource>
+      </maximo-datasource>
+      <!--maximo-datasource id="invBalDetailItemDS" pre-load="false" object-structure="mxapiitem" where="itemnum=&quot;{page.params.itemnum}&quot;" cache-expiry-ms="1">
+        <schema id="mrz77">
+          <attribute name="_id" unique-id="true" id="dn8py"/>
+          <attribute name="_imagelibref" id="pwkq3"/>
+        </schema>
+      </maximo-datasource-->
+      <json-datasource id="invbaldetailjsonds" src="{[]}" selection-mode="single" id-attribute="_idx">
+        <schema id="abj_q">
+          <attribute name="_idx" id="nk4d3"/>
+          <attribute name="label" id="rkv_m"/>
+          <attribute name="value" id="yd8d9"/>
+        </schema>
+      </json-datasource>
+      <header-template title="Material detail" hide-breadcrumb="true" icon-name="carbon:close" icon-action="goBack" id="qazxa"/>
+      <label hidden="{app.state.invbaldetailloading}" label="{page.state.invbal_currentitem.itemnum} {page.state.invbal_currentitem.itemdesc}" id="m4v5r"/>
+      <panel hidden="{app.state.invbaldetailloading}" id="yxne7">
+        <data-list hidden="{app.state.invbaldetailloading}" border="false" datasource="invbaldetailjsonds" show-search="false" no-select-behavior="true" id="invdetail_items">
+          <list-item id="g639p">
+            <box direction="column" fill-child="true" id="nwgwq">
+              <label label="{item.label}" padding="top" theme="16-bold" id="km5ng"/>
+              <label label="{item.value}" padding="bottom" id="ar7ng"/>
+            </box>
+          </list-item>
+        </data-list>
+      </panel>
+      <box hidden="{app.state.invbaldetailloading}" direction="column" fill-parent="true" background-color="ui-01" id="gbz6z">
+        <border-layout fill-parent="true" id="m57p3">
+          <top horizontal-align="start" vertical-align="center" id="k6dr6">
+            <box fill-parent="true" id="b5a99">
+              <label label="Photo" theme="16-bold" id="yvekq"/>
+            </box>
+          </top>
+          <middle horizontal-align="center" vertical-align="start" id="zkak3">
+            <image src="{invBalDetailItemDS.item._imagelibref}" readonly="{app.device.isMaximoMobile?true:false}" title="Add photo" id="eqwgg"/>
+          </middle>
+        </border-layout>
+      </box>
+    </page>
+    <page padding="false" id="reconcile" controller="ReconcilePageController">
+      <states id="yvx4_">
+        <state name="containerTabSelected" url-enabled="true" value="0" type="number" id="gvxzr"/>
+        <state name="reconcileds" value="reconciledsmismatched" type="string" id="k3qx6"/>
+        <state name="mismatched_selected" value="true" type="boolean" id="bk72k"/>
+        <state name="matched_selected" value="false" type="boolean" id="yerqa"/>
+      </states>
+      <maximo-datasource id="reconcileds4all" object-structure="mxapiinvbal" saved-query="MOBILEINVCNTREC" controller="ReconcileDataController" page-size="20" order-by="pre_curbalchange desc">
+        <schema id="x6r66">
+          <attribute name="itemnum" index="true" sortable="false" searchable="true" id="x9n69"/>
+          <attribute name="item.description--itemdesc" sortable="false" searchable="true" id="brrbr"/>
+          <attribute name="binnum" searchable="true" sortable="false" id="mxr2q"/>
+          <attribute name="nextphycntdate" title="Last count date" searchable="true" id="vrp4e"/>
+          <attribute name="physcnt" sortable="false" id="mk3n_"/>
+          <attribute name="pre_curbalchange" title="Variance" sortable="false" id="pjy6x"/>
+          <attribute name="reconciled" sortable="false" id="pympb"/>
+          <attribute name="invbalancesid" unique-id="true" sortable="false" index="true" id="jbb2r"/>
+          <attribute name="curbal" sortable="false" id="jdvy2"/>
+          <attribute name="physcntdate" sortable="false" id="n29d9"/>
+          <attribute name="maxvar.allowblindcnt" sortable="false" id="nek4x"/>
+          <attribute name="notmatchindicator" sortable="false" id="a88k8"/>
+          <attribute name="ownersysid" sortable="false" id="g_7xk"/>
+          <attribute name="pre_date" sortable="false" id="vjyad"/>
+          <attribute name="externalrefid" sortable="false" id="z6ype"/>
+          <attribute name="stagedcurbal" sortable="false" id="w62nw"/>
+          <attribute name="pre_curbal" sortable="false" id="pvpe2"/>
+          <attribute name="pickedqty" sortable="false" id="azrbn"/>
+          <attribute name="sendersysid" sortable="false" id="pdazd"/>
+          <attribute name="orgid" sortable="false" id="aqjqy"/>
+          <attribute name="stagingbin" sortable="false" id="np424"/>
+          <attribute name="itemsetid" sortable="false" id="rxjpw"/>
+          <attribute name="sourcesysid" sortable="false" id="ramyx"/>
+          <attribute name="ownersysid" sortable="false" id="mmn47"/>
+          <attribute name="siteid" sortable="false" id="rpdvk"/>
+          <attribute name="inventory.abctype--abctype" sortable="false" id="zjea_"/>
+          <attribute name="inventory.issueunit--issueunit" sortable="false" id="b7v2j"/>
+          <attribute name="location" sortable="false" id="xaab4"/>
+          <attribute name="conditioncode" sortable="false" id="ye4md"/>
+          <attribute name="pre_calccurbal" sortable="false" id="z4d6_"/>
+        </schema>
+        <maximo-datasource-override id="reconciledsmismatched" saved-query="MOBILEINVCNTREC" where="pre_curbalchange!=0"/>
+        <maximo-datasource-override id="reconciledsmatched" saved-query="MOBILEINVCNTREC" where="pre_curbalchange=0"/>
+      </maximo-datasource>
+      <header-template title="Reconciliation preview" hide-breadcrumb="true" icon-name="carbon:chevron--left" icon-action="goBack" id="r9mx9">
+        <!--button slot="buttons" label="" disabled="{page.state.reconcileds.selecteditems.length===0}" icon="maximo:task" on-click="doneHandler" id="w6k4b"/-->
+        <button slot="buttons" icon="carbon:renew" disabled="{!app.state.reconcileneedrefresh}" on-click="reloadDatasource" id="x66xw"/>
+        <tabs slot="tabs" selected="{page.state.selectedTabIndex}" on-selection-change="changeContainerTab" use-with-mobile="true" id="b6qb9">
+          <tab label="Mismatched" loading="{app.state.reconcileloading}" on-click="switchToMismatchedTab" selected="{page.state.mismatched_selected}" id="mismatched_tab">
+            <tag-group hidden="{app.state.reconcileloading}" slot="badge-type" type="dark-gray" align="start" tags="{[{label: `${reconciledsmismatched.state.totalCount}`}]}" id="aprv6"/>
+          </tab>
+          <tab label="Matched" loading="{app.state.reconcileloading}" on-click="switchToMatchedTab" selected="{page.state.matched_selected}" id="matched_tab">
+            <tag-group hidden="{app.state.reconcileloading}" slot="badge-type" type="dark-gray" align="start" tags="{[{label: `${reconciledsmatched.state.totalCount}`}]}" id="b9bye"/>
+          </tab>
+        </tabs>
+      </header-template>
+      <panel hidden="{app.state.reconcileloading}" id="d7nwq">
+        <data-list hidden="{app.state.reconcileloading}" multi-action="true" selected-icon="carbon:checkbox--checked" unselected-icon="carbon:checkbox" datasource="{page.state.reconcileds}" show-search="true" search-placeholder-text="Search items" empty-set-string="No materials to reconcile." enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}" id="reconciliation_items">
+          <button slot="selected-actions" icon="carbon:close" on-click="applySelected" on-click-arg="{page.state.reconcileds}" label="Reconcile" kind="primary" id="reconciliation_list_items_apply_button"/>
+          <multi-sort-button slot="actions" kind="ghost" datasource="{page.state.reconcileds}" disabled="{(reconciledsmismatched.state.totalCount=='0' &amp;&amp; page.state.selectedTabIndex==0) || (reconciledsmatched.state.totalCount=='0' &amp;&amp; page.state.selectedTabIndex==1)}" icon="Carbon:caret--sort" id="z8m4b"/>
+          <list-item id="reconciliation_list_items">
+            <adaptive-row id="bn464">
+              <adaptive-column small-width="100" medium-width="70" large-width="70" id="reconciliation_list_items_r1_c1">
+                <box direction="column" fill-child="true" id="reconciliation_list_items_r1_c1_b1">
+                  <field value="{item.itemnum}" field-class-name="16-regular" hide-label="true" padding="top" id="vmvj7"/>
+                  <field value="{item.itemdesc}" field-class-name="16-regular" hide-label="true" padding="bottom" id="zry2v"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="70" medium-width="15" large-width="15" id="reconciliation_list_items_r1_c2">
+                <box direction="column" horizontal-align="start" vertical-align="center" fill-child="true" id="reconciliation_list_items_r1_c2_b1">
+                  <icon-group primary-icon="{item.pre_curbalchange<0 ? 'carbon:arrow--down' : (item.pre_curbalchange>0 ? 'carbon:arrow--up': 'carbon:subtract')}" primary-icon-color="{item.pre_curbalchange<0 ? 'red' : (item.pre_curbalchange>0 ? 'green': 'white')}" label="{item.pre_curbalchange}" id="reconciliation_list_items_r1_c2_b1_f1"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="30" medium-width="15" large-width="15" small-horizontal-align="end" medium-horizontal-align="end" large-horizontal-align="end" id="reconciliation_list_items_r1_c3">
+                <box direction="column" horizontal-align="end" vertical-align="center" fill-child="true" id="reconciliation_list_items_r1_c3_b1">
+                  <button icon="carbon:chevron--right" kind="ghost" on-click="gotoDetailsFromSelectedReconciliation" on-click-arg="{{invbalancesid:item.invbalancesid, itemnum:item.itemnum, href:item.href}}" padding="false" id="kxndj"/>
+                </box>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </data-list>
+      </panel>
+      <!--<dialogs id="v2px2">
+        <dialog id="countNotMatch" title="Warning" secondary-action-text="Recount" secondary-icon="carbon:reset" on-secondary-action="cancel" primary-action-text="Confirm" primary-icon="carbon:checkmark" primary-kind="ghost">
+          <label wrap="true" label="The physical count does not match the current balance. Do you confirm this count?" id="wx465"/>
+        </dialog>
+      </dialogs>-->
+    </page>
+  </pages>
+  <messages id="prydr">
+    <message id="Countbooks" text="Count books"/>
+    <message id="Adhoccount" text="Ad hoc count"/>
+    <message id="Reconciliation" text="Reconciliation"/>
+    <message id="invalidinput" text="Should be number 0 ~ 1!"/>
+    <message id="exceedlimit" text="Exceed the allowable limit!"/>
+    <message id="cntbkCompleted_label" text="Count book was completed"/>
+    <message id="updatephyscnt_msg" text="Physical count saved"/>
+    <message id="reconcile_update_msg1" text="Successfully reconciled "/>
+    <message id="reconcile_update_msg2" text=" materials"/>
+    <message id="Rotating" text="Rotating"/>
+    <message id="Asset" text="Asset"/>
+    <message id="Lot" text="Lot"/>
+    <message id="Unit" text="Unit"/>
+    <message id="Balance" text="Balance"/>
+    <message id="Lastcount" text="Last count"/>
+    <message id="Lastcountdate" text="Last count date"/>
+    <message id="Calculated" text="Calculated"/>
+    <message id="Bin" text="Bin"/>
+    <message id="ABCType" text="ABC Type"/>
+    <message id="of" text="of"/>
+    <message id="counted" text="counted"/>
+    <message id="overdue" text="overdue"/>
+    <message id="days" text="days"/>
+    <message id="day" text="day"/>
+  </messages>
+</maximo-application>

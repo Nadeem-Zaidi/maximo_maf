@@ -1,0 +1,20 @@
+<dialog id="drawer2" size="lg" title="Instructions">
+  <border-layout fill-parent="true" padding="true" id="kj2__">
+    <top vertical-align="center" horizontal-align="start" border="true" id="yrp74">
+      <label label="{page.state.computedTitle}" theme="20-regular" wrap="true" id="mz62q" />
+    </top>
+    <middle background-color="ui-background" id="jkkvz">
+      <box direction="column" vertical-align="start" horizontal-align="start" fill-parent="true"
+        id="a6jjr">
+        <label label="{page.state.computedAsset}" wrap="true" theme="16-regular" id="wxvqm" />
+        <label label="{page.state.computedLocation}" wrap="true" theme="16-regular" id="wkkq5" />
+      </box>
+    </middle>
+    <bottom background-color="ui-background" id="wd6np">
+      <box direction="column" fill-parent="true" padding-top="0.5" padding-bottom="0.5" id="ygdvm">
+        <rich-text-viewer content="{page.state.computedLongDescription}"
+          hidden="{!page.state.computedLongDescription}" id="wep4n" />
+      </box>
+    </bottom>
+  </border-layout>
+</dialog>

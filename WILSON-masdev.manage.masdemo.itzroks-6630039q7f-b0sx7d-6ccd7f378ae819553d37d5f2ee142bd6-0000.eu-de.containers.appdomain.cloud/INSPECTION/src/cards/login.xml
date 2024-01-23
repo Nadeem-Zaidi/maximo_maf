@@ -1,0 +1,33 @@
+<container layout="vertical" halign-items="center" valign-items="center" grow="1" id="aw389">
+    <container layout="horizontal" id="xgbpw">
+      <container grow="47" id="mr3rq"/>
+      <container grow="53" layout="vertical" id="negdz" padding="true">
+        <container layout="horizontal" padding="true" id="z2ngg">
+          <label label="IBM" theme="header-large" id="wqyy8"/>
+          <label label="Maximo" theme="header-medium" id="jwb_g"/>
+        </container>
+        <container padding="true" id="zqzr9">
+          <label label="Enterprise Asset Management" id="pxdra"/>
+        </container>
+      </container>
+    </container>
+    <container layout="horizontal" id="j2py3">
+      <container halign-items="start" grow="53" layout="vertical" id="e7q3p">
+        <text-input id="maximoURL" label="Maximo URL" hidden="{!app.state.loginData.showMaximoURL}" placeholder="Enter Maximo URL" readonly="false" invalid="false" required="false" value="{app.state.loginData.maximoURL}"/>
+        <text-input id="user" label="User name" placeholder="Enter username" readonly="false" invalid="false" required="false" value="{app.state.loginData.username}"/>
+        <text-input id="pass" label="Password" type="password" placeholder="Enter password" readonly="false" invalid="false" required="false" value="{app.state.loginData.password}"/>
+        <label spacing="form" label="{app.state.loginData.loginFeedback}" theme="error" id="e5mjk"/>
+      </container>
+    </container>
+    <container layout="horizontal" id="ywgxv">
+      <container grow="47" id="k7b3e"/>
+      <container valign-items="start" halign-items="start" grow="53" layout="vertical" id="r6xrz">
+        <button label="Sign in" on-click="handleLogin" loading="{app.state.loginData.loading}" id="jdej3"/>
+        <button hidden="{app.state.shareButtonVisible !== false}" label="Share Logs" on-click="shareLogs" id="xmdea"/>
+        <!-- commented out until support for visible is implemented
+                                   <button label="Forgot my password" kind="primary" on-click="forgotPassword"/>
+                                   <button label="Fingerprint" kind="primary" on-click="fingerprintLogin"/>
+           -->
+      </container>
+    </container>
+  </container>

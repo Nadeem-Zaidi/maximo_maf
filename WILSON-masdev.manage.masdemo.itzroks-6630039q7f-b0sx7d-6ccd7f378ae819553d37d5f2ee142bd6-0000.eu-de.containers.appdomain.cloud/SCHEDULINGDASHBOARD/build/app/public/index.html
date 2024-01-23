@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="IBM Graphite"/>
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1, shrink-to-fit=no, viewport-fit=auto"
+    />
+    <meta name="theme-color" content="#000000" />
+
+    
+
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
+
+    <title>{{app_name}}</title>
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.svg" />
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <style>
+        .loading {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 10.5rem;
+          height: 10.5rem;
+          margin-top: -5.25rem;
+          margin-left: -5.25rem;
+          animation: load8 1.1s infinite linear;
+        }
+
+        @keyframes load8 {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+        .loading__svg {
+          fill: transparent;
+        }
+
+        .loading__svg circle {
+          stroke-width: 8;
+          stroke-linecap: butt;
+          stroke-dasharray: 240;
+        }
+
+        .loading__stroke {
+          stroke: #0062ff;
+          stroke-dashoffset: 40;
+        }
+      </style>
+      <div
+        aria-label="{{app_name}}"
+        aria-live="assertive"
+        class="loading"
+      >
+        <svg class="loading__svg" viewBox="-75 -75 150 150">
+          <title>{{app_loading_title}}</title>
+          <circle class="loading__stroke" cx="0" cy="0" r="37.5"></circle>
+        </svg>
+      </div>
+    </div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+    -->
+  </body>
+</html>

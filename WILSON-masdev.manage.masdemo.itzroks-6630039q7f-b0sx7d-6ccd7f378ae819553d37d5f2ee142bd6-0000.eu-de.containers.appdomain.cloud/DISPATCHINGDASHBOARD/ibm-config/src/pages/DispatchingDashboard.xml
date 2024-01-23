@@ -1,0 +1,267 @@
+<box padding-start="1" padding-end="1" direction="column" id="b3dk">
+  <box id="kwqkk">
+    <dashboard id="bk6dk">
+      <dashboard-value-tile
+        datasource="jdashboardKPIds"
+        value-field="performedTasks"
+        unit="work records"
+        title="Assignments"
+        has-title-wrap="true"
+        id="vppgv"
+        nodata-label="No data"
+        tooltip="The total number of assigned work records that are included in all schedules on the dashboard."
+      />
+      <dashboard-value-tile
+        id="uy34i5"
+        tooltip="The total number of labor and crew resources that are included in all schedules on the dashboard."
+        datasource="jdashboardKPIds"
+        value-field="resourcesNum"
+        unit="resources"
+        title="Total resources"
+        nodata-label="No data"
+        has-title-wrap="true"
+      />
+      <dashboard-value-tile
+        id="uy34i2"
+        tooltip="The number of emergency work records in all schedules on the dashboard."
+        datasource="jdashboardKPIds"
+        value-field="emergencies"
+        title="Emergencies"
+        unit="work records"
+        nodata-label="No data"
+        has-title-wrap="true"
+      />
+      <dashboard-value-tile
+        id="uy34ij"
+        tooltip="The percentage of resource time that has work assigned. This percentage is the total utilization rate for all resource time in all schedules that are included in the dashboard."
+        datasource="jdashboardKPIds"
+        value-field="resourceUtilization"
+        unit="%"
+        title="Resource utilization"
+        nodata-label="No data"
+        has-title-wrap="true"
+      />
+    </dashboard>
+  </box>
+  <box
+    padding-start="-0.5"
+    padding-end="-0.5"
+    padding-top="1"
+    direction="column"
+    id="e7qw3"
+  >
+    <box border="true" id="njbyv" />
+    <box
+      direction="column"
+      id="dpdndd"
+      background-color="field-01"
+      padding-top="1"
+    >
+      <label label="Schedules" theme="header-medium" id="nwvvp" padding="top" />
+      <label
+        label="Click on schedule name to view more details."
+        theme="small"
+        color="text-02"
+        padding="bottom"
+        id="nw4vp"
+      />
+      <table
+        datasource="{page.state.selectedDatasource}"
+        use-radio-button-single-select="false"
+        can-resize="false"
+        display-row-count="false"
+        can-reorder-columns="false"
+        can-filter="true"
+        can-search="false"
+        no-data-message="No schedules available"
+        id="b6gyy"
+      >
+        <toolbar-actions id="kv222">
+          <button
+            on-click="loadApp"
+            on-click-arg="{{appName: 'RLASSIGN', options:{embedded:true}}}"
+            kind="ghost"
+            label="Add schedules"
+            slot="action-button"
+            id="xjzv9"
+          />
+          <button
+            hidden="false"
+            small="true"
+            icon="carbon:restart"
+            on-click="onReload"
+            id="arj9b"
+          />
+        </toolbar-actions>
+        <table-column
+          width="300"
+          name="name"
+          label="Name"
+          placeholder-text="Name"
+          id="wmgmw"
+        >
+          <box
+            direction="column"
+            hidden="{item.optimizationstatus === 'PROCESSING'}"
+            id="ga263"
+          >
+            <link
+              label="{item.name} ({item.scenarioname})"
+              page="workItemDetails"
+              page-params="{{'scenario':item.href, 'projectname':item.name, 'selectedTab':0, 'startDate': item.startdateacm}}"
+              id="n8wnx"
+            />
+          </box>
+          <box
+            direction="column"
+            hidden="{item.optimizationstatus !== 'PROCESSING'}"
+            id="vevam"
+          >
+            <label
+              theme="field"
+              label="{item.name} ({item.scenarioname})"
+              id="jvybz"
+            />
+          </box>
+          <label
+            theme="field"
+            label="{item.description}"
+            id="nwvcp"
+            spacing="none"
+            padding="none"
+          />
+        </table-column>
+        <table-column
+          width="250"
+          name="scheduletype"
+          label="Process type"
+          can-filter="false"
+          can-sort="false"
+          id="g85mg"
+        >
+          <label label="{item.ScheduleTypeLabel}" id="e83k_" />
+        </table-column>
+        <table-column
+          name="optimization_status"
+          label="Optimization status"
+          can-filter="false"
+          can-sort="false"
+          id="n5mkj"
+        >
+          <box direction="column" id="qk_yr">
+            <link
+              label="{item.optimizationstatus}"
+              page="optimizeSchedule"
+              page-params="{{'href':item.href, 'projectname':item.name, 'projectid':item.skdprojectid, 'optimizationstatus':item.optimizationstatus, 'timelimit':30, 'interval':10,}}"
+              id="y4nb6"
+            />
+            <label
+              theme="field"
+              label="{item.optimizationendtime}"
+              hidden="{!item.optimizationendtime}"
+              spacing="none"
+              padding="none"
+              id="k2b9y"
+            />
+          </box>
+        </table-column>
+        <table-column
+          name="unscheduled"
+          label="Assignment issues"
+          can-filter="false"
+          can-sort="false"
+          id="e24bb"
+        >
+          <box
+            direction="column"
+            hidden="{item.unscheduled === 0 || item.optimizationstatus === 'PROCESSING'}"
+            id="m524p"
+          >
+            <link
+              label="{item.unscheduled}"
+              theme="small"
+              page="workItemDetails"
+              page-params="{{'scenario':item.href, 'projectname':item.name, 'selectedTab':2, 'startDate': item.startdateacm}}"
+              id="n4wnx"
+            />
+          </box>
+          <box
+            hidden="{item.unscheduled !== 0 || item.optimizationstatus === 'PROCESSING'}"
+            id="m424p"
+          >
+            <label
+              theme="small"
+              label="{item.unscheduled}"
+              id="nbvcp"
+              padding="none"
+              spacing="none"
+            />
+          </box>
+        </table-column>
+        <table-column
+          name="emergencies"
+          label="Emergencies"
+          can-filter="false"
+          can-sort="false"
+          id="vqany"
+        >
+          <box
+            direction="row"
+            horizontal-align="center"
+            vertical-align="center"
+            hidden="{item.emergencies === 0}"
+            id="wbz3j"
+          >
+            <link
+              label="{item.emergencies}"
+              page="workItemDetails"
+              page-params="{{'scenario':item.href, 'projectname':item.name, 'selectedTab':0, 'startDate': item.startdateacm}}"
+              id="w5re3"
+            />
+          </box>
+          <box
+            hidden="{item.emergencies !== 0}"
+            horizontal-align="center"
+            vertical-align="center"
+            id="dvmb_"
+          >
+            <label
+              theme="small"
+              label="{item.emergencies}"
+              padding="none"
+              spacing="none"
+              id="v7m8r"
+            />
+          </box>
+        </table-column>
+        <table-column
+          name="resource_utilization"
+          label="Resource utilization"
+          can-filter="false"
+          can-sort="false"
+          id="n483m"
+        >
+          <label
+            theme="small"
+            label="{item.resourceutilization}%"
+            padding="none"
+            spacing="none"
+            id="rw77_"
+          />
+        </table-column>
+        <table-column
+          name="startdateacm"
+          placeholder-text="Start date"
+          label="Start date"
+          id="rnd35"
+        />
+        <table-column
+          name="enddateacm"
+          placeholder-text="End date"
+          label="End date"
+          id="awmyb"
+        />
+      </table>
+    </box>
+  </box>
+</box>

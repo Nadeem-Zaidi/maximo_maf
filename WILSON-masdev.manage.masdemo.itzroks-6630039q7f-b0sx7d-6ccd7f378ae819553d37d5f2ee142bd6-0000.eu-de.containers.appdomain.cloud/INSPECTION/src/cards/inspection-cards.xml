@@ -1,0 +1,25 @@
+<card-group datasource="{page.state.selectedDSCards}" show-refresh="true" empty-set-string="No inspections found" sub-label="Try another view. If you are offline, try again when you are online." hide-count-search="{page.state.hideCountSearch}" enable-barcode-scanner="true" timeout="{45}" id="z3w87">
+  <button slot="selected-actions" icon="maximo:group-new" on-click="openBatch" label="Open batch" kind="primary" id="pdem6"/>
+  <card-template2 id="cardtemplate2" chevron-kind="secondary" slot="item" show-chevron="true">
+    <wrapped-text slot="slot1" max-length="150" label="{item.computedTitle}" size="large" id="akxxd"/>
+    <button slot="slot2" kind="secondary" label="{item.computedWOTitle}" hidden="{!item.computedWOTitle || !page.state.techmobileAccess}" padding="false" icon="Carbon:launch" on-click="loadApp" on-click-arg="{{appName: 'techmobile', context: {page: 'workOrderDetails', wonum: item.computedWONum, siteid: item.siteid, href: item.computedHref}}}" id="ergz4"/>
+    <date-relative slot="slot3" value="{item.duedate}" wrap="true" text-prefix="Due" type="date_full_month" hidden="{item.computedIsOverDue || !item.duedate}" id="qj_43"/>
+    <icon fill="red" slot="slot12" size="24" icon="carbon:warning--alt--filled" hidden="{!item.computedIsOverDue || !item.duedate}" id="b38em"/>
+    <date-relative slot="slot3" wrap="true" value="{item.duedate}" text-prefix="Overdue since" type="date_full_month" theme="error" hidden="{!item.computedIsOverDue || !item.duedate}" id="qj_467"/>
+    <tag-group slot="slot10" align="start" tags="{item.computedInspectionStatus}" id="dn6p5"/>
+    <button slot="slot10" kind="ghost" on-click="changePage" on-click-arg="{{page:'execution_panel',inspectionresultid:item.inspectionresultid,itemhref:item.href}}" hidden="{item.status_maxvalue !== 'PENDING' || item.isbatch}" icon="carbon:chevron--right" id="xy_r3"/>
+    <icon slot="slot11" icon="{(item.computedAsset) ? 'carbon:asset' : 'carbon:location'}" hidden="{!item.computedAsset &amp;&amp; !item.computedLocation }" id="wjn6j"/>
+    <field slot="slot4" wrap="true" value="{item.computedAsset}" hide-label="true" padding="none" hidden="{!item.computedAsset}" id="wy8e4"/>
+    <field slot="slot5" wrap="true" value="{item.computedLocation}" hide-label="true" padding="none" hidden="{!item.computedLocation}" id="eyem5"/>
+    <field slot="slot7" value="{item.computedDuration}" hidden="{!item.computedDuration}" wrap="false" hide-label="true" label-placement="start" padding="none" id="kjxbn"/>
+    <button-group slot="slot8" padding="false" id="mn2g5">
+      <button kind="secondary" icon="Carbon:document" hidden="false" on-click="showInstructions" on-click-arg="{item}" id="avgy7"/>
+      <button kind="secondary" icon="carbon:map" hidden="{!item.plussgeojson}" on-click="showMapDialog" on-click-arg="{item}" disconnected="{!app.state.isMapValid}" disconnected-message="Map is not configured" id="ejewq"/>
+      <button kind="secondary" icon="maximo:materialsandtools" hidden="true" id="bja__"/>
+      <button kind="secondary" icon="maximo:group-new" hidden="{!item.isbatch}" tag-value="{item.batchlist.length}" on-click="changePage" on-click-arg="{{page:'batch_details',inspectionresultid:item.inspectionresultid,itemhref:item.href}}" id="kgxzy"/>
+    </button-group>
+    <button-group slot="slot9" align="end" id="r83r4" padding="false">
+      <button label="{item.computedButtonLabel}" hidden="{!item.computedButtonLabel}" icon="carbon:play" on-click="handleCardType" on-click-arg="{item}" kind="{item.computedButtonTheme}" id="wnga_"/>
+    </button-group>
+  </card-template2>
+</card-group>

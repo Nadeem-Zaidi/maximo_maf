@@ -1,0 +1,94 @@
+{
+  "name": "@maximo/icmobile",
+  "author": "Maximo Dev <maximodev@us.ibm.com>",
+  "version": "8.11.0",
+  "private": true,
+  "windowsInstall": true,
+  "winShell": false,
+  "homepage": ".",
+  "dependencies": {
+    "@maximo/maximo-js-api": "2.12.387",
+    "@maximo/react-components": "2.12.387",
+    "mobx": "5.15.7",
+    "mobx-react": "5.4.4",
+    "react": "17.0.2",
+    "react-app-polyfill": "1.0.6",
+    "react-dom": "17.0.2"
+  },
+  "scripts": {
+    "start": "cd build/app && react-scripts start",
+    "start_debug": "cd build/app && set NODE_OPTIONS=\"--max_old_space_size=30000\" && react-scripts start",
+    "build": "npx --no-install maxdev-cli build --in ./src/app.xml --out ./build/app/src/ --update-ids --copy",
+    "lint": "npm run lint:eslint",
+    "lint:eslint": "eslint ./src/",
+    "build:production": "yarn build && yarn labels && cd build/app && react-scripts build",
+    "ci:check": "npm run test:coverage && npm run lint && npm run build",
+    "man": "npx --no-install maxdev-cli man",
+    "test": "react-scripts test --watchAll --coverage",
+    "test:coverage": "cross-env CI=true npx react-scripts test --coverage --silent --all --passWithNoTests",
+    "clean": "npx --no-install maxdev-cli clean",
+    "labels": "npx --no-install maxdev-cli localize -i ./src/app.xml -o ./src/i18n/labels.json --format json",
+    "storybook": "start-storybook -p 6006 -c config/storybook -s config/storybook/assets",
+    "build-storybook": "build-storybook -c config/storybook -s config/storybook/assets",
+    "build:maximoMobile:all": "yarn build:production && npx maxdev-cli upload-app --mobile-only",
+    "build:maximoMobile:all:dev": "npx cross-env GRAPHITE_SOURCEMAP=inline-source-map yarn build:maximoMobile:all",
+    "mobile": "yarn clean && yarn build && yarn build:maximoMobile:all:dev",
+    "upload:icgraphite": "npx --no-install maxdev-cli upload-app -u maxadmin -p maxadmin -a icmobile --skip-src --skip-zip --domain=srgraphite1.fyre.ibm.com --port=7001",
+    "upload:icgraphite_dev": "npx cross-env NODE_OPTIONS=\"--max_old_space_size=30000\" GRAPHITE_SOURCEMAP=inline-source-map yarn build:production && npx --no-install maxdev-cli upload-app -u maxadmin -p maxadmin -a icmobile --skip-zip --domain=localhost --port=7001"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@maximo/app-processor": "2.12.387",
+    "@maximo/maxdev-cli": "2.12.387",
+    "cross-env": "^7.0.3",
+    "react-scripts": "4.0.3",
+    "react-test-renderer": "17.0.2",
+    "sinon": "9.2.4"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "./src/**/*.js": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(ol)/)"
+    ]
+  },
+  "graphite": {
+    "platform": "maximoMobile"
+  },
+  "resolutions": {
+    "ansi-html": "0.0.8",
+    "babel-loader": "8.1.0",
+    "browserslist": "4.16.5",
+    "ejs": "3.1.7",
+    "glob-parent": "5.1.2",
+    "immer": "9.0.6",
+    "loader-utils": "2.0.4",
+    "minimatch": "3.0.5",
+    "node-forge": "1.3.0",
+    "nth-check": "2.0.1",
+    "parse-path": "5.0.0",
+    "parse-url": "8.1.0",
+    "prismjs": "1.27.0",
+    "react-dev-utils": "11.0.4",
+    "react-error-overlay": "6.0.9",
+    "shell-quote": "1.7.3",
+    "webpack": "4.44.2",
+    "@babel/traverse": "7.23.2",
+    "@carbon/telemetry": "0.1.0",
+    "semver": "7.5.2"
+  }
+}

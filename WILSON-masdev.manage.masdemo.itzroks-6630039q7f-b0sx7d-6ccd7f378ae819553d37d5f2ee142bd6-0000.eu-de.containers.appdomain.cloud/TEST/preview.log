@@ -1,0 +1,8 @@
+$ cd build/app && react-scripts start
+
+** maxdev-cli (Graphite) is overriding the default react-scripts webpack.config **
+** webpack version:  4.44.2
+** ENV: NODE_OPTIONS=--max_old_space_size=8192
+** ENV: BROWSER=none
+** ENV: NODE_ENV=development
+Something is already running on port 3006.

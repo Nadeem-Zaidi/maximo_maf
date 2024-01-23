@@ -1,0 +1,1302 @@
+<maximo-application navigator-tile-order="400" controller="AppController" product-name-adaptive="Maximo" theme="touch" product-name="Maximo" title="Inspections" id="inspection" version="8.11.0.0" default-log-level="error">
+  <properties id="me9qb">
+    <property name="mxe.mobile.inspection.features.savegeolocation" id="myxyz"/>
+    <property name="mxe.mobile.inspection.features.enablereview" id="arwp3"/>
+    <property name="mxe.mobile.inspection.features.mviintegration" id="jkb3_"/>
+  </properties>
+  <menu slot="navigation-items" id="ga4kr">
+    <menu-item label="Inspections" icon="maximo:inspections" page="main" id="zpydr"/>
+    <menu-item action-type="add" label="Create inspection" icon="maximo:add--record" page="createInspection" id="kjgxd"/>
+  </menu>
+  <states id="ez6er">
+    <state name="isMapValid" type="boolean" id="d8rjv"/>
+    <state name="isFormExecutionLoaded" type="boolean" id="kx_w9"/>
+    <state name="inspectionsList" type="object" id="x69dm"/>
+    <state name="hideMicIcon" type="boolean" value="true" id="v3k6y"/>
+    <state name="disableMicIcon" type="boolean" value="true" id="mpzqv"/>
+    <state name="savegeolocation" type="boolean" id="mvg7p"/>
+    <state name="enablereview" type="boolean" value="false" id="nr__m"/>
+    <state name="reviewStatusValue" type="string" id="a2b47"/>
+    <state name="inspectionStatusValues" type="object" id="pwe3d"/>
+    <state name="assignedworkdssync" value="false" type="boolean" id="xqnr_"/>
+    <state name="pendingdssync" value="false" type="boolean" id="p7ygv"/>
+    <state name="inprogdssync" value="false" type="boolean" id="g4zy_"/>
+    <state name="inreviewdssync" value="false" type="boolean" id="jvm93"/>
+    <state name="completedItems" type="object" id="completedItems11"/>
+    <state name="LoadedObject" value="{}" type="object" id="q4a7a"/>
+    <state name="attachmentsInMemory" type="object" id="att001"/>
+    <state name="instructions" type="object" value="{}" id="g74we"/>
+  </states>
+  <maximo-datasource id="synonymdomainDataInsp" lookup-data="true" offline-immediate-download="true" object-structure="mxapisynonymdomain" saved-query="MOBILEDOMAIN">
+    <schema id="m8rgx">
+      <attribute name="value" id="b3x5v"/>
+      <attribute name="maxvalue" searchable="true" id="yp2ea"/>
+      <attribute name="description" id="rbm9n"/>
+      <attribute name="domainid" searchable="true" id="nx_mm"/>
+      <attribute name="valueid" unique-id="true" searchable="true" id="gjwdp"/>
+      <attribute name="siteid" searchable="true" id="ye_gk"/>
+      <attribute name="orgid" searchable="true" id="n8v_a"/>
+      <attribute name="defaults" id="wq8jj"/>
+    </schema>
+  </maximo-datasource>
+  <pages id="pages">
+    <!-- <page id="login">
+      <include src="./cards/login.xml" id="aneaz"/>
+    </page>  -->
+    <page id="main" controller="InspListPageController">
+      <states id="yy4gy">
+        <state name="selectedDS" value="assignedworktolist" type="string" id="mmvq9"/>
+        <state name="selectedDSCards" value="assignedworktolist" type="string" id="emw_b"/>
+        <state name="selectedDSMap" value="assignedworktolist" type="string" id="jpgpq"/>
+        <state name="techmobileAccess" value="0" type="number" id="dkk7a"/>
+        <state name="selectedSwitch" value="0" type="number" id="z24pg"/>
+        <state name="showMapOverlay" value="0" type="number" id="a664g"/>
+        <state name="hideCountSearch" value="false" type="boolean" id="dwpka"/>
+        <state name="showClusterList" value="false" type="boolean" id="jzn9_"/>
+        <state name="inspectionsIdCluster" value="" type="object" id="km5_8"/>
+        <state name="itemsCluster" value="" type="string" id="gqbjy"/>
+        <state name="inspIdForMap" value="" type="string" id="z6rq7"/>
+        <state name="isMapOpen" value="false" type="boolean" id="mkxwr"/>
+        <state name="mapListHeight" value="45%" type="string" id="vgv86"/>
+        <state name="mapPaddingRight" value="" type="string" id="jzb2d"/>
+        <state name="mapPaddingLeft" value="" type="string" id="zmg92"/>
+        <state name="mapPaddingBottom" value="0" type="string" id="jb7qk"/>
+        <state name="mapHeight" value="" type="string" id="b4nkd"/>
+        <state name="mapDialogHeight" value="" type="string" id="k2ypa"/>
+        <state name="mapCardHeight" value="auto" type="string" id="vy5k6"/>
+        <state name="mapCardScroll" value="false" type="boolean" id="m8ewy"/>
+        <state name="comeFromCluster" value="false" type="boolean" id="k9zmq"/>
+        <state name="hideBackButton" value="false" type="boolean" id="qa2bp"/>
+        <state name="showReviewItems" type="boolean" value="false" id="wjyqw"/>
+        <state name="assignedWhereClause" value="" type="string" id="a_y_8"/>
+        <state name="mviIntegration" type="boolean" value="false" id="z26xb"/>
+      </states>
+      <maximo-datasource id="assignedworkds" page-size="200" offline-enabled="false" saved-query="ASSIGNEDWORKTODAY" object-structure="mxapiinspectionres" order-by="duedate" controller="InspListDataController" selection-mode="multiple" domain-internal-where="{app.state.assignedWhereClause}" mobile-qbe-filter="{{'status_maxvalue': '!=COMPLETED, CAN, REVIEW', 'historyflag': '!=true'}}" offline-immediate-download="true" geometry-format="geojson">
+        <schema id="kvq9a">
+          <attribute name="siteid" id="d_8mz"/>
+          <attribute name="orgid" id="nka7x"/>
+          <attribute name="resultnum" searchable="true" id="q__qy"/>
+          <attribute name="location" searchable="true" id="vg234"/>
+          <attribute name="referenceobject" id="r38a5"/>
+          <attribute name="referenceobjectid" searchable="true" id="b3wm6"/>
+          <attribute name="inspectionresultid" unique-id="true" id="prqkd"/>
+          <attribute name="status" index="true" searchable="true" id="bq_pg"/>
+          <attribute name="status_maxvalue" index="true" id="n892b"/>
+          <attribute name="status_description" id="nagwn"/>
+          <attribute name="createdate" id="xkznx"/>
+          <attribute name="createdby" id="jk8zg"/>
+          <attribute name="href" id="zebn6"/>
+          <attribute name="duedate" sortable="true" id="b6xwy"/>
+          <attribute name="allowedactions" id="z3kq8"/>
+          <attribute name="isbatch" id="mgpqr"/>
+          <attribute name="rel.batchlist{allowedstates,inspectionresultid,asset,href,historyflag,status,rel.inspfieldresult{inspectionimageinference{*},inspfieldresultid,errorflag,errormessage,inspfieldnum,inspfieldresultnum,inspformnum,inspquestionnum,orgid,resultnum,revision,siteid,txtresponse,numresponse,dateresponse,timeresponse,readconfirmation,rolloverflag,doclinks{*},inspfieldresultselection{txtresponse,inspfieldresultselectionid,anywhererefid},anywhererefid,actionrequired,plussgeojson,isvisible}}" id="gx4dr"/>
+          <attribute name="inspectionform" id="wm7z8">
+            <attribute name="description_longdescription" id="nmx4e"/>
+            <attribute name="name" searchable="true" sortable="true" id="p8xp9"/>
+            <attribute name="inspectionformid" id="xek92"/>
+            <attribute name="hasrequiredquestion" id="y_kwy"/>
+            <attribute name="enablereview" id="e2v45"/>
+          </attribute>
+          <attribute name="sequence" id="w3w44"/>
+          <!-- Contains duplicate relation to allow search capabilities -->
+          <attribute name="assets" id="vvp_g">
+            <attribute name="assetnum--assetnumalias" sortable="true" searchable="true" id="xnd4x"/>
+            <attribute name="description--assetdesc" sortable="true" searchable="true" id="xkb3x"/>
+          </attribute>
+          <attribute name="rel.assets{assetnum, description, autolocate, rel.assetmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="yq7pe"/>
+          <!-- Contains duplicate relation to allow search capabilities -->
+          <attribute name="locations" id="bv3_3">
+            <attribute name="location--locationalias" sortable="true" searchable="true" id="mbvwk"/>
+            <attribute name="description--locdesc" sortable="true" searchable="true" id="awjz8"/>
+          </attribute>
+          <attribute name="rel.locations{location, description, autolocate, rel.locationmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="eqg5w"/>
+          <attribute name="rel.workorder.mxapiwodetail{wonum, description, taskid, worktype, schedstart, istask, estdur, autolocate, rel.parent.mxapiwodetail{wonum, description, href}, href}" id="bx78q"/>
+          <attribute name="rel.histresults{href,resultnum,createdate,inspectionresultid,rel.inspfieldresult{inspfieldresultid,href,inspfieldnum,txtresponse,numresponse,dateresponse,timeresponse,rel.inspfieldresultselection{inspfieldresultselectionid,txtresponse,anywhererefid},isvisible}}" id="r_x29">
+            <maximo-child-filter related-path="inspectionresult.histresults" limit="5" order-by="-resultnum" id="ke2ex"/>
+          </attribute>
+          <attribute name="allowedstates" id="gnp7w"/>
+          <attribute name="inspresultstatus{href,_bulkid}" id="jazrj"/>
+          <attribute name="parent" searchable="true" sortable="true" id="w6zg2"/>
+          <attribute name="historyflag" index="true" id="ry8ga"/>
+          <attribute name="computedTitle" computed-function="_computeTitle" type="STRING" sub-type="ALN" title="Title" remarks="Title" id="g3_55"/>
+          <attribute name="computedWOTitle" computed-function="_computeWOTitle" type="STRING" sub-type="ALN" title="Work Order" remarks="Work Order type and number" id="g776q"/>
+          <attribute name="computedWONum" computed-function="_computeWONum" type="STRING" sub-type="ALN" title="Work Order" remarks="Identifies the work order" id="gabwm"/>
+          <attribute name="computedHref" computed-function="_computeHref" type="STRING" sub-type="ALN" id="kba3n"/>
+          <attribute name="computedButtonLabel" computed-function="_computeButtonLabel" type="STRING" sub-type="ALN" id="ej3w6"/>
+          <attribute name="computedCompletedDate" computed-function="_computeCompletedDate" type="STRING" sub-type="DATETIME" title="Completed Date" remarks="Completed Date" id="xqzdv"/>
+          <attribute name="computedIsOverDue" computed-function="computedIsOverDue" title="computedIsOverDue" remarks="computedIsOverDue" id="mnw4e"/>
+          <attribute name="computedQuestions" computed-function="_computeQuestionCount" type="STRING" sub-type="ALN" title="Inspection Questions" remarks="Amount of questions in inspection form" id="akyrw"/>
+          <attribute name="computedDuration" computed-function="_computeDuration" type="STRING" sub-type="ALN" id="k5989"/>
+          <attribute name="computedAsset" computed-function="_computeAsset" type="STRING" sub-type="ALN" id="dv82e"/>
+          <attribute name="computedLocation" computed-function="_computeLocation" type="STRING" sub-type="ALN" id="nzb8w"/>
+          <attribute name="plussgeojson" computed-function="_computePlussgeojson" id="zgnm9"/>
+          <attribute name="computedInspectionStatus" computed-function="computedInspectionStatus" id="ewgm6"/>
+        </schema>
+        <maximo-datasource-override id="assignedworktolist" saved-query="INSPRESULTPENDINGINPROGRESS" default="true" offline-immediate-download="true"/>
+        <maximo-datasource-override id="pendingds" saved-query="INSPRESULTPENDING" mobile-qbe-filter="{{'status_maxvalue': '=PENDING', 'historyflag': '!=true'}}" offline-immediate-download="true"/>
+        <maximo-datasource-override id="inprogds" saved-query="INSPRESULTINPROGRESS" mobile-qbe-filter="{{'status_maxvalue':'=INPROG', 'historyflag': '!=true'}}" offline-immediate-download="true"/>
+        <maximo-datasource-override id="inreviewds" saved-query="INSPRESULTREVIEW" mobile-qbe-filter="{{'status_maxvalue':'=REVIEW', 'historyflag': '!=true'}}" offline-immediate-download="true"/>
+        <maximo-datasource-override id="completedds" saved-query="INSPRESULTCOMPLETE" offline-immediate-download="false"/>
+        <maximo-datasource-override id="allinspectionsds" saved-query="INSPRESULTALL" domain-internal-where="{''}" mobile-qbe-filter="{{'historyflag': '!=true'}}" offline-immediate-download="false"/>
+      </maximo-datasource>
+      <json-datasource id="jsonclusterinspectionsds" items="items" pre-load="false" src="{[]}" selection-mode="none">
+        <schema id="zv5wy">
+          <attribute name="inspectionresultid" unique-id="true" id="djbxa"/>
+          <attribute name="inspectionform" id="np49d">
+            <attribute name="name" id="kkg_x"/>
+            <attribute name="description_longdescription" id="ae6n4"/>
+          </attribute>
+          <attribute name="plussgeojson" id="jz567"/>
+          <attribute name="computedTitle" id="m33pb"/>
+          <attribute name="computedAsset" id="p7k9q"/>
+          <attribute name="computedLocation" id="b9z5g"/>
+        </schema>
+      </json-datasource>
+      <json-datasource id="jsoncardinspectionsds" items="items" pre-load="false" src="{[]}" selection-mode="none">
+        <schema id="dxxzj">
+          <attribute name="inspectionresultid" unique-id="true" id="xmmy7"/>
+          <attribute name="inspectionform" id="axkaj">
+            <attribute name="name" id="bp8z8"/>
+            <attribute name="description_longdescription" id="nkd7w"/>
+          </attribute>
+          <attribute name="plussgeojson" id="r6ymm"/>
+          <attribute name="status" id="dnzq3"/>
+        </schema>
+      </json-datasource>
+      <json-datasource id="dsstatusDomainList" src="{[]}" items="statusItems" selection-mode="single" id-attribute="value">
+        <schema id="q42kj">
+          <attribute name="value" id="yyv5y"/>
+          <attribute name="description" id="grbwb"/>
+        </schema>
+      </json-datasource>
+      <header-template id="vwp4b" title-column-width="{app.state.screen.size === 'md' ? 70 : app.state.screen.size === 'lg' ? 40 : app.state.screen.size === 'xlg' ? 21 : 65}" hide-breadcrumb="true">
+        <dropdown slot="dropdown" theme="light" size="none" selected-item="{page.state.selectedDS}" on-change="filterList" id="rzvz4" hide-unselected-placeholder="true">
+          <dropdown-item value="assignedworktolist" text="Assigned inspections" id="y4_eq"/>
+          <dropdown-item value="pendingds" text="Pending" id="wdz9p"/>
+          <dropdown-item value="inprogds" text="In progress" id="zjgq6"/>
+          <dropdown-item value="inreviewds" hidden="{!page.state.showReviewItems}" text="For review" id="y9zej"/>
+          <dropdown-item value="completedds" hidden="{app.device.isMaximoMobile}" text="Completed" id="zw86w"/>
+          <dropdown-item value="allinspectionsds" hidden="{app.device.isMaximoMobile}" text="All inspections" id="zy6q_"/>
+        </dropdown>
+        <content-switcher slot="content-switches" selected-index="{page.state.selectedSwitch}" id="nvx4v">
+          <cs-switch on-click="showDSList" on-click-arg="{'listView'}" icon="carbon:list" id="gxz47"/>
+          <cs-switch on-click="showDSList" on-click-arg="{'mapView'}" disabled="{!app.state.isMapValid}" icon="carbon:map" id="j_9_r"/>
+        </content-switcher>
+      </header-template>
+      <dialogs id="gabr6">
+        <dialog id="dialogmap" title="Inspection location" on-close-action="mapDialogClose" size="lg" passive="true" padding="none">
+          <map on-map-initialize="onMapInitializedDialog" height="{page.state.mapDialogHeight}" attribution-label="{false}" id="q9kv5" preload="true">
+            <map-layers id="x4kvw">
+              <map-layer name="Inspections" label="Inspections" datasource="{page.state.selectedDS}" symbology-handler="createInspSymbology" legend-handler="retrieveInspLegends" geometry-field-format="geojson" geometry-field-name="plussgeojson" hidden="false" min-scale="0" max-scale="0" transparency="0" cluster-tolerance="20" spatial-reference="4326" maximum-features-limit="5000" id="mapLayerInspDialog"/>
+            </map-layers>
+            <map-events id="mapEventDialog">
+              <map-click id="mapClickDialog" on-action="handleMapClick" tolerance="2"/>
+              <map-hover id="mapHoverDialog" on-action="handleMapHover" tolerance="2" hover-time="300"/>
+              <map-move id="mapMoveDialog" on-action="handleMapMove" move-time="200"/>
+            </map-events>
+            <map-overlay id="mapOverlayCardDialog" hidden="{!(page.state.showMapOverlay===2)}" position="bottom" left="{page.state.mapPaddingLeft}" right="{page.state.mapPaddingRight}" width="100%" bottom="{page.state.mapPaddingBottom}" height="{page.state.mapCardHeight}" scrollable="{page.state.mapCardScroll}">
+              <include src="./cards/inspection-cards-map.xml" id="j399j"/>
+            </map-overlay>
+            <map-overlay hidden="false" max-width="100%" left="55px" bottom="55px" top="20px" right="0px" position="top-right" transparent="true" scrollable="false" type="map-toolbar" id="x9pq3">
+              <map-toolbar id="v7kb5">
+                <map-toolbar-layer width="400px" maxWidth="100%" maxHeight="70vh" id="pgk99"/>
+                <map-toolbar-mylocation id="nzk6v"/>
+                <map-toolbar-identify do-not-hide-list="{['map-toolbar']}" id="dkrv5"/>
+                <map-toolbar-replica hidden-button="false" mobile-only="true" id="p_e4w"/>
+                <map-toolbar-indoor id="ayw56"/>
+              </map-toolbar>
+            </map-overlay>
+          </map>
+        </dialog>
+        <dialog id="instructionsDialog" size="lg" title="Instructions">
+          <border-layout fill-parent="true" padding="true" id="d8g2v">
+            <top vertical-align="center" horizontal-align="start" border="true" id="x_j3g">
+              <label label="{page.state.instructions.title}" theme="20-regular" wrap="true" id="gv2aq"/>
+            </top>
+            <middle background-color="ui-background" id="p8kpe">
+              <box direction="column" vertical-align="start" horizontal-align="start" fill-parent="true" id="bgapr">
+                <label label="{page.state.instructions.asset}" wrap="true" theme="16-regular" id="r6zje"/>
+                <label label="{page.state.instructions.location}" wrap="true" theme="16-regular" id="am3y_"/>
+              </box>
+            </middle>
+            <bottom background-color="ui-background" id="dyn7m">
+              <box direction="column" fill-parent="true" padding-top="0.5" padding-bottom="0.5" id="xpdq4">
+                <rich-text-viewer content="{page.state.instructions.longDesc}" id="qzza8"/>
+              </box>
+            </bottom>
+          </border-layout>
+        </dialog>
+        <sliding-drawer id="inspectionStatusChangeDialog" align="start" header-text="Change status" content-padding="false" controller="ChangeStatusController">
+          <box id="vy69e">
+            <panel id="vxb22">
+              <box direction="row" vertical-align="center" padding-start="1" padding-top="0.5" padding-bottom="0.5" id="wd_r_">
+                <label theme="20-regular" label="Select a status" padding="default" id="p9n2n"/>
+              </box>
+              <data-list datasource="dsstatusDomainList" show-single-select-icon="true" on-item-click="selectStatus" selected-icon="carbon:checkmark--filled" unselected-icon="carbon:radio-button" show-search="false" id="nb6k6">
+                <list-item id="rmg5z">
+                  <border-layout fill-parent="true" padding="false" id="k2nwm">
+                    <middle horizontal-overflow="hidden" id="n3wq7">
+                      <label label="{item.description}" theme="16-regular" padding="none" id="dz9pj"/>
+                      <label label="{item.value}" padding="none" id="mb57r"/>
+                    </middle>
+                  </border-layout>
+                </list-item>
+              </data-list>
+            </panel>
+          </box>
+          <button-group slot="header-button" align="end" id="rqk4v">
+            <button icon="carbon:checkmark--outline" kind="primary" disabled="{page.state.disableDoneButton}" loading="{page.state.loadingstatus===true}" on-click="changeStatus" id="yy86d"/>
+          </button-group>
+        </sliding-drawer>
+      </dialogs>
+      <stacked-panel selected-index="{page.state.selectedSwitch}" id="rmn3a">
+        <panel id="zjkrk">
+          <include src="./cards/inspection-cards.xml" id="a5_dz"/>
+        </panel>
+        <panel id="m8n88">
+          <map on-map-initialize="onMapInitialized" height="{page.state.mapHeight}" attribution-label="{false}" id="pmp_y">
+            <map-layers id="vegx8">
+              <map-layer name="Inspections" label="Inspections" datasource="{page.state.selectedDS}" symbology-handler="createInspSymbology" legend-handler="retrieveInspLegends" geometry-field-format="geojson" geometry-field-name="plussgeojson" hidden="false" min-scale="0" max-scale="0" transparency="0" cluster-tolerance="20" spatial-reference="4326" maximum-features-limit="5000" id="mapLayerInsp"/>
+            </map-layers>
+            <map-events id="mapEvent">
+              <map-click id="mapClick" on-action="handleMapClick" tolerance="2"/>
+              <map-hover id="mapHover" on-action="handleMapHover" tolerance="2" hover-time="300"/>
+              <map-move id="mapMove" on-action="handleMapMove" move-time="200"/>
+            </map-events>
+            <map-overlay id="mapOverlayList" hidden="{!(page.state.showMapOverlay===1)}" position="bottom" left="{page.state.mapPaddingLeft}" right="{page.state.mapPaddingRight}" width="100%" height="{page.state.mapListHeight}" bottom="{page.state.mapPaddingBottom}">
+              <border-layout fill-parent="true" padding="false" id="m72_p">
+                <top id="pngmz">
+                  <button hidden="{!(page.state.showClusterList)}" icon="carbon:chevron--left" kind="ghost" on-click="showDSList" on-click-arg="{'mapView'}" padding="false" id="n8d5y"/>
+                </top>
+                <middle id="k5wnz">
+                  <data-list datasource="{page.state.selectedDSMap}" show-search="{!(page.state.hideCountSearch)}" show-count="true" no-select-behavior="true" enable-barcode-scanner="true" timeout="{45}" id="yxqgq">
+                    <border-layout slot="item" fill-parent="true" id="pwgdq">
+                      <middle width="65" horizontal-overflow="hidden" id="debxp">
+                        <label label="{item.computedTitle}" color="gray80" theme="16-regular" id="zrbwg"/>
+                        <label label="{item.computedAsset}" hidden="{!item.computedAsset}" color="gray60" theme="16-regular" id="kyqn9"/>
+                        <label label="{item.computedLocation}" hidden="{item.computedAsset}" color="gray60" theme="16-regular" id="gn5zy"/>
+                      </middle>
+                      <end width="35" horizontal-overflow="hidden" horizontal-align="end" id="z7bdp">
+                        <label label="No service address specified" hidden="{item.plussgeojson}" color="gray60" theme="16-regular" id="mj7qp"/>
+                        <box vertical-align="center" direction="column" horizontal-align="end" fill-parent="true" id="xgbpq">
+                          <button icon="carbon:chevron--right" kind="ghost" on-click="showInspMapCard" on-click-arg="{{'item': item}}" padding="false" id="k_p7n"/>
+                        </box>
+                      </end>
+                    </border-layout>
+                  </data-list>
+                </middle>
+              </border-layout>
+            </map-overlay>
+            <map-overlay id="mapOverlayCard" hidden="{!(page.state.showMapOverlay===2)}" position="bottom" left="{page.state.mapPaddingLeft}" right="{page.state.mapPaddingRight}" width="100%" bottom="{page.state.mapPaddingBottom}" height="{page.state.mapCardHeight}" scrollable="{page.state.mapCardScroll}">
+              <box fill-parent="true" direction="column" id="p68j4">
+                <border-layout fill-parent="true" middle-border="true" padding="false" hidden="{page.state.hideBackButton}" id="rq974">
+                  <middle direction="row" vertical-align="center" horizontal-align="start" id="qr92m">
+                    <button icon="carbon:chevron--left" kind="ghost" on-click="showListFromCard" padding="false" id="q4pzz"/>
+                    <label label="{page.state.itemsCluster}" color="gray60" theme="16-regular" id="nbme7"/>
+                  </middle>
+                </border-layout>
+                <include src="./cards/inspection-cards-no-action.xml" id="kpbm7"/>
+              </box>
+            </map-overlay>
+            <map-overlay hidden="false" max-width="100%" left="55px" bottom="55px" top="20px" right="0px" position="top-right" transparent="true" scrollable="false" type="map-toolbar" id="g_jje">
+              <map-toolbar id="grjxp">
+                <map-toolbar-layer width="400px" maxWidth="100%" maxHeight="{page.state.mapListHeight}" id="p_mxa"/>
+                <map-toolbar-mylocation id="y5__n"/>
+                <map-toolbar-identify do-not-hide-list="{['map-toolbar']}" id="gm_r6"/>
+                <map-toolbar-replica hidden-button="false" mobile-only="true" id="e868w"/>
+                <map-toolbar-indoor id="z7em4"/>
+              </map-toolbar>
+            </map-overlay>
+          </map>
+        </panel>
+      </stacked-panel>
+    </page>
+    <page id="transition_page" controller="TransitionPageController">
+      <maximo-datasource id="contextredirectds" where="inspectionresultid={page.params.inspectionresultid}" object-structure="mxapiinspectionres">
+        <schema id="ejkd3">
+          <attribute name="inspectionresultid" unique-id="true" id="jem7j"/>
+          <attribute name="resultnum" id="xg842"/>
+          <attribute name="href" id="z4w9z"/>
+          <attribute name="status" id="z4dw9z"/>
+          <attribute name="allowedstates" id="xjdg8a"/>
+          <attribute name="isbatch" id="kywkp"/>
+        </schema>
+      </maximo-datasource>
+    </page>
+    <page id="createInspection" controller="CreateInspectionsPageController">
+      <states id="eg_9k">
+        <state name="selected" type="string" value="" id="m8jkx"/>
+        <state name="splitViewIndex" type="number" value="{1}" id="q62_a"/>
+        <state name="asset" type="object" value="{}" id="d6_p4"/>
+        <state name="assetSelection" type="string" value="Select an asset" id="bpbrz"/>
+        <state name="invalidAsset" type="boolean" value="false" id="zrvn4"/>
+        <state name="locations" type="object" value="{}" id="n23pm"/>
+        <state name="locationSelection" type="string" value="Select a location" id="xnkq8"/>
+        <state name="invalidLocation" type="boolean" value="false" id="y3gzq"/>
+        <state name="inspForm" type="object" value="" id="bbwv3"/>
+        <state name="formSelection" type="string" value="Select a template" id="em_a2"/>
+        <state name="showRecommended" type="boolean" value="false" id="jgmjq"/>
+        <state name="mapIsForAsset" type="boolean" value="1" id="bapwg"/>
+        <state name="mapListHeight" value="40%" type="string" id="xgy5y"/>
+        <state name="mapPaddingRight" value="" type="string" id="gx858"/>
+        <state name="mapPaddingLeft" value="" type="string" id="wq2b9"/>
+        <state name="mapPaddingBottom" value="0" type="string" id="qk2q3"/>
+        <state name="mapHeight" value="calc(100vh - 9rem)" type="string" id="jzebn"/>
+        <state name="mapDialogHeight" value="calc(100vh - 6rem)" type="string" id="e9b3q"/>
+        <state name="mapCardHeight" value="auto" type="string" id="ww4k5"/>
+        <state name="mapCardScroll" value="false" type="boolean" id="dk548"/>
+        <state name="mapSelectDisabled" value="true" type="boolean" id="x28vq"/>
+        <state name="showClusterList" value="false" type="boolean" id="pw96a"/>
+        <state name="canCreate" type="boolean" value="false" id="bapwgS"/>
+        <state name="isCreating" type="boolean" value="false" id="bsapwgS"/>
+      </states>
+      <maximo-datasource id="createInspectionDS" object-structure="mxapiinspectionres">
+        <schema id="g9wex">
+          <attribute name="inspectionresultid" unique-id="true" id="yjpxr908"/>
+          <attribute name="siteid" id="yjpxr"/>
+          <attribute name="orgid" id="bmgnk"/>
+          <attribute name="resultnum" id="eq9gk"/>
+          <attribute name="revision" id="edde_"/>
+          <attribute name="inspformnum" id="mn63z"/>
+          <attribute name="referenceobject" id="v64j3"/>
+          <attribute name="referenceobjectid" id="a3e4d"/>
+          <attribute name="status" id="zxq_y"/>
+          <attribute name="createdate" id="aw664"/>
+          <attribute name="duedate" id="w_6_b"/>
+          <attribute name="asset" id="bmwk_24"/>
+          <attribute name="inspectionform" id="bmwk4">
+            <attribute name="name" id="dna43"/>
+            <attribute name="createdate" searchable="true" sortable="true" id="y_zwb"/>
+            <attribute name="inspectionformid" id="jpyqp"/>
+            <attribute name="inspformnum" id="mwxxj"/>
+            <attribute name="audioguided" id="nye6y"/>
+            <attribute name="revision" id="e9kdn"/>
+            <attribute name="status" id="a8yd4"/>
+            <attribute name="hasld" id="q7rjm"/>
+            <attribute name="readconfirmation" id="v5va3"/>
+            <attribute name="enablereview" id="mnnmv"/>
+          </attribute>
+          <attribute name="parent" id="yjx7e"/>
+        </schema>
+      </maximo-datasource>
+      <json-datasource id="createInspectionDSAux" src="{[]}" selection-mode="single" id-attribute="label">
+        <schema id="dpyn7">
+          <attribute name="isAsset" id="rpxpa"/>
+          <attribute name="Assetnum" id="nzpdm"/>
+          <attribute name="isLocation" id="wmv2n"/>
+          <attribute name="Location" id="awgn9"/>
+          <attribute name="" id="yxype"/>
+        </schema>
+      </json-datasource>
+      <maximo-datasource id="locationLookupDS" offline-immediate-download="true" lookup-data="true" object-structure="MXAPIOPERLOC" saved-query="MOBILELOCATION" selection-mode="single" geometry-format="geojson">
+        <schema id="mvr2_">
+          <attribute name="locationsid" unique-id="true" id="vz5rv"/>
+          <attribute name="location" searchable="true" index="true" id="a27m4"/>
+          <attribute name="description" searchable="true" id="a3xbd"/>
+          <attribute name="failurecode" id="zr_k3"/>
+          <attribute name="glaccount" searchable="true" id="k6xn7"/>
+          <attribute name="locpriority" searchable="false" id="b2rgd"/>
+          <attribute name="parent" searchable="false" id="pxj85"/>
+          <attribute name="locationchildren" child-relationship="syschildren" id="k7mpn"/>
+          <attribute name="locsystem.primarysystem--primarysystem" id="pg4_y"/>
+          <attribute name="systemid" id="eyj5w"/>
+          <attribute name="type" searchable="true" id="q8xdp">
+            <lookup-map name="listLocationType" id="en_dp">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="wzkne"/>
+              <lookup-return lookup-field="value" datasource-field="value" id="nnve_"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="status" searchable="true" id="bgzny">
+            <lookup-map name="locationstatus" id="azrgq">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="bdz89"/>
+              <lookup-return lookup-field="value" datasource-field="value" id="nz4pa"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="siteid" searchable="true" id="rx3k_"/>
+          <attribute name="orgid" searchable="true" id="gy5jv"/>
+          <attribute name="autolocate" id="mmxan"/>
+          <attribute name="rel.failurelist{failurelist,failurecode.description,failurecode.failurecode}" id="kvyzp"/>
+          <attribute name="rel.locationmeter{metername,active,rollover,lastreading,readingtype,lastreadingdate,measureunitid,meter.measureunit.description--unitdescription,sequence}" id="zjmwa"/>
+        </schema>
+        <maximo-datasource-override id="locationDS" selection-mode="multiple"/>
+        <maximo-datasource-override id="locationMapDS" controller="MapDatasourceController" has-position="true" page-size="5000"/>
+        <maximo-datasource-override id="locationHierarchyDS" offline-immediate-download="true" lookup-data="true"/>
+      </maximo-datasource>
+      <maximo-datasource id="assetLookupDS" offline-immediate-download="true" lookup-data="true" object-structure="MXAPIASSET" saved-query="MOBILEASSET" selection-mode="single" geometry-format="geojson">
+        <schema id="ynk_5">
+          <attribute name="itemnum" searchable="true" id="rzqm9"/>
+          <attribute name="assetuid" unique-id="true" id="y6a7w"/>
+          <attribute name="assetnum" searchable="true" id="ax6b6"/>
+          <attribute name="description" searchable="true" id="mm_5w"/>
+          <attribute name="assethealth" searchable="true" id="rp_gd"/>
+          <attribute name="assettag" searchable="true" id="nwz6x">
+            <lookup-map name="assettag" id="jda3e">
+              <lookup-return lookup-field="displayValue" datasource-field="assettag" id="bgbp3"/>
+              <lookup-return lookup-field="value" datasource-field="assettag" id="pqpdp"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="assettype" searchable="true" id="y83be">
+            <lookup-map name="assettype" id="pq6k7">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="nwv8w"/>
+              <lookup-return lookup-field="value" datasource-field="value" id="r3e7b"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="binnum" searchable="true" id="yngn7"/>
+          <attribute name="isrunning" searchable="false" id="n_vzb"/>
+          <attribute name="itemnum" searchable="true" id="vkyy2">
+            <lookup-map name="assetitemnum" id="qvbba">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="n3dra"/>
+              <lookup-return lookup-field="value" datasource-field="itemnum" id="kwp6z"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="location" searchable="true" id="j_p8p">
+            <lookup-map name="assetloc" id="a4jze" datasource="locationDS">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="ay8m_"/>
+              <lookup-return lookup-field="value" datasource-field="location" id="xmj28"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="location.description--locationdesc" searchable="true" id="gkezk"/>
+          <attribute name="manufacturer" searchable="true" id="ezv4p">
+            <lookup-map name="assetmanufacturer" id="gexka">
+              <lookup-return lookup-field="displayValue" datasource-field="name" id="jaqxm"/>
+              <lookup-return lookup-field="value" datasource-field="company" id="yjmyr"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="priority" searchable="true" id="a86bp"/>
+          <attribute name="serialnum" searchable="true" id="b2a32">
+            <lookup-map name="assetserialnum" id="xxnw6">
+              <lookup-return lookup-field="displayValue" datasource-field="serialnum" id="r8j58"/>
+              <lookup-return lookup-field="value" datasource-field="serialnum" id="pkwjx"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="siteid" searchable="true" id="qa6j4"/>
+          <attribute name="vendor" searchable="true" id="z349m"/>
+          <attribute name="assetchildren" child-relationship="children" id="k6bb2"/>
+          <attribute name="location.glaccount--locglaccount" searchable="true" id="zvnp3"/>
+          <attribute name="autolocate" id="krpvd"/>
+          <attribute name="parent" searchable="true" id="xmker"/>
+          <attribute name="status" searchable="true" id="ngzmj">
+            <lookup-map name="assetstatus" id="pzerj">
+              <lookup-return lookup-field="displayValue" datasource-field="description" id="jx58d"/>
+              <lookup-return lookup-field="value" datasource-field="value" id="wyd5n"/>
+            </lookup-map>
+          </attribute>
+          <attribute name="failurecode" searchable="true" id="j8wyv"/>
+          <attribute name="location.locpriority--locpriority" id="dmarb"/>
+          <attribute name="location.failurecode--locfailurecode" id="pw595"/>
+          <attribute name="rel.failurelist{failurelist,failurecode.description,failurecode.failurecode}" id="jrvdr"/>
+          <attribute name="rel.assetmeter{metername,active,rollover,lastreading,readingtype,lastreadingdate,measureunitid,meter.measureunit.description--unitdescription,sequence}" id="zp6y9"/>
+          <attribute name="classstructure.hierarchypath" id="raarn"/>
+          <attribute name="asset_parent.description--parentassetdesc" id="k43xe"/>
+          <attribute name="serviceaddress.formattedaddress--formattedaddress" searchable="true" id="m96dn"/>
+          <attribute name="statusdesc.description--assetstatusdesc" id="wyrx2"/>
+          <attribute name="assetmeter" id="e_2vk">
+            <attribute name="_dbcount--assetmetercount" id="evm3w"/>
+          </attribute>
+          <attribute name="rel.assetspec{assetattrid,measureunitid,numvalue,alnvalue,assetattribute.description--assetattributedesc,displaysequence}" id="v2728"/>
+          <attribute name="assetspec" id="qga_d">
+            <attribute name="_dbcount--assetspeccount" id="pm5q8"/>
+          </attribute>
+        </schema>
+        <maximo-datasource-override id="assetMapDS" controller="MapDatasourceController" has-position="true" page-size="5000"/>
+      </maximo-datasource>
+      <maximo-datasource id="inspFormLookupDS" pre-load="true" offline-immediate-download="true" lookup-data="true" object-structure="MXAPIINSPFORM" selection-mode="single" saved-query="MOBILEFORMS" domain-internal-where="status=ACTIVE">
+        <schema id="xx678">
+          <attribute name="inspectionformid" id="dx86k" unique-id="true"/>
+          <attribute name="inspformnum" id="rj37r"/>
+          <attribute name="name" searchable="true" id="bvp_b"/>
+          <attribute name="orgid" id="xg3rn"/>
+          <attribute name="revision" id="q55gesr"/>
+          <attribute name="status" id="ng_qv"/>
+          <attribute name="description_longdescription" id="p_69_"/>
+          <attribute name="readconfirmation" id="wa275"/>
+          <attribute name="enablereview" id="kgynj"/>
+          <attribute name="rel.inspquestionsgrp{description_longdescription,description,groupid,groupseq,inspquestionid,inspquestionnum, hasld,rel.inspquestionchild{description_longdescription,description,groupid,groupseq,inspquestionid,inspquestionnum, hasld,rel.inspfield{sequence,rel.domain{rel.alndomainvalue{*}, rel.synonymdomain{*}},selectedmodel,description,fieldtype,fieldtype_maxvalue,inspfieldid,inspquestionid,inspquestionnum,inspfieldnum,required,visible, metertype,measureunitid, metername, rel.alndomain{ value, description},rel.inspfieldoption{description,inspfieldoptionid,color,icon,inspectorfeedback,requireaction}}},rel.inspfield{sequence,rel.domain{rel.alndomainvalue{*}, rel.synonymdomain{*}},selectedmodel,description,fieldtype,fieldtype_maxvalue,inspfieldid,inspquestionid,inspquestionnum,inspfieldnum,required,visible,metertype, metername,measureunitid, lastreading, rel.alndomain{value, description},rel.inspfieldoption{description,inspfieldoptionid,color,icon,inspectorfeedback,requireaction}}}" id="kgxb5_2"/>
+          <attribute name="rel.inspcascadeoption{inspcascadeoptionid,requireaction,srcfield,srcquestion,tgtfield,tgtquestion,visible,required,srctxtresponse,number1,number2,operator1,operator2,showmessage,inspectorfeedback, reject}" id="xeza3_2"/>
+        </schema>
+      </maximo-datasource>
+      <maximo-datasource id="inspRecommendedFormLookupDS" pre-load="true" offline-immediate-download="true" lookup-data="true" object-structure="MXAPIINSPFORMUSEWITH" selection-mode="single" saved-query="MOBILEFORMS">
+        <schema id="jrqr3">
+          <attribute name="inspformusewithid" id="g2jv5" unique-id="true"/>
+          <attribute name="inspformnum" id="q55ge"/>
+          <attribute name="objectname" searchable="true" id="bz64z"/>
+          <attribute name="objectid" searchable="true" search-type="EXACT" id="ee8px"/>
+          <attribute name="inspectionform" id="xgzdk">
+            <attribute name="name" id="r88b6"/>
+            <attribute name="revision" id="r8s8b6"/>
+          </attribute>
+        </schema>
+      </maximo-datasource>
+      <!-- Step 1: Specify the asset or location -->
+      <header-template title="Create inspection" show-current-page-in-bread-crumb="false" icon-name="carbon:close" icon-action="goBack" id="r65wd">
+        <menu-button slot="menu-button-action" disabled="{!page.state.canCreate}" loading="{page.state.isCreating}" icon="carbon:overflow-menu--vertical" label="{app.state.screen.size === 'sm' ? '' : 'Continue'}" id="ejq75">
+          <menu-item label="Start" icon="carbon:arrow--right" id="b7_7x" on-click="startInspection"/>
+          <menu-item label="Save" icon="carbon:checkmark" id="pk387" on-click="saveAsPeding"/>
+        </menu-button>
+      </header-template>
+      <dialogs id="nzgd5">
+        <lookup id="locationLookup" width="99" datasource="locationLookupDS" tight="true" on-item-click="selectLocation" show-search="true" lookup-attributes="{['location','description']}" show-count="true" lookup-heading="Location" enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}"/>
+        <lookup id="assetLookup" width="99" datasource="assetLookupDS" on-item-click="selectAsset" show-search="true" lookup-attributes="{['assetnum','description']}" show-count="true" lookup-heading="Asset" enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}"/>
+        <dialog id="mapDialog" title="Select from map" size="lg" padding="none" primary-icon="carbon:checkmark" on-primary-action="selectValueFromMap" primary-kind="primary" primary-button-disabled="{page.state.mapSelectDisabled}">
+          <map on-map-initialize="onMapInitialized" show-device-position="true" height="{page.state.mapHeight}" id="g5bqa">
+            <map-layers id="x7m2w">
+              <map-layer name="LOCATION" label="Location" datasource="locationMapDS" hidden="{page.state.mapIsForAsset}" geometry-field-name="autolocate" symbology-handler="createSymbology" legend-handler="retrieveLocationLegends" geometry-field-format="geojson" min-scale="0" max-scale="320000" transparency="0" cluster-tolerance="20" spatial-reference="4326" maximum-features-limit="5000" exclude-fields="_bulkid,_rowstamp,_selected,href" value-field="location" id="x9za2"/>
+              <map-layer name="ASSET" label="Asset" datasource="assetMapDS" hidden="{!page.state.mapIsForAsset}" geometry-field-name="autolocate" symbology-handler="createSymbology" legend-handler="retrieveAssetLegends" geometry-field-format="geojson" min-scale="0" max-scale="320000" transparency="0" cluster-tolerance="20" spatial-reference="4326" maximum-features-limit="5000" exclude-fields="_bulkid,_rowstamp,_selected,href" value-field="assetnum" id="gwq48"/>
+            </map-layers>
+            <map-events id="mapDialogEvents">
+              <map-click id="mapDialogClick" on-action="handleMapClick" tolerance="2"/>
+            </map-events>
+            <map-overlay hidden="{page.state.mapIsForAsset}" position="bottom" left="{page.state.mapPaddingLeft}" right="{page.state.mapPaddingRight}" top="40px" width="100%" height="{page.state.mapListHeight}" bottom="{page.state.mapPaddingBottom}" scrollable="{page.state.mapCardScroll}" type="data-list" id="d4vxa">
+              <border-layout fill-parent="true" padding="false" id="jwa2y">
+                <top id="ax7zg">
+                  <button hidden="{!(page.state.showClusterList)}" icon="carbon:chevron--left" kind="ghost" on-click="clearCluster" on-click-arg="{'locationMapDS'}" padding="false" id="enzv3"/>
+                </top>
+                <middle id="aqbj_">
+                  <data-list datasource="locationMapDS" on-item-click="handleItemClick" search-placeholder-text="Find location" enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}" id="k55xk">
+                    <box slot="item" children-hide-overflow="true" fill-child="true" fill-parent="true" id="dnee5">
+                      <label label="{item.location}" id="x8_kp"/>
+                    </box>
+                  </data-list>
+                </middle>
+              </border-layout>
+            </map-overlay>
+            <map-overlay hidden="{!page.state.mapIsForAsset}" position="bottom" left="{page.state.mapPaddingLeft}" right="{page.state.mapPaddingRight}" top="40px" width="100%" height="{page.state.mapListHeight}" bottom="{page.state.mapPaddingBottom}" scrollable="{page.state.mapCardScroll}" type="data-list" id="aawvr">
+              <border-layout fill-parent="true" padding="false" id="wa85y">
+                <top id="r_qy3">
+                  <button hidden="{!(page.state.showClusterList)}" icon="carbon:chevron--left" kind="ghost" on-click="clearCluster" on-click-arg="{'assetMapDS'}" padding="false" id="gg9py"/>
+                </top>
+                <middle id="v6qdm">
+                  <data-list datasource="assetMapDS" on-item-click="handleItemClick" search-placeholder-text="Find asset" enable-barcode-scanner="true" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}" id="wjee3">
+                    <box slot="item" children-hide-overflow="true" fill-child="true" fill-parent="true" id="xdjrn">
+                      <label label="{item.assetnum}" id="e2b57"/>
+                    </box>
+                  </data-list>
+                </middle>
+              </border-layout>
+            </map-overlay>
+            <map-overlay hidden="false" scrollable="false" max-width="100%" left="55px" bottom="55px" top="20px" right="0px" position="top-right" transparent="true" type="map-toolbar" id="kg7gv">
+              <map-toolbar id="qd4qb">
+                <map-toolbar-layer id="j7xma"/>
+                <map-toolbar-mylocation id="wkwzq"/>
+                <map-toolbar-identify do-not-hide-list="{['map-toolbar']}" id="vpqb5"/>
+                <map-toolbar-replica hidden-button="false" mobile-only="true" id="wad8e"/>
+                <map-toolbar-indoor id="rxbxz"/>
+              </map-toolbar>
+            </map-overlay>
+          </map>
+        </dialog>
+        <dialog id="assetSelect" title="Select asset" passive="true">
+          <box background-color="ui-01" direction="column" id="w6zmm">
+            <smart-input label="Asset" value="{createInspectionDSAux.item.assetnum}" on-blur="handleAsset" enable-lookup-buttongroup="true" select-lookup-attribute="assetnum" invalid="{page.state.hasInvalidAsset}" id="pekg2">
+              <button slot="button-group" kind="secondary" label="Search" icon="carbon:search" lookup="assetLookup" id="zm69j"/>
+              <barcode-button slot="button-group" kind="secondary" label="Scan" icon="maximo:scan" on-scan="handleAsset" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}" id="gjbz4"/>
+              <button slot="button-group" kind="secondary" label="Map" icon="carbon:map" on-click="openMapDialog" on-click-arg="{true}" id="b8b8g"/>
+            </smart-input>
+            <label label="Selected asset is invalid or is not on this device" hidden="{!page.state.invalidAsset}" padding="none" theme="error" id="gezdb"/>
+          </box>
+        </dialog>
+        <dialog id="locationSelect" title="Select location" passive="true">
+          <box background-color="ui-01" direction="column" id="jejdv">
+            <smart-input label="Location" value="{createInspectionDSAux.item.location}" on-blur="handleLocation" enable-lookup-buttongroup="true" select-lookup-attribute="location" invalid="{page.state.hasInvalidLocation}" id="w4g8a">
+              <button slot="button-group" kind="secondary" label="Search" icon="carbon:search" lookup="locationLookup" id="z7e7x"/>
+              <barcode-button slot="button-group" kind="secondary" label="Scan" icon="maximo:scan" on-scan="handleLocation" readers="{[`ean_reader`,`code_128_reader`,`code_39_reader`]}" id="p6k2r"/>
+              <button slot="button-group" kind="secondary" label="Map" icon="carbon:map" on-click="openMapDialog" on-click-arg="{false}" id="gv_4n"/>
+            </smart-input>
+            <label label="Selected location is invalid or is not on this device" hidden="{!page.state.invalidLocation}" padding="none" theme="error" id="pbp62"/>
+          </box>
+        </dialog>
+      </dialogs>
+      <label label="Select asset or location" id="d4dw3"/>
+      <box background-color="ui-01" id="a7_2q" direction="column" padding-end="0.5" padding-start="0.5">
+        <border-layout fill-parent="true" width="100%" padding="false" id="eakyy">
+          <start direction="row" vertical-align="center" shrink="0" id="pve99">
+            <button icon="carbon:close--outline" kind="ghost" on-click="clearValue" on-click-arg="asset" hidden="{!page.state.asset.assetnum}" padding="false" id="pbbjg"/>
+          </start>
+          <middle direction="column" horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="dzr8y">
+            <box direction="column" padding-start="0.5" id="beb72">
+              <label label="Asset" theme="16-bold" padding="none" id="pmd3d"/>
+              <label label="{page.state.assetSelection}" wrap="true" padding="none" id="zjqx5"/>
+            </box>
+          </middle>
+          <end direction="row" horizontal-align="end" vertical-align="center" id="vn94p">
+            <box vertical-align="center" children-hide-overflow="true" direction="row" fill-parent="true" horizontal-align="end" id="kpdqv">
+              <button icon="carbon:chevron--right" kind="ghost" on-click="openDialog" on-click-arg="assetSelect" padding="false" id="ryr62"/>
+            </box>
+          </end>
+        </border-layout>
+        <border-layout fill-parent="true" width="100%" padding="false" id="rqyd3">
+          <start direction="row" vertical-align="center" shrink="0" id="a3_xv">
+            <button icon="carbon:close--outline" kind="ghost" on-click="clearValue" on-click-arg="locations" hidden="{!page.state.locations.location}" padding="false" id="gap2d"/>
+          </start>
+          <middle direction="column" horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="ymxmn">
+            <box direction="column" padding-start="0.5" id="eeykr">
+              <label label="Location" theme="16-bold" padding="none" id="anqmn"/>
+              <label label="{page.state.locationSelection}" wrap="true" padding="none" id="z8zjk"/>
+            </box>
+          </middle>
+          <end direction="row" horizontal-align="end" vertical-align="center" id="v6j6_">
+            <box vertical-align="center" children-hide-overflow="true" direction="row" fill-parent="true" horizontal-align="end" id="g2b4p">
+              <button icon="carbon:chevron--right" kind="ghost" on-click="openDialog" on-click-arg="locationSelect" padding="false" id="w_6m4"/>
+            </box>
+          </end>
+        </border-layout>
+      </box>
+      <!-- Step 2: Specify the Inspection Form Template-->
+      <label label="Inspection form template" id="e39wn"/>
+      <box background-color="ui-01" direction="column" padding-end="0.5" padding-start="0.5" id="x7b4g">
+        <border-layout fill-parent="true" width="100%" padding="false" id="ap8j8">
+          <start direction="row" vertical-align="center" shrink="0" id="jej3g">
+            <button icon="carbon:close--outline" kind="ghost" on-click="clearValue" on-click-arg="formSelection" hidden="{!page.state.inspForm}" padding="false" id="w7pbp"/>
+          </start>
+          <middle direction="column" horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="rpak3">
+            <box direction="column" padding-start="0.5" id="zyx2v">
+              <label label="Template" theme="16-bold" padding="none" id="rqkn7"/>
+              <label label="{page.state.formSelection}" wrap="true" padding="none" id="bbpp2"/>
+            </box>
+          </middle>
+          <end direction="row" horizontal-align="end" vertical-align="center" id="qxazr">
+            <box vertical-align="center" children-hide-overflow="true" direction="row" fill-parent="true" horizontal-align="end" id="aq2yv">
+              <button icon="carbon:chevron--right" kind="ghost" sliding-drawer="slidingFormsLookup" padding="false" id="drern"/>
+            </box>
+          </end>
+        </border-layout>
+      </box>
+      <box background-color="ui-01" direction="column" padding="0.5" hidden="{!page.state.inspForm.description_longdescription}" id="ej56a">
+        <border-layout fill-parent="true" width="100%" padding="false" id="xwpwj">
+          <top horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" border="true" background-color="ui-01" id="rjmnb">
+            <label label="Instructions" theme="20-regular" hidden="{!page.state.inspForm.description_longdescription}" id="bv5bq"/>
+          </top>
+          <middle direction="column" horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="mbmvw">
+            <box direction="column" fill-parent="true" padding-top="0.5" padding-bottom="0.5" id="pnr4e">
+              <rich-text-viewer content="{page.state.inspForm.description_longdescription}" hidden="{!page.state.inspForm.description_longdescription}" id="ddxbe"/>
+            </box>
+          </middle>
+        </border-layout>
+      </box>
+      <dialogs id="jwx6g">
+        <sliding-drawer id="slidingFormsLookup" controller="InspFormLookupController" align="start" header-text="Select a template" content-padding="false">
+          <states id="dv863">
+            <state name="useConfirmDialog" value="false" type="boolean" id="rm66z"/>
+          </states>
+          <box direction="column" id="g4nn_">
+            <label label="Suggested" hidden="{!page.state.showRecommended}" id="j6qbe"/>
+            <data-list datasource="inspRecommendedFormLookupDS" show-search="false" enable-barcode-scanner="false" show-count="true" hidden="{!page.state.showRecommended}" on-item-click="selectFormItemRecommended" id="xkapq">
+              <list-item id="bn7zm">
+                <border-layout fill-parent="true" padding="true" id="w2r8e">
+                  <middle direction="column" horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="v_2v5">
+                    <box direction="column" vertical-align="center" fill-parent="true" id="gxmgd">
+                      <field value="{item.inspectionform.name}" override-required="true" field-class-name="header-small" padding="none" hide-label="true" id="vra_k"/>
+                    </box>
+                  </middle>
+                  <end direction="row" horizontal-align="end" vertical-align="center" id="an8b6">
+                    <box vertical-align="center" children-hide-overflow="true" direction="row" fill-parent="true" horizontal-align="end" id="k78a3">
+                      <button icon="maximo:select--end" kind="secondary" padding="false" on-click="selectFormItemRecommended" on-click-arg="{item}" id="agm3_"/>
+                    </box>
+                  </end>
+                </border-layout>
+              </list-item>
+            </data-list>
+            <data-list datasource="inspFormLookupDS" show-search="true" enable-barcode-scanner="false" show-count="true" on-item-click="selectFormItem" id="ba36r">
+              <filter-button slot="actions" datasource="inspFormLookupDS" hidden="false" id="jzmpa"/>
+              <list-item id="g9zrp">
+                <border-layout fill-parent="true" padding="true" id="mjdmr">
+                  <middle direction="column" horizontal-overflow="hidden" horizontal-align="start" vertical-align="center" id="yd67j">
+                    <box direction="column" vertical-align="center" fill-parent="true" id="bqgkp">
+                      <field value="{item.name}" override-required="true" field-class-name="header-small" padding="none" hide-label="true" id="m9e2_"/>
+                    </box>
+                  </middle>
+                  <end direction="row" horizontal-align="end" vertical-align="center" id="wjqzw">
+                    <box vertical-align="center" children-hide-overflow="true" direction="row" fill-parent="true" horizontal-align="end" id="bde5_">
+                      <button icon="maximo:select--end" kind="secondary" padding="false" on-click="selectFormItem" on-click-arg="{item}" id="pdqej"/>
+                    </box>
+                  </end>
+                </border-layout>
+              </list-item>
+            </data-list>
+          </box>
+        </sliding-drawer>
+      </dialogs>
+    </page>
+    <page id="inspsummary" title="Inspection overview" controller="InspSummaryPageController">
+      <maximo-datasource id="inspectionsummary" object-structure="mxapiinspectionres" selection-mode="single" controller="InspSummaryDataController" item-url="{page.params.itemhref}" geometry-format="geojson">
+        <schema id="j48kq">
+          <attribute name="inspectionresultid" unique-id="true" id="aapyn"/>
+          <attribute name="referenceobject" id="kje3a"/>
+          <attribute name="inspectionform" id="zxxg2">
+            <attribute name="name" id="ebam5"/>
+            <attribute name="description_longdescription" id="nymw4"/>
+          </attribute>
+          <attribute name="rel.assets{description,assetnum,autolocate,rel.assetmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="ydb42"/>
+          <attribute name="rel.locations{location,description,autolocate,rel.locationmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="w7y59"/>
+          <attribute name="rel.workorder{wonum, description, worktype,autolocate, rel.parent{wonum, description, href}}" id="rjnme"/>
+          <attribute name="computedTitle" computed-function="_computeTitle" type="STRING" sub-type="ALN" title="Title" remarks="Title" id="q_bm2"/>
+          <attribute name="computedAsset" computed-function="_computeAssetInfo" type="STRING" sub-type="ALN" title="Asset" remarks="Asset" id="kg8k2"/>
+          <attribute name="computedLocation" computed-function="_computeLocationInfo" type="STRING" sub-type="ALN" title="Location" remarks="Location" id="v2zpe"/>
+        </schema>
+      </maximo-datasource>
+      <header-template id="nwd3z"/>
+      <box direction="column" fill-parent="true" background-color="ui-01" padding-top="0.125" fill-child="true" id="mzy_3">
+        <border-layout padding="true" id="v_we_">
+          <top vertical-align="center" horizontal-align="start" background-color="ui-01" id="wg_n2">
+            <label label="{inspectionsummary.item.computedTitle}" theme="20-regular" wrap="true" id="x5vwk"/>
+          </top>
+          <middle background-color="ui-background" id="qk7a6">
+            <box direction="column" vertical-align="start" horizontal-align="start" fill-parent="true" id="gbrk7">
+              <label label="{inspectionsummary.item.computedAsset}" wrap="true" theme="16-regular" id="zvn7z"/>
+              <label label="{inspectionsummary.item.computedLocation}" wrap="true" theme="16-regular" id="kww4k"/>
+            </box>
+          </middle>
+          <bottom background-color="ui-background" id="aq29a">
+            <box direction="column" fill-child="true" fill-parent="true" padding-top="0.5" padding-bottom="0.5" id="y9mb5">
+              <rich-text-viewer content="{inspectionsummary.item.inspectionform.description_longdescription}" hidden="{!inspectionsummary.item.inspectionform.description_longdescription}" id="emdrm"/>
+            </box>
+          </bottom>
+        </border-layout>
+      </box>
+    </page>
+    <page id="inspcompletionsummary" controller="InspCompletionSummaryPageController">
+      <states id="krajp">
+        <state name="displayMessage" type="string" id="ewxmb"/>
+      </states>
+      <json-datasource id="actionsds" items="items" pre-load="false" src="{[]}" selection-mode="single">
+        <schema id="ad5dw">
+          <attribute name="action" unique-id="true" id="g8m7w"/>
+          <attribute name="description" id="bn7rz"/>
+        </schema>
+      </json-datasource>
+      <maximo-datasource id="inspcompletionsummaryds" object-structure="mxapiinspectionres" selection-mode="single" controller="InspCompletionSummaryDataController" item-url="{app.state.inspectionsList.currentItem}" geometry-format="geojson">
+        <schema id="mye84">
+          <attribute name="inspectionresultid" unique-id="true" id="e3xrj"/>
+          <attribute name="referenceobject" id="vaq2b"/>
+          <attribute name="status" id="qgdep"/>
+          <attribute name="inspectionform" id="gx4ay">
+            <attribute name="name" id="n2k8z"/>
+            <attribute name="description_longdescription" id="xk568"/>
+            <attribute name="inspquestionunit" id="pg6aj">
+              <attribute name="_dbcount--totalquestion" id="xbvbd"/>
+            </attribute>
+          </attribute>
+          <attribute name="inspfieldresult{inspectionimageinference{*},anywhererefid,inspfieldresultid,inspfieldresultselection{txtresponse,inspfieldresultselectionid,anywhererefid},anywhererefid,errorflag,errormessage,inspfieldnum,inspfieldresultnum,inspformnum,inspquestionnum,orgid,resultnum,revision,siteid,txtresponse,numresponse,dateresponse,timeresponse,readconfirmation,rolloverflag,doclinks{*},actionrequired,plussgeojson}" id="arxdd45"/>
+          <attribute name="rel.inspformscript{autoscript, description}" id="a33ve"/>
+          <attribute name="rel.assets{description,assetnum,autolocate,rel.assetmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="zg6bx"/>
+          <attribute name="rel.locations{location,description,autolocate,rel.locationmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="g7y3r"/>
+          <attribute name="rel.workorder{wonum, description, worktype, autolocate,rel.parent{wonum, description, href}}" id="jvpw4"/>
+          <attribute name="allowedactions" id="ebkxg"/>
+          <attribute name="displaymessage" id="ezy6z"/>
+          <attribute name="computedWOTitle" computed-function="_computeWOTitle" type="STRING" sub-type="ALN" title="Work Order" remarks="Work Order" id="w2kaa"/>
+          <attribute name="computedAsset" computed-function="_computeAssetInfo" type="STRING" sub-type="ALN" title="Asset" remarks="Asset" id="qpen7"/>
+          <attribute name="computedLocation" computed-function="_computeLocationInfo" type="STRING" sub-type="ALN" title="Location" remarks="Location" id="k5jwb"/>
+          <attribute name="computedQuestions" computed-function="_computeQuestionCount" type="STRING" sub-type="ALN" title="Inspection Questions" remarks="Amount of questions in inspection form" id="wypxr"/>
+        </schema>
+      </maximo-datasource>
+      <header-template title="Inspection summary" show-current-page-in-bread-crumb="false" id="wrekn">
+        <button slot="buttons" label="Done" icon="Carbon:checkmark--outline" on-click="doneHandler" id="xkv_q"/>
+      </header-template>
+      <box direction="column" vertical-align="center" horizontal-align="start" background-color="ui-01" padding-top="0.125" fill-child="true" id="e4w87">
+        <border-layout fill-parent="true" padding="true" id="knwx4">
+          <top border="true" background-color="ui-01" id="pqn7a">
+            <adaptive-row id="xbnby">
+              <adaptive-column small-width="100" medium-width="100" large-width="70" small-horizontal-align="start" medium-horizontal-align="start" large-horizontal-align="start" id="qnwe5">
+                <box direction="row" id="dpqpd">
+                  <wrapped-text label="{inspcompletionsummaryds.item.inspectionform.name}" sub-label="{inspcompletionsummaryds.item.computedWOTitle}" size="large" id="nrbnb"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="100" medium-width="100" large-width="30" small-horizontal-align="start" medium-horizontal-align="start" large-horizontal-align="end" id="vjeq5">
+                <box direction="row" horizontal-align="end" padding-end="0.5" id="bb6ez">
+                  <tag-group type="warm-gray" tags="{[{label: `${inspcompletionsummaryds.item.status_description}`}]}" disabled="true" wrap="false" id="xka93"/>
+                </box>
+              </adaptive-column>
+            </adaptive-row>
+          </top>
+          <middle id="x_em_">
+            <adaptive-row id="emxm7">
+              <adaptive-column small-width="100" medium-width="100" large-width="70" small-horizontal-align="start" medium-horizontal-align="start" large-horizontal-align="start" id="ng4bj">
+                <box padding-start="2" direction="column" id="e_bm6">
+                  <label wrap="true" label="{inspcompletionsummaryds.item.computedAsset}" theme="16-regular" id="vnywr"/>
+                  <label wrap="true" label="{inspcompletionsummaryds.item.computedLocation}" theme="16-regular" id="gpn6g"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="100" medium-width="100" large-width="30" small-horizontal-align="start" medium-horizontal-align="start" large-horizontal-align="end" id="xng63">
+                <box direction="row" horizontal-align="end" padding-end="2" id="qv2ve">
+                  <label wrap="false" label="{inspcompletionsummaryds.item.computedQuestions}" padding="default" id="g99be"/>
+                </box>
+              </adaptive-column>
+            </adaptive-row>
+          </middle>
+          <bottom id="gj9pm">
+            <box padding-start="2" direction="column" hidden="{!page.state.displayMessage}" id="vyw4v">
+              <wrapped-text label="{page.state.displayMessage}" size="large" id="qbv86"/>
+            </box>
+          </bottom>
+        </border-layout>
+      </box>
+      <data-list datasource="actionsds" show-search="false" hidden="{actionsds.state.itemCount === 0}" id="j_5_g">
+        <box slot="item" direction="row" id="k3k6v">
+          <button icon="Carbon:chevron--right" kind="secondary" label="{item.description}" icon-placement="start" hidden="{!item.description}" on-click="takeAction" on-click-arg="{{'inspection': inspcompletionsummaryds.item, 'action': item.action}}" id="ygy83"/>
+        </box>
+      </data-list>
+    </page>
+    <page id="voice_inspection" controller="VoicePageController">
+      <header-template title="Voice inspection" show-current-page-in-bread-crumb="false" id="voice_page_title"/>
+      <content-docker hidden="{app.state.networkConnected}" docked-position="top" docked-to-header="true" id="dnp_q">
+        <border-layout fill-parent="true" padding="false" id="a44y8">
+          <start background-color="ui-04" id="zgqnx" vertical-align="center">
+            <box padding-start="1" padding-end="0.75" padding-top="0.75" padding-bottom="0.75" id="nnpnn">
+              <icon icon="maximo:cloud--disabled" fill="#ffffff" id="yaeke"/>
+            </box>
+          </start>
+          <middle background-color="ui-04" id="w696g">
+            <box padding-top="0.75" padding-bottom="0.75" padding-end="1" id="re9yw">
+              <label label="Disconnected from the server. Check your internet connection." wrap="true" color="white0" id="voice_disconnected_title"/>
+            </box>
+          </middle>
+        </border-layout>
+      </content-docker>
+      <border-layout fill-parent="true" height="calc(100% - 80px)" id="abzxg">
+        <top id="mjp3z">
+          <voice callback="{page.state.callback}" configs="{page.state.configs}" muted="{page.state.muted}" id="annvz"/>
+        </top>
+        <middle horizontal-align="center" vertical-align="center" id="g5dj2">
+          <box hidden="{page.state.isError || !app.state.networkConnected}" horizontal-align="center" vertical-align="center" padding-top="1" padding-bottom="1" id="y8kgd">
+            <label label="Voice assistant in progress" theme="36-light" wrap="true" id="voice_progress_title"/>
+          </box>
+          <box hidden="{!page.state.isError &amp;&amp; app.state.networkConnected}" horizontal-align="center" vertical-align="center" padding-top="1" padding-bottom="1" id="wpm54">
+            <label label="Voice assistant unavailable" theme="36-light" wrap="true" id="voice_error_title"/>
+          </box>
+          <box hidden="{!page.state.isError &amp;&amp; app.state.networkConnected}" horizontal-align="center" vertical-align="center" padding-top="0.25" padding-bottom="1" id="r8d7v">
+            <label label="If the problem continues, go back and complete the inspection form manually." wrap="true" id="voice_error_description"/>
+          </box>
+          <box horizontal-align="center" vertical-align="center" padding-top="0.25" padding-bottom="1" id="qzyb4">
+            <label label="{page.params.inspectionTitle}" wrap="true" id="vapmb"/>
+          </box>
+          <box horizontal-align="center" vertical-align="center" padding-top="3" padding-bottom="1" id="mpx98">
+            <button disabled="{page.state.isError || !app.state.networkConnected}" kind="ghost" icon="{(page.state.muted || page.state.isError || !app.state.networkConnected) ? 'carbon:microphone--off' : 'carbon:microphone' }" on-click="toggle" id="ym8jg"/>
+          </box>
+        </middle>
+      </border-layout>
+    </page>
+    <page id="batch_details" controller="BatchPageController">
+      <maximo-datasource id="batchds" controller="BatchDataController" pre-load="true" offline-enabled="false" object-structure="mxapiinspectionres" order-by="duedate" selection-mode="none" mobile-qbe-filter="{{'historyflag': '!=true'}}" offline-immediate-download="true" item-url="{page.params.itemhref}" geometry-format="geojson">
+        <schema id="rr2rn">
+          <attribute name="siteid" id="p8yp7"/>
+          <attribute name="orgid" id="yrr2w"/>
+          <attribute name="resultnum" searchable="true" id="z5v2r"/>
+          <attribute name="location" searchable="true" id="re7pd"/>
+          <attribute name="referenceobject" id="dv7p8"/>
+          <attribute name="referenceobjectid" searchable="true" id="pdnpg"/>
+          <attribute name="rel.inspfieldresult{inspectionimageinference{*},inspfieldresultid,errorflag,errormessage,inspfieldnum,inspfieldresultnum,inspformnum,inspquestionnum,orgid,resultnum,revision,siteid,txtresponse,numresponse,dateresponse,timeresponse,readconfirmation,rolloverflag,doclinks{*},inspfieldresultselection{txtresponse,inspfieldresultselectionid,anywhererefid},anywhererefid,actionrequired,plussgeojson,isvisible}" id="wperq"/>
+          <attribute name="inspectionresultid" unique-id="true" id="wwaxb"/>
+          <attribute name="status" searchable="true" id="b5de5"/>
+          <attribute name="status_maxvalue" index="true" id="gqb3d"/>
+          <attribute name="status_description" id="nw3mw"/>
+          <attribute name="createdate" id="zyj86"/>
+          <attribute name="duedate" sortable="true" id="dr4ev"/>
+          <attribute name="allowedactions" id="dmpra"/>
+          <attribute name="rel.batchlist{href,asset}" id="aazg3"/>
+          <attribute name="inspectionform" id="dej7e">
+            <attribute name="name" searchable="true" sortable="true" id="nyxr8"/>
+            <attribute name="inspectionformid" id="mqgex"/>
+            <attribute name="hasrequiredquestion" id="k2692"/>
+            <attribute name="inspquestionunit" id="wg94k">
+              <attribute name="_dbcount--totalquestion" id="vqmwd"/>
+            </attribute>
+          </attribute>
+          <attribute name="sequence" id="gk7x4"/>
+          <!-- Contains duplicate relation to allow search capabilities -->
+          <attribute name="assets" id="xg8qy">
+            <attribute name="assetnum--assetnumalias" sortable="true" searchable="true" id="jp976"/>
+            <attribute name="description--assetdesc" sortable="true" searchable="true" id="dw2nx"/>
+          </attribute>
+          <attribute name="rel.assets{assetnum, description, autolocate, rel.assetmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="aw3w4"/>
+          <!-- Contains duplicate relation to allow search capabilities -->
+          <attribute name="locations" id="j_52b">
+            <attribute name="location--locationalias" sortable="true" searchable="true" id="zdjjd"/>
+            <attribute name="description--locdesc" sortable="true" searchable="true" id="ja_7v"/>
+          </attribute>
+          <attribute name="rel.locations{location, description, autolocate, rel.locationmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="rxn67"/>
+          <attribute name="rel.workorder.mxapiwodetail{wonum, description, taskid, worktype, schedstart, istask, estdur, autolocate, rel.parent.mxapiwodetail{wonum, description, href}, href}" id="n83rx"/>
+          <attribute name="allowedstates" id="xp57n"/>
+          <attribute name="inspresultstatus{href,_bulkid}" id="r5_39"/>
+          <attribute name="parent" id="vz9pb"/>
+          <attribute name="historyflag" index="true" id="qj5v2"/>
+          <attribute name="computedWOTitle" computed-function="_computeWOTitle" type="STRING" sub-type="ALN" title="Work Order" remarks="Work Order type and number" id="d5dp9"/>
+        </schema>
+        <maximo-datasource id="batchlistds" controller="BatchDataController" cache-expiry-ms="1" relationship="batchlist" pre-load="true" order-by="inspectionresultid" geometry-format="geojson">
+          <schema id="jk2xa">
+            <attribute name="siteid" id="kbmdz"/>
+            <attribute name="orgid" id="x2g86"/>
+            <attribute name="resultnum" id="dzqxp"/>
+            <attribute name="revision" id="b4wrk"/>
+            <attribute name="inspformnum" id="wdmxd"/>
+            <attribute name="referenceobject" id="p77qj"/>
+            <attribute name="referenceobjectid" id="pb9kk"/>
+            <attribute name="inspectionresultid" unique-id="true" id="dw2v6"/>
+            <attribute name="inspfieldresult{inspectionimageinference{*},anywhererefid,inspfieldresultid,inspfieldresultselection{txtresponse,inspfieldresultselectionid,anywhererefid},anywhererefid,errorflag,errormessage,inspfieldnum,inspfieldresultnum,inspformnum,inspquestionnum,orgid,resultnum,revision,siteid,txtresponse,numresponse,dateresponse,timeresponse,readconfirmation,rolloverflag,doclinks{*},actionrequired,plussgeojson}" id="gkx6a"/>
+            <attribute name="status" id="m5vqb"/>
+            <attribute name="createdate" id="dzy25"/>
+            <attribute name="duedate" id="bjv8k"/>
+            <attribute name="allowedstates" id="db9d9"/>
+            <attribute name="computeHideCompleted" id="computeHideCompletedf1" computed-function="_computeHideCompleted"/>
+            <attribute name="computeHidePreview" id="computeHidePreviewf1" computed-function="_computeHidePreview"/>
+            <attribute name="inspectionform" id="ej9em">
+              <attribute name="name" id="vy4z4"/>
+              <attribute name="createdate" searchable="true" sortable="true" id="q_pj4"/>
+              <attribute name="inspectionformid" id="v6b28"/>
+              <attribute name="inspformnum" id="ymym3"/>
+              <attribute name="audioguided" id="b7xqm"/>
+              <attribute name="revision" id="aj3e6"/>
+              <attribute name="orgid" id="agkr9"/>
+              <attribute name="status" id="yqp58"/>
+              <attribute name="hasld" id="w63yv"/>
+              <attribute name="readconfirmation" id="ag9xk"/>
+            </attribute>
+            <attribute name="rel.inspcascadeoption{inspcascadeoptionid,requireaction,srcfield,srcquestion,tgtfield,tgtquestion,visible,required,srctxtresponse,number1,number2,operator1,operator2,showmessage,inspectorfeedback,reject}" id="qjyqe"/>
+            <attribute name="rel.assets{assetnum,description,autolocate,rel.assetmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="pjejx"/>
+            <attribute name="rel.locations{location,description,autolocate,rel.locationmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="kj923"/>
+            <attribute name="rel.workorder{wonum, description, taskid, worktype, schedstart, istask, autolocate,rel.parent{wonum, description, href}}" id="kqbqp"/>
+            <attribute name="rel.histresults{href,resultnum,createdate,inspectionresultid,rel.inspfieldresult{inspfieldresultid,href,inspfieldnum,txtresponse,numresponse,dateresponse,timeresponse,rel.inspfieldresultselection{inspfieldresultselectionid,txtresponse,anywhererefid},isvisible}}" id="xqypb">
+              <maximo-child-filter related-path="inspectionresult.histresults" limit="5" order-by="-resultnum" id="gm_6x"/>
+            </attribute>
+            <attribute name="computedInspectionFormName" computed-function="_computeInspectionFormName" sub-type="ALN" title="Form Name" remarks="Inspection Form Name" type="STRING" id="ymjgy"/>
+          </schema>
+        </maximo-datasource>
+      </maximo-datasource>
+      <header-template title="{batchds.item.computedWOTitle}" hide-breadcrumb="true" show-current-page-in-bread-crumb="false" icon-name="carbon:chevron--left" icon-action="goBack" id="batch_page_title">
+        <button slot="buttons" label="Start batch inspections" icon="carbon:play" loading="{page.state.loadingstatus===true}" on-click="openBatch" id="jkdy_"/>
+      </header-template>
+      <data-list datasource="batchlistds" no-select-behavior="true" border="true" tight="false" show-search="false" show-count="true" id="n8m3j">
+        <list-item id="k3gx2">
+          <border-layout fill-parent="true" id="r4jeg">
+            <middle shrink="1" horizontal-overflow="hidden" id="vxxn9">
+              <box children-hide-overflow="true" fill-parent="true" id="z9rxw">
+                <label label="{item.inspectionform.name}" theme="16-bold" padding="top" id="xz5__"/>
+              </box>
+              <box id="gz3y3">
+                <box vertical-align="center" padding-start="0.5" hidden="{!item.assets}" id="ra_yb">
+                  <icon icon="carbon:asset" size="20" id="z73g7"/>
+                  <label label="{item.assets ? item.assets[0].assetnum : ''}" id="x4ajn"/>
+                </box>
+                <box vertical-align="center" padding-start="1" hidden="{!item.locations}" id="beygr">
+                  <icon icon="carbon:location" size="20" id="bn9_5"/>
+                  <label label="{item.locations ? item.locations[0].location : ''}" id="epw_9"/>
+                </box>
+              </box>
+            </middle>
+            <end vertical-align="center" horizontal-align="end" id="dznqj">
+              <border-layout id="gajzn">
+                <start vertical-align="center" id="r98vm">
+                  <box padding-end="1" id="nmegq">
+                    <icon icon="carbon:checkmark--outline" fill="green" hidden="{item.computeHideCompleted}" id="gzzrz"/>
+                  </box>
+                </start>
+                <end id="ynvma">
+                  <button on-click="openInspectionInPreviewMode" on-click-arg="{item}" loading="{page.state.loadingstatus===true}" icon="carbon:chevron--right" hidden="{item.computeHidePreview}" id="r9967"/>
+                </end>
+              </border-layout>
+            </end>
+          </border-layout>
+        </list-item>
+      </data-list>
+    </page>
+    <page id="execution_panel" controller="ExecutionFormPageController">
+      <states id="n37ex">
+        <state name="pageTitle" type="string" value="" id="v95gp"/>
+        <state name="disableCompletion" type="boolean" value="true" id="mdbxg"/>
+        <state name="isSaving" type="boolean" value="false" id="mdbxg21"/>
+        <state name="countLabel" type="string" id="nbkd6"/>
+        <state name="computedTitle" type="string" id="bndk4"/>
+        <state name="computedAsset" type="string" id="k42__"/>
+        <state name="computedLocation" type="string" id="k2z_k"/>
+        <state name="computedLongDescription" type="string" id="wx8qd"/>
+        <state name="metersList" type="object" id="p4_pa"/>
+        <state name="inspectionResultLimit" value="5" type="number" id="d5wm5"/>
+        <state name="historicFieldDescription" type="string" id="j74zk"/>
+        <state name="syncRequested" type="boolean" value="false" id="dndv8"/>
+        <state name="defectCivilAccess" type="number" value="0" id="d2866"/>
+        <state name="editTans" type="boolean" value="false" id="dnssdv8"/>
+        <state name="keepSearch" type="boolean" id="bdz9d"/>
+        <state name="activeImageRef" value="" type="string" id="za6e9"/>
+        <state name="selectedHistoryItem" value="{{}}" type="object" id="gxkd6"/>
+        <state name="sliderValue" value="1" type="number" id="g4_9w"/>
+        <state name="sliderMin" value="1" type="number" id="b94v6"/>
+        <state name="sliderMax" value="2" type="number" id="e_yq8"/>
+        <state name="hdoclinks" type="object" id="ak99p"/>
+        <state name="imageMapEnabled" type="boolean" value="false" id="e75zy"/>
+        <state name="hidedetails" type="boolean" value="false" id="pk7ww"/>
+        <state name="analysisError" type="boolean" id="nvn4n"/>
+        <state name="hideMessageBar" type="boolean" id="v_2va"/>
+        <state name="inferenceResultIndex" value="0" type="number" id="g3m8y"/>
+        <state name="categories" value="Algae,Crack,Spalling,Rust,Crack with precipitation,Spalling with corrosion" type="string" id="x_qj6"/>
+        <state name="useConfirmDialog" value="false" type="boolean" id="mwjqd"/>
+        <state name="mapLabelsSelected" type="boolean" value="false" id="x9g__"/>
+      </states>
+      <maximo-datasource id="executeInspections" offline-immediate-download="false" cache-expiry-ms="1" selection-mode="single" controller="ExecutionFormDataController" object-structure="mxapiinspectionres" geometry-format="geojson">
+        <schema id="pkdq5">
+          <attribute name="siteid" id="j3q7y"/>
+          <attribute name="orgid" id="bz768"/>
+          <attribute name="resultnum" id="be925"/>
+          <attribute name="revision" id="gykzn"/>
+          <attribute name="inspformnum" id="n8_7w"/>
+          <attribute name="referenceobject" id="qb6b8"/>
+          <attribute name="referenceobjectid" id="z5p3d"/>
+          <attribute name="inspectionresultid" unique-id="true" id="kznm7"/>
+          <attribute name="inspfieldresult{inspectionimageinference{*},anywhererefid,inspfieldresultid,inspfieldresultselection{txtresponse,inspfieldresultselectionid,anywhererefid},anywhererefid,errorflag,errormessage,inspfieldnum,inspfieldresultnum,inspformnum,inspquestionnum,orgid,resultnum,revision,siteid,txtresponse,numresponse,dateresponse,timeresponse,readconfirmation,rolloverflag,doclinks{*},actionrequired,plussgeojson}" id="arx45"/>
+          <attribute name="status" id="aj82r"/>
+          <attribute name="createdate" id="qdqe9"/>
+          <attribute name="duedate" id="ayd_q"/>
+          <attribute name="inspectionform" id="y3nka">
+            <attribute name="name" id="kj344"/>
+            <attribute name="createdate" searchable="true" sortable="true" id="wrmj4"/>
+            <attribute name="inspectionformid" id="rqgae"/>
+            <attribute name="inspformnum" id="rnaqx"/>
+            <attribute name="audioguided" id="ez4rn"/>
+            <attribute name="revision" id="ej88d"/>
+            <attribute name="orgid" id="jw3_j"/>
+            <attribute name="status" id="gqj2n"/>
+            <attribute name="hasld" id="badgx"/>
+            <attribute name="readconfirmation" id="k9kzz"/>
+            <attribute name="enablereview" id="vmkre"/>
+          </attribute>
+          <attribute name="rel.inspcascadeoption{inspcascadeoptionid,requireaction,srcfield,srcquestion,tgtfield,tgtquestion,visible,required,srctxtresponse,number1,number2,operator1,operator2,showmessage,inspectorfeedback,reject}" id="xeza3"/>
+          <attribute name="rel.inspquestionsgrp{description_longdescription,description,groupid,groupseq,inspquestionid,inspquestionnum, hasld,rel.inspquestionchild{description_longdescription,description,groupid,groupseq,sequence,inspquestionid,inspquestionnum, hasld,rel.inspfield{sequence,rel.domain{rel.alndomainvalue{*}, rel.synonymdomain{*}},description,fieldtype,inspfieldid,inspquestionid,inspquestionnum,inspfieldnum,required, selectedmodel, visible, metertype, metername,measureunitid, rel.alndomain{ value, description},rel.inspfieldoption{description,inspfieldoptionid,color,icon,inspectorfeedback,requireaction}}},rel.inspfield{sequence,rel.domain{rel.alndomainvalue{*}, rel.synonymdomain{*}},description,fieldtype,inspfieldid,href,inspquestionid,inspquestionnum,inspfieldnum,required,visible, selectedmodel, metertype, metername,measureunitid, lastreading, rel.alndomain{value, description},rel.inspfieldoption{description,inspfieldoptionid,color,icon,inspectorfeedback,requireaction}}}" searchable="true" id="kgxb5"/>
+          <attribute name="rel.assets{assetnum,description,autolocate,rel.assetmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="axzn4"/>
+          <attribute name="rel.locations{location,description,autolocate,rel.locationmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="k79an"/>
+          <attribute name="rel.workorder{wonum, description, taskid, worktype, schedstart, istask, autolocate,rel.parent{wonum, description, href}}" id="jrkez"/>
+          <attribute name="rel.histresults{resultnum,createdate,inspectionresultid,rel.inspfieldresult{inspfieldresultid,inspfieldnum,txtresponse,numresponse,dateresponse,timeresponse,rel.inspfieldresultselection{inspfieldresultselectionid,txtresponse,anywhererefid},isvisible}}" id="wxvwn">
+            <maximo-child-filter related-path="inspectionresult.histresults" limit="5" order-by="-resultnum" id="rby2e"/>
+          </attribute>
+          <attribute name="inspresultstatus{href,_bulkid}" id="eb2rq"/>
+          <attribute name="parent" id="xv_2r"/>
+          <attribute name="allowedstates" id="xjg8a"/>
+          <attribute name="computedPageTitle" computed-function="_computePageTitle" type="STRING" sub-type="ALN" title="Page title" remarks="Page Title" id="pv3z7"/>
+          <attribute name="_computeSlidingDrawerTitle" computed-function="_computeSlidingDrawerTitle" type="STRING" sub-type="ALN" title="Page title" remarks="Sliding Drawer Title" id="ak_rz"/>
+          <attribute name="computedAsset" computed-function="_computeAsset" type="STRING" sub-type="ALN" title="Asset" remarks="Asset" id="j7pmn"/>
+          <attribute name="computedLocation" computed-function="_computeLocation" type="STRING" sub-type="ALN" title="Location" remarks="Location" id="qp_2p"/>
+          <attribute name="computedButtonLabel" computed-function="_computeButtonLabel" type="STRING" sub-type="ALN" title="Button label" remarks="Button label" id="d55py"/>
+        </schema>
+      </maximo-datasource>
+      <maximo-datasource id="inspFormInformation" selection-mode="single" object-structure="mxapiinspectionres" controller="InspectionInformationDataController" item-url="{app.state.inspectionsList.currentItem}" geometry-format="geojson">
+        <schema id="mqe3k">
+          <attribute name="inspectionresultid" unique-id="true" id="a2ne_"/>
+          <attribute name="inspectionform" id="m6a2r">
+            <attribute name="inspectionformid" id="rr6da"/>
+            <attribute name="inspformnum" id="km5qb"/>
+            <attribute name="name" id="mmg68"/>
+            <attribute name="description_longdescription" id="v9prw"/>
+          </attribute>
+          <attribute name="rel.inspquestion{description,description_longdescription,groupid,groupseq,inspquestionid,inspquestionnum}" id="g7jxe"/>
+          <attribute name="rel.assets{assetnum,description,autolocate,rel.assetmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="qrb88"/>
+          <attribute name="rel.locations{location,description,autolocate,rel.locationmeter{metername,measureunitid,active,rollover,lastreading,readingtype}}" id="pvvry"/>
+          <attribute name="computedFormName" computed-function="_computeFormName" type="STRING" sub-type="ALN" title="Form name" remarks="Form name" id="eg47v"/>
+          <attribute name="computedLongDescription" computed-function="_computeLongDescription" type="STRING" sub-type="ALN" title="Instructions" remarks="Instructions" id="zzpa2"/>
+        </schema>
+      </maximo-datasource>
+      <json-datasource id="previousInspectionResultsList" src="{[]}" items="previousInspectionResultsList" selection-mode="none" id-attribute="inspectionresultid">
+        <schema id="x4b7w">
+          <attribute name="inspectionresultid" id="den98"/>
+          <attribute name="createdate" id="j_kbw"/>
+          <attribute name="inspfieldresult" id="bxj62">
+            <attribute name="response" id="k5aw7"/>
+            <attribute name="format" id="g96mk"/>
+          </attribute>
+          <attribute name="fielddescription" id="kwj4_"/>
+        </schema>
+      </json-datasource>
+      <json-datasource id="inspfieldresult" src="{[]}" items="items">
+        <schema id="mq11e3k">
+          <attribute name="inspfieldresultid" unique-id="true" id="xvs_ss2r"/>
+          <attribute name="inspfieldresultselection{txtresponse,inspfieldresultselectionid,anywhererefid}" id="xvs_sss2r"/>
+          <attribute name="anywhererefid" id="zeq8a"/>
+          <attribute name="errorflag" id="zwkyj"/>
+          <attribute name="errormessage" id="qb64a"/>
+          <attribute name="inspfieldnum" id="g77pa"/>
+          <attribute name="inspfieldresultnum" id="vdndz"/>
+          <attribute name="inspformnum" id="madk2"/>
+          <attribute name="inspquestionnum" id="x9m6j"/>
+          <attribute name="orgid" id="pawva"/>
+          <attribute name="inspectionimageinference{*}" id="vpwd9"/>
+          <attribute name="resultnum" id="yvwjd"/>
+          <attribute name="revision" id="qxq37"/>
+          <attribute name="siteid" id="rgy7m"/>
+          <attribute name="txtresponse" id="k2m5p"/>
+          <attribute name="numresponse" id="yng5v"/>
+          <attribute name="dateresponse" id="w4qwn"/>
+          <attribute name="timeresponse" id="y3ymn"/>
+          <attribute name="readconfirmation" id="p5e2k"/>
+          <attribute name="rolloverflag" id="r6p_9"/>
+          <attribute name="doclinks{*}" id="pd79_"/>
+          <attribute name="actionrequired" id="q95k3"/>
+          <attribute name="plussgeojson" id="mj_p8"/>
+        </schema>
+      </json-datasource>
+      <header-template title="{page.state.pageTitle}" id="q85ay" title-column-width="{app.state.screen.size === 'md' ? 70 : app.state.screen.size === 'lg' ? 40 : app.state.screen.size === 'xlg' ? 21 : 65}" hide-breadcrumb="true">
+        <button slot="buttons" label="Open next inspection" icon="carbon:launch" hidden="{1 >= app.state.inspectionsList.size || app.state.inspectionsList.isLast}" on-click="goToNext" on-click-arg="{executeInspections.item}" kind="secondary" id="vgnp_"/>
+        <button slot="buttons" label="Start" icon="carbon:play" hidden="{executeInspections.item.status_maxvalue !== 'PENDING'}" loading="{!app.state.isFormExecutionLoaded}" on-click="startForm" on-click-arg="{executeInspections.item}" id="pg__a"/>
+        <button slot="buttons" label="{executeInspections.item.computedButtonLabel}" icon="carbon:checkmark--outline" hidden="{(executeInspections.item.status_maxvalue !== 'INPROG') &amp;&amp; (executeInspections.item.status_maxvalue !== 'REVIEW') &amp;&amp; !page.state.editTrans}" loading="{(!app.state.isFormExecutionLoaded  &amp;&amp; !page.state.disableCompletion) || page.state.completeinprogress}" on-click="completeForm" on-click-arg="{executeInspections.item}" disabled="{page.state.disableCompletion || page.state.isSaving}" id="bmpa3"/>
+        <button slot="buttons" label="Summary" icon="carbon:chevron--right" hidden="{page.state.editTrans || page.params.isBatchPreview || (executeInspections.item.status_maxvalue !== 'COMPLETED' &amp;&amp; executeInspections.item.status_maxvalue !== 'CAN')}" loading="{(!app.state.isFormExecutionLoaded) || page.state.summaryinprogress}" on-click="showCompletionSummary" on-click-arg="{executeInspections.item}" id="me9m_"/>
+      </header-template>
+      <content-docker docked-position="top" docked-to-header="true" id="w3x3x">
+        <box direction="column" fill-parent="true" background-color="ui-01" padding-top="0.125" fill-child="true" id="zpm3m">
+          <border-layout id="rkdw4" fill-parent="true" padding="false">
+            <start direction="row" vertical-align="center" id="rzg_k" shrink="0">
+              <box horizontal-align="center" vertical-align="center" id="pvr28">
+                <button dialog="drawer1" icon="carbon:list" kind="ghost" padding="false" id="b8v2r"/>
+              </box>
+            </start>
+            <middle direction="row" vertical-align="center" shrink="1" horizontal-overflow="hidden" id="rkagq">
+              <border-layout id="b64y3">
+                <middle direction="row" vertical-align="center" shrink="1" id="rdkm4">
+                  <label wrap="false" label="{executeInspections.item.inspectionform.name}" theme="20-regular" id="yp6vw"/>
+                </middle>
+                <end shrink="0" vertical-align="center" horizontal-align="start" id="zq98_">
+                  <button icon="carbon:information" kind="ghost" on-click="openFormInstructionsDrawer" on-click-arg="{{'item': executeInspections.item}}" padding="false" id="wd9w3"/>
+                </end>
+              </border-layout>
+            </middle>
+            <end shrink="0" grow="1" vertical-align="center" horizontal-align="start" id="rrnbn">
+              <box id="wzvex" horizontal-align="start" vertical-align="center" padding-end="0.25">
+                <label label="{page.state.countLabel}" theme="16-regular" id="ryqzr"/>
+                <button hidden="{app.state.hideMicIcon}" disabled="{app.state.disableMicIcon || !app.state.networkConnected}" icon="carbon:microphone" on-click="doVoiceInspection" on-click-arg="{{inspectionTitle:executeInspections.item.inspectionform.name, result_num:executeInspections.item.resultnum, form_num: executeInspections.item.inspformnum, orgid:executeInspections.item.orgid, revision: executeInspections.item.revision }}" kind="secondary" action-icon="{(app.state.disableMicIcon || !app.state.networkConnected) ? false : true}" action-icon-name="carbon:play--filled" id="pp__2"/>
+                <menu-button icon="carbon:overflow-menu--vertical" kind="ghost" hidden="{!page.state.defectCivilAccess || executeInspections.item.status_maxvalue !== 'INPROG'}" id="z8y69">
+                  <menu-item label="Create defect" icon="carbon:chevron--right" hidden="{!page.state.defectCivilAccess || executeInspections.item.status_maxvalue !== 'INPROG'}" on-click="loadApp" on-click-arg="{{appName:'cimobiledefect',locations:executeInspections.item.locations,asset:executeInspections.item.assets,page:'newdefect'}}" id="z35nk"/>
+                </menu-button>
+              </box>
+            </end>
+          </border-layout>
+        </box>
+      </content-docker>
+      <dialogs id="wnynq">
+        <dialog controller="DialogController" id="drawer1" size="lg" on-close-action="clearQuestionSearch" title="Jump to question">
+          <box direction="column" fill-child="true" id="zdwb4">
+            <tag-group-toggles align="start" tags="{page.state.tagGroupTogglesData1}" on-toggle-change="changeToggle" on-toggle-change-arg="{page.state.tagGroupTogglesData1}" id="yymjk"/>
+            <search place-holder-text="Search" on-change="setSearchParamState" on-search="handleQuestionSearch" current-search="{page.state.currentSearch}" id="jzwbx"/>
+            <data-list datasource="executeInspections" show-search="false" expand-all="true" on-item-click="goToInspection" id="q6p4n">
+              <!-- renderer for children of the "inspquestionchild" field (third level)-->
+              <list-item child-attribute="inspquestionchild" on-item-click="goToInspectionItem" id="de6x8">
+                <border-layout padding="false" id="vnevg">
+                  <start id="aqna5" direction="row" vertical-align="center" shrink="0">
+                    <box vertical-align="center" fill-parent="true" min-width="4.125rem" id="d643_">
+                      <icon icon="Carbon:checkmark--outline" fill="green" hidden="{!item.completed || item.visible===false}" id="mn6da"/>
+                      <label label="{item.formattedGroupSeq}. " padding="none" id="a99al2ae" theme="20-regular" hidden="{item.completed}"/>
+                      <icon icon="Carbon:view-off" hidden="{item.visible!==false}" size="20" id="pk_ay"/>
+                    </box>
+                    <icon icon="maximo:dot" fill="blue" hidden="{!item.required}" size="20" id="jv_pp"/>
+                  </start>
+                  <middle id="ge9k2" direction="row" vertical-align="center" horizontal-overflow="hidden">
+                    <wrapped-text label="{item.description}" max-length="60" size="medium" id="x6e5e"/>
+                  </middle>
+                </border-layout>
+              </list-item>
+              <!-- renderer for children of the "inspquestionsgrp" field -->
+              <list-item child-attribute="inspquestionsgrp" on-item-click="goToInspectionItem" id="q_edz">
+                <border-layout padding="false" id="bajxk">
+                  <start direction="row" vertical-align="center" shrink="0" id="k3_jw">
+                    <box vertical-align="center" min-width="2.25rem" fill-parent="true" id="m2p2x">
+                      <icon icon="Carbon:checkmark--outline" fill="green" hidden="{!item.completed || item.visible===false}" id="b94dj"/>
+                      <label label="{item.groupseq}." padding="none" hidden="{item.completed}" theme="20-regular" id="w4qdp"/>
+                      <icon icon="Carbon:view-off" hidden="{item.visible!==false}" size="20" id="zmr_g"/>
+                    </box>
+                    <icon icon="maximo:dot" fill="blue" hidden="{!item.required}" size="20" id="mxxdg"/>
+                  </start>
+                  <middle id="bra7n" vertical-align="center" horizontal-overflow="hidden">
+                    <wrapped-text label="{item.description}" max-length="60" size="medium" id="m2pqk"/>
+                  </middle>
+                </border-layout>
+              </list-item>
+              <!-- default renderer-->
+              <list-item id="pwznv">
+                <box direction="row" id="k9m3m">
+                  <wrapped-text label="{item._computeSlidingDrawerTitle}" max-length="50" hidden="{!item.inspectionform.name}" size="large" id="kpy7n"/>
+                </box>
+              </list-item>
+            </data-list>
+          </box>
+        </dialog>
+        <dialog id="drawer2" size="lg" title="Instructions">
+          <border-layout fill-parent="true" padding="true" id="kj2__">
+            <top vertical-align="center" horizontal-align="start" border="true" id="yrp74">
+              <label label="{page.state.computedTitle}" theme="20-regular" wrap="true" id="mz62q"/>
+            </top>
+            <middle background-color="ui-background" id="jkkvz">
+              <box direction="column" vertical-align="start" horizontal-align="start" fill-parent="true" id="a6jjr">
+                <label label="{page.state.computedAsset}" wrap="true" theme="16-regular" id="wxvqm"/>
+                <label label="{page.state.computedLocation}" wrap="true" theme="16-regular" id="wkkq5"/>
+              </box>
+            </middle>
+            <bottom background-color="ui-background" id="wd6np">
+              <box direction="column" fill-parent="true" padding-top="0.5" padding-bottom="0.5" id="ygdvm">
+                <rich-text-viewer content="{page.state.computedLongDescription}" hidden="{!page.state.computedLongDescription}" id="wep4n"/>
+              </box>
+            </bottom>
+          </border-layout>
+        </dialog>
+        <sliding-drawer id="previousResultsDrawer" align="start" header-text="Previous results" content-padding="false">
+          <box direction="column" id="zbp3q">
+            <box direction="column" vertical-align="center" horizontal-align="start" background-color="ui-01" padding-top="-0.375" id="a6_q5">
+              <box padding-start="0.75" padding-top="0.25" padding-bottom="0.25" hidden="{!page.state.historicFieldDescription}" padding-end="0.25" id="en994">
+                <label label="{page.state.historicFieldDescription}" wrap="true" id="dzx65"/>
+              </box>
+            </box>
+            <data-list datasource="previousInspectionResultsList" show-count="true" show-search="false" empty-row-style="false" empty-set-string="{app.device.isMaximoMobile ? 'Sync data to retrieve any existing results.' : 'No results found'}" id="mknpm">
+              <list-item id="re43e">
+                <border-layout fill-parent="true" padding="false" id="yejaa">
+                  <start id="e547k">
+                    <box direction="column" id="w9wyk">
+                      <field padding="top" wrap="true" id="mgdk2">
+                        <sub-field value="{item.inspfieldresult.response}" type="{item.inspfieldresult.format}" id="bgmk2"/>
+                      </field>
+                    </box>
+                    <box direction="column" id="z22wj">
+                      <field padding="bottom" wrap="true" id="dxrj3">
+                        <sub-field value="{item.createdate}" type="date_full_month" id="azq9y"/>
+                      </field>
+                    </box>
+                  </start>
+                </border-layout>
+              </list-item>
+            </data-list>
+          </box>
+        </sliding-drawer>
+        <dialog id="imageInferenceEdit" size="lg" controller="ImageInferenceEditController" on-close-action="onClose" title="Edit analyzed photo">
+          <image-map item="{app.state.LoadedObject}" object-name="inspectionimageinference" layout="mobile" show-table="true" editable="true" categories="{page.state.categories}" datasource="inspfieldresult" result-index="{page.state.inferenceResultIndex}" confidence="0.5" src="{page.state.activeImageRef}" id="kp4jw"/>
+          <button slot="header-buttons" label="Done" on-click="saveEdit" loading="{page.state.saveInProgress}" id="we9ry"/>
+        </dialog>
+      </dialogs>
+      <form-execution loading="{app.state.loadingForm}" update-dialog="updateDialog" datasource="executeInspections" id="vrw4n" on-change="computeFieldChanges" show-info="openInformation" open-previous-results-drawer="openPreviousResultsDrawer" meters="{page.state.metersList}" on-load="checkFormLoaded" edit-trans="{page.state.editTrans}"/>
+    </page>
+  </pages>
+  <messages id="g2ge_">
+    <message id="batch_title" text="Batch"/>
+    <message id="batch_inspections" text="Batch inspection {0} of {1}"/>
+    <message id="inspections_title" text="Inspections"/>
+    <message id="question_of_counter" text="{0} of {1}"/>
+    <message id="mobile_question_of_counter" text="{0}/{1}"/>
+    <message id="required_question_of_counter" text="{0} required of {1}"/>
+    <message id="question_counter" text="{0} questions"/>
+    <message id="question_counter_single" text="{0} question"/>
+    <message id="start_inspection" text="Start inspection"/>
+    <message id="resume_inspection" text="Resume inspection"/>
+    <message id="view_inspection" text="View inspection"/>
+    <message id="est_duration" text="Estimated duration: {0}"/>
+    <message id="action_executed" text="The action was executed."/>
+    <message id="action_queued" text="Action was queued and will be executed during the synchronization."/>
+    <message id="return_to_app" text="Returning to {0}"/>
+    <message id="records_counter" text="{0} records"/>
+    <message id="records_counter_single" text="{0} record"/>
+    <message id="record_not_on_device" text="This record is not on your device. Try again or wait until you are online."/>
+    <message id="to_do" text="To Do"/>
+    <message id="done" text="Done"/>
+    <message id="required" text="Required"/>
+    <message id="archived" text="Archived"/>
+    <message id="no_location_selected" text="No location selected"/>
+    <message id="no_asset_selected" text="No asset selected"/>
+    <message id="select_asset" text="Select an asset"/>
+    <message id="select_location" text="Select a location"/>
+    <message id="select_template" text="Select a template"/>
+    <message id="cluster" text="Cluster"/>
+    <message id="inprog" text="In Progress"/>
+    <message id="pending" text="Pending"/>
+    <message id="completed" text="Completed"/>
+    <message id="complete" text="Complete"/>
+  </messages>
+</maximo-application>

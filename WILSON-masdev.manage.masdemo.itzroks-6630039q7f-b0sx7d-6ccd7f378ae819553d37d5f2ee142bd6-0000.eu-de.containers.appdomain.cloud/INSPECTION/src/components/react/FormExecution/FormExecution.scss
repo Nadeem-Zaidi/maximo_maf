@@ -1,0 +1,21 @@
+/*
+ * Licensed Materials - Property of IBM
+ *
+ * 5737-M66
+ *
+ * (C) Copyright IBM Corp. 2020, 2022 All Rights Reserved
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with
+ * IBM Corp.
+ */
+
+@import '../../common/conduct-inspections-app.scss';
+
+@media (max-width: #{$breakpoint-sm-max}) {
+  .mx--form-execution-wrapper
+    .mx--BorderLayout-Box.mx--BorderLayout-Box-column {
+    margin-inline-start: 0 !important;
+    margin-inline-end: 0 !important;
+  }
+}
