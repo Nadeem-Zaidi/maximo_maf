@@ -1,0 +1,96 @@
+ View Specifications and Classifications functionality on 'Work order details' page
+
+These test cases will verify view functionality on 'Work order details' page for Technician web app, online and offline mode on mobile containers.
+
+These test cases will cover functionalities of following user stories:
+
+- GRAPHITE-55300: View Specifications in a Work Order
+
+**Design URL:**
+
+- <https://www.figma.com/file/J6YHCXeCT5oH2c1n3BKPM5/Maximo-Mobile?node-id=5433%3A230598&t=gIVFTR1GRDGcYqp5-3>
+
+**Note:**
+
+- In case of web app, all transactions are saved in database and refreshed on the UI in real time.
+- In case of online mode on mobile containers, transactions are sent to the database for saving instantly but UI is not refreshed from database until 'Check for Updates' button is clicked.
+- In case of offline mode on mobile containers, transactions are queued for syncing to the database and synced to database once device is online. UI is not refreshed from database until 'Check for Updates' button is clicked.
+- All server side error messages will be displayed in error page on devices post syncing with server and tapping on 'Check for Updates' button in both online and offline modes.
+
+## Scenario 1 - Verify that technician can see the "Classification" on the WO details page
+
+**Pre-condition:**
+1. Login with Admin credentials in Maximo classic/Manage.
+2. Go to work order tracking application.
+3. Create a new work order.
+4. Add classification and classification description in specifications tab.
+5. Add assignments for labor and approve the WO.
+
+**Steps:**
+
+1. Launch the Maximo Mobile with technician.
+2. Click on "My Schedule" tile and open the list of work orders.
+3. Search the work order and click chevron to open WO details page.
+4. Verify the Classification is displayed on the WO details page.
+
+**Results:**
+
+The technician should be able to see the classification on the WO details page.
+
+## Scenario 2 - Verify that technician can see the "Specifications" tile/list item on the WO details page
+
+**Pre-condition:**
+
+1. Login with Admin credentials in Maximo classic/Manage.
+2. Go to work order tracking application.
+3. Create a new work order.
+4. Add specifications in specifications tab for example- Date value, Numeric value, Alphanumeric value.
+5. Add assignments for labor and approve the WO.
+
+**Steps:**
+
+1. Launch the Maximo Mobile with technician.
+2. Click on "My Schedule" tile and open the list of work orders.
+3. Search the work order and click chevron to open WO details page.
+4. Verify the "Specifications" tile/list item is displayed on the WO details page.
+
+**Results:**
+
+- The technician should be able to see the "Specifications" tile on the WO details page.
+- Added data should be correctly displayed after clicking chevron icon on specifications tile.
+
+## Scenario 3 - Verify that technician navigates to the next page immediately on clicking specifications tab
+
+**Pre-condition:**
+
+1. Login with Admin credentials in Maximo classic/Manage.
+2. Go to work order tracking application.
+3. Create a new work order.
+4. Add specifications in specifications tab for example- Date value, Numeric value, Alphanumeric value.
+5. Add assignments for labor and approve the WO.
+
+**Steps:**
+
+1. Launch the Maximo Mobile with technician.
+2. Click on "My Schedule" tile and open the list of work orders.
+3. Search the work order and click chevron to open WO details page.
+4. Verify the "Specifications" tile/list item is displayed on the WO details page.
+5. Click on the specifications and it navigates to the next page. Verify data is loaded without any performace issue.
+
+**Results:**
+
+Added data should be correctly displayed after clicking chevron icon on specifications tile without any performance lag.
+
+## Scenario 4 - Verify the UI of the cards/pages/views for fonts, font sizes, font color, text completeness, alignment, positioning etc. is correct and as per design
+
+**Pre-condition:**
+
+Pre-conditions as specified for above mentioned test scenarios.
+
+**Steps:**
+
+Perform steps as specified for above mentioned test scenarios.
+
+**Result:**
+
+The cards/pages for fonts, font sizes, font color, text completeness, alignment, positioning etc. are correct and as per design.

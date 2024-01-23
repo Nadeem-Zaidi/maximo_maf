@@ -1,0 +1,189 @@
+# Technician and supervisor can navigate from technician and approvals application to assets and inspection application- Cross application scenarios.
+
+These test cases will verify the cross application functionalities and features in the technician and approvals web and mobile app. These test cases will cover the functionalities of following story:
+
+- GRAPHITE-65356: Cross Application testing implementation
+
+Verify that a technician can navigate to inspections and assets application, performs actions and return back to its original place
+
+Pre-conditions:
+
+1. "IBM Maximo Mobile App" or "IBM Maximo Mobile for EAM App" is already installed and configured in the device.
+2. Navigate to Manage inspections form.
+3. Click on + Create form.
+4. Enter form name and select form type.
+5. Click on + Add question and select single or multiple response fields from Asset data, date entry, media, numeric entry, text entry,selectable responses.
+6. Add combination of questions from all of the response fields available in inspections form.
+7. Enter multiple questions and it's relevent fields and click done.
+8. Save the inspections form.
+9. Change the inspection form status from draft to active.
+10. Navigate to classic application and search for work order tracking.
+11. Create a new work order and click on search asset lookup. 
+12. Select 'Go to assets' and and under common actions, select 'Assosiate users and custodians' option. 
+13. Under Users and Custodians section, add a new row with person details and check the custodian and users option.
+14. Navigate to workorder and add description, work type and GL account.
+15. Add inspections form created in the above steps under Job details section.
+16. Under multiple assets,location and CL section add inspection form with asset/location details.Add multiple fields for this as well.
+17. Navigate to planned plans tab and add multiple planned tasks. 
+18. Assign inspections and asset/location to multiple tasks. Make sure asset/location added in tasks is different from the asset/location added under workorder section.
+19. Assign supervisor to the workorder.
+20.  Add labor in assignments tab and approve the work order.
+
+Steps:
+
+1. From a device, open the "IBM Maximo Mobile App" or "Maximo Mobile for EAM App" and log in as a technician. (e.g. Wilson)
+2. From the navigator, select "Assigned work".
+3. From the dropdown menu, select the option "Assigned work".
+4. Search the work order and click on chevron icon to navigate to WO details page.
+
+Result:
+- Verify that the "Work Order Details" page is displayed
+
+Steps:
+5. Scroll down to asset and location section and click on chevron icon next to asset and location.
+6. Verify technician navigates to details page of assets application. 
+7. Click on edit icon in assets application.
+8. Perform multiple operations, edit description/long description and save the asset.
+9. Verify edited data is reflecting correctly.
+10. Click on back button.
+11. Repeat similar steps from approvals applications as well.
+
+Result for Technician application:
+- Technician should navigate to Assets application. For web, it should open in the same browser tab.
+- Edited data should be reflected properly.
+- In case on web, on clicking back button technician should navigate back to technician application.
+- In case of mobile, on clicking back button technician should navigate to the technician application. It should route back to the same place from where it navigated- WO Details page
+
+Result for Approvals application:
+
+- On tapping "Approvals" tile on navigator, Approvals application should be launched. 
+- Technician should navigate to Assets application. For web, it should open in the same browser tab.
+- Edited data should be reflected properly.
+- In case on web, on clicking back button user should navigate back to approvals application.
+- In case of mobile, on clicking back button user should navigate to the approvals application. It should route back to the same place from where it navigated- WO Details page.
+
+12. Click on the task touchpoint on WO details page from technician application.
+13. Verify multiple planned tasks are added with asset and location which contains inspection forms assigned as well.
+14. Click on the chevron icon next to asset and location.
+15. Verify technician navigates to the details page of asset manager application. 
+16. Perform multiple operations, edit description/long descrption and save the asset.
+17. Verify edited data is reflecting correctly.
+18. Click on back button.
+19. Repeat same steps from approvals applications as well.
+
+Result for Technician application:
+
+- Technician should navigate to Assets application for mobile. For web, it shoulder open in the same browser tab.
+- Edited data should be reflected properly.
+- In case on web, on clicking back button technician should navigate back to technician application. It should route back to the same place from where it navigated- Tasks page.
+- In case of mobile, on clicking back button technician should navigate to the technician application. It should route back to the same place from where it navigated- Tasks page.
+
+Result for Approvals application:
+
+- Supervisor should navigate to Assets application for mobile. For web, it shoulder open in the same browser tab.
+- Edited data should be reflected properly.
+- In case on web, on clicking back button supervisor should navigate back to Approvals application. It should route back to the same place from where it navigated- Tasks page.
+- In case of mobile, on clicking back button supervisor should navigate to the Approvals application. It should route back to the same place from where it navigated- Tasks page.
+
+Note- Perform this by assigning asset and location to multiple tasks and verify the navigation.
+
+20. On WO details page for technician application, click on the inspections touch point which is under details section.
+21. Verify technician navigates to the inspections application which displays list of questions added while creating an inspections form in the pre-condition steps. 
+22.  Click on start button.
+23. Add required details as per the questions and click on done button.
+24. Add attachments, meters etc and then perform navigation.
+25. Mark inspections form as complete.
+26. Repeat same steps from approvals applications as well.
+
+Result for Technician application:
+
+- Technician should navigate to inspections application. For web, it shoulder open in the same browser tab.
+- After completing the inspections form, technician should navigate back to the WO details page of technician application.
+
+Result for Approvals application:
+
+- Supervisor should navigate to inspections application. For web, it shoulder open in the same browser tab.
+- After completing the inspections form, supervisor should navigate back to the WO details page of approvals application.
+
+27. On WO details page, click on isnpections touchpoint for mutiple asset, location and CL.
+28. Perform similar actions mentioned above and verify technician navigates back to technician application after performing actions on inspections application.
+29. Click on 'Mark Complete' for mutiple asset, location and CL and click on inspections tocuhpoint. 
+30. Repeat same steps from approvals applications as well.
+
+Result for Technician application:
+
+- Technician should navigate to inspections application. For web, it shoulder open in the same browser tab.
+- After completing the inspections form, technician should navigate back to the WO details page of technician application.
+- Technician should navigate to inspections application even though multiple asset is marked complete.
+
+Result for Approvals application:
+
+- Supervisor should navigate to inspections application. For web, it shoulder open in the same browser tab.
+- After completing the inspections form, supervisor should navigate back to the WO details page of approvals application.
+- Supervisor should navigate to inspections application even though multiple asset is marked complete.
+
+31. Click on task touchpoint from WO details page.
+32. Verify technician can view multiple tasks with inspections assigned to them. 
+33. Click on inspections touchpoint and perform similar actions mentioned in above steps. 
+34. Repeat same steps from approvals applications as well.
+
+Result for Technician application:
+
+- Technician should navigate to inspections application. For web, it shoulder open in the same browser tab.
+- After completing the inspections form, technician should route back to the same place from where it navigated- Tasks page.
+
+Result for Approvals application:
+
+- Supervsior should navigate to inspections application. For web, it shoulder open in the same browser tab.
+- After completing the inspections form, supervisor should route back to the same place from where it navigated- Tasks page.
+
+Note- Perform this with assigning multiple tasks with inspection forms and different task status. 
+
+35. Click on inspections touchpoint again.
+36. Click on 9 dot navigator and click on technician application.(Case for mobile)
+37. Repeat same steps from WO details page for inspections touchpoint.
+38. Repeat same steps from approvals applications as well.
+
+Result for Technician application:
+
+- Technician should navigate to its last state before moving to inspections application. For this case, it should navigate back to task page.
+- Technician should navigate to its last state before moving to inspections application. For this case, it should navigate back to WO details page as technician clicked inspection icon from WO details page.
+
+Result for Approvals application:
+
+- Supervisor should navigate to its last state before moving to inspections application. For this case, it should navigate back to task page.
+- Supervisor should navigate to its last state before moving to inspections application. For this case, it should navigate back to WO details page as supervisor clicked inspection icon from WO details page.
+
+39. Click on chevron icon on the tasks page next to asset and location.
+40. Click on 9 dot navigator and click on technician application.(Case for mobile)
+41. Repeat same steps from WO details page for chevron icon present in asset and location section.
+42. Repeat same steps from approvals applications as well.
+
+Result for Technician application:
+
+- Technician should navigate to its last state before moving to inspections application. For this case, it should navigate back to task page as technician clicked chevron icon for asset and location from tasks page.
+- Technician should navigate to its last state before moving to inspections application. For this case, it should navigate back to WO details page as technician clicked chevron icon for asset and location from WO details page.
+
+Result for Approvals application:
+
+- Supervsior should navigate to its last state before moving to inspections application. For this case, it should navigate back to task page as supervsior clicked chevron icon for asset and location from tasks page.
+- Supervisor should navigate to its last state before moving to inspections application. For this case, it should navigate back to WO details page as supervisor clicked chevron icon for asset and location from WO details page.
+
+43. Navigate to WO list page and start WO. 
+44. Click on the "Approved" tag.
+45. Change the work order status to "In Progress" and confirm.
+46. Perform all the above steps with different WO status.
+47. Repeat same steps from approvals applications as well.
+
+Result for Technician application:
+
+- Technician should navigate to inspections application and after completion of inspection form or incase of incompleted form, navigate back to technician application on clicking back button and should reflect same WO status.
+- Technician should navigate to assets application and after editing the details of asset or incase of non-edited one, navigate back to technician application on clicking back button and should reflect same WO status.
+
+Result for Approvals application:
+
+- Supervisor should navigate to inspections application and after completion of inspection form or incase of incompleted form, navigate back to approvals application on clicking back button and should reflect same WO status.
+- Supervisor should navigate to assets application and after editing the details of asset or incase of non-edited one, navigate back to approvals application on clicking back button and should reflect same WO status.
+
+
+Alternative scenario: Repeat the steps above in offline mode, make sure that the technician can conduct and complete a work order while the device is disconnected. Also, make sure that the data is properly synced with the server once the device is back online.

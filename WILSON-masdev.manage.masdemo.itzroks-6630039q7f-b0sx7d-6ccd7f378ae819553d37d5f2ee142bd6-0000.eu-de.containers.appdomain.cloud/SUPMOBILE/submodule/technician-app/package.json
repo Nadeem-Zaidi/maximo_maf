@@ -1,0 +1,40 @@
+{
+  "name": "techmobile",
+  "version": "8.11.0",
+  "description": "Maximo Technician",
+  "main": "",
+  "license": "SEE LICENSE IN ./LICENSE.md",
+  "repository": "https://github.ibm.com/maximo-app-framework/$npm_package_name/",
+  "private": true,
+  "config": {
+    "graphiteAppLocation": "applications/graphite/packages/technician-app",
+    "gsaName": "TECHNICIAN",
+    "gsaLocation": "Builds/GraphiteApps/TECHNICIAN"
+  },
+  "scripts": {
+    "help:build": "echo Build Application",
+    "build": "cd applications/graphite/packages/technician-app && yarn build",
+    "ci:check": "cd applications/graphite/packages/technician-app && yarn ci:check",
+    "build:production": "cd applications/graphite/packages/technician-app && cross-env NODE_OPTIONS=\"--max_old_space_size=8192\" yarn build:production",
+    "build:zip": "cd applications/graphite/packages/technician-app && npx --no-install maxdev-cli upload-app -u dummy -p dummy -a $npm_package_name --dry-run",
+    "upgrade:maximo": "cd applications/graphite/packages/technician-app && yarn upgrade --scope @maximo --latest --tilde",
+    "clean": "npx shx rm -rf build",
+    "postclean": "cd applications/graphite/packages/technician-app && yarn clean",
+    "realclean": "shx rm -rf applications/graphite/packages/technician-app/node_modules && shx rm -rf node_modules",
+    "postinstall": "cd applications/graphite/packages/technician-app && yarn install",
+    "sync": "node ./scripts/sync"
+  },
+  "devDependencies": {
+    "adm-zip": "latest",
+    "archiver": "^4.0.2",
+    "config": "latest",
+    "cross-env": "^7.0.2",
+    "dir-compare": "latest",
+    "fs": "latest",
+    "fs-extra": "latest",
+    "path": "latest",
+    "shx": "^0.3.2",
+    "ssh2": "latest",
+    "ssh2-sftp-client": "^5.2.1"
+  }
+}

@@ -1,0 +1,1403 @@
+<maximo-application product-name="Maximo" controller="AppController" theme="touch" product-name-adaptive="Maximo" title="Assets" id="assetmobile" version="8.11.0.0" default-log-level="error" user-menu-enabled="true" nav-initial-open-state="false" mas-enabled="false">
+  <states id="np6yy">
+    <state name="refreshOnSubsequentLogin" value="false" type="boolean" id="aqnga"/>
+  </states>
+  <menu slot="navigation-items" id="d_rqa">
+    <menu-item label="Assets" icon="maximo:assets" page="assetlist" id="xwndn"/>
+    <menu-item action-type="add" label="Create Asset" icon="maximo:add--record" sigoption="MXAPIASSET.CREATENEWASSET" page="createasset" id="xv8pg"/>
+  </menu>
+  <maximo-datasource id="assetListDS" offline-immediate-download="false" pre-load="false" object-structure="MXAPIASSET" saved-query="MOBILEMYASSET" selection-mode="single" controller="AssetListDataController" geometry-format="geojson">
+    <schema id="n2wry">
+      <attribute name="assetid" searchable="true" unique-id="true" id="e_v_v"/>
+      <attribute name="description_longdescription" id="dk3pj"/>
+      <attribute name="itemnum" searchable="true" id="g62gb">
+        <lookup-map name="assetitemnum" id="w_n6b">
+          <lookup-return lookup-field="displayValue" datasource-field="description,itemnum" id="vaer4"/>
+          <lookup-return lookup-field="value" datasource-field="itemnum" id="j3ja5"/>
+        </lookup-map>
+      </attribute>
+      <attribute name="assetuid" unique-id="true" id="pkdvw"/>
+      <attribute name="assetnum" searchable="true" id="jpad2"/>
+      <attribute name="autolocate" id="e55jr"/>
+      <attribute name="description" searchable="true" id="ydnak"/>
+      <attribute name="assettype" searchable="true" id="w5z4j"/>
+      <attribute name="isrunning" id="avm45"/>
+      <attribute name="location.description--locationdesc" searchable="true" id="j_9_g"/>
+      <attribute name="manufacturer" searchable="true" id="ey38y"/>
+      <attribute name="priority" searchable="true" id="y3m67"/>
+      <attribute name="serialnum" searchable="true" id="k6ar8">
+        <lookup-map name="assetserialnum" id="m_wpk">
+          <lookup-return lookup-field="displayValue" datasource-field="serialnum" id="k2472"/>
+          <lookup-return lookup-field="value" datasource-field="serialnum" id="e54p6"/>
+        </lookup-map>
+      </attribute>
+      <attribute name="siteid" searchable="true" id="wyy34"/>
+      <attribute name="vendor" searchable="true" id="zg2y5">
+        <lookup-map name="assetmanufacturer" id="q_pgn">
+          <lookup-return lookup-field="displayValue" datasource-field="name,company" id="we4e2"/>
+          <lookup-return lookup-field="value" datasource-field="company" id="qwr8q"/>
+        </lookup-map>
+      </attribute>
+      <attribute name="_imagelibref" id="qzb45"/>
+      <attribute name="parent" searchable="true" id="z_azm"/>
+      <attribute name="location.failurecode--locfailurecode" id="xgyen"/>
+      <attribute name="status" searchable="true" id="wwx5v"/>
+      <attribute name="statusdesc.description--assetstatusdesc" id="y5kq6"/>
+      <attribute name="location" searchable="true" id="p9b5b">
+        <lookup-map name="assetloc" id="axwja" datasource="locationFilterDS">
+          <lookup-return lookup-field="displayValue" datasource-field="description,location" id="z9z_b"/>
+          <lookup-return lookup-field="value" datasource-field="location" id="qpj86"/>
+        </lookup-map>
+      </attribute>
+      <attribute name="saddresscode" id="wv55l"/>
+      <attribute name="failurecode" id="b74_3">
+        <lookup-map name="assetfailure" id="k68m9">
+          <lookup-return lookup-field="displayValue" datasource-field="description,failurecode" id="gqv67"/>
+          <lookup-return lookup-field="value" datasource-field="failurecode" id="ew47a"/>
+        </lookup-map>
+      </attribute>
+      <attribute name="rel.failurelist{failurelist,failurecode.description,failurecode.failurecode}" id="r6xpj"/>
+      <attribute name="rel.assetmeter{metername,active,rollover,lastreading,readingtype,lastreadingdate,measureunitid,meter.measureunit.description--unitdescription,sequence}" id="pbqgg"/>
+      <attribute name="serviceaddress.formattedaddress--formattedaddress" searchable="true" id="be6j7"/>
+      <attribute name="serviceaddress.latitudey" id="basj7"/>
+      <attribute name="serviceaddress.longitudex" id="becf7"/>
+      <attribute name="serviceaddress.addresscode" id="beca8"/>
+      <attribute name="serviceaddress.siteid" id="n91k"/>
+      <attribute name="serviceaddress.description" id="n28k"/>
+      <attribute name="serviceaddress.streetaddress" id="n3ak"/>
+      <attribute name="serviceaddress.addressline2" id="n4ak"/>
+      <attribute name="serviceaddress.addressline3" id="nj55k"/>
+      <attribute name="serviceaddress.city" id="n64k"/>
+      <attribute name="serviceaddress.regiondistrict" id="n73k"/>
+      <attribute name="serviceaddress.country" id="nj83"/>
+      <attribute name="serviceaddress.stateprovince" id="n9a2"/>
+      <attribute name="serviceaddress.postalcode" id="n10a1"/>
+      <attribute name="computedAssetDescription" computed-function="computedAssetDescription" title="Asset header" remarks="Identifies the assets." id="e_ra2"/>
+      <attribute name="classstructure.hierarchypath" id="e97n6"/>
+      <attribute name="asset_parent.description--parentassetdesc" id="mrk73"/>
+      <attribute name="computedAssetStatus" computed-function="computedAssetStatus" id="pvkd9"/>
+      <attribute name="assetmeter" id="j78xx">
+        <attribute name="_dbcount--assetmetercount" id="qda4x"/>
+      </attribute>
+      <attribute name="computedDisableMeter" computed-function="computedDisableMeter" id="a8zy3"/>
+      <attribute name="rel.assetspec{assetattrid,measureunitid,numvalue,alnvalue,assetattribute.description--assetattributedesc,displaysequence}" id="ke4j4"/>
+      <attribute name="assetspec" id="w45pn">
+        <attribute name="_dbcount--assetspeccount" id="mmwg8"/>
+      </attribute>
+    </schema>
+    <maximo-datasource-override id="activeAssetListDS" saved-query="MOBILEMYASSET" offline-immediate-download="true"/>
+    <maximo-datasource-override id="newAssetListDS" saved-query="CREATEDLOCALLY" offline-immediate-download="true"/>
+  </maximo-datasource>
+  <maximo-datasource id="newServiceAddressDS" id-attribute="serviceaddressid" where="addresscode=&quot;0&quot;" object-structure="MXAPISRVAD">
+    <schema id="qwdzb">
+      <attribute name="serviceaddressid" unique-id="true" id="eqd4y"/>
+      <attribute name="formattedaddress" id="x5wbz"/>
+      <attribute name="city" id="nv348"/>
+      <attribute name="orgid" id="rejxe"/>
+      <attribute name="stateprovince" id="rxqe4"/>
+      <attribute name="stateprovince_description" id="k_78k"/>
+      <attribute name="addresscode" id="z9zb8"/>
+      <attribute name="latitudey" id="x2v2z"/>
+      <attribute name="longitudex" id="bex6_"/>
+    </schema>
+  </maximo-datasource>
+  <maximo-datasource id="parentListDS" offline-immediate-download="true" pre-load="false" lookup-data="true" object-structure="MXAPIASSET" saved-query="MOBILEASSET" selection-mode="single" controller="AssetListDataController" geometry-format="geojson">
+    <schema id="ekvd_">
+      <attribute name="assetid" searchable="true" unique-id="true" id="yad97"/>
+      <attribute name="assetuid" unique-id="true" id="bbnq6"/>
+      <attribute name="assetnum" searchable="true" id="r3n6d"/>
+      <attribute name="siteid" searchable="true" id="qyenn"/>
+      <attribute name="description" searchable="true" id="x7mmm"/>
+      <attribute name="location.description--locationdesc" searchable="true" id="r4kb9"/>
+      <attribute name="location" searchable="true" id="bgrg6">
+        <lookup-map name="assetloc" datasource="locationFilterDS" id="redn9">
+          <lookup-return lookup-field="displayValue" datasource-field="description,location" id="j7dye"/>
+          <lookup-return lookup-field="value" datasource-field="location" id="r43d9"/>
+        </lookup-map>
+      </attribute>
+    </schema>
+  </maximo-datasource>
+  <maximo-datasource id="dsFailureList" offline-immediate-download="true" saved-query="FAILUREMOB" page-size="100" object-structure="mxapifailurelist" lookup-data="true" selection-mode="single" controller="AssetCreateDataController">
+    <schema id="wkeye">
+      <attribute name="failurelist" searchable="true" unique-id="true" id="en5e5"/>
+      <attribute name="failurecode" id="wa5x6"/>
+      <attribute name="failurelistid" unique-id="true" id="abybp"/>
+      <attribute name="failurecode.description" searchable="true" type="STRING" sub-type="ALN" id="jgp6e"/>
+      <attribute name="failurecode.failurecode" searchable="true" id="gkvk_"/>
+      <attribute name="computeFailureCode" computed-function="computedFailureCode" id="xzp3q"/>
+      <attribute name="orgid" id="kqb6w"/>
+      <attribute name="type" searchable="true" id="kwe8r"/>
+      <attribute name="parent" id="mjp7e"/>
+    </schema>
+  </maximo-datasource>
+  <maximo-datasource id="synonymdomainData" offline-immediate-download="true" object-structure="MXAPISYNONYMDOMAIN" saved-query="MOBILEDOMAIN" lookup-data="true" selection-mode="single">
+    <schema id="em924">
+      <attribute name="value" searchable="true" unique-id="true" id="j4epe"/>
+      <attribute name="description" searchable="true" id="y7jdp"/>
+      <attribute name="maxvalue" searchable="true" id="g58pj"/>
+      <attribute name="domainid" searchable="true" id="m2ebr"/>
+      <attribute name="valueid" searchable="true" id="aakrv"/>
+      <attribute name="siteid" searchable="true" id="r27qk"/>
+      <attribute name="orgid" searchable="true" id="wz5gx"/>
+      <attribute name="defaults" searchable="true" id="avz96"/>
+    </schema>
+  </maximo-datasource>
+  <maximo-datasource id="defaultSetDs" offline-immediate-download="true" lookup-data="true" pre-load="true" object-structure="mxapiorganization" saved-query="MOBILEORG">
+    <schema id="bveym">
+      <attribute name="itemsetid" id="x4pne"/>
+      <attribute name="orgid" unique-id="true" searchable="true" id="mr8av"/>
+      <attribute name="rel.maxvars{*}" id="yd8ea"/>
+    </schema>
+  </maximo-datasource>
+  <maximo-datasource id="alndomainData" offline-immediate-download="true" object-structure="MXAPIALNDOMAIN" page-size="10" lookup-data="true" selection-mode="single">
+    <schema id="zxb7q">
+      <attribute name="domainid" searchable="true" id="q8g63"/>
+      <attribute name="value" searchable="true" id="kmdq2"/>
+      <attribute name="description" searchable="true" id="yn7z7"/>
+    </schema>
+  </maximo-datasource>
+  <maximo-datasource id="numericDomainDS" offline-immediate-download="true" object-structure="MXAPINUMERICDOMAIN" page-size="10" lookup-data="true" selection-mode="single">
+    <schema id="xcyyb1">
+      <attribute name="domainid" searchable="true" id="e7zb_"/>
+      <attribute name="value" searchable="true" id="jx2nx"/>
+      <attribute name="description" searchable="true" id="q8vbz"/>
+    </schema>
+  </maximo-datasource>
+  <maximo-datasource id="tableDomainDS" offline-immediate-download="true" lookup-data="true" object-structure="MXAPITABLEDOMAIN" selection-mode="single" cache-expiry-ms="1" page-size="5000">
+    <schema id="pq8k3">
+      <attribute name="value" searchable="true" id="e93yv"/>
+      <attribute name="description" searchable="true" id="xabb_"/>
+      <attribute name="domainid" id="q5b8d"/>
+      <attribute name="siteid" id="rx9nd"/>
+      <attribute name="orgid" id="er7gn"/>
+    </schema>
+  </maximo-datasource>
+  <json-datasource id="assetStatusList" src="{[]}" items="statusItems" selection-mode="single" id-attribute="value">
+    <schema id="dpyn7">
+      <attribute name="value" id="pp6be"/>
+      <attribute name="description" id="k8k8k"/>
+      <attribute name="maxvalue" id="rawnz"/>
+    </schema>
+  </json-datasource>
+  <maximo-datasource id="assetListDummyDS" object-structure="MXAPIASSET">
+    <schema id="y8_7j">
+      <attribute name="assetuid" unique-id="true" id="daarg"/>
+      <attribute name="assetnum" searchable="true" id="rymyr"/>
+    </schema>
+    <maximo-datasource id="assetmetersds" object-name="assetmeter" relationship="int_assetmeter" order-by="sequence" selection-mode="none" controller="AssetListDataController">
+      <schema id="kwxra">
+        <attribute name="metername" id="rna9v"/>
+        <attribute name="lastreading" id="xvr_v"/>
+        <attribute name="measureunitid" id="ye3a5"/>
+        <attribute name="lastreadingdate" id="d2ywm"/>
+        <attribute name="index" id="jz2x5"/>
+        <attribute name="href" id="b5v69"/>
+        <attribute name="assetmeterid" unique-id="true" id="qyr8z"/>
+        <attribute name="sequence" sortable="true" id="vy8p4"/>
+        <!-- the reading field will be computed based on new/last reading -->
+        <attribute name="computedReadingDate" computed-function="computedReading" id="q3enk"/>
+        <attribute name="meter.measureunit.description--unitdescription" id="q2xg2"/>
+      </schema>
+    </maximo-datasource>
+  </maximo-datasource>
+  <maximo-datasource id="dsCompany" offline-immediate-download="true" object-structure="MXAPIVENDOR" saved-query="REQUESTCOMPANYLIST" lookup-data="true" selection-mode="single">
+    <schema id="qe7x9">
+      <attribute name="companiesid" unique-id="true" id="rw5p8"/>
+      <attribute name="company" searchable="true" id="ynk5x"/>
+      <attribute name="type" searchable="true" id="wvaw_"/>
+      <attribute name="name" searchable="true" id="ygqda"/>
+      <attribute name="orgid" searchable="true" id="p27y5"/>
+    </schema>
+    <maximo-datasource-override id="dsManufacture" lookup-data="true" selection-mode="single"/>
+    <maximo-datasource-override id="dsVendor" lookup-data="true" selection-mode="single"/>
+  </maximo-datasource>
+  <maximo-datasource id="locationLookupDS" object-structure="MXAPIOPERLOC" saved-query="MOBILELOCATION" lookup-data="true" selection-mode="single" controller="AssetCreateDataController" geometry-format="geojson">
+    <schema id="zmaq3">
+      <attribute name="locationsid" unique-id="true" id="menw3"/>
+      <attribute name="location" searchable="true" index="true" id="dprab"/>
+      <attribute name="description" searchable="true" id="xg7p9"/>
+      <attribute name="type" searchable="true" id="anrp6">
+        <lookup-map name="listLocationType" id="qx929">
+          <lookup-return lookup-field="displayValue" datasource-field="description,value" id="zemnj"/>
+          <lookup-return lookup-field="value" datasource-field="value" id="ey87r"/>
+        </lookup-map>
+      </attribute>
+      <attribute name="status" searchable="true" id="gxzyp">
+        <lookup-map name="locationstatus" id="azj7b">
+          <lookup-return lookup-field="displayValue" datasource-field="description,value" id="k4k_7"/>
+          <lookup-return lookup-field="value" datasource-field="value" id="qgx_6"/>
+        </lookup-map>
+      </attribute>
+      <attribute name="siteid" searchable="true" id="x9_rg"/>
+      <attribute name="orgid" searchable="true" id="pnyry"/>
+    </schema>
+    <maximo-datasource-override id="locationFilterDS" selection-mode="multiple"/>
+  </maximo-datasource>
+  <json-datasource id="assetclassdataDS" id-attribute="classstructureid" selection-mode="single" items="member" src="{[]}">
+    <schema id="bqpyv">
+      <attribute name="classificationid" searchable="true" index="true" id="w4ny3"/>
+      <attribute name="hierarchypath" id="m42m7"/>
+      <attribute name="classstructureid" unique-id="true" id="e795p"/>
+      <attribute name="parent" id="zv4wy"/>
+      <attribute name="lvl" id="xpx3y"/>
+    </schema>
+  </json-datasource>
+  <maximo-datasource id="AssetClassDomain" object-structure="MXAPITKCLASS" saved-query="MOBILECLASSSTRUCTURE" page-size="1" lookup-data="true" pre-load="true" offline-immediate-download="true" controller="ClassificationController">
+    <schema id="aqpwv">
+      <attribute name="classificationid" id="p47zj"/>
+      <attribute name="classificationdesc" searchable="true" id="ygwn8"/>
+      <attribute name="classstructureid" unique-id="true" index="true" id="ggmde"/>
+      <attribute name="classstructureuid" id="dynjd"/>
+      <attribute name="description" searchable="true" id="k9yky"/>
+      <attribute name="haschildren" id="bx76z"/>
+      <attribute name="show" id="pr2zg"/>
+      <attribute name="sortorder" id="p2w5w"/>
+      <attribute name="useclassindesc" id="byky9"/>
+      <attribute name="_id" id="j9ypk"/>
+      <attribute name="_imagelibref" id="q2g7p"/>
+      <attribute name="siteid" id="y8wa4"/>
+      <attribute name="orgid" id="e_3yw"/>
+      <attribute name="parent" index="true" id="de92_"/>
+      <attribute name="rel.classusewith{objectname}" id="k_aa_"/>
+      <attribute name="rel.classspec{assetattrid, measureunitid, classstructureid, assetattributeid, classspecid, orgid, siteid, domainid, tableattribute, lookupname}" id="dk82z"/>
+      <attribute name="hierarchypath" id="e_ka2"/>
+    </schema>
+  </maximo-datasource>
+  <maximo-datasource id="assetAttributeDS" object-structure="MXAPIASSETATTRIBUTE" lookup-data="true" pre-load="true" offline-immediate-download="true" controller="AssetDetailsDataController">
+    <schema id="m_wmv">
+      <attribute name="assetattrid" id="e3gbe"/>
+      <attribute name="datatype" id="j4gq4"/>
+      <attribute name="orgid" searchable="true" id="gpq72"/>
+      <attribute name="description" id="pbbbv"/>
+      <attribute name="domainid" id="m6vjj"/>
+      <attribute name="classstructureid" id="qjvzx"/>
+    </schema>
+  </maximo-datasource>
+  <json-datasource id="assetSpecCombinedDS" selection-mode="none" items="member" src="{[]}">
+    <schema id="bmq2n">
+      <attribute name="assetattrid" id="e8b8a"/>
+      <attribute name="anywhererefid" id="zeq8a"/>
+      <attribute name="measureunitid" id="pbp29"/>
+      <attribute name="numvalue" scale="2" id="mvvk8"/>
+      <attribute name="alnvalue" id="em2j_"/>
+      <attribute name="tablevalue" id="n3da3"/>
+      <attribute name="assetspecid" id="pkxex"/>
+      <attribute name="assetattribute.description--assetattributedesc" id="w4dz6"/>
+      <attribute name="displaysequence" sortable="true" id="nnm7e"/>
+      <attribute name="classstructureid" sortable="true" id="r9bxb"/>
+      <attribute name="linearassetspecid" sortable="true" id="nqz8w"/>
+      <attribute name="datatype" id="b23eg"/>
+      <attribute name="domainid" id="g4n5m"/>
+      <attribute name="computedLabel" id="vpa3z"/>
+    </schema>
+  </json-datasource>
+  <pages id="pages">
+    <page padding="true" id="assetlist" path="/assetlist" title="Assets" icon="maximo:assets" controller="AssetListPageController">
+      <states id="bg3wg">
+        <state name="selectedSwitch" value="0" type="number" id="jg6pk"/>
+        <state name="selectedDS" value="activeAssetListDS" type="string" id="g39ap"/>
+        <state name="showMapOverlay" value="0" type="number" id="m7vm7"/>
+        <state name="mapPaddingBottom" value="" type="string" id="zaady"/>
+        <state name="mapAssetListHeight" value="45%" type="boolean" id="r22g9"/>
+        <state name="mapAssetCardHeight" value="60%" type="boolean" id="qx8g3"/>
+        <state name="mapPaddingRight" value="" type="string" id="q35jb"/>
+        <state name="mapPaddingLeft" value="" type="string" id="xba2g"/>
+        <state name="mapHighlightedItem" value="" type="object" id="vq9gd"/>
+      </states>
+      <header-template hide-breadcrumb="true" title-column-width="{page.state.breadcrumbWidth ? page.state.breadcrumbWidth : app.state.screen.size === 'md' ? 50 : app.state.screen.size === 'lg' ? 30 : app.state.screen.size === 'xlg' ? 21 : 65}" id="yyq9q">
+        <dropdown slot="dropdown" background-color="white" selected-item="{page.state.selectedDS}" on-change="loadAssetListData" id="j5web" hide-unselected-placeholder="true">
+          <dropdown-item value="activeAssetListDS" text="My assets" id="dgx5m"/>
+          <dropdown-item value="newAssetListDS" text="Assets created by me" id="aq3ry"/>
+        </dropdown>
+        <content-switcher slot="content-switches" id="zx67e" selected-index="{page.state.selectedSwitch}">
+          <cs-switch on-click="showCardList" icon="carbon:list" id="qg99w"/>
+          <cs-switch on-click="showMapList" disabled="{!app.state.isMapValid}" icon="carbon:map" id="qvn2y"/>
+        </content-switcher>
+      </header-template>
+      <stacked-panel selected-index="{page.state.selectedSwitch}" id="qzfnm">
+        <panel id="ea95m">
+          <include src="./asset-card-group.xml" id="p5ked"/>
+        </panel>
+        <panel id="r4nev">
+          <map on-map-initialize="onMapInitialized" height="{page.state.mapPaddingBottom}" attribution-label="{false}" id="bgeap" preload="true">
+            <map-layers id="m8vp8">
+              <map-layer name="ASSETS_Status" label="Assets" datasource="{page.state.selectedDS}" geometry-field-name="autolocate" symbology-handler="createAssetSymbology" legend-handler="retrieveAssetLegends" geometry-field-format="geojson" hidden="false" min-scale="0" max-scale="0" transparency="0" cluster-tolerance="20" spatial-reference="4326" maximum-features-limit="5000" exclude-fields="bulkid,_rowstamp,_selected,href" value-field="assetnum" update-when-query-changes="true" id="mapLayerAsset" facility-attribute-name="facilityid" level-attribute-name="levelid"/>
+            </map-layers>
+            <map-events id="mapEvent">
+              <map-click id="mapClick" on-action="handleMapClick" tolerance="2"/>
+              <map-long-press id="mapLongPress" on-action="handleMapLongPress" trigger-menu="mapmenu" tolerance="20" press-check-time="300" sigoption="MXAPIASSET.CREATENEWASSET"/>
+            </map-events>
+            <map-overlay hidden="false" max-width="100%" left="55px" bottom="55px" top="20px" right="0px" position="top-right" id="vpe3m" transparent="true" type="map-toolbar" scrollable="false">
+              <map-toolbar id="jyvyx">
+                <map-toolbar-layer collapse="true"  width="400px" maxWidth="100%" maxHeight="{page.state.mapAssetListHeight}" id="pj7k9"/>
+                <map-toolbar-mylocation collapse="true" id="dawjm" />
+                <map-toolbar-identify do-not-hide-list="{['map-toolbar']}" collapse="true"  id="g4xrd"/>
+                <map-toolbar-replica hidden-button="false" mobile-only="true" collapse="true" id="wqrpm"/>
+                <map-toolbar-indoor collapse="true"  id="nwepg"/>
+                <map-toolbar-query collapse="true" hidden-button="false" do-not-hide-list="{['map-toolbar']}" id="v8e9n"/>
+                <map-toolbar-results collapse="true" id="gvq9a"/>
+              </map-toolbar>
+            </map-overlay>
+            <map-overlay id="q8n3x" hidden="{!(page.state.showMapOverlay===0)}" position="bottom" left="{page.state.mapPaddingLeft}" right="{page.state.mapPaddingRight}" top="20px" width="100%" height="{page.state.mapAssetListHeight}" bottom="0rem">
+              <data-list datasource="{page.state.selectedDS}" id="vazdy" on-item-click="handleItemClick" padding="false" enable-barcode-scanner="true" readers="{[`ean_reader`]}" timeout="{45}" search-placeholder-text="Search record list">
+                <border-layout slot="item" fill-parent="true" padding="false" id="x866v">
+                  <start horizontal-overflow="hidden" id="daemx">
+                    <image use-thumbnail="true" height="64" width="64" allow-popup="false" src="{item._imagelibref}" external="false" placeholder="true" id="jqrb3"/>
+                  </start>
+                  <middle width="80" horizontal-overflow="hidden" id="paxpg">
+                    <label label="{item.computedAssetDescription}" theme="16-bold" padding="top" id="zman4"/>
+                    <label label="{item.locationdesc}" color="gray60" theme="16-regular" padding="bottom" id="ympd"/>
+                  </middle>
+                  <end width="20" vertical-align="center" horizontal-align="end" id="ke6zq">
+                    <box vertical-align="center" direction="column" horizontal-align="end" fill-parent="true" id="jw9e3">
+                      <button icon="carbon:chevron--right" kind="ghost" on-click="openAssetCard" on-click-arg="{{'item': item, 'prevPage': 'mapassetlist'}}" padding="false" id="kxndj"/>
+                    </box>
+                  </end>
+                </border-layout>
+              </data-list>
+            </map-overlay>
+            <map-overlay hidden="{!(page.state.showMapOverlay===1)}" position="bottom" left="{page.state.mapPaddingLeft}" right="{page.state.mapPaddingRight}" height="{page.state.mapAssetCardHeight}" width="100%" bottom="0rem" id="v5np9">
+              <border-layout padding="false" middle-border="true" width="100%" id="m_mv7">
+                <start vertical-align="center" id="p9b86">
+                  <box vertical-align="center" direction="column" horizontal-align="start" fill-parent="true" id="adwy8">
+                    <button icon="carbon:chevron--left" kind="ghost" on-click="openPrevPage" padding="false" id="qbm84"/>
+                  </box>
+                </start>
+              </border-layout>
+              <include src="./asset-card-group.xml" id="jwq72"/>
+            </map-overlay>
+            <map-menu id="mapmenu">
+              <map-menu-item label="Create Asset" icon="carbon:add" on-click="goToCreateAssetPage" id="pp4_v"/>
+            </map-menu>
+          </map>
+        </panel>
+      </stacked-panel>
+      <dialogs id="w98wy">
+        <sliding-drawer id="assetmeterReadingDrawer" content-padding="false" align="start" header-text="Meters">
+          <panel id="ed92z">
+            <panel id="y7pek">
+              <box padding-top="1" id="jm9xd"/>
+              <data-list datasource="assetmetersds" show-search="false" title="{page.state.assetMeterHeader}" hidden="{!assetmetersds.state.itemCount}" id="z8r6w">
+                <border-layout padding="false" slot="item" fill-parent="true" id="g4arz">
+                  <start width="75" id="yxpmq" horizontal-overflow="hidden">
+                    <border-layout padding="false" fill-parent="true" id="w83v4">
+                      <top id="z65n2">
+                        <box direction="column" vertical-align="center" fill-parent="true" id="y7q82">
+                          <field value="{item.metername}" field-class-name="16-bold" override-required="true" padding="none" qualifier="{item.unitdescription ? item.unitdescription : item.measureunitid}" hide-label="true" id="zv73k"/>
+                        </box>
+                      </top>
+                      <bottom id="e36vz">
+                        <box id="z9ndw">
+                          <field padding="none" id="y8yqy">
+                            <sub-field value="{item.computedReadingDate}" type="date_full_month" id="y__gr"/>
+                          </field>
+                          <field padding="none" id="qy7ym">
+                            <sub-field value="{item.computedReadingDate}" type="time" id="d5adz"/>
+                          </field>
+                        </box>
+                      </bottom>
+                    </border-layout>
+                  </start>
+                  <end vertical-align="center" width="25" horizontal-overflow="hidden" id="yvrkx">
+                    <box vertical-align="center" direction="row" horizontal-align="end" fill-child="true" fill-parent="true" id="mk8en">
+                      <field value="{item.lastreading}" field-class-name="16-regular" hide-label="true" id="j5njg"/>
+                    </box>
+                  </end>
+                </border-layout>
+              </data-list>
+            </panel>
+          </panel>
+        </sliding-drawer>
+      </dialogs>
+    </page>
+    <page padding="true" id="assetDetails" path="/assetDetails" title="Asset" controller="AssetDetailsPageController">
+      <states id="z9x36">
+        <state name="selectedDS" value="assetDetails" type="string" id="xwpa6"/>
+      </states>
+      <maximo-datasource id="assetDetailsDS" object-structure="MXAPIASSET" selection-mode="single" controller="AssetDetailsDataController" item-url="{page.params.href}">
+        <schema id="qmqgr">
+          <attribute name="assetid" unique-id="true" id="xypyr"/>
+          <attribute name="assetnum" searchable="true" id="pj69q"/>
+          <attribute name="description" searchable="true" id="xkyw2"/>
+          <attribute name="location" id="r3av"/>
+          <attribute name="serviceaddress" id="dmyd4">
+            <attribute name="formattedaddress--formattedaddress" searchable="true" id="rqkmk"/>
+            <attribute name="latitudey" id="rasd"/>
+            <attribute name="longitudex" id="rqask"/>
+            <attribute name="addresscode" id="rmksk"/>
+            <attribute name="siteid" id="n9ak"/>
+            <attribute name="description" id="nj8k"/>
+            <attribute name="streetaddress" id="n7ak"/>
+            <attribute name="addressline2" id="n6ak"/>
+            <attribute name="addressline3" id="nj5k"/>
+            <attribute name="city" id="nj4k"/>
+            <attribute name="regiondistrict" id="nj3k"/>
+            <attribute name="country" id="nja3"/>
+            <attribute name="stateprovince" id="nja2"/>
+            <attribute name="postalcode" id="nja1"/>
+          </attribute>
+          <attribute name="_imagelibref" id="m_ewb"/>
+          <attribute name="location.description--locationdesc" id="j_9"/>
+          <attribute name="computedLocation" computed-function="computedLocation" id="q43p2"/>
+          <attribute name="asset_parent.description--parentassetdesc" id="q36j5"/>
+          <attribute name="isrunning" id="edrq7"/>
+          <attribute name="manufacturer" id="edb68"/>
+          <attribute name="manufacturer.name--manufacturername" id="y_pr5"/>
+          <attribute name="computedManufacturer" computed-function="computedManufacturer" id="jzkzn"/>
+          <attribute name="serialnum" id="b7j68"/>
+          <attribute name="itemtype" id="lla09"/>
+          <attribute name="assettype" id="lla98"/>
+          <attribute name="status" searchable="true" id="pvz5e"/>
+          <attribute name="statusdesc.description--assetstatusdesc" id="b982j"/>
+          <attribute name="failurecode" id="rd937"/>
+          <attribute name="failurecodes.description--failurecodedesc" id="y_wyv"/>
+          <attribute name="computedFailurecode" computed-function="computedFailurecode" id="rvmdx"/>
+          <attribute name="classstructure.hierarchypath" id="dkn3y"/>
+          <attribute name="classstructure.classstructureid" id="en_p_"/>
+          <attribute name="parent" id="gpb7v"/>
+          <attribute name="orgid" id="z7__e"/>
+          <attribute name="computedAssetStatus" computed-function="computedAssetStatus" id="v8rxx"/>
+          <attribute name="assetspec" id="ek77b">
+            <attribute name="_dbcount--assetspeccount" id="k7v7q"/>
+          </attribute>
+          <attribute name="assetmeter" id="vk65b">
+            <attribute name="_dbcount--assetmetercount" id="w3nxv"/>
+          </attribute>
+          <attribute name="vendor" id="edrm8"/>
+          <attribute name="companies.name--vendorname" searchable="true" id="mmn4y"/>
+          <attribute name="computedDocLinks" computed-function="computedDocLinksCount" id="d5qr_"/>
+          <attribute name="computedVendor" computed-function="computedVendor" searchable="true" id="kb48_"/>
+          <attribute name="saddresscode" id="wv55j"/>
+          <attribute name="doclinks" id="be5g3">
+            <attribute name="_dbcount--doclinkscount" id="dye3k"/>
+          </attribute>
+          <attribute name="hierarchypath" id="mwyzn"/>
+        </schema>
+        <maximo-datasource id="assetSpecificationDS" relationship="assetspecclass" selection-mode="none" order-by="displaysequence" controller="AssetDetailsDataController">
+          <schema id="dn8k8">
+            <attribute name="assetattrid" id="mdbv3"/>
+            <attribute name="anywhererefid" id="n8yg2"/>
+            <attribute name="measureunitid" id="x2e_5"/>
+            <attribute name="numvalue" scale="2" id="nazea"/>
+            <attribute name="alnvalue" id="ekvf3"/>
+            <attribute name="tablevalue" id="kbk4r"/>
+            <attribute name="assetspecid" id="ap94d"/>
+            <attribute name="assetattribute.description--assetattributedesc" id="bmy2d"/>
+            <attribute name="displaysequence" sortable="true" id="dp_ne"/>
+            <attribute name="classstructureid" sortable="true" id="q8mn8"/>
+            <attribute name="linearassetspecid" sortable="true" id="ajkz5"/>
+          </schema>
+        </maximo-datasource>
+        <maximo-datasource id="serviceAddressDS" id-attribute="serviceaddressid" relationship="serviceaddress" selection-mode="none">
+          <schema id="gryvk">
+            <attribute name="serviceaddressid" unique-id="true" id="q_p8z"/>
+            <attribute name="formattedaddress" id="awem6"/>
+            <attribute name="city" id="p52em"/>
+            <attribute name="stateprovince" id="mr4e9"/>
+            <attribute name="stateprovince_description" id="m7n4p"/>
+            <attribute name="addresscode" id="eaj98"/>
+            <attribute name="latitudey" id="py7ek"/>
+            <attribute name="longitudex" id="k9r6x"/>
+          </schema>
+        </maximo-datasource>
+      </maximo-datasource>
+      <header-template title-column-width="{app.state.screen.size === 'lg' ? 45 : 60}" id="pjw4x"/>
+      <box padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '0.5'}" id="aqjv8"/>
+      <box hidden="{page.state.noDataFoundErrMsg}" background-color="field-01" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '0' : '0.5'}" id="nk236">
+        <border-layout padding="true" fill-parent="true" top-border="true" id="xye72">
+          <top id="pqxdy">
+            <adaptive-row id="g_6a8">
+              <adaptive-column small-width="70" medium-width="50" large-width="60" xlarge-horizontal-align="start" large-horizontal-align="start" medium-horizontal-align="start" small-horizontal-align="start" id="w4nxn">
+                <box fill-child="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '0' : '.5'}" hidden="{!item.description}" id="j4b84">
+                  <wrapped-text size="large" label="{item.description}" sub-label="{item.assetnum}" id="gpv3_"/>
+                </box>
+                <box fill-child="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '0' : '.5'}" hidden="{item.description}" id="q4q3w">
+                  <label label="{item.assetnum}" color="gray60" theme="16-regular" override-required="true" id="zze3_"/>
+                </box>
+              </adaptive-column>
+              <adaptive-column small-width="30" medium-width="50" large-width="40" xlarge-horizontal-align="end" large-horizontal-align="end" medium-horizontal-align="end" small-horizontal-align="end" id="x5ne9">
+                <box id="dv25y">
+                  <button icon="carbon:edit" kind="secondary" padding="false" on-click="openAssetEditPage" on-click-arg="{{'item': item,'datasource':'assetDetailsDS'}}" id="pdex4"/>
+                </box>
+              </adaptive-column>
+            </adaptive-row>
+          </top>
+          <middle id="vrnm5" horizontal-overflow="hidden">
+            <border-layout middle-border="true" width="100" fill-parent="true" id="rxwj_">
+              <top id="ax9rx">
+                <adaptive-row id="wj2b8">
+                  <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="rxg78">
+                    <border-layout fill-parent="true" id="zen24">
+                      <middle id="p95qj">
+                        <box direction="row" id="r6__2">
+                          <action-tag label="Up" type="warm-gray" icon="Carbon:arrow--up" hidden="{!assetDetailsDS.item.assetnum || !assetDetailsDS.item.isrunning}" id="kk3pp"/>
+                          <action-tag label="Down" type="warm-gray" icon="Carbon:arrow--down" hidden="{assetDetailsDS.item.assetnum &amp;&amp; assetDetailsDS.item.isrunning}" id="xmbn4"/>
+                          <box direction="column" padding-top="0.125" id="z2w7v">
+                            <tag-group wrap="true" max-tag-width="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 200 : app.state.screen.size === 'lg' ? 300 :600}" align="end" tags="{item.computedAssetStatus}" id="z5qrw"/>
+                          </box>
+                        </box>
+                        <box direction="row" fill-child="true" fill-parent="true" vertical-align="center" padding-top="{1}" padding-start="{1}" id="gfwb1g">
+                          <border-layout fill-parent="true" id="x294f5">
+                            <start id="bezvw" horizontal-overflow="hidden">
+                              <box padding-end="2" fill-parent="true" direction="row" id="g20ag">
+                                <border-layout fill-parent="true" id="x2asfa5">
+                                  <start width="4" id="nq9xx">
+                                    <box padding-top="0.5" id="veazr">
+                                      <icon icon="Carbon:asset" id="pm8ym"/>
+                                    </box>
+                                  </start>
+                                  <middle horizontal-align="start" horizontal-overflow="hidden" id="j9ryp">
+                                    <box direction="row" horizontal-overflow="hidden" fill-parent="true" fill-child="true" id="bx2ka">
+                                      <field wrap="true" value="{page.state.parentAssetInfo}" label="Parent asset" id="pmq45"/>
+                                    </box>
+                                  </middle>
+                                </border-layout>
+                              </box>
+                            </start>
+                          </border-layout>
+                        </box>
+                        <box direction="row" fill-child="true" fill-parent="true" vertical-align="center" padding-top="{1}" padding-start="{1}" id="g2wbg">
+                          <border-layout fill-parent="true" id="x29f5">
+                            <start id="bezvaw" horizontal-overflow="hidden">
+                              <box padding-end="2" fill-parent="true" direction="row" id="g20dag">
+                                <border-layout fill-parent="true" id="x2afa5">
+                                  <start width="4" id="n9xx">
+                                    <box padding-top="0.5" id="vear">
+                                      <icon icon="Carbon:location" id="e7ggg"/>
+                                    </box>
+                                  </start>
+                                  <middle horizontal-align="start" horizontal-overflow="hidden" id="j9yp">
+                                    <box direction="row" horizontal-overflow="hidden" fill-parent="true" fill-child="true" id="x2ka">
+                                      <field wrap="true" padding="bottom" value="{page.state.serviceAddress}" label="Service address" id="nn_jar"/>
+                                    </box>
+                                  </middle>
+                                </border-layout>
+                              </box>
+                            </start>
+                          </border-layout>
+                        </box>
+                      </middle>
+                    </border-layout>
+                  </adaptive-column>
+                  <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="qmzb7">
+                    <box direction="column" padding="0.5" hidden="{!item._imagelibref}" vertical-align="start" horizontal-align="center" id="nxmq5">
+                      <image src="{item._imagelibref}" id="rqjkd"/>
+                    </box>
+                    <box direction="column" padding-end="0.5" fill-child="true" fill-parent="true" hidden="{item._imagelibref}" background-color="field-02" vertical-align="center" horizontal-align="center" id="e_dj2">
+                      <image src="{item._imagelibref}" placeholder="{true}" height="{app.device.screen.size === 'sm' ? 70 : 120}" id="wjn9w"/>
+                    </box>
+                  </adaptive-column>
+                </adaptive-row>
+              </top>
+              <start id="ax8lx">
+                <adaptive-row id="wjko8">
+                  <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="rx6j8">
+                    <border-layout fill-parent="true" id="zej94">
+                      <middle id="p8lqj" horizontal-align="start" horizontal-overflow="hidden" width="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 70 : 90}">
+                        <box direction="row" fill-parent="true" fill-child="true" vertical-align="center" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '0' : '1'}" id="z9sex">
+                          <field value="{assetDetailsDS.item.hierarchypath}" label="Classification" id="y3y3p"/>
+                        </box>
+                      </middle>
+                    </border-layout>
+                  </adaptive-column>
+                  <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="rx6k7">
+                    <border-layout fill-parent="true" id="zej23">
+                      <end horizontal-align="start" horizontal-overflow="hidden" id="p0lqj" width="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 70 : 90}">
+                        <box direction="row" fill-parent="true" fill-child="true" vertical-align="center" padding-start="0" id="zk8ex">
+                          <field value="{assetDetailsDS.item.serialnum}" label="Serial Number" id="pmn8"/>
+                        </box>
+                      </end>
+                    </border-layout>
+                  </adaptive-column>
+                </adaptive-row>
+                <adaptive-row id="wj2o8">
+                  <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="r3as8">
+                    <border-layout fill-parent="true" id="ze8k4">
+                      <middle id="p7jkj" horizontal-align="start" horizontal-overflow="hidden" width="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 70 : 90}">
+                        <box direction="row" fill-parent="true" fill-child="true" vertical-align="center" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '0' : '1'}" id="z6hjx">
+                          <field value="{assetDetailsDS.item.computedLocation}" label="Location" id="pmas4"/>
+                        </box>
+                      </middle>
+                    </border-layout>
+                  </adaptive-column>
+                  <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="rx6jk7">
+                    <border-layout fill-parent="true" id="kmj93">
+                      <end horizontal-align="start" horizontal-overflow="hidden" id="p9kqj" width="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 70 : 90}">
+                        <box direction="row" fill-parent="true" fill-child="true" vertical-align="center" padding-start="0" id="z22ex">
+                          <field value="{assetDetailsDS.item.assetfeature.feature}" label="Feature Class" id="pman8"/>
+                        </box>
+                      </end>
+                    </border-layout>
+                  </adaptive-column>
+                </adaptive-row>
+                <adaptive-row id="wn7k8">
+                  <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="r8kj8">
+                    <border-layout fill-parent="true" id="zash8">
+                      <middle id="pa08j" horizontal-align="start" horizontal-overflow="hidden" width="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 70 : 90}">
+                        <box direction="row" fill-parent="true" fill-child="true" vertical-align="center" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '0' : '1'}" id="z2ldx">
+                          <field value="{assetDetailsDS.item.computedVendor}" label="Vendor" id="ps6j4"/>
+                        </box>
+                      </middle>
+                    </border-layout>
+                  </adaptive-column>
+                  <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="rxas97">
+                    <border-layout fill-parent="true" id="ma893">
+                      <end horizontal-align="start" horizontal-overflow="hidden" id="p9asqj" width="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 70 : 90}">
+                        <box direction="row" fill-parent="true" fill-child="true" vertical-align="center" padding-start="0" id="zml9x">
+                          <field value="{assetDetailsDS.item.computedFailurecode}" label="Failure Class" id="pju89"/>
+                        </box>
+                      </end>
+                    </border-layout>
+                  </adaptive-column>
+                </adaptive-row>
+                <adaptive-row id="wj8l8">
+                  <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="r36j8">
+                    <border-layout fill-parent="true" id="zej44">
+                      <middle id="p85qj" horizontal-align="start" horizontal-overflow="hidden" width="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 70 : 90}">
+                        <box direction="row" fill-parent="true" fill-child="true" vertical-align="center" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '0' : '1'}" id="z6sex">
+                          <field value="{assetDetailsDS.item.computedManufacturer}" label="Manufacturer" id="pma74"/>
+                        </box>
+                      </middle>
+                    </border-layout>
+                  </adaptive-column>
+                  <adaptive-column small-width="100" medium-width="100" large-width="50" medium-horizontal-align="start" id="rx687">
+                    <border-layout fill-parent="true" id="zej93">
+                      <end horizontal-align="start" horizontal-overflow="hidden" id="p10qj" width="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 70 : 90}">
+                        <box direction="row" fill-parent="true" fill-child="true" vertical-align="center" padding-start="0" id="z11ex">
+                          <field value="{page.state.assetType}" label="Type" id="pas9"/>
+                        </box>
+                      </end>
+                    </border-layout>
+                  </adaptive-column>
+                </adaptive-row>
+              </start>
+            </border-layout>
+          </middle>
+          <bottom id="ayd9r">
+            <box direction="row" fill-child="true" fill-parent="true" padding-start="1" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" id="p3z76">
+              <button-group padding="false" id="a9qyw">
+                <button icon="maximo:gauge" kind="secondary" hidden="{!assetDetailsDS.item.assetmetercount}" on-click="openMeterdetailDrawer" on-click-arg="{{'item': item,'datasource': assetmetersds}}" id="q5qdp"/>
+                <button icon="maximo:location-capture" kind="secondary" hidden="{!page.state.isMobile}" on-click="captureLocation" on-click-arg="{{'item': item,'datasource': assetDetailsDS}}" id="rb_28" action-icon="{page.state.latitudey}" action-icon-name="carbon:checkmark--filled" icon-placement="start"/>
+                <button icon="carbon:add" kind="secondary" id="gxjgk"/>
+              </button-group>
+            </box>
+          </bottom>
+        </border-layout>
+      </box>
+      <box hidden="{page.state.noDataFoundErrMsg}" padding-top="1.5" id="jqxdm">
+        <border-layout fill-parent="true" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '0' : '.5'}" id="bznkx">
+          <top id="av_aa">
+            <label label="Related records" theme="20-regular" id="q7bj4"/>
+          </top>
+          <start width="100" id="zyvzm">
+            <box direction="column" fill-child="true" fill-parent="true" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '0' : '.5'}" id="qjxka">
+              <navigator width="100%" theme="ui-05" mode="list" fade-background-color="false" id="nnrzw">
+                <navigator-tile tile-label="Attachments" pictogram="maximo:document--attachments" onclick-action="showAttachmentPage" onclick-action-arg="{{'item':assetDetailsDS.item}}" badge-value="{assetDetailsDS.item.computedDocLinks}" badge-type="dark-gray" id="ezp9j"/>
+              </navigator>
+            </box>
+          </start>
+        </border-layout>
+      </box>
+      <box padding-top="1.7" id="zqbd3"/>
+      <box hidden="{page.state.noDataFoundErrMsg}" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '0' : '.5'}" id="kxjkd">
+        <border-layout hidden="{!assetDetailsDS.item.assetspeccount}" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '0' : '.5'}" fill-parent="true" id="pbxzw">
+          <top id="k35qm">
+            <label label="Specifications" theme="20-regular" id="n_78p"/>
+            <button icon="carbon:edit" kind="ghost" padding="false" on-click="openSpecificationDrawer" on-click-arg="{{'item': item,'datasource':'assetSpecificationDS'}}" id="xm_kz"/>
+          </top>
+          <start id="n6_2a" width="100">
+            <data-list datasource="assetSpecificationDS" show-search="false" id="jzr6w">
+              <border-layout padding="false" slot="item" fill-parent="true" id="kv6en">
+                <start width="50" id="e8dpg" horizontal-overflow="hidden">
+                  <box id="w4dk_" fill-parent="true" vertical-align="center" fill-child="true">
+                    <field label="{item.assetattributedesc ? item.assetattrid : null}" override-required="true" id="bpyn7">
+                      <sub-field value="{item.assetattributedesc || item.assetattrid}" id="xv_96"/>
+                    </field>
+                  </box>
+                </start>
+                <middle width="40" horizontal-align="end" horizontal-overflow="hidden" id="r_3_9">
+                  <box padding-end="1" fill-parent="true" fill-child="true" id="w_ezb">
+                    <field value="{item.numvalue || item.alnvalue || item.tablevalue}" label="{item.measureunitid}" override-required="true" id="kne7n"/>
+                  </box>
+                </middle>
+              </border-layout>
+            </data-list>
+          </start>
+        </border-layout>
+      </box>
+      <box hidden="{!page.state.noDataFoundErrMsg}" direction="column" id="bp9kj">
+        <no-data empty-set-string="Record not found" sub-label="Record not available on this app" id="n8745"/>
+      </box>
+      <dialogs id="yq7gn">
+        <sliding-drawer id="assetStatusChangeDialog" align="start" header-text="Change status" content-padding="false">
+          <box direction="column" id="wn9mv">
+            <panel id="akax9">
+              <box direction="row" vertical-align="center" padding-start="1" padding-top="0.5" padding-bottom="0.5" id="zze26">
+                <label theme="20-regular" label="Select a status" padding="default" id="yqyzp"/>
+              </box>
+              <data-list datasource="assetStatusList" show-single-select-icon="true" on-item-click="selectStatus" selected-icon="carbon:checkmark--filled" unselected-icon="carbon:radio-button" show-search="false" id="z4q5w">
+                <list-item id="qkjnz">
+                  <border-layout fill-parent="true" padding="false" id="ay7g5">
+                    <middle horizontal-overflow="hidden" id="k_k7n">
+                      <label label="{item.value}" theme="16-regular" padding="none" id="mjnna"/>
+                    </middle>
+                  </border-layout>
+                </list-item>
+              </data-list>
+            </panel>
+          </box>
+          <button-group slot="header-button" align="end" id="vpby_">
+            <button icon="carbon:checkmark" disabled="{page.state.selectedStatus == ''}" kind="primary" on-click="changeStatus" loading="{page.state.statusLoading}" id="k6v2w"/>
+          </button-group>
+        </sliding-drawer>
+        <sliding-drawer id="assetmeterdetailsDrawer" content-padding="false" align="start" header-text="Meters">
+          <panel id="ne22w">
+            <panel id="rqv_9">
+              <box padding-top="1" id="dy8jv"/>
+              <data-list datasource="assetmetersds" show-search="false" title="{page.state.assetMeterHeader}" hidden="{!assetmetersds.state.itemCount}" id="aq_p9">
+                <border-layout padding="false" slot="item" fill-parent="true" id="kx77z">
+                  <start width="75" horizontal-overflow="hidden" id="jbagm">
+                    <border-layout padding="false" fill-parent="true" id="y99mw">
+                      <top id="g43yr">
+                        <box direction="column" vertical-align="center" fill-parent="true" id="gkxq5">
+                          <field value="{item.metername}" field-class-name="16-bold" override-required="true" padding="none" qualifier="{item.unitdescription ? item.unitdescription : item.measureunitid}" hide-label="true" id="pq625"/>
+                        </box>
+                      </top>
+                      <bottom id="qk62r">
+                        <box id="pmz4_">
+                          <field padding="none" id="d8y4k">
+                            <sub-field value="{item.computedReadingDate}" type="date_full_month" id="yy83p"/>
+                          </field>
+                          <field padding="none" id="nxn86">
+                            <sub-field value="{item.computedReadingDate}" type="time" id="yd8_r"/>
+                          </field>
+                        </box>
+                      </bottom>
+                    </border-layout>
+                  </start>
+                  <end vertical-align="center" width="25" horizontal-overflow="hidden" id="ewx5q">
+                    <box vertical-align="center" direction="row" horizontal-align="end" fill-child="true" fill-parent="true" id="v5355">
+                      <field value="{item.lastreading}" field-class-name="16-regular" hide-label="true" id="g8wz4"/>
+                    </box>
+                  </end>
+                </border-layout>
+              </data-list>
+            </panel>
+          </panel>
+        </sliding-drawer>
+        <lookup id="assetSpecDomainLookup" show-search="true" enable-barcode-scanner="true" lookup-heading="Domain" datasource="alndomainData" on-item-click="chooseAssetSpecDomain" border="true" lookup-attributes="{['value', 'description']}" height="400"/>
+        <lookup id="assetSpecNumericDomainLookup" show-search="true" enable-barcode-scanner="true" lookup-heading="Domain" datasource="numericDomainDS" on-item-click="chooseAssetSpecNumDomain" border="true" lookup-attributes="{['value', 'description']}" height="400"/>
+        <lookup id="assetSpecTableDomainLookup" show-search="true" enable-barcode-scanner="true" lookup-heading="Domain" datasource="tableDomainDS" on-item-click="chooseAssetSpecTableDomain" border="true" lookup-attributes="{['value', 'description']}" height="400"/>
+        <sliding-drawer id="assetspecificationDrawer" content-padding="false" align="start" header-text="Edit specifications">
+          <panel id="yedqv">
+            <data-list datasource="assetSpecCombinedDS" padding="false" show-search="false" id="nqxkq">
+              <border-layout padding="false" slot="item" fill-parent="true" id="veyn6">
+                <start horizontal-overflow="hidden" id="y9m9_">
+                  <box fill-parent="true" direction="column" hidden="{item.domainid != undefined}" padding-start="1" padding-end="1" fill-child="true" id="emd96">
+                    <smart-input value="{item.alnvalue}" hidden="{item.datatype_maxvalue === 'NUMERIC'}" input-kind="ALN" label="{item.computedLabel}" hide-step-buttons="true" id="ewvdk"/>
+                    <smart-input value="{item.numvalue}" hidden="{item.datatype_maxvalue === 'ALN'}" input-kind="DECIMAL" label="{item.computedLabel}" hide-step-buttons="true" id="gbqz2"/>
+                  </box>
+                  <box fill-parent="true" hidden="{item.domainid == undefined}" padding="0.5" fill-child="true" id="w9drb">
+                    <border-layout fill-parent="false" padding="false" middle-border="true" id="pq2z8">
+                      <start width="90" background-color="ui-01" horizontal-overflow="hidden" id="mk7xe">
+                        <box children-sizes="100" direction="column" padding-start="0.5" fill-child="true" fill-parent-horizontal="true" id="vpe48">
+                          <field label="{item.computedLabel}" label-class-name="header-small" hidden="{item.datatype_maxvalue === 'NUMERIC' || item.datatype_maxvalue === 'MAXTABLE'}" swap-position="false"  id="q7jn7">
+                            <sub-field value="{item.alnvalue}" id="rdpzw"/>
+                          </field>
+                          <field label="{item.assetattrid}" label-class-name="header-small" hidden="{item.datatype_maxvalue === 'ALN'  || item.datatype_maxvalue === 'MAXTABLE'}" swap-position="false" id="y62dd">
+                            <sub-field value="{item.numvalue}" id="jpxzk"/>
+                          </field>
+                          <field label="{item.assetattrid}" label-class-name="header-small" hidden="{item.datatype_maxvalue === 'ALN'  || item.datatype_maxvalue === 'NUMERIC'}" swap-position="false" id="rnzv5">
+                            <sub-field value="{item.tablevalue}" id="ywede"/>
+                          </field>
+                        </box>
+                      </start>
+                      <end width="10" background-color="ui-01" id="gz7z7">
+                        <button icon="carbon:chevron--right" on-click="openSpecLookup" on-click-arg="{{'page':page,'item':item}}" kind="ghost" padding="false" id="w2wnw"/>
+                      </end>
+                    </border-layout>
+                  </box>
+                </start>
+              </border-layout>
+            </data-list>
+          </panel>
+          <button-group slot="header-button" align="end" id="emvb_">
+            <button icon="carbon:checkmark" kind="primary" on-click="saveSpecification" on-click-arg="{{'item':assetSpecificationDS.items,'datasource':assetSpecificationDS}}" id="kvnqx"/>
+          </button-group>
+        </sliding-drawer>
+      </dialogs>
+    </page>
+    <page padding="true" id="createasset" path="/createasset" title="Create Asset" icon="maximo:assets" controller="AssetCreateDataController">
+      <states id="wpzjr">
+        <state name="minPriority" value="0" type="number" id="kbazm"/>
+        <state name="maxPriority" value="999" type="number" id="yw2_v"/>
+        <state name="useConfirmDialog" value="true" type="boolean" id="b79xz"/>
+        <state name="hasAssetNumber" value="false" type="boolean" id="qg4d7"/>
+      </states>
+      <header-template title-column-width="{app.state.screen.size === 'lg' ? 45 : 80}" id="kngx7">
+        <button slot="buttons" disabled="{(page.state.readOnlyState || (!dsCreateAsset.state.canSave))}" label="Save" icon="carbon:checkmark" on-click="createAsset" on-click-arg="{{'item':dsCreateAsset.item,'datasource':dsCreateAsset}}" kind="ghost" loading="{page.state.saveInProgress}" id="pmme3"/>
+      </header-template>
+      <maximo-datasource id="dsCreateAsset" object-structure="mxapiasset" where="assetnum=&quot;0&quot;" auto-save="false">
+        <schema id="mwp_5">
+          <attribute name="assetid" searchable="true" unique-id="true" id="e_v_v1"/>
+          <attribute name="assetnum" id="gmw8v1"/>
+          <attribute name="serialnum" id="yj944"/>
+          <attribute name="manufacturer" id="n76a4"/>
+          <attribute name="manufacturer.name--manufacturername" id="dazj2"/>
+          <attribute name="priority" id="bkn5x"/>
+          <attribute name="description" id="qb7_w"/>
+          <attribute name="description_longdescription" id="dk3pj1"/>
+          <attribute name="parent" id="qk752"/>
+          <attribute name="siteid" id="x_gn_"/>
+          <attribute name="orgid" id="e6mne"/>
+          <attribute name="location" id="qd723"/>
+          <attribute name="location.description--locationdesc" id="g8pmn"/>
+          <attribute name="vendor" id="q23asd8d"/>
+          <attribute name="companies.name--vendorname" id="n6x2w"/>
+          <attribute name="failurecode" id="kdryp"/>
+          <attribute name="failurecodes.description--failurecodedesc" id="rrj6j"/>
+          <attribute name="assettype" id="k9nmz"/>
+          <attribute name="assetstatusdesc" id="nz6ax"/>
+          <attribute name="parentassetdesc" id="eemmg"/>
+          <attribute name="classstructureid" id="d7pqv"/>
+          <attribute name="hierarchypath" id="xzva3"/>
+        </schema>
+      </maximo-datasource>
+      <json-datasource id="assetSpecificationCreateDS" selection-mode="single" items="member" src="{[]}">
+        <schema id="gn8_5">
+          <attribute name="assetattrid" id="pwvy4"/>
+          <attribute name="anywhererefid" id="dyyen"/>
+          <attribute name="measureunitid" id="v3vrg"/>
+          <attribute name="numvalue" scale="2" id="be58q"/>
+          <attribute name="alnvalue" id="pm3j8"/>
+          <attribute name="assetspecid" id="qnxb7"/>
+          <attribute name="assetattribute.description--assetattributedesc" id="wa66n"/>
+          <attribute name="displaysequence" sortable="true" id="wmnzy"/>
+          <attribute name="classstructureid" sortable="true" id="m258_"/>
+          <attribute name="linearassetspecid" sortable="true" id="e7e7j" default-value="0"/>
+        </schema>
+      </json-datasource>
+      <dialogs id="ayjv2">
+        <dialog id="longdsEditDialog" title="Long description" on-close-action="onCloseRichTextDialog" passive="true" size="lg">
+          <rich-text-editor content="{dsCreateAsset.item.description_longdescription}" toolbar="true" menubar="false" statusbar="false" on-editor-change="onEditorChange" on-save="onEditorSave" id="a_x43"/>
+        </dialog>
+        <dialog id="saveDiscardDialogCreatePage" title="Save or discard changes?" primary-action-text="Save" primary-icon="carbon:checkmark" on-primary-action="setRichTextValue" on-primary-action-arg="{{'item': dsCreateAsset.item, 'datasource': dsCreateAsset}}" primary-kind="primary" on-secondary-action="closeSaveDiscardDialog" secondary-action-text="Discard" secondary-icon="carbon:delete">
+          <label wrap="true" label="You must first discard or save your changes." id="w32ka"/>
+        </dialog>
+        <dialog id="inValidLocationDialog" title="invalid location" primary-action-text="ok" on-primary-action="closeSaveDiscardDialog">
+          <label wrap="true" label="BMXAA2661E - Location is not a valid location" id="w77ka"/>
+        </dialog>
+        <lookup-with-filter id="manufacturerLookup" width="100" datasource="dsManufacture" on-item-click="chooseManufacturer" show-search="true" show-count="true" lookup-heading="Manufacture" enable-barcode-scanner="true">
+          <list-item id="dnnmm">
+            <adaptive-row id="nzwxe">
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="p53ky">
+                <label label="{item.company}" id="zqabj"/>
+              </adaptive-column>
+              <adaptive-column small-width="40" medium-width="67" large-width="40" xlarge-width="50" id="gn7qq">
+                <label label="{item.name}" id="gk8e5"/>
+              </adaptive-column>
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="mv3b8">
+                <label label="{item.orgid}" id="bw_br"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="vendorLookup" width="100" datasource="dsVendor" on-item-click="chooseVendor" show-search="true" show-count="true" lookup-heading="Vendor" enable-barcode-scanner="true">
+          <list-item id="pnk57">
+            <adaptive-row id="q9x_a">
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="x_dmn">
+                <label label="{item.company}" id="dwe4g"/>
+              </adaptive-column>
+              <adaptive-column small-width="40" medium-width="67" large-width="40" xlarge-width="50" id="y2y83">
+                <label label="{item.name}" id="k73dk"/>
+              </adaptive-column>
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="nj579">
+                <label label="{item.orgid}" id="mm277"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="parentLookup" width="100" datasource="parentListDS" show-search="true" on-item-click="chooseAssetItem" show-count="true" has-filter="false" lookup-heading="Parent" enable-barcode-scanner="true">
+          <list-item id="e5b5b">
+            <adaptive-row id="kdq9z">
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="v6eek">
+                <label label="{item.assetnum}" id="ympnq"/>
+              </adaptive-column>
+              <adaptive-column small-width="40" medium-width="67" large-width="40" xlarge-width="50" id="zpx33">
+                <label label="{item.description}" id="qenw5"/>
+              </adaptive-column>
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="rgpde">
+                <label label="{item.location}" id="xnn5z"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="failureClassLookup" width="100" datasource="dsFailureList" on-item-click="chooseFailureCode" show-search="true" show-count="true" has-filter="true" lookup-heading="Failure class" enable-barcode-scanner="true">
+          <list-item id="nmap2">
+            <adaptive-row id="grv_p">
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="vqeek">
+                <label label="{item.computeFailureCode}" id="xdbjk"/>
+              </adaptive-column>
+              <adaptive-column small-width="40" medium-width="67" large-width="40" xlarge-width="50" id="r7zbq">
+                <label label="{item.failurecode.description}" id="e7_mx"/>
+              </adaptive-column>
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="g242y">
+                <label label="{item.orgid}" id="n7eke"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="typeLookup" width="100" datasource="synonymdomainData" show-search="false" show-count="true" on-item-click="chooseType" has-filter="true" lookup-heading="Type" enable-barcode-scanner="true">
+          <list-item id="xy6wr">
+            <adaptive-row id="qp9pk">
+              <adaptive-column small-width="40" medium-width="40" large-width="30" xlarge-width="30" id="dj_8n">
+                <label label="{item.value}" id="z9_ap"/>
+              </adaptive-column>
+              <adaptive-column small-width="60" medium-width="60" large-width="60" xlarge-width="50" id="d3krx">
+                <label label="{item.description}" id="e9adg"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="openLocationLookup" width="100" on-item-click="chooseAssetLocation" datasource="locationLookupDS" show-search="true" show-count="true" lookup-heading="Locations">
+          <list-item id="f5a5b">
+            <adaptive-row id="kdq3a">
+              <adaptive-column small-width="30" medium-width="30" large-width="30" xlarge-width="30" id="v7eek">
+                <label label="{item.location}" id="ympdq"/>
+              </adaptive-column>
+              <adaptive-column small-width="40" medium-width="40" large-width="50" xlarge-width="50" id="zpx55">
+                <label label="{item.description}" id="fenw5"/>
+              </adaptive-column>
+              <adaptive-column small-width="30" medium-width="30" large-width="20" xlarge-width="20" id="zpd45">
+                <label label="{item.type}" id="fsdw5"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="openClassificationLookup" width="100" datasource="assetclassdataDS" on-item-click="chooseClassification" show-search="true" search-placeholder="Select classification" show-count="true" tree-name="Classification hierarchy" has-filter="false" hierarchy-drill-in="true" lookup-heading="Classification hierarchy">
+          <list-item child-attribute="children" id="qed6eax8">
+            <box direction="row" id="qeu5pmme" fill-parent="true">
+              <label label="{item.classificationid}" id="quv9yez"/>
+            </box>
+          </list-item>
+          <list-item id="qwpbuex" tree-label-attribute="classificationid"/>
+          <list-item id="qwpbzenv">
+            <box direction="row" id="qi3pamme" fill-parent="true">
+              <label label="{item.classificationid}" id="qwd2ade3r"/>
+            </box>
+          </list-item>
+        </lookup-with-filter>
+      </dialogs>
+      <panel id="zrmye">
+        <box padding-top="1" id="j6vxy"/>
+        <box direction="column" background-color="field-01" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 0 : '0.5'}" id="gr4pa">
+          <border-layout padding="false" background-color="field-01" width="100%" id="x5mzd">
+            <middle horizontal-overflow="hidden" width="100" id="jax6k">
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-top="1.5" fill-child="true" id="nq622">
+                <smart-input label="Description" rows="1" theme="dark" input-kind="ALN" value="{dsCreateAsset.item.description}" id="xpkmg" on-change="updateSaveButtonVisibility"/>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-bottom="1.5" fill-child="true" id="xmy3k">
+                <text-area value="{dsCreateAsset.item.description_longdescription}" theme="dark" max-length="200" label="Long Description" on-change="updateSaveButtonVisibility" id="exm5m"/>
+              </box>
+            </middle>
+          </border-layout>
+        </box>
+        <border-layout padding="false" fill-parent="true" width="100%" id="xdvwd">
+          <top id="b86z7">
+            <box direction="row" vertical-align="center" padding-top="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '1.125'}" id="pqayj">
+              <label label="Details" theme="20-regular" wrap="true" id="ze254"/>
+            </box>
+          </top>
+        </border-layout>
+        <box direction="column" background-color="field-01" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 0 : '0.5'}" id="ry_z2">
+          <border-layout padding="false" background-color="field-01" width="100%" id="yyd3k">
+            <middle horizontal-overflow="hidden" id="b6by9">
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-top="1.5" fill-child="true" id="xm__x">
+                <smart-input label="Asset Number" required="true" theme="dark" value="{dsCreateAsset.item.assetnum}" on-change="validateAssetNumber" enable-lookup-buttongroup="true" select-lookup-attribute="assetnum" debounce-time="1000" id="kp2p8">
+                  <barcode-button slot="button-group" kind="secondary" label="Search" on-scan="handleAssetBarcodeScan" id="egzrx"/>
+                </smart-input>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" fill-child="true" id="dx5yd">
+                <smart-input label="Serial number" on-change="updateSaveButtonVisibility" rows="1" theme="dark" input-kind="GL" value="{dsCreateAsset.item.serialnum}" id="dg3yj" enable-lookup-buttongroup="true" select-lookup-attribute="serialnum">
+                  <barcode-button slot="button-group" kind="secondary" label="Search" on-scan="handleSerialBarcodeScan" id="b8a9w"/>
+                </smart-input>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" fill-child="true" id="npqmx">
+                <smart-input label="Type" theme="dark" value="{dsCreateAsset.item.assettype}" enable-lookup-buttongroup="true" select-lookup-attribute="value" debounce-time="1000" on-change="validateType" on-change-arg="value" id="ygvk4">
+                  <button slot="button-group" kind="secondary" label="Search" icon="Carbon:search" on-click="openTypeLookup" id="ayd2g"/>
+                </smart-input>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" fill-child="true" id="r8bxn">
+                <smart-input label="Vendor" theme="dark" value="{dsCreateAsset.item.vendor}" enable-lookup-buttongroup="true" select-lookup-attribute="company" debounce-time="1000" on-change="validateVendor" on-change-arg="vendor" id="d3_j3">
+                  <button slot="button-group" kind="secondary" label="Search" icon="Carbon:search" on-click="openVendorLookup" id="j5vgd"/>
+                </smart-input>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" fill-child="true" id="n_5r2">
+                <smart-input label="Manufacturer" theme="dark" value="{dsCreateAsset.item.manufacturer}" enable-lookup-buttongroup="true" select-lookup-attribute="company" debounce-time="1000" on-change="validateManufacture" on-change-arg="manufacturer" id="b3a_5">
+                  <button slot="button-group" kind="secondary" label="Search" icon="Carbon:search" on-click="openManufacturerLookup" id="x859j"/>
+                </smart-input>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-bottom="1.5" fill-child="true" id="b25b5">
+                <smart-input label="Parent" theme="dark" value="{dsCreateAsset.item.parent}" enable-lookup-buttongroup="true" select-lookup-attribute="assetnum" debounce-time="100" on-change="chooseParent" on-change-arg="assetnum" id="arp_n">
+                  <button slot="button-group" kind="secondary" label="Search" icon="Carbon:search" lookup="parentLookup" id="ex2vk"/>
+                </smart-input>
+              </box>
+            </middle>
+          </border-layout>
+        </box>
+        <border-layout padding="false" fill-parent="true" width="100%" id="n8764">
+          <top id="d9axp">
+            <box direction="row" vertical-align="center" padding-top="2.125" padding-bottom="1.125" id="qjbde">
+              <label label="Classifications" theme="20-regular" wrap="true" id="vmpd5"/>
+            </box>
+          </top>
+        </border-layout>
+        <box direction="column" background-color="field-01" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 0 : '0.5'}" id="a3rz7">
+          <border-layout padding="false" background-color="field-01" width="100%" id="qewwm">
+            <middle horizontal-overflow="hidden" id="mprdn">
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-top="1.5" padding-bottom="1" fill-child="true" id="rdjkx">
+                <smart-input label="Failure class" theme="dark" value="{dsCreateAsset.item.failurecode}" debounce-time="1000" on-change="validateFailureCode" on-change-arg="failurecode" enable-lookup-buttongroup="true" select-lookup-attribute="computeFailureCode" id="rxex6">
+                  <button slot="button-group" kind="secondary" label="Search" icon="Carbon:search" on-click="openFailureClassLookup" id="xkx4j"/>
+                </smart-input>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-bottom="1.5" fill-child="true" id="nev6y">
+                <border-layout padding="false" fill-parent="true" background-color="field-01" width="100%" id="pb3ad">
+                  <start width="97" horizontal-overflow="hidden" id="paz_m">
+                    <smart-input label="Classification" readonly="true" theme="dark" value="{dsCreateAsset.item.hierarchypath}" id="bv3jr"/>
+                  </start>
+                  <end vertical-align="end" width="3" id="dx7z2">
+                    <button kind="secondary" icon="Carbon:search" on-click="openClassificationLookup" id="g7xd4"/>
+                  </end>
+                </border-layout>
+              </box>
+            </middle>
+          </border-layout>
+        </box>
+        <box padding-top="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" id="a73rg"/>
+        <border-layout padding="false" fill-parent="true" width="100%" id="xdvfd">
+          <top id="b13z7">
+            <box direction="row" vertical-align="center" padding-top="2.125" padding-bottom="1.125" id="pqfdj">
+              <label label="Locations" theme="20-regular" wrap="true" id="ze2sa3"/>
+            </box>
+          </top>
+        </border-layout>
+        <box direction="column" background-color="field-01" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 0 : '0.5'}" id="p4vbq">
+          <border-layout padding="false" background-color="field-01" width="100%" id="x5973">
+            <middle horizontal-overflow="hidden" id="z7zbm">
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-bottom="1" padding-top="1.5" fill-child="true" id="m35yp">
+                <smart-input label="Location" theme="dark" value="{dsCreateAsset.item.location}" select-lookup-attribute="location" on-change="validateLocation" enable-lookup-buttongroup="true" id="awegq">
+                  <button slot="button-group" kind="secondary" label="Search" icon="Carbon:search" on-click="loadLocationLookup" id="wxry5"/>
+                  <barcode-button slot="button-group" icon="Maximo:scan" on-scan="handleLocationBarcodeScan" timeout="30" label="Scan" id="md92n"/>
+                </smart-input>
+              </box>
+            </middle>
+          </border-layout>
+        </box>
+      </panel>
+    </page>
+    <page padding="true" id="editasset" path="/editasset" title="Edit Asset" icon="maximo:assets" controller="AssetEditDataController">
+      <states id="jkqgp">
+        <state name="minPriority" value="0" type="number" id="wgqwy"/>
+        <state name="maxPriority" value="999" type="number" id="rr__3"/>
+        <state name="useConfirmDialog" value="true" type="boolean" id="zvq_q"/>
+      </states>
+      <header-template title-column-width="{app.state.screen.size === 'lg' ? 45 : 80}" id="ydb42">
+        <button slot="buttons" disabled="{(page.state.readOnlyState || (!dsEditAsset.state.canSave))}" label="Save" icon="carbon:checkmark" on-click="updateAsset" on-click-arg="{{'item':dsEditAsset.item,'datasource':dsEditAsset}}" kind="ghost" loading="{page.state.saveInProgress}" id="dmnwk"/>
+      </header-template>
+      <maximo-datasource id="dsEditAsset" object-structure="mxapiasset" auto-save="false">
+        <schema id="pa2b_">
+          <attribute name="assetid" searchable="true" unique-id="true" id="rvm93"/>
+          <attribute name="assetnum" id="zzvnw"/>
+          <attribute name="serialnum" id="ww296"/>
+          <attribute name="manufacturer" id="nppyq"/>
+          <attribute name="manufacturer.name--manufacturername" id="vx9k_"/>
+          <attribute name="priority" id="px85e"/>
+          <attribute name="description" id="y7bnz"/>
+          <attribute name="description_longdescription" id="p5rpd"/>
+          <attribute name="parent" id="bxq65"/>
+          <attribute name="siteid" id="byd22"/>
+          <attribute name="location" id="r3avv"/>
+          <attribute name="location.description--locationdesc" id="x95kd"/>
+          <attribute name="vendor" id="ad_kp"/>
+          <attribute name="companies.name--vendorname" id="ye2qe"/>
+          <attribute name="failurecode" id="a95y6"/>
+          <attribute name="failurecodes.description--failurecodedesc" id="a_q5g"/>
+          <attribute name="assettype" id="m_zz5"/>
+          <attribute name="assetstatusdesc" id="dk5ez"/>
+          <attribute name="parentassetdesc" id="eemm"/>
+          <attribute name="classstructureid" id="q45_r"/>
+          <attribute name="hierarchypath" id="v62kj"/>
+        </schema>
+        <maximo-datasource id="assetSpecificationEditDSOriginal" relationship="assetspecclass" selection-mode="none" order-by="displaysequence">
+          <schema id="p9jdq1">
+            <attribute name="assetattrid" id="xj9a31"/>
+            <attribute name="anywhererefid" id="penrq1"/>
+            <attribute name="measureunitid" id="qb7481"/>
+            <attribute name="numvalue" scale="2" id="jqaap1"/>
+            <attribute name="alnvalue" id="mmxad1"/>
+            <attribute name="assetspecid" id="qyj3g1"/>
+            <attribute name="assetattribute.description--assetattributedesc" id="rg9621"/>
+            <attribute name="displaysequence" sortable="true" id="b6x361"/>
+            <attribute name="classstructureid" sortable="true" id="y5dv81"/>
+            <attribute name="linearassetspecid" sortable="true" id="jmr751" default-value="0"/>
+          </schema>
+        </maximo-datasource>
+      </maximo-datasource>
+      <json-datasource id="assetSpecificationEditTempDS" selection-mode="single" items="member" src="{[]}">
+        <schema id="p9jdq">
+          <attribute name="assetattrid" id="xj9a3"/>
+          <attribute name="anywhererefid" id="penrq"/>
+          <attribute name="measureunitid" id="qb748"/>
+          <attribute name="numvalue" scale="2" id="jqaap"/>
+          <attribute name="alnvalue" id="mmxad"/>
+          <attribute name="assetspecid" id="qyj3g"/>
+          <attribute name="assetattribute.description--assetattributedesc" id="rg962"/>
+          <attribute name="displaysequence" sortable="true" id="b6x36"/>
+          <attribute name="classstructureid" sortable="true" id="y5dv8"/>
+          <attribute name="linearassetspecid" sortable="true" id="jmr75" default-value="0"/>
+        </schema>
+      </json-datasource>
+      <dialogs id="xwp_m">
+        <dialog id="longdsEditDialogEditPage" title="Long description" on-close-action="onCloseRichTextDialog" passive="true" size="lg">
+          <rich-text-editor content="{dsEditAsset.item.description_longdescription}" toolbar="true" menubar="false" statusbar="false" on-editor-change="onEditorChange" on-save="onEditorSave" id="pvqjb"/>
+        </dialog>
+        <dialog id="saveDiscardDialogEditPage" title="Save or discard changes?" primary-action-text="Save" primary-icon="carbon:checkmark" on-primary-action="setRichTextValue" on-primary-action-arg="{{'item': dsEditAsset.item, 'datasource': dsEditAsset}}" primary-kind="primary" on-secondary-action="closeSaveDiscardDialog" secondary-action-text="Discard" secondary-icon="carbon:delete">
+          <label wrap="true" label="You must first discard or save your changes." id="dvm3w"/>
+        </dialog>
+        <dialog id="inValidLocationDialogEditPage" title="invalid location" primary-action-text="ok" on-primary-action="closeSaveDiscardDialog">
+          <label wrap="true" label="BMXAA2661E - Location is not a valid location" id="dwpy8"/>
+        </dialog>
+        <lookup-with-filter id="manufacturerLookupEdit" width="100" datasource="dsManufacture" on-item-click="chooseManufacturer" show-search="true" show-count="true" lookup-heading="Manufacture" enable-barcode-scanner="true">
+          <list-item id="mn4yv">
+            <adaptive-row id="yzegg">
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="bkmne">
+                <label label="{item.company}" id="a9mz8"/>
+              </adaptive-column>
+              <adaptive-column small-width="40" medium-width="67" large-width="40" xlarge-width="50" id="mb9vp">
+                <label label="{item.name}" id="xkvwq"/>
+              </adaptive-column>
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="j3vv_">
+                <label label="{item.orgid}" id="m9pzb"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="vendorLookupEdit" width="100" datasource="dsVendor" on-item-click="chooseVendor" show-search="true" show-count="true" lookup-heading="Vendor" enable-barcode-scanner="true">
+          <list-item id="mzkk6">
+            <adaptive-row id="dwy6n">
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="axqa3">
+                <label label="{item.company}" id="jzr4j"/>
+              </adaptive-column>
+              <adaptive-column small-width="40" medium-width="67" large-width="40" xlarge-width="50" id="w4v2g">
+                <label label="{item.name}" id="n5zg6"/>
+              </adaptive-column>
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="j34m7">
+                <label label="{item.orgid}" id="qk5y8"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="parentLookupEdit" width="100" datasource="parentListDS" show-search="true" on-item-click="chooseAssetItem" show-count="true" has-filter="false" lookup-heading="Parent" enable-barcode-scanner="true">
+          <list-item id="naver">
+            <adaptive-row id="wpk5e">
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="jdk7p">
+                <label label="{item.assetnum}" id="p9rn2"/>
+              </adaptive-column>
+              <adaptive-column small-width="40" medium-width="67" large-width="40" xlarge-width="50" id="d2bjp">
+                <label label="{item.description}" id="zk9md"/>
+              </adaptive-column>
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="z_v9x">
+                <label label="{item.location}" id="wgk3_"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="failureClassLookupEdit" width="100" datasource="dsFailureList" on-item-click="chooseFailureCode" show-search="true" show-count="true" has-filter="true" lookup-heading="Failure class" enable-barcode-scanner="true">
+          <list-item id="q6p22">
+            <adaptive-row id="xnb_r">
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="qrkd4">
+                <label label="{item.computeFailureCode}" id="jvn4n"/>
+              </adaptive-column>
+              <adaptive-column small-width="40" medium-width="67" large-width="40" xlarge-width="50" id="ybbnk">
+                <label label="{item.failurecode.description}" id="mq7r_"/>
+              </adaptive-column>
+              <adaptive-column small-width="30" medium-width="33" large-width="30" xlarge-width="25" id="dbgpj">
+                <label label="{item.orgid}" id="dpmxx"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="typeLookupEdit" width="100" datasource="synonymdomainData" show-search="false" show-count="true" on-item-click="chooseType" has-filter="true" lookup-heading="Type" enable-barcode-scanner="true">
+          <list-item id="q_ra8">
+            <adaptive-row id="yv6j2">
+              <adaptive-column small-width="40" medium-width="40" large-width="30" xlarge-width="30" id="w8xa4">
+                <label label="{item.value}" id="kzyyj"/>
+              </adaptive-column>
+              <adaptive-column small-width="60" medium-width="60" large-width="60" xlarge-width="50" id="g3r5k">
+                <label label="{item.description}" id="pk66b"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="openLocationLookupEdit" width="100" on-item-click="chooseAssetLocation" datasource="locationLookupDS" show-search="true" show-count="true" lookup-heading="Locations">
+          <list-item id="qpga4">
+            <adaptive-row id="w6859">
+              <adaptive-column small-width="30" medium-width="30" large-width="30" xlarge-width="30" id="gnwx2">
+                <label label="{item.location}" id="jp_83"/>
+              </adaptive-column>
+              <adaptive-column small-width="40" medium-width="40" large-width="50" xlarge-width="50" id="m3e6q">
+                <label label="{item.description}" id="zxary"/>
+              </adaptive-column>
+              <adaptive-column small-width="30" medium-width="30" large-width="20" xlarge-width="20" id="rpk7k">
+                <label label="{item.type}" id="g42xp"/>
+              </adaptive-column>
+            </adaptive-row>
+          </list-item>
+        </lookup-with-filter>
+        <lookup-with-filter id="openClassificationLookupEdit" datasource="assetclassdataDS" on-item-click="changeClassification" show-search="true" search-placeholder="Select classification" show-count="true" tree-name="Classification hierarchy" has-filter="false" hierarchy-drill-in="true" lookup-heading="Classification hierarchy">
+          <list-item child-attribute="children" id="bwr_7">
+            <box direction="row" fill-parent="true" id="q2vdv">
+              <label label="{item.classificationid}" id="ge2av"/>
+            </box>
+          </list-item>
+          <list-item tree-label-attribute="classificationid" id="pvaqx"/>
+          <list-item id="wp9d5">
+            <box direction="row" fill-parent="true" id="v3jm2">
+              <label label="{item.classificationid}" id="ppezj"/>
+            </box>
+          </list-item>
+        </lookup-with-filter>
+      </dialogs>
+      <panel id="g52wr">
+        <box padding-top="1" id="x7jj5"/>
+        <box direction="column" background-color="field-01" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 0 : '0.5'}" id="w73n6">
+          <border-layout padding="false" background-color="field-01" width="100%" id="mvxq7">
+            <middle horizontal-overflow="hidden" width="100" id="jzbxr">
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-bottom="1" padding-top="1.5" fill-child="true" id="wanz4">
+                <smart-input label="Description" rows="1" theme="dark" input-kind="ALN" value="{dsEditAsset.item.description}" on-change="updateSaveButtonVisibility" id="m342p"/>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-bottom="1.5" fill-child="true" id="vngmx">
+                <text-area value="{dsEditAsset.item.description_longdescription}" theme="dark" max-length="200" label="Long Description" on-change="updateSaveButtonVisibility" id="v38z9"/>
+              </box>
+            </middle>
+          </border-layout>
+        </box>
+        <border-layout padding="false" fill-parent="true" width="100%" id="pq7y4">
+          <top id="wqbwj">
+            <box direction="row" vertical-align="center" padding-top="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '1.125'}" id="zpwn6">
+              <label label="Details" theme="20-regular" wrap="true" id="y96bq"/>
+            </box>
+          </top>
+        </border-layout>
+        <box direction="column" background-color="field-01" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 0 : '0.5'}" id="kz5pb">
+          <border-layout padding="false" background-color="field-01" width="100%" id="az929">
+            <middle horizontal-overflow="hidden" id="qxwxg">
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-top="1.5" fill-child="true" id="zvvep">
+                <smart-input label="Asset Number" readonly="true" theme="dark" value="{dsEditAsset.item.assetnum}" on-change="validateAssetNumber" enable-lookup-buttongroup="true" select-lookup-attribute="assetnum" id="vz4mw">
+                  <barcode-button slot="button-group" kind="secondary" label="Search" on-scan="handleAssetBarcodeScan" id="p7ez4"/>
+                </smart-input>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" fill-child="true" id="jwr32">
+                <smart-input label="Serial number" on-change="updateSaveButtonVisibility" rows="1" theme="dark" input-kind="GL" value="{dsEditAsset.item.serialnum}" enable-lookup-buttongroup="true" select-lookup-attribute="serialnum" id="gj9vj">
+                  <barcode-button slot="button-group" kind="secondary" label="Search" on-scan="handleSerialBarcodeScan" id="a3v5_"/>
+                </smart-input>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" fill-child="true" id="vg2w2">
+                <smart-input label="Type" theme="dark" value="{dsEditAsset.item.assettype}" enable-lookup-buttongroup="true" select-lookup-attribute="value" debounce-time="1000" on-change="validateType" on-change-arg="value" id="m7wd3">
+                  <button slot="button-group" kind="secondary" label="Search" icon="Carbon:search" on-click="openTypeLookup" id="y2wmb"/>
+                </smart-input>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" fill-child="true" id="km3xj">
+                <smart-input label="Vendor" theme="dark" value="{dsEditAsset.item.vendor}" enable-lookup-buttongroup="true" select-lookup-attribute="company" debounce-time="1000" on-change="validateVendor" on-change-arg="vendor" id="akq95">
+                  <button slot="button-group" kind="secondary" label="Search" icon="Carbon:search" on-click="openVendorLookup" id="x36_7"/>
+                </smart-input>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" fill-child="true" id="x6dzy">
+                <smart-input label="Manufacturer" theme="dark" value="{dsEditAsset.item.manufacturer}" enable-lookup-buttongroup="true" select-lookup-attribute="company" debounce-time="1000" on-change="validateManufacture" on-change-arg="manufacturer" id="a92zn">
+                  <button slot="button-group" kind="secondary" label="Search" icon="Carbon:search" on-click="openManufacturerLookup" id="njpjz"/>
+                </smart-input>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-bottom="1.5" fill-child="true" id="zpd5d">
+                <smart-input label="Parent" theme="dark" value="{dsEditAsset.item.parent}" enable-lookup-buttongroup="true" select-lookup-attribute="assetnum" debounce-time="100" on-change="chooseParent" readonly="{page.state.hasAssetMovePersmission == false}" on-change-arg="assetnum" id="drd9w">
+                  <button slot="button-group" kind="secondary" label="Search" icon="Carbon:search" lookup="parentLookupEdit" id="wb794"/>
+                </smart-input>
+              </box>
+            </middle>
+          </border-layout>
+        </box>
+        <border-layout padding="false" fill-parent="true" width="100%" id="zx6_e">
+          <top id="xab5d">
+            <box direction="row" vertical-align="center" padding-top="2.125" padding-bottom="1.125" id="dg7qz">
+              <label label="Classifications" theme="20-regular" wrap="true" id="w56_g"/>
+            </box>
+          </top>
+        </border-layout>
+        <box direction="column" background-color="field-01" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 0 : '0.5'}" id="ny5by">
+          <border-layout padding="false" background-color="field-01" width="100%" id="wzj86">
+            <middle horizontal-overflow="hidden" id="zpqqa">
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-top="1.5" fill-child="true" id="ybr46">
+                <smart-input label="Failure class" theme="dark" value="{dsEditAsset.item.failurecode}" debounce-time="1000" on-change="validateFailureCode" on-change-arg="failurecode" enable-lookup-buttongroup="true" select-lookup-attribute="computeFailureCode" id="b3ag3">
+                  <button slot="button-group" kind="secondary" label="Search" icon="Carbon:search" on-click="openFailureClassLookup" id="m7qxj"/>
+                </smart-input>
+              </box>
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-bottom="1.5" fill-child="true" id="g3axq">
+                <border-layout padding="false" fill-parent="true" background-color="field-01" width="100%" id="ykrwm">
+                  <start width="97" horizontal-overflow="hidden" id="eyyn8">
+                    <smart-input label="Classification" readonly="true" theme="dark" value="{dsEditAsset.item.hierarchypath}" id="j5645"/>
+                  </start>
+                  <end vertical-align="end" width="3" id="we_6g">
+                    <button kind="secondary" icon="Carbon:search" on-click="openClassificationLookupEdit" id="q98we"/>
+                  </end>
+                </border-layout>
+              </box>
+            </middle>
+          </border-layout>
+        </box>
+        <box padding-top="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '1' : '.5'}" id="y9_yx"/>
+        <border-layout padding="false" fill-parent="true" width="100%" id="ymare">
+          <top id="w8wzg">
+            <box direction="row" vertical-align="center" padding-top="2.125" padding-bottom="1.125" id="v_x5e">
+              <label label="Locations" theme="20-regular" wrap="true" id="bvdwz"/>
+            </box>
+          </top>
+        </border-layout>
+        <box direction="column" background-color="field-01" padding="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? 0 : '0.5'}" id="nn6px">
+          <border-layout padding="false" background-color="field-01" width="100%" id="r46x9">
+            <middle horizontal-overflow="hidden" id="mz592">
+              <box direction="row" children-sizes="100" fill-parent="true" padding-start="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-end="{app.state.screen.size === 'sm' || app.state.screen.size === 'md' ? '.5' : '1.5'}" padding-bottom="1" padding-top="1.5" fill-child="true" id="wa8x_">
+                <smart-input label="Location" theme="dark" value="{dsEditAsset.item.location}" select-lookup-attribute="location" on-change="validateLocation" readonly="{page.state.hasAssetMovePersmission == false}" enable-lookup-buttongroup="true" id="v9gnv">
+                  <button slot="button-group" kind="secondary" label="Search" icon="Carbon:search" on-click="loadLocationLookup" id="xq9d3"/>
+                  <barcode-button slot="button-group" icon="Maximo:scan" on-scan="handleLocationBarcodeScan" timeout="30" label="Scan" id="n9g97"/>
+                </smart-input>
+              </box>
+            </middle>
+          </border-layout>
+        </box>
+      </panel>
+    </page>
+    <page id="attachments" title="Attachments" padding="true" controller="AttachmentController">
+      <header-template title-column-width="{app.state.screen.size === 'lg' ? 45 : 60}" id="qrw97"/>
+      <maximo-datasource id="assetAttachmentResourceDs" default="true" object-structure="MXAPIASSET">
+        <schema id="j2d__">
+          <attribute name="assetnum" id="xbmn_"/>
+          <attribute name="description" id="nqz35"/>
+          <attribute name="assetid" unique-id="true" id="p67dz"/>
+        </schema>
+        <maximo-datasource id="attachmentListDS" attachment="true" page-size="250" relationship="doclinks" selection-mode="none">
+          <schema id="jxrn4">
+            <attribute name="docinfoid" unique-id="true" id="gr94p"/>
+            <attribute name="description" id="qg_vk"/>
+            <attribute name="fileName" id="a3gvm"/>
+            <attribute name="identifier" unique-id="true" id="pdwbd"/>
+            <attribute name="title" id="mvbew"/>
+            <attribute name="href" id="zy88z"/>
+            <attribute name="format" id="g_zk2"/>
+          </schema>
+        </maximo-datasource>
+      </maximo-datasource>
+      <panel id="vn25k">
+        <attachment-list datasource="attachmentListDS" hide-when-empty="false" show-search="false" show-managed-header="true" is-editable="{page.state.addAttachmentAccess}" allow-naming="true" id="rvqjg"/>
+      </panel>
+    </page>
+  </pages>
+</maximo-application>

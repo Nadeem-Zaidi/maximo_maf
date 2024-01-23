@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="MobileTestSuite test run on Android device">
+	<parameter name="configPath"
+		value="src/test/resources/config.eam.browserstack.mobile.android.properties" />
+	<parameter name="testType" value="mobileapp" />
+	<listeners>
+		<listener
+			class-name="com.ibm.maximo.technician.listener.ScreenShotListener" />
+	</listeners>
+	<test thread-count="1" name="SearchTest" preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class name="com.ibm.maximo.technician.testcases.SearchTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="MaterialRequestsTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.MaterialRequestsTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="ViewWorkOrderTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.ViewWorkOrderTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="StartWorkOrderWithoutTimer"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.StartWorkOrderWithoutTimer" />
+		</classes>
+	</test>
+	<test thread-count="1" name="TaskFlowControlTestCaseTwo"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.TaskFlowControlTestCaseTwo" />
+		</classes>
+	</test>
+	<test thread-count="1" name="TaskWorkOrdersVerifyWorkLogTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.TaskWorkOrdersVerifyWorkLogTest" />
+		</classes>
+	</test>
+	<test thread-count="1"
+		name="PlannedMaterialsToolsRequestMaterialsforItemTypesOne"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.PlannedMaterialsToolsRequestMaterialsforItemTypesOne" />
+		</classes>
+	</test>
+	<test thread-count="1"
+		name="PlannedMaterialsToolsRequestMaterialsforItemTypesTwo"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.PlannedMaterialsToolsRequestMaterialsforItemTypesTwo" />
+		</classes>
+	</test>
+	<test thread-count="1"
+		name="PlannedMaterialsToolsRequestMaterialsforItemTypesThree"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.PlannedMaterialsToolsRequestMaterialsforItemTypesThree" />
+		</classes>
+	</test>
+	<test thread-count="1"
+		name="TaskWorkOrdersUpdateMeterReadingsTest" preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.TaskWorkOrdersUpdateMeterReadingsTest" />
+		</classes>
+	</test>
+	<test thread-count="1"
+		name="TaskWorkOrdersParentReflectsSubtaskChangeTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.TaskWorkOrdersParentReflectsSubtaskChangeTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="PlannedToolsTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.PlannedToolsTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="CreateWorkOrderTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.CreateWorkOrderTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="FollowUpWorkTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.FollowUpWorkTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="TaskFlowControlTestCaseOne"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.TaskFlowControlTestCaseOne" />
+		</classes>
+	</test>
+	<test thread-count="1" name="TaskFlowControl"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.TaskFlowControl" />
+		</classes>
+	</test>
+	<test thread-count="1" name="ViewSpecificationTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.ViewSpecificationTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="SwitchToAssetDetailsTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.SwitchToAssetDetailsTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="CompleteWorkOrder"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.CompleteWorkOrder" />
+		</classes>
+	</test>
+	<test thread-count="1" name="MetersTest" preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class name="com.ibm.maximo.technician.testcases.MetersTest" />
+		</classes>
+	</test>
+	<test thread-count="1"
+		name="TaskWorkOrdersFailureInSubtaskOnlyTest" preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.TaskWorkOrdersFailureInSubtaskOnlyTest" />
+		</classes>
+	</test>
+	<test thread-count="1"
+		name="TaskWorkOrderVerifyInWorkOrderDetailsPage" preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.TaskWorkOrderVerifyInWorkOrderDetailsPage" />
+		</classes>
+	</test>
+	<test thread-count="1" name="TaskTestSuite" preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class name="com.ibm.maximo.technician.testcases.TaskTestSuite" />
+		</classes>
+	</test>
+	<test thread-count="1" name="AssetLookupTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.AssetLookupTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="MultiAssetLocationTestSuiteOne"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.MultiAssetLocationTestSuiteOne" />
+		</classes>
+	</test>
+	<test thread-count="1" name="MultiAssetLocationTestSuiteTwo"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.MultiAssetLocationTestSuiteTwo" />
+		</classes>
+	</test>
+	<test thread-count="1" name="LaborTransaction"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.LaborTransaction" />
+		</classes>
+	</test>
+	<test thread-count="1" name="MultiAssetLocationTestSuiteThree"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.MultiAssetLocationTestSuiteThree" />
+		</classes>
+	</test>
+	<test thread-count="1" name="FailureReportTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.FailureReportTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="TaskPageTest" preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class name="com.ibm.maximo.technician.testcases.TaskPageTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="MultipleTaskTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.MultipleTaskTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="AssetLocationWorkHistoryPageTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.AssetLocationWorkHistoryPageTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="AssetLocationTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.AssetLocationTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="AddWorkLog" preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class name="com.ibm.maximo.technician.testcases.AddWorkLog" />
+		</classes>
+	</test>
+	<test thread-count="1" name="TaskWorkOrder" preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class name="com.ibm.maximo.technician.testcases.TaskWorkOrder" />
+		</classes>
+	</test>
+	<test thread-count="1" name="ActualMaterialsTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.ActualMaterialsTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="ActualLaborToolsMaterialTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.ActualLaborToolsMaterialTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="NavigatorTest" preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class name="com.ibm.maximo.technician.testcases.NavigatorTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="ActualToolsTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.ActualToolsTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="EditWorkOrderDetailsTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.EditWorkOrderDetailsTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="ReservedItemsTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.ReservedItemsTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="WoSafetyPlanTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.WoSafetyPlanTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="ChangeStatusWOTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.ChangeStatusWOTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="InspectionIntegration"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.InspectionIntegration" />
+		</classes>
+	</test>
+	<test thread-count="1" name="TaskCardTest" preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class name="com.ibm.maximo.technician.testcases.TaskCardTest" />
+		</classes>
+	</test>
+	<test thread-count="1" name="StartWorkWithTimer"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.StartWorkWithTimer" />
+		</classes>
+	</test>
+	<test thread-count="1" name="StartWorkOrderTest"
+		preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class
+				name="com.ibm.maximo.technician.testcases.StartWorkOrderTest" />
+		</classes>
+	</test>
+</suite>

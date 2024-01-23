@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="MobileTestSuite run on Android and iOS device">
+	<!-- suite name="Suite Name" -->
+	<suite-files>
+		<suite-file path="./testng-eam-browserstack-mobile-android.xml" />
+		<suite-file path="./testng-eam-browserstack-mobile-ios.xml" />
+	</suite-files>
+</suite>

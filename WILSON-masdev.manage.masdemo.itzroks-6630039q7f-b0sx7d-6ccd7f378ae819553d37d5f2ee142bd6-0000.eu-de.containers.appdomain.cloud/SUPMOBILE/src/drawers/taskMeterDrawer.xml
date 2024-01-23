@@ -1,0 +1,72 @@
+<panel id="yk7qy">
+  <panel id="qd8rw">
+    <box padding-top="1" id="mk6r8"/>
+    <data-list datasource="{page.state.assetMeterData}" show-search="false" title="{page.state.assetMeterHeader}" hidden="{!page.state.assetMeterData.state.itemCount}" id="jej_m">
+      <border-layout padding="false" slot="item" fill-parent="true" id="mzp4r">
+        <top id="ezb4j">
+          <border-layout padding="false" fill-parent="true" id="maq93">
+            <start width="70" horizontal-overflow="hidden" id="dw_6z">
+              <border-layout padding="false" fill-parent="true" id="v7_6k">
+                <top id="k95bg">
+                  <box direction="column" vertical-align="center" fill-parent="true" id="b37ge">
+                    <field value="{item.metername}" override-required="true" field-class-name="16-bold" padding="none" qualifier="{item.unitdescription ? item.unitdescription : item.measureunitid}" hide-label="true" id="p8vyg"/>
+                  </box>
+                </top>
+                <bottom id="k8d5v">
+                  <box id="zw3y5">
+                    <field padding="none" id="rxvmd">
+                      <sub-field value="{item.computedReadingDate}" type="date_full_month" id="v7gqq"/>
+                    </field>
+                    <field padding="none" id="b5d73">
+                      <sub-field value="{item.computedReadingDate}" type="time" id="azz56"/>
+                    </field>
+                  </box>
+                </bottom>
+              </border-layout>
+            </start>
+            <end vertical-align="center" width="30" id="az86b">
+              <box vertical-align="center" direction="row" horizontal-align="end" fill-parent="true" id="j_m5m">
+                <field wrap="true" value="{item.computedReading}" field-class-name="16-regular" hide-label="true" id="b97md"/>
+              </box>
+            </end>
+          </border-layout>
+        </top>
+      </border-layout>
+    </data-list>
+  </panel>
+  <panel id="eg3yj">
+    <box padding-top="1" id="ynqeq"/>
+    <data-list datasource="{page.state.locationMeterData}" show-search="false" title="{page.state.locationMeterHeader}" hidden="{!page.state.locationMeterData.state.itemCount}" id="y3ka3">
+      <border-layout padding="false" slot="item" fill-parent="true" id="be5xk">
+        <top id="ek_mg">
+          <border-layout padding="false" fill-parent="true" id="wmnp7">
+            <start width="70" horizontal-overflow="hidden" id="jq7jn">
+              <border-layout padding="false" fill-parent="true" id="j47w9">
+                <top id="wz7qy">
+                  <box direction="column" vertical-align="center" fill-parent="true" id="gj76j">
+                    <field value="{item.metername}" override-required="true" field-class-name="16-bold" padding="none" qualifier="{item.unitdescription ? item.unitdescription : item.measureunitid}" hide-label="true" id="v_bx9"/>
+                  </box>
+                </top>
+                <bottom id="xm7n9">
+                  <box id="mvp3z">
+                    <field padding="none" id="wa5bx">
+                      <sub-field value="{item.computedReadingDate}" type="date_full_month" id="x4585"/>
+                    </field>
+                    <field padding="none" id="vx3pq">
+                      <sub-field value="{item.computedReadingDate}" type="time" id="pev_9"/>
+                    </field>
+                  </box>
+                </bottom>
+              </border-layout>
+            </start>
+            <end vertical-align="center" width="30" id="x763x">
+              <box vertical-align="center" direction="row" horizontal-align="end" fill-parent="true" id="x96_9">
+                <field value="{item.computedReading}" field-class-name="16-regular" hide-label="true" id="qeva2"/>
+              </box>
+            </end>
+          </border-layout>
+        </top>
+      </border-layout>
+    </data-list>
+  </panel>
+</panel>

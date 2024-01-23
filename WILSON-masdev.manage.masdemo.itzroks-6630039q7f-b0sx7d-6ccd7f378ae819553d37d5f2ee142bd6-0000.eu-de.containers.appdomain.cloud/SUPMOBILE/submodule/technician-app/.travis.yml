@@ -1,0 +1,2 @@
+import:
+  - maximo-app-framework/build-configs:apps-travis-configs.yml

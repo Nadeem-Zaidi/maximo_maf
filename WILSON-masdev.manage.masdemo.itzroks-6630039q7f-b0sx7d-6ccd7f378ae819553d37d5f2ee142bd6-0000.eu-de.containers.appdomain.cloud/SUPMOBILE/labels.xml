@@ -1,0 +1,3526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<maxlabels>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>messages_error_messages</id>
+    <property>label</property>
+    <value>This is an error</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>messages_no_value</id>
+    <property>label</property>
+    <value>No value supplied for field {0} even though it is required.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>messages_no_field</id>
+    <property>label</property>
+    <value>No field {0} found in schema</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>messages_wrong_type</id>
+    <property>label</property>
+    <value>Incorrect type for field {0}. Expected {1} but got {2}.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>messages_over_max_length</id>
+    <property>label</property>
+    <value>Value {0} for field {1} exceeds max length allowed ({2})</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>messages_save_failed</id>
+    <property>label</property>
+    <value>Saving data has failed.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>messages_toast_error_on_page_label</id>
+    <property>label</property>
+    <value>Errors on page</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>messages_toast_errors_on_page_msg</id>
+    <property>label</property>
+    <value>Correct the errors before saving.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>system_shared</id>
+    <property>label</property>
+    <value>shared</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>system_private</id>
+    <property>label</property>
+    <value>private</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>system_invalidtime</id>
+    <property>label</property>
+    <value>Invalid time</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>system_invaliddate</id>
+    <property>label</property>
+    <value>Invalid date</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>system_invalidnumber</id>
+    <property>label</property>
+    <value>Invalid number</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>system_invaliddatetime</id>
+    <property>label</property>
+    <value>Invalid date and time</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>system_maximumlength</id>
+    <property>label</property>
+    <value
+      >The value specified exceeds the maximum field length that is allowed for
+      this attribute: Value = {0}, Attribute Name={1}, Maximum
+      Length={2}.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>system_invalidduration</id>
+    <property>label</property>
+    <value>Invalid duration</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>system_invalidyorn</id>
+    <property>label</property>
+    <value>Invalid Yes or No value</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>system_hours</id>
+    <property>label</property>
+    <value>hours</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>system_minutes</id>
+    <property>label</property>
+    <value>minutes</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>system_hour</id>
+    <property>label</property>
+    <value>hour</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>system_minute</id>
+    <property>label</property>
+    <value>minute</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>userconfirmation_saveConfirmHeading</id>
+    <property>label</property>
+    <value>Save or discard changes?</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>userconfirmation_itemsChangedNotSaved</id>
+    <property>label</property>
+    <value
+      >To leave this page, you must first discard or save your changes.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>userconfirmation_primaryButtonText</id>
+    <property>label</property>
+    <value>Save</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>userconfirmation_secondaryButtonText</id>
+    <property>label</property>
+    <value>Discard</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>userconfirmation_toastErrorsOnPage</id>
+    <property>label</property>
+    <value>Errors on page</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>userconfirmation_toastErrorDescription</id>
+    <property>label</property>
+    <value>Correct the errors before saving.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>fieldhelp_fieldTitle</id>
+    <property>label</property>
+    <value>Field</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>fieldhelp_tableColumn</id>
+    <property>label</property>
+    <value>Resource</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>fieldhelp_maxLength</id>
+    <property>label</property>
+    <value>Max Length</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>pageheader_backLabel</id>
+    <property>label</property>
+    <value>Back</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>tablisttemplate_actionsOverflow</id>
+    <property>label</property>
+    <value>Actions</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>tablisttemplate_checkForUpdates</id>
+    <property>label</property>
+    <value>Check for updates</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>pageheadertemplate_search</id>
+    <property>label</property>
+    <value>What are you looking for today?</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>pageheadertemplate_searchTouch</id>
+    <property>label</property>
+    <value>Search</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>splitview_back</id>
+    <property>label</property>
+    <value>Back</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_menuOverflowDescription</id>
+    <property>label</property>
+    <value>Application Menu</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_menuUserDescription</id>
+    <property>label</property>
+    <value>User</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_knowledgeCenterActionLabel</id>
+    <property>label</property>
+    <value>Knowledge Center</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_logOutActionLabel</id>
+    <property>label</property>
+    <value>Log out</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_logOutPromptMsg</id>
+    <property>label</property>
+    <value>Are you sure you want to log out?</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_userMenuLabel</id>
+    <property>label</property>
+    <value>User Menu</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_profileActionLabel</id>
+    <property>label</property>
+    <value>Manage profile</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_helpMenuLabel</id>
+    <property>label</property>
+    <value>Help</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_whatsNewLabel</id>
+    <property>label</property>
+    <value>What's new</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_gettingStarted</id>
+    <property>label</property>
+    <value>Getting started</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_documentation</id>
+    <property>label</property>
+    <value>User documentation</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_requestEnhancement</id>
+    <property>label</property>
+    <value>Request documentation</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_support</id>
+    <property>label</property>
+    <value>Support</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_helpAbout</id>
+    <property>label</property>
+    <value>About</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_companyName</id>
+    <property>label</property>
+    <value>IBM</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_productName</id>
+    <property>label</property>
+    <value>Maximo Application Suite</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_productNameAdaptive</id>
+    <property>label</property>
+    <value>Maximo Mobile</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>graphiteapplication_systemInfoLabel</id>
+    <property>label</property>
+    <value>System Information</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>attachmentlist_attachments</id>
+    <property>label</property>
+    <value>Attachments</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>attachmentlist_deleting</id>
+    <property>label</property>
+    <value>Deleting </value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>attachmentlist_selectedCount</id>
+    <property>label</property>
+    <value>{0} Items Selected</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>attachmentlist_search</id>
+    <property>label</property>
+    <value>What are you looking for today?</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>attachmentlist_notification</id>
+    <property>label</property>
+    <value>Notification</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>attachmentlist_emptySetString</id>
+    <property>label</property>
+    <value>No attachments available</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>attachmentlist_emptySetSubLabel</id>
+    <property>label</property>
+    <value>Want to add a document, photo, or video? Select the Add icon.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>attachmentlist_invalidPropCombination</id>
+    <property>label</property>
+    <value
+      >You cannot specify hideWhenEmpty when allowing a search bar. Please
+      disable one of the properties.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>barcodecontroller_cancel</id>
+    <property>label</property>
+    <value>Cancel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>barcodecontroller_scanBarcode</id>
+    <property>label</property>
+    <value>Scan</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>barcodecontroller_cameras</id>
+    <property>label</property>
+    <value>Available cameras</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>barcodecontroller_error_noMediaDeviceSupport</id>
+    <property>label</property>
+    <value
+      >Scanning is unavailable. Check that your connection is secure and that
+      use of your camera is permitted.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>barcodecontroller_user</id>
+    <property>label</property>
+    <value>User facing camera</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>barcodecontroller_environment</id>
+    <property>label</property>
+    <value>Environment facing camera</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>barcodescanner_cancel</id>
+    <property>label</property>
+    <value>Cancel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>barcodescanner_scanBarcode</id>
+    <property>label</property>
+    <value>Scan</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>barcodescanner_cameras</id>
+    <property>label</property>
+    <value>Available cameras</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>barcodescanner_error_noMediaDeviceSupport</id>
+    <property>label</property>
+    <value
+      >Scanning is unavailable. Check that your connection is secure and that
+      use of your camera is permitted.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>barcodescanner_user</id>
+    <property>label</property>
+    <value>User facing camera</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>barcodescanner_environment</id>
+    <property>label</property>
+    <value>Environment facing camera</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>button_disconnectedMessage</id>
+    <property>label</property>
+    <value>This feature is not available while offline</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>buttonbar_label</id>
+    <property>label</property>
+    <value>Data sync Bar Label</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>cardgroup_selectAll</id>
+    <property>label</property>
+    <value>Select All</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>cardgroup_selectActionsOverflow</id>
+    <property>label</property>
+    <value>Actions</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>cardgroup_selectedCount</id>
+    <property>label</property>
+    <value>Selected: {0}</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>cardgroup_actionsOverflow</id>
+    <property>label</property>
+    <value>Actions</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>cardgroup_cancel</id>
+    <property>label</property>
+    <value>Cancel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>cardgroup_checkForUpdates</id>
+    <property>label</property>
+    <value>Check for updates</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>cardgroup_selectedTitle</id>
+    <property>label</property>
+    <value>Selected</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>cardgroup_unSelectedTitle</id>
+    <property>label</property>
+    <value>Not Selected</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>cardgroup_search</id>
+    <property>label</property>
+    <value>Search</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>chatlog_noNotesLabel</id>
+    <property>label</property>
+    <value>No notes to view.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>chatlog_noNotesSubLabel</id>
+    <property>label</property>
+    <value>Be the first to add a note.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>chatlog_primaryButtonText</id>
+    <property>label</property>
+    <value>Ok</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>chatlog_secondaryButtonText</id>
+    <property>label</property>
+    <value>Cancel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>chatlog_placeholderText</id>
+    <property>label</property>
+    <value>Add a note</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>checkboxgroup_fieldRequiredText</id>
+    <property>label</property>
+    <value>At least one selection is required</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dashboard_noTooltipLinkText</id>
+    <property>label</property>
+    <value>Link</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcegaugetile_nodataLabel</id>
+    <property>label</property>
+    <value>No data</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcevaluetile_nodataLabel</id>
+    <property>label</property>
+    <value>No data</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datalist_reset</id>
+    <property>label</property>
+    <value>Clear changes</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datalist_selectedCount</id>
+    <property>label</property>
+    <value>{0} Items Selected</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datalist_multiActionSelectedCount</id>
+    <property>label</property>
+    <value>Selected: {0}</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datalist_search</id>
+    <property>label</property>
+    <value>What are you looking for today?</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datalist_selectAll</id>
+    <property>label</property>
+    <value>Select All</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datalist_multiActionCancel</id>
+    <property>label</property>
+    <value>Cancel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datalist_actionsOverflow</id>
+    <property>label</property>
+    <value>Actions</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datalist_searchTouch</id>
+    <property>label</property>
+    <value>Search</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datalist_records</id>
+    <property>label</property>
+    <value> records</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datalist_tree</id>
+    <property>label</property>
+    <value>Tree</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dateinput_noEdit</id>
+    <property>label</property>
+    <value>This field cannot be edited</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>daterelative_today</id>
+    <property>label</property>
+    <value>Today</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>daterelative_tomorrow</id>
+    <property>label</property>
+    <value>Tomorrow</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>daterelative_yesterday</id>
+    <property>label</property>
+    <value>Yesterday</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialog_yes</id>
+    <property>label</property>
+    <value>Yes</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialog_no</id>
+    <property>label</property>
+    <value>No</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialog_close</id>
+    <property>label</property>
+    <value>Close</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialog_cancel</id>
+    <property>label</property>
+    <value>Cancel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialog_ok</id>
+    <property>label</property>
+    <value>Ok</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_close</id>
+    <property>label</property>
+    <value>Close</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_yes</id>
+    <property>label</property>
+    <value>Yes</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_no</id>
+    <property>label</property>
+    <value>No</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_ok</id>
+    <property>label</property>
+    <value>Ok</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_cancel</id>
+    <property>label</property>
+    <value>Cancel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_discard</id>
+    <property>label</property>
+    <value>Discard</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_systemMessage</id>
+    <property>label</property>
+    <value>System message</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_save</id>
+    <property>label</property>
+    <value>Save</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_primaryButtonText</id>
+    <property>label</property>
+    <value>Ok</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_secondaryButtonText</id>
+    <property>label</property>
+    <value>Cancel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_linkConfirmHeading</id>
+    <property>label</property>
+    <value>Are you leaving?</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_saveConfirmHeading</id>
+    <property>label</property>
+    <value>Save or discard changes?</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_primaryButtonSaveText</id>
+    <property>label</property>
+    <value>Save</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_secondaryButtonDiscardText</id>
+    <property>label</property>
+    <value>Discard</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_itemsChangedNotSaved</id>
+    <property>label</property>
+    <value
+      >To leave this page, you must first discard or save your changes.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dialogcontroller_componentsNotFilledProperly</id>
+    <property>label</property>
+    <value>This page contains data that are not properly filled.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dropdown_unspecifiedValueLabel</id>
+    <property>label</property>
+    <value>Unspecified</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dropdown_loading</id>
+    <property>label</property>
+    <value>Loading</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dropdown_noEdit</id>
+    <property>label</property>
+    <value>This field cannot be edited</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_loading</id>
+    <property>label</property>
+    <value>Loading...</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_noviews</id>
+    <property>label</property>
+    <value>No Views...</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_save</id>
+    <property>label</property>
+    <value>Save</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_saveAs</id>
+    <property>label</property>
+    <value>Save as...</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_saved</id>
+    <property>label</property>
+    <value>View saved</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_delete</id>
+    <property>label</property>
+    <value>Delete</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_deleted</id>
+    <property>label</property>
+    <value>View has been deleted.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_delConfLabel</id>
+    <property>label</property>
+    <value>Delete view?</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_confirmation</id>
+    <property>label</property>
+    <value>Delete the {0} view? This action can't be undone.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_userInteractionTitle</id>
+    <property>label</property>
+    <value>View Title</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_saveAsPlaceholder</id>
+    <property>label</property>
+    <value>Specify a unique name</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_saveAsTitle</id>
+    <property>label</property>
+    <value>Name</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_saveAsHeading</id>
+    <property>label</property>
+    <value>Save as new view</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>viewmanagerdropdown_saveAsMessage</id>
+    <property>label</property>
+    <value
+      >You can save your current display settings, searches, filters, and
+      queries as a new view.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>durationinput_iconDescription</id>
+    <property>label</property>
+    <value>choose a duration</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>durationinput_increment_number</id>
+    <property>label</property>
+    <value>Increment duration</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>durationinput_decrement_number</id>
+    <property>label</property>
+    <value>Decrement duration</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>durationinput_invalidText</id>
+    <property>label</property>
+    <value>Provide a duration</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>durationinput_noEdit</id>
+    <property>label</property>
+    <value>This field cannot be edited</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>durationinput_fieldRequiredText</id>
+    <property>label</property>
+    <value>A value is required</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>durationinput_placeholder</id>
+    <property>label</property>
+    <value>- -</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>field_emptyPlaceholder</id>
+    <property>label</property>
+    <value>Unspecified</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>field_emptyTouchPlaceholder</id>
+    <property>label</property>
+    <value>–</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>filter_done</id>
+    <property>label</property>
+    <value>Done</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>filter_title</id>
+    <property>label</property>
+    <value>Filters</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>filter_records</id>
+    <property>label</property>
+    <value>records</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>filtercontroller_done</id>
+    <property>label</property>
+    <value>Done</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>filtercontroller_title</id>
+    <property>label</property>
+    <value>Filters</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>filtercontroller_records</id>
+    <property>label</property>
+    <value>records</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>icongroup_unspecifiedLabel</id>
+    <property>label</property>
+    <value>Unspecified</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>icongroup_errorLabel</id>
+    <property>label</property>
+    <value>Error</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>icongroup_warningLabel</id>
+    <property>label</property>
+    <value>Warning</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>image_noImage</id>
+    <property>label</property>
+    <value>No image</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>image_imgDelMsg</id>
+    <property>label</property>
+    <value>Image will be deleted</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>image_fullSizeTitle</id>
+    <property>label</property>
+    <value>Full size</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>image_reCenter</id>
+    <property>label</property>
+    <value>Center image</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>lookup_selectedCount</id>
+    <property>label</property>
+    <value>{0} Items Selected</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>lookup_search</id>
+    <property>label</property>
+    <value>What are you looking for today?</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>lookup_primaryButtonText</id>
+    <property>label</property>
+    <value>Ok</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>lookup_secondaryButtonText</id>
+    <property>label</property>
+    <value>Cancel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>lookup_lookupHeading</id>
+    <property>label</property>
+    <value>Lookup</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>lookup_searchTouch</id>
+    <property>label</property>
+    <value>Search</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcemultiselect_loading</id>
+    <property>label</property>
+    <value>Loading...</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcemultiselect_multiSelectOverInformation</id>
+    <property>label</property>
+    <value>Information: Only top {0} of {1} is selectable.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcemultiselect_FilterOverInformation</id>
+    <property>label</property>
+    <value
+      >Information: Top {0} of {1} is viewable for selection. Please add
+      additional filtering.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcemultiselect_noResultsFound</id>
+    <property>label</property>
+    <value>No Results Found</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiselect_label</id>
+    <property>label</property>
+    <value>Select Value(s)</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiselect_filterLabel</id>
+    <property>label</property>
+    <value>Filter</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiselect_closeMenuLabel</id>
+    <property>label</property>
+    <value>Close menu</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiselect_openMenuLabel</id>
+    <property>label</property>
+    <value>Open menu</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiselect_clearAllLabel</id>
+    <property>label</property>
+    <value>Clear all selected items</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiselect_clearSelectionLabel</id>
+    <property>label</property>
+    <value>Clear selection</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiselect_noSelectFilterLabel</id>
+    <property>label</property>
+    <value>Choose one or more options</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiselect_filterOpenLabel</id>
+    <property>label</property>
+    <value>Search for more options</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiselect_optionsSelectedLabel</id>
+    <property>label</property>
+    <value> options are selected</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiselect_invalidText</id>
+    <property>label</property>
+    <value>Text is invalid</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiselect_noResultsFound</id>
+    <property>label</property>
+    <value>No Results Found</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiselect_unspecifiedPlaceholder</id>
+    <property>label</property>
+    <value>Unspecified</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>navigatorclass_noDataString</id>
+    <property>label</property>
+    <value>No results</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>navigatorclass_tooltipText</id>
+    <property>label</property>
+    <value
+      >Unable to load application data. Please check your network connection and
+      try again.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>navigatortile_noDataString</id>
+    <property>label</property>
+    <value>No results</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>navigatortile_tooltipText</id>
+    <property>label</property>
+    <value
+      >Unable to load application data. Please check your network connection and
+      try again.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>navigatorwithsearch_search</id>
+    <property>label</property>
+    <value>Search</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>nodata_noDataString</id>
+    <property>label</property>
+    <value>No results</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>numberinput_iconDescription</id>
+    <property>label</property>
+    <value>choose a number</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>numberinput_increment_number</id>
+    <property>label</property>
+    <value>Increment number</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>numberinput_decrement_number</id>
+    <property>label</property>
+    <value>Decrement number</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>numberinput_invalidText</id>
+    <property>label</property>
+    <value>Invalid entry</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>numberinput_noEdit</id>
+    <property>label</property>
+    <value>This field cannot be edited</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>numberinput_fieldRequiredText</id>
+    <property>label</property>
+    <value>A value is required</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>numberinput_placeholder</id>
+    <property>label</property>
+    <value>- -</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>radiobuttons_fieldRequiredText</id>
+    <property>label</property>
+    <value>A selection is required</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>search_ariaSearch</id>
+    <property>label</property>
+    <value>Search</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>search_searchIcon</id>
+    <property>label</property>
+    <value>Search icon</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>search_clearSearch</id>
+    <property>label</property>
+    <value>Clear search input text</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>slidingdrawer_headerText</id>
+    <property>label</property>
+    <value>Default Header</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_emptyMessage</id>
+    <property>label</property>
+    <value>No data</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_rowCountInHeader</id>
+    <property>label</property>
+    <value>Results: {0}</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_columnSelectionConfig</id>
+    <property>label</property>
+    <value>Manage columns</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_noResultsMessage</id>
+    <property>label</property>
+    <value>No results</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_emptyButtonLabel</id>
+    <property>label</property>
+    <value>Add Record</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_searchPlaceholder</id>
+    <property>label</property>
+    <value>Search</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_batchCancel</id>
+    <property>label</property>
+    <value>Cancel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_itemsPerPage</id>
+    <property>label</property>
+    <value>Items per page:</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_itemsRangeWithTotal</id>
+    <property>label</property>
+    <value>{0}–{1} of {2} items</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_pageRange</id>
+    <property>label</property>
+    <value>{0} of {1} pages</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_itemsSelected</id>
+    <property>label</property>
+    <value>items selected</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_itemSelected</id>
+    <property>label</property>
+    <value>item selected</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_clearAllFilters</id>
+    <property>label</property>
+    <value>Clear all filters</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_columnSelectionButtonAria</id>
+    <property>label</property>
+    <value>Column Selection</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_filterButtonAria</id>
+    <property>label</property>
+    <value>Filters</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_total</id>
+    <property>label</property>
+    <value>Total</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>datasourcetable_toggleAggregations</id>
+    <property>label</property>
+    <value>Total</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>tag_clearFilter</id>
+    <property>label</property>
+    <value>Clear filter</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>taggroup_moreFilters</id>
+    <property>label</property>
+    <value>More filters</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>taggroup_filters</id>
+    <property>label</property>
+    <value>Filters</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>taggroup_moreTags</id>
+    <property>label</property>
+    <value>More {0}</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>textarea_unspecifiedPlaceholder</id>
+    <property>label</property>
+    <value>Unspecified</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>textinput_noEdit</id>
+    <property>label</property>
+    <value>This field cannot be edited</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>textinput_unspecifiedPlaceholder</id>
+    <property>label</property>
+    <value>Unspecified</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>timeinput_am</id>
+    <property>label</property>
+    <value>AM</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>timeinput_pm</id>
+    <property>label</property>
+    <value>PM</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>toggle_yesno_yes</id>
+    <property>label</property>
+    <value>Yes</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>toggle_yesno_no</id>
+    <property>label</property>
+    <value>No</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>toggle_truefalse_true</id>
+    <property>label</property>
+    <value>True</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>toggle_truefalse_false</id>
+    <property>label</property>
+    <value>False</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>toggle_onoff_on</id>
+    <property>label</property>
+    <value>On</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>toggle_onoff_off</id>
+    <property>label</property>
+    <value>Off</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>toggle_unCheckedLabel</id>
+    <property>label</property>
+    <value>UnChecked</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>toggle_checkedLabel</id>
+    <property>label</property>
+    <value>Checked</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>systeminfodialogcontroller_heading</id>
+    <property>label</property>
+    <value>System Information</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>systeminfodialogcontroller_message</id>
+    <property>label</property>
+    <value>An error occured. Please try again</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>userprofile_headerText</id>
+    <property>label</property>
+    <value>User profile</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>userprofile_footerText</id>
+    <property>label</property>
+    <value>Log out</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>userprofileslidingdrawer_headerText</id>
+    <property>label</property>
+    <value>User profile</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>userprofileslidingdrawer_footerText</id>
+    <property>label</property>
+    <value>Log out</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>userprofileslidingdrawer_systemInfoLabel</id>
+    <property>label</property>
+    <value>System Information</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>supmobile_product-name</id>
+    <property>label</property>
+    <value>Maximo Mobile</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>supmobile_product-name-adaptive</id>
+    <property>label</property>
+    <value>Maximo Mobile</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>supmobile_title</id>
+    <property>label</property>
+    <value>Maximo Mobile</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>w6_yq_label</id>
+    <property>label</property>
+    <value>Approvals</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>r9zjz_label</id>
+    <property>label</property>
+    <value>Materials &amp; Tools</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>xb5jv_label</id>
+    <property>label</property>
+    <value>Map</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>approvals_title</id>
+    <property>label</property>
+    <value>Approvals</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>vewqj_value</id>
+    <property>label</property>
+    <value>todaywoassignedDS</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>w8m82_title</id>
+    <property>label</property>
+    <value>Work Order</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>yzx7x_title</id>
+    <property>label</property>
+    <value>Asset</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>bzz5w_title</id>
+    <property>label</property>
+    <value>computedIsOverDue</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>zpjz9_title</id>
+    <property>label</property>
+    <value>Item</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>a3vdy_title</id>
+    <property>label</property>
+    <value>Tool</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>njkmd_text</id>
+    <property>label</property>
+    <value>Work orders to review</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rmk_6_text</id>
+    <property>label</property>
+    <value>Completed work orders</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>p26j8_label</id>
+    <property>label</property>
+    <value>Get materials &amp; tools</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>workLogDrawer_header-text</id>
+    <property>label</property>
+    <value>Work log</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>woStatusChangeDialog_header-text</id>
+    <property>label</property>
+    <value>Change status</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>yqyzp_label</id>
+    <property>label</property>
+    <value>Select a status</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>statusMemo_placeholder</id>
+    <property>label</property>
+    <value>Add a comment about the status change</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>statusMemo_label</id>
+    <property>label</property>
+    <value>Add a comment (optional)</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>meterReadingDrawer_header-text</id>
+    <property>label</property>
+    <value>Meters</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>zkzw9_label</id>
+    <property>label</property>
+    <value>Update</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>update_meterReading_drawer_header-text</id>
+    <property>label</property>
+    <value>Enter readings</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>we5t7_label</id>
+    <property>label</property>
+    <value>false</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>we6t7_label</id>
+    <property>label</property>
+    <value>false</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>meterReadingLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Meter readings</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rollOverDialog_title</id>
+    <property>label</property>
+    <value>System Message</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rollOverDialog_primary-action-text</id>
+    <property>label</property>
+    <value>Yes</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rollOverDialog_secondary-action-text</id>
+    <property>label</property>
+    <value>No</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>wx465_label</id>
+    <property>label</property>
+    <value
+      >{0} for {1} is less than the last reading of {2}. Is this a rollover
+      reading?</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>woConfirmLabTimeOnSchedule_title</id>
+    <property>label</property>
+    <value>Send this labor time for approval?</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>woConfirmLabTimeOnSchedule_primary-action-text</id>
+    <property>label</property>
+    <value>Send</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>woConfirmLabTimeOnSchedule_secondary-action-text</id>
+    <property>label</property>
+    <value>Edit labor</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>w_ge5_label</id>
+    <property>label</property>
+    <value>Start date and time</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>m_4e6_label</id>
+    <property>label</property>
+    <value>at</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>ngq86_label</id>
+    <property>label</property>
+    <value>Duration</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>wrwz4_label</id>
+    <property>label</property>
+    <value>End date and time</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>zj8n6_label</id>
+    <property>label</property>
+    <value>at</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>b2kpw_label</id>
+    <property>label</property>
+    <value>Type</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>qm3eb_label</id>
+    <property>label</property>
+    <value>My Schedule</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>n8nzx_label</id>
+    <property>label</property>
+    <value>Materials and tools</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dkz3r_label</id>
+    <property>label</property>
+    <value>Inspections</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>gz9mq_label</id>
+    <property>label</property>
+    <value>Create New...</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rvvd6_label</id>
+    <property>label</property>
+    <value>Safety</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>pn7j9_label</id>
+    <property>label</property>
+    <value>Assist</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>ndnmj_label</id>
+    <property>label</property>
+    <value>Maps</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>d9j6q_label</id>
+    <property>label</property>
+    <value>Work History</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>em5qk_label</id>
+    <property>label</property>
+    <value>Asset and Digital Twin</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>gdpnr_label</id>
+    <property>label</property>
+    <value>My Calendar</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>xgnb5_label</id>
+    <property>label</property>
+    <value>Help and Support</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>eb6q__label</id>
+    <property>label</property>
+    <value>Settings</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>tasks_title</id>
+    <property>label</property>
+    <value>Tasks</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>r_r26_label</id>
+    <property>label</property>
+    <value>Done</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>planTaskLongDesc_title</id>
+    <property>label</property>
+    <value>Long description</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>knevp_label</id>
+    <property>label</property>
+    <value>Launch assist</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>a8p65_label</id>
+    <property>label</property>
+    <value>Mark complete</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>e9rgg_label</id>
+    <property>label</property>
+    <value>{0}.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>materials_title</id>
+    <property>label</property>
+    <value>Materials &amp; Tools</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>py7q__value</id>
+    <property>label</property>
+    <value>todaywoassignedDS</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>e_ykk_text</id>
+    <property>label</property>
+    <value>Assigned work</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>w7er9_text</id>
+    <property>label</property>
+    <value>PMs due this week</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>z2mzp_label</id>
+    <property>label</property>
+    <value>Done</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>a2z2e_title</id>
+    <property>label</property>
+    <value>Materials</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>a2z2e_select-all-label</id>
+    <property>label</property>
+    <value>All materials</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>r6r25_title</id>
+    <property>label</property>
+    <value>Tools</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>r6r25_select-all-label</id>
+    <property>label</property>
+    <value>All tools</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rx7pr_label</id>
+    <property>label</property>
+    <value>{0} hours</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>eqear_label</id>
+    <property>label</property>
+    <value>No planned materials or tools.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>workOrderDetails_title</id>
+    <property>label</property>
+    <value>Work order</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>mabr__title</id>
+    <property>label</property>
+    <value>Work Order</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>k3gvx_title</id>
+    <property>label</property>
+    <value>Item</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>jb3p5_title</id>
+    <property>label</property>
+    <value>Tool</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>woDetailsDialog_title</id>
+    <property>label</property>
+    <value>Long description</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>woConfirmLabTime_title</id>
+    <property>label</property>
+    <value>Send this labor time for approval?</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>woConfirmLabTime_primary-action-text</id>
+    <property>label</property>
+    <value>Send</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>woConfirmLabTime_secondary-action-text</id>
+    <property>label</property>
+    <value>Edit labor</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>xk_3d_label</id>
+    <property>label</property>
+    <value>Start date and time</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>yxdp8_label</id>
+    <property>label</property>
+    <value>at</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>en93q_label</id>
+    <property>label</property>
+    <value>Duration</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>jga3w_label</id>
+    <property>label</property>
+    <value>End date and time</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>j_d3g_label</id>
+    <property>label</property>
+    <value>at</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>qgzke_label</id>
+    <property>label</property>
+    <value>Type</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>woWorkLogDrawer_header-text</id>
+    <property>label</property>
+    <value>Work log</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rvq4r_label</id>
+    <property>label</property>
+    <value>No planned materials and tools to show</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>yx_dj_label</id>
+    <property>label</property>
+    <value>Click the cart to request materials.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>p4wy5_label</id>
+    <property>label</property>
+    <value>Tap the cart to request materials.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>assetMisMatchDialog_title</id>
+    <property>label</property>
+    <value>Asset mismatch</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>d775p_label</id>
+    <property>label</property>
+    <value>Asset scanned</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>m3n2z_label</id>
+    <property>label</property>
+    <value>Asset on work order</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rvj42_label</id>
+    <property>label</property>
+    <value>Check these things:</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>p_5rr_label</id>
+    <property>label</property>
+    <value>- Did you scan the correct asset?</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>ee4qa_label</id>
+    <property>label</property>
+    <value>- Are you at the location on the work order?</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>bj9ka_label</id>
+    <property>label</property>
+    <value
+      >If you cannot identify the correct asset, contact your supervisor.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>kxdzv_label</id>
+    <property>label</property>
+    <value>BMX9348394</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>q7e8p_label</id>
+    <property>label</property>
+    <value>Scan asset</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>vp487_label</id>
+    <property>label</property>
+    <value>OK</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>downTimeCodeLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Downtime code</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>assetStatusDialog_header-text</id>
+    <property>label</property>
+    <value>Asset Status</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>y7nv5_label</id>
+    <property>label</property>
+    <value>Current status</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>eynwp_label</id>
+    <property>label</property>
+    <value>Status date</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>d8ama_label</id>
+    <property>label</property>
+    <value>Downtime code</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiMeterReadingDrawer_header-text</id>
+    <property>label</property>
+    <value>Meters</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>mdb4w_label</id>
+    <property>label</property>
+    <value>Update</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>update_multiMeterReading_drawer_header-text</id>
+    <property>label</property>
+    <value>Enter readings</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>r52jg_label</id>
+    <property>label</property>
+    <value>false</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rb4md_label</id>
+    <property>label</property>
+    <value>false</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiMeterReadingLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Meter readings</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiMeterrollOverDialog_title</id>
+    <property>label</property>
+    <value>System Message</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiMeterrollOverDialog_primary-action-text</id>
+    <property>label</property>
+    <value>Yes</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>multiMeterrollOverDialog_secondary-action-text</id>
+    <property>label</property>
+    <value>No</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>anzdp_label</id>
+    <property>label</property>
+    <value
+      >{0} for {1} is less than the last reading of {2}. Is this a rollover
+      reading?</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>qzeaq_label</id>
+    <property>label</property>
+    <value>Pause work</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dkqr7_label</id>
+    <property>label</property>
+    <value>Stop work</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>mrw6w_label</id>
+    <property>label</property>
+    <value>Stop travel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>e4ppv_label</id>
+    <property>label</property>
+    <value>Start work</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>jq254_label</id>
+    <property>label</property>
+    <value>Start travel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>bp5bq_label</id>
+    <property>label</property>
+    <value>Details</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>am98x_label</id>
+    <property>label</property>
+    <value>at</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>pz6xe_label</id>
+    <property>label</property>
+    <value>at</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>z7rk8_label</id>
+    <property>label</property>
+    <value>Scheduled dates and duration</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>jk9r5_disconnected-message</id>
+    <property>label</property>
+    <value>Map is not configured</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>qxpdb_label</id>
+    <property>label</property>
+    <value>Asset and location</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>g9beg_label</id>
+    <property>label</property>
+    <value>Up</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>yb_dp_label</id>
+    <property>label</property>
+    <value>Down</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>yex9v_label</id>
+    <property>label</property>
+    <value>Location</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dvxwq_label</id>
+    <property>label</property>
+    <value>Location description</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>z3x_2_label</id>
+    <property>label</property>
+    <value>Mark complete</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>y3zg3_label</id>
+    <property>label</property>
+    <value>Undo</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>v7a42_label</id>
+    <property>label</property>
+    <value>Asset</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>mrxxm_label</id>
+    <property>label</property>
+    <value>Asset description</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>z6pqr_label</id>
+    <property>label</property>
+    <value>Mark complete</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>b4xgd_label</id>
+    <property>label</property>
+    <value>Undo</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dzzpa_tile-label</id>
+    <property>label</property>
+    <value>Attachments</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>vrry3_tile-label</id>
+    <property>label</property>
+    <value>Follow-up work</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>nj7pm_tile-label</id>
+    <property>label</property>
+    <value>Assist</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>a6332_label</id>
+    <property>label</property>
+    <value>Reported on</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>bza3x_label</id>
+    <property>label</property>
+    <value>at</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>dk8zn_label</id>
+    <property>label</property>
+    <value>Reported by</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>yrx49_label</id>
+    <property>label</property>
+    <value>Contact</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>materialRequest_title</id>
+    <property>label</property>
+    <value>Material request</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>qgd4k_label</id>
+    <property>label</property>
+    <value>Send</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>itemsListLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Select item</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>storeRoomListLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Storeroom</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>AddItemDrawer_header-text</id>
+    <property>label</property>
+    <value>Add item</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rg2mg_label</id>
+    <property>label</property>
+    <value>Type</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rg2mg_value</id>
+    <property>label</property>
+    <value>Item</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rgj85_label</id>
+    <property>label</property>
+    <value>Item</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>v_a8x_label</id>
+    <property>label</property>
+    <value>Storeroom</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>g_ywm_label</id>
+    <property>label</property>
+    <value>Quantity</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>e3xjy_label</id>
+    <property>label</property>
+    <value>Order unit</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>k99p4_label</id>
+    <property>label</property>
+    <value>Manufacturer</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>zn4w5_label</id>
+    <property>label</property>
+    <value>Vendor</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>ypvvw_label</id>
+    <property>label</property>
+    <value>Materials list</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>qmda6_label</id>
+    <property>label</property>
+    <value>Add material</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>xq79d_label</id>
+    <property>label</property>
+    <value>Request details</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>y2wwv_label</id>
+    <property>label</property>
+    <value>Required date</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>qpyjk_label</id>
+    <property>label</property>
+    <value>Priority</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>p36pa_label</id>
+    <property>label</property>
+    <value>Drop to</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>report_work_title</id>
+    <property>label</property>
+    <value>Report work</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>p6aav_label</id>
+    <property>label</property>
+    <value>Complete work</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>jn5x8_label</id>
+    <property>label</property>
+    <value>Failure</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>b33g__label</id>
+    <property>label</property>
+    <value>Class</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>jxdv6_label</id>
+    <property>label</property>
+    <value>Problem</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>mjj59_label</id>
+    <property>label</property>
+    <value>Cause</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>p558g_label</id>
+    <property>label</property>
+    <value>Remedy</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>transTypeLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Type</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>craftLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Craft</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>laborLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Labor</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>reportTimeDrawer_header-text</id>
+    <property>label</property>
+    <value>Labor</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>g5_4e_label</id>
+    <property>label</property>
+    <value>Labor</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>wdd_v_label</id>
+    <property>label</property>
+    <value>Type</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>startDate_label</id>
+    <property>label</property>
+    <value>Start date</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>startTime_placeholder</id>
+    <property>label</property>
+    <value>0:00</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>startTime_label</id>
+    <property>label</property>
+    <value>Start time</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>regularHours_label</id>
+    <property>label</property>
+    <value>Hours</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>endDate_label</id>
+    <property>label</property>
+    <value>End date</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>endTime_placeholder</id>
+    <property>label</property>
+    <value>0:00</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>endTime_label</id>
+    <property>label</property>
+    <value>End time</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>b9em8_label</id>
+    <property>label</property>
+    <value>Craft</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>r83pw_label</id>
+    <property>label</property>
+    <value>Skill level</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>materialLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Material</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>storeRoomLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Storeroom</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>binLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Bin number</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>transactionTypeLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Transaction type</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rotatingAssetLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Rotating asset</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>materialsDrawer_header-text</id>
+    <property>label</property>
+    <value>Add material</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rw_47_label</id>
+    <property>label</property>
+    <value>Material</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>bq4w__label</id>
+    <property>label</property>
+    <value>Storeroom</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>jnanx_label</id>
+    <property>label</property>
+    <value>Bin number</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>zmvp5_label</id>
+    <property>label</property>
+    <value>Rotating asset</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>mz8_2_label</id>
+    <property>label</property>
+    <value>Quantity</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>zaeb8_label</id>
+    <property>label</property>
+    <value>Transaction type</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>zrn4k_label</id>
+    <property>label</property>
+    <value>Labor</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>brqe2_empty-set-string</id>
+    <property>label</property>
+    <value>No labor time reported.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>w_y2v_label</id>
+    <property>label</property>
+    <value>at</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>vjprx_label</id>
+    <property>label</property>
+    <value>at</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>bam2r_empty-set-string</id>
+    <property>label</property>
+    <value>No labor time reported.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>g72kg_label</id>
+    <property>label</property>
+    <value>at</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>a228b_label</id>
+    <property>label</property>
+    <value>at</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>q6q4b_label</id>
+    <property>label</property>
+    <value>Materials used</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>q5vk4_empty-set-string</id>
+    <property>label</property>
+    <value>No materials reported.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>m4e9x_label</id>
+    <property>label</property>
+    <value>Tools used</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rvkkj_empty-set-string</id>
+    <property>label</property>
+    <value>No tools reported.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>v3zj9_label</id>
+    <property>label</property>
+    <value>Asset</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>z6784_label</id>
+    <property>label</property>
+    <value>Find assets near me</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>y984a_label</id>
+    <property>label</property>
+    <value>Health:</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>mk3_e_label</id>
+    <property>label</property>
+    <value>Next failure</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>r7gng_label</id>
+    <property>label</property>
+    <value>Est. End of Life</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>znaw8_label</id>
+    <property>label</property>
+    <value>Next PM</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>q5dg5_label</id>
+    <property>label</property>
+    <value>Parent Asset</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>pyx6r_label</id>
+    <property>label</property>
+    <value>Service Address</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>eq37v_label</id>
+    <property>label</property>
+    <value>Installation Date</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>q_a6e_label</id>
+    <property>label</property>
+    <value>Digital Twin</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>b7qab_label</id>
+    <property>label</property>
+    <value>Attachments</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>wp6am_label</id>
+    <property>label</property>
+    <value>Assist</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>ekmm8_label</id>
+    <property>label</property>
+    <value>Asset History</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>g6np4_label</id>
+    <property>label</property>
+    <value>Inspections</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>angzv_label</id>
+    <property>label</property>
+    <value>Maintenance Logs</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>edgg7_label</id>
+    <property>label</property>
+    <value>Operating entries</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>e2dy4_label</id>
+    <property>label</property>
+    <value>Failures</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>m5zyn_label</id>
+    <property>label</property>
+    <value>Part Usage</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>nb5vy_label</id>
+    <property>label</property>
+    <value>Calendar</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>failureDetails_title</id>
+    <property>label</property>
+    <value>Failure</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>vnjnn_header-back-label</id>
+    <property>label</property>
+    <value>Failure</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>q997m_label</id>
+    <property>label</property>
+    <value>Failure date and time</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>failureRemark_label</id>
+    <property>label</property>
+    <value>Remarks</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>attachments_title</id>
+    <property>label</property>
+    <value>Attachments</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>relatedWorkOrder_title</id>
+    <property>label</property>
+    <value>Follow-up work</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>ykwv4_label</id>
+    <property>label</property>
+    <value>Done</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>a89dm_label</id>
+    <property>label</property>
+    <value>Related work orders</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>m3nvj_label</id>
+    <property>label</property>
+    <value>Create follow-up work</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>vkw2j_empty-set-string</id>
+    <property>label</property>
+    <value>No related records.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>assetWorkOrder_title</id>
+    <property>label</property>
+    <value>Asset and location history</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>kdr4w_empty-set-string</id>
+    <property>label</property>
+    <value>No work orders found</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>zpxg3_label</id>
+    <property>label</property>
+    <value>Updated</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>d_vkm_empty-set-string</id>
+    <property>label</property>
+    <value>No work orders found</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>zznqv_label</id>
+    <property>label</property>
+    <value>Updated</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>e297p_label</id>
+    <property>label</property>
+    <value>Save</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>woDetailsEditDialog_title</id>
+    <property>label</property>
+    <value>Long description</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>workTypeLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Worktype</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>r4xdr_label</id>
+    <property>label</property>
+    <value>Overview</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>k2_mb_label</id>
+    <property>label</property>
+    <value>Description</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>bgk69_label</id>
+    <property>label</property>
+    <value>Long description</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>yqkzy_label</id>
+    <property>label</property>
+    <value>Priority</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>yqkzy_placeholder</id>
+    <property>label</property>
+    <value>Enter {0} to {1}</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>kga47_label</id>
+    <property>label</property>
+    <value>Scheduled start</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>y8pqz_label</id>
+    <property>label</property>
+    <value>Scheduled finish</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>yqpzj_label</id>
+    <property>label</property>
+    <value>Estimated duration</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>wgj4__label</id>
+    <property>label</property>
+    <value>Work type</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>wgj4__empty-field-placeholder</id>
+    <property>label</property>
+    <value>Select a type</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>vmn3n_label</id>
+    <property>label</property>
+    <value>Asset and location</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>va5we_label</id>
+    <property>label</property>
+    <value>Asset</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>va5we_placeholder</id>
+    <property>label</property>
+    <value>Asset number</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>av_qz_label</id>
+    <property>label</property>
+    <value>Location</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>av_qz_placeholder</id>
+    <property>label</property>
+    <value>Location number</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>createwo_title</id>
+    <property>label</property>
+    <value>Create work order</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>mjbgg_label</id>
+    <property>label</property>
+    <value>Save</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>longdsEditDialog_title</id>
+    <property>label</property>
+    <value>Long description</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>workTyLookup_lookup-heading</id>
+    <property>label</property>
+    <value>Worktype</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>d2pqj_label</id>
+    <property>label</property>
+    <value>Overview</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>j3d2k_label</id>
+    <property>label</property>
+    <value>Description</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>p8y6w_label</id>
+    <property>label</property>
+    <value>Long description</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>j8265_label</id>
+    <property>label</property>
+    <value>Priority</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>j8265_placeholder</id>
+    <property>label</property>
+    <value>Enter {0} to {1}</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>va287_label</id>
+    <property>label</property>
+    <value>Scheduled start</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>j288g_label</id>
+    <property>label</property>
+    <value>Scheduled finish</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>vp7qm_label</id>
+    <property>label</property>
+    <value>Estimated duration</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>x8mbk_label</id>
+    <property>label</property>
+    <value>Work type</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>x8mbk_empty-field-placeholder</id>
+    <property>label</property>
+    <value>Select a type</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>fail_class_placeholder_text</id>
+    <property>label</property>
+    <value>Failure class</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>problem_placeholder_text</id>
+    <property>label</property>
+    <value>Problem</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>cause_placeholder_text</id>
+    <property>label</property>
+    <value>Cause</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>remedy_placeholder_text</id>
+    <property>label</property>
+    <value>Remedy</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>meter_cont_error_text</id>
+    <property>label</property>
+    <value
+      >The new reading ({0}) entered on {1} should be greater than the previous
+      reading ({2}) entered on ({3}).</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>startdate_msg_text</id>
+    <property>label</property>
+    <value>Start date is required</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>future_startdate_msg_text</id>
+    <property>label</property>
+    <value>Start date cannot be in the future</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>future_enddate_msg_text</id>
+    <property>label</property>
+    <value>End date cannot be in the future</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>start_enddate_compare_msg_text</id>
+    <property>label</property>
+    <value>End date should be later than start date</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>regularhr_msg_text</id>
+    <property>label</property>
+    <value>Hours exceed duration between start and end time</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>regularhr_overtime_msg_text</id>
+    <property>label</property>
+    <value
+      >Regular hours plus overtime exceeds duration between start and end
+      date</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>regularhr_req_msg_text</id>
+    <property>label</property>
+    <value>Regular hours is required</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>regularhr_invalid_msg_text</id>
+    <property>label</property>
+    <value>Invalid regular hours</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>rollover_error_text</id>
+    <property>label</property>
+    <value
+      >Readings cannot exceed rollover values. The reading {0} is greater than
+      the rollover point {1}.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>relatedwo_created_msg_text</id>
+    <property>label</property>
+    <value>Follow-up work created</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>future_starttime_msg_text</id>
+    <property>label</property>
+    <value>Start time can not be in the future</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>future_endtime_msg_text</id>
+    <property>label</property>
+    <value>End time can not be in the future</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>start_endtime_compare_msg_text</id>
+    <property>label</property>
+    <value>End time should be later than start time</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>asset_confirmed_text</id>
+    <property>label</property>
+    <value>Asset confirmed</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>unknown_text</id>
+    <property>label</property>
+    <value>Unknown</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>defaultWorkType_text</id>
+    <property>label</property>
+    <value>Actual work time</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>fail_get_synonym_text</id>
+    <property>label</property>
+    <value>Can not get the synonym data({0}</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>record_not_on_device_text</id>
+    <property>label</property>
+    <value
+      >This record is not on your device. Try again or wait until you are
+      online.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>regularhr_with_futuredate_msg_text</id>
+    <property>label</property>
+    <value>Actual labor can not be with future dates and times</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>gps_location_saved_text</id>
+    <property>label</property>
+    <value>Device location saved</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>Select_a_type_label_text</id>
+    <property>label</property>
+    <value>Select a type</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>startdate_enddate_compare_msg_text</id>
+    <property>label</property>
+    <value>The start date must be before the finish date</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>priority_error_msg_text</id>
+    <property>label</property>
+    <value
+      >Priority {0} is not a valid priority value between {1} and {2}</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>assetStatusDateRequired_text</id>
+    <property>label</property>
+    <value>Status Date is required.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>assetStatusDateCompare_text</id>
+    <property>label</property>
+    <value
+      >New asset status change date must be greater than change dates on all
+      previous transactions for this asset.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>assetPromptDownMessage_text</id>
+    <property>label</property>
+    <value
+      >The asset currently has a status of Down. To change the status of the
+      asset now, you must cancel the current status change and report
+      downtime.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>edit_work_order_label_text</id>
+    <property>label</property>
+    <value>Edit work order</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>create_followup_label_text</id>
+    <property>label</property>
+    <value>Create follow-up work order</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>est_dur_msg_text</id>
+    <property>label</property>
+    <value>The duration should be positive value</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>woCompleted_label_text</id>
+    <property>label</property>
+    <value>Work order {0} completed</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>jgyq6_refresh-disconnected-message</id>
+    <property>label</property>
+    <value>This feature is not available while offline</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>jgyq6_empty-set-string</id>
+    <property>label</property>
+    <value>No work orders found</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>jgyq6_sub-label</id>
+    <property>label</property>
+    <value
+      >Try another view. If you are offline, try again when you are
+      online.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>qj_43_text-prefix</id>
+    <property>label</property>
+    <value>Due</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>qj_467_text-prefix</id>
+    <property>label</property>
+    <value>Overdue since</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>jya7d_disconnected-message</id>
+    <property>label</property>
+    <value>Map is not configured</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>g3wzk_label</id>
+    <property>label</property>
+    <value>Start Work</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>k2_q3_label</id>
+    <property>label</property>
+    <value>Pause work</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>nxea3_label</id>
+    <property>label</property>
+    <value>Stop work</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>meerd_label</id>
+    <property>label</property>
+    <value>Start travel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>mqjbg_label</id>
+    <property>label</property>
+    <value>Stop travel</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>yjpma_label</id>
+    <property>label</property>
+    <value>Approve</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>qkx_r_label</id>
+    <property>label</property>
+    <value>View</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>map_spatialReferencesNotConfigured</id>
+    <property>label</property>
+    <value
+      >The Spatial Reference being used by one or more map service is not
+      configured or supported in Map Manager: {0}.</value
+    >
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>map_mapManagerNotFound</id>
+    <property>label</property>
+    <value>An enabled map was not found for your site {0}.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>map_mapConfigNotFound</id>
+    <property>label</property>
+    <value>A map configuration was not found</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>map_initialPositionNotFound</id>
+    <property>label</property>
+    <value>Map initial position could not be determined.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>map_invalidMapConfig</id>
+    <property>label</property>
+    <value>Invalid map configuration file.</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>map_noBasemapInfoFound</id>
+    <property>label</property>
+    <value>The json configuration for the basemap was not found {0}</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>map_spatialNotInstalled</id>
+    <property>label</property>
+    <value>Maximo Spatial is not installed</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>map_mousePosition</id>
+    <property>label</property>
+    <value>Coordinates:</value>
+  </maxlabel>
+  <maxlabel>
+    <app>supmobile</app>
+    <id>mylocationtool_locationNotAvailable</id>
+    <property>label</property>
+    <value
+      >To center the map on your location, enable location services in your
+      device settings.</value
+    >
+  </maxlabel>
+</maxlabels>

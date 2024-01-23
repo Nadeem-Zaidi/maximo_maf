@@ -1,0 +1,12 @@
+.gradle
+.settings
+bin
+build
+target
+.classpath
+.project
+.DS_Store
+**/*.ipa
+**/*.apk
+**/tmp
+/test-output/

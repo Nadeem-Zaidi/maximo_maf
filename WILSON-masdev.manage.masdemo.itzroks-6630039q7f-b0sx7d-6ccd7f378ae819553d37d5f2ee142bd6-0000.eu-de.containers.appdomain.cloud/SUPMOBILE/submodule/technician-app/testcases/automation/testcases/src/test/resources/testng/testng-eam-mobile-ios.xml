@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="MobileTestSuite">
+	<parameter name="configPath"
+		value="src/test/resources/config.eam.mobile.ios.properties" />
+	<parameter name="testType" value="mobileapp" />
+	<listeners>
+		<listener
+			class-name="com.ibm.maximo.technician.listener.ScreenShotListener" />
+	</listeners>
+	<test thread-count="1" name="Test">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+<!-- 				<class name="com.ibm.maximo.technician.testcases.MetersTest" /> -->
+<!-- 			<class name="com.ibm.maximo.technician.testcases.SearchTest" /> -->
+<!-- 			<class name="com.ibm.maximo.technician.testcases.NavigatorTest" /> -->
+<!-- 			<class name="com.ibm.maximo.technician.testcases.StartWorkOrderTest" />	 -->
+ 			<class name="com.ibm.maximo.technician.testcases.ViewWorkOrderTest" />			
+<!-- 		<class name="com.ibm.maximo.technician.testcases.FollowUpWorkTest" /> -->
+<!-- 			<class name="com.ibm.maximo.technician.testcases.ChangeStatusWOTest" /> -->
+<!-- 			<class name="com.ibm.maximo.technician.testcases.EditWorkOrderDetailsTest" />		 -->
+<!-- 			<class name="com.ibm.maximo.technician.testcases.MaterialRequestsTest" /> -->
+<!-- 			<class name="com.ibm.maximo.technician.testcases.AssetLocationTest" /> -->
+		</classes>
+	</test>
+</suite> 

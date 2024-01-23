@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="DesktopTestSuite">
+	<parameter name="configPath"  value="src/test/resources/config.mas.desktop.edge.properties"/>
+	<listeners>
+    	<listener class-name="com.ibm.maximo.automation.example.listener.ScreenShotListener" />
+  	</listeners>
+	<parameter name="testType"  value="desktop"/>
+	<test thread-count="1" name="Test">
+		<groups>
+			<run>
+				<include name="desktop" />
+			</run>
+		</groups>
+
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class name="com.ibm.maximo.technician.testcases.SearchTest" />
+		</classes>
+	</test>
+</suite> 

@@ -1,0 +1,58 @@
+<panel id="e3x6b">
+  <panel id="m3qmr">
+    <box background-color="field-01" fill-parent-horizontal="true" id="g3_n6">
+      <box direction="column" padding=".75" fill-parent-horizontal="true" id="z65de">
+        <smart-input label="Date" value="{woPlanTaskDetaildsSelected.item.computedMeterCurDate}" placeholder="" readonly="{woPlanTaskDetaildsSelected.item.measurementvalue != undefined || woPlanTaskDetaildsSelected.item.observation != undefined}" on-blur="validateMeterDate" on-blur-arg="{{'datasource':woPlanTaskDetaildsSelected}}" id="xd6gr"/>
+        <smart-input label="Time" value="{woPlanTaskDetaildsSelected.item.computedMeterCurTime}" placeholder="" readonly="{woPlanTaskDetaildsSelected.item.measurementvalue != undefined || woPlanTaskDetaildsSelected.item.observation != undefined}" on-blur="validateMeterTime" on-blur-arg="{{'datasource':woPlanTaskDetaildsSelected}}" id="peg66"/>
+      </box>
+    </box>
+    <data-list datasource="woPlanTaskDetaildsSelected" show-search="false" title="{page.state.assetMeterHeader}" hidden="{!woPlanTaskDetaildsSelected.state.itemCount}" id="evvn2">
+      <border-layout slot="item" fill-parent="true" padding="false" id="z8jdb">
+        <start horizontal-overflow="hidden" id="p3y9j">
+          <box fill-child="true" padding-end=".75" fill-parent="true" children-sizes="100" id="qkdj5">
+            <border-layout fill-parent="true" padding="true" id="zda96">
+              <start width="100" vertical-align="center" horizontal-overflow="hidden" id="n8g4k">
+                <box direction="row" children-sizes="100" vertical-align="center" hidden="{item.measurepoint.meter.metertype_maxvalue ==='CHARACTERISTIC'}" fill-parent="true" fill-child="true" id="wwbm_">
+                  <border-layout fill-parent="true" width="100" padding="false" id="kvk4v">
+                    <top background-color="ui-01" horizontal-overflow="hidden" id="zve85">
+                      <box children-sizes="100" fill-child="true" fill-parent="true" id="n8wzw">
+                        <field value="{item.measurepoint.description}" padding="top" field-class-name="16-bold" hide-label="true" id="w39wx"/>
+                      </box>
+                    </top>
+                    <start id="pkze7">
+                      <box direction="column" children-sizes="100" padding-top="{item.newreadingFlag? 1 : 0}" vertical-align="center" fill-parent="true" fill-child="true" id="bj2jq">
+                        <smart-input value="{item.newreading}" input-kind="DECIMAL" placeholder="{woPlanTaskDetaildsSelected.item.measurementvalue}" readonly="{item.measurementvalue}" on-blur="onBlurReadings" on-blur-arg="{item}" hide-step-buttons="true" theme="dark" hide-label="true" label="" hidden="{item.newreadingFlag}" id="ja6zp"/>
+                      </box>
+                    </start>
+                  </border-layout>
+                </box>
+                <box direction="row" hidden="{item.measurepoint.meter.metertype_maxvalue !=='CHARACTERISTIC'}" children-sizes="100" vertical-align="center" fill-parent="true" fill-child="true" id="rjnee">
+                  <border-layout fill-parent="true" padding="true" id="eew6q">
+                    <top background-color="ui-01" horizontal-overflow="hidden" id="xrvpz">
+                      <box children-sizes="100" fill-child="true" fill-parent="true" id="a5jnk">
+                        <field value="{item.measurepoint.description}" padding="top" field-class-name="16-bold" hide-label="true" id="ej4bn"/>
+                      </box>
+                    </top>
+                    <start width="70" id="kdd2p">
+                      <box direction="column" children-sizes="100" horizontal-align="end" padding-top="1" padding-bottom="{item.measurepoint.meter.metertype_maxvalue ==='CHARACTERISTIC'? '0.5' : '0'}" vertical-align="center" fill-parent="true" fill-child="true" id="p5zrw">
+                        <field value="{item.newreading}" padding="none" hide-label="true" hidden="{item.measurepoint.meter.metertype_maxvalue !=='CHARACTERISTIC'}" id="d4jjg"/>
+                      </box>
+                    </start>
+                    <middle horizontal-align="end" horizontal-overflow="hidden" id="vkq29">
+                      <button icon="Carbon:close--outline" kind="ghost" on-click="clearCharacterMeterReaing" on-click-arg="{{'item': item,'newreading':''}}" hidden="{!item.newreading || item.observation}" padding="false" id="rj3wx"/>
+                    </middle>
+                    <end hidden="{item.newreadingFlag}" id="dbdnk">
+                      <box vertical-align="center" hidden="{item.measurepoint.meter.metertype_maxvalue !=='CHARACTERISTIC' || item.observation}" direction="row" horizontal-align="end" fill-parent="true" id="m2ze9">
+                        <button icon="carbon:chevron--right" kind="ghost" hidden="{item.measurepoint.meter.metertype_maxvalue !=='CHARACTERISTIC'}" on-click="openMeterLookup" on-click-arg="{{'item': item, 'datasource': woassetmeters}}" disabled="{item.newreadingFlag}" padding="false" id="vxz9b"/>
+                      </box>
+                    </end>
+                  </border-layout>
+                </box>
+              </start>
+            </border-layout>
+          </box>
+        </start>
+      </border-layout>
+    </data-list>
+  </panel>
+</panel>

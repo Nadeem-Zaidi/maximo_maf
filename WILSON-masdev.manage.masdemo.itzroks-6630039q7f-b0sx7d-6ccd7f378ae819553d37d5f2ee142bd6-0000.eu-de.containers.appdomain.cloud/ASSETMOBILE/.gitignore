@@ -1,0 +1,10 @@
+build/
+src/setupProxy.js
+src/dummy-data.json
+/ibm-config/*
+node_modules
+update-dev.sh
+files.txt
+index.html
+
+/coverage

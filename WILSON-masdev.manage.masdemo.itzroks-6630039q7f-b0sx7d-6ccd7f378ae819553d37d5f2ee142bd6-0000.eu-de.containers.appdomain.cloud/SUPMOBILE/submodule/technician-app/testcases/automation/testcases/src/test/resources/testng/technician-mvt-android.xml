@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="MobileTestSuite priority=1 test run on Android device">
+	<parameter name="configPath" value="src/test/resources/config.mas.mobile.android.properties" />
+	<parameter name="testType" value="mobileapp" />
+	<listeners>
+		<listener
+			class-name="com.ibm.maximo.technician.listener.ScreenShotListener" />
+	</listeners>
+	<test thread-count="1" name="SearchTest" preserve-order="true">
+		<groups>
+			<run>
+				<include name="mobile" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.ibm.maximo.technician.testcases.TestSuite" />
+			<class name="com.ibm.maximo.technician.testcases.SearchTest" />
+		</classes>
+	</test>
+</suite>

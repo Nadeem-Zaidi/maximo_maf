@@ -1,0 +1,34 @@
+sudo: required
+dist: trusty
+group: bluezone
+language: java
+jdk:
+  - openjdk8
+env:
+  - NODE_OPTIONS="--max_old_space_size=8192"
+before_install:
+  - export TZ=America/New_York
+  - nvm install 16
+  - npm install -g shx
+  - npm install -g git+ssh://git@github.ibm.com/maximo-app-framework/flint.git#semver:1
+  - npx --no-install flint ci-init
+install:
+  - yarn install
+script:
+  - nvm use 16
+  # run ci:check, build, build:production, and build:zip
+  - npx flint app-build
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: "npx flint app-gsa-deploy --package-json ./package.json --clean --sub-dir next"
+    on:
+      branch: master
+
+  # only deploy branches that start with MAS
+  - provider: script
+    skip_cleanup: true
+    script: "npx flint app-gsa-deploy --package-json ./package.json --clean --sub-dir $TRAVIS_BRANCH"
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^MAS-.*

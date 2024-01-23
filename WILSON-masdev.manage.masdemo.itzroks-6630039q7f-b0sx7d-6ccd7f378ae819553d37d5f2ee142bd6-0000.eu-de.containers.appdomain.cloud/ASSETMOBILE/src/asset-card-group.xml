@@ -1,0 +1,18 @@
+<card-group datasource="{page.state.selectedDS}" show-refresh="true" disconnected="{!app.state.networkConnected}" refresh-disconnected-message="This feature is not available while offline" enable-barcode-scanner="true" readers="{[`ean_reader`]}" timeout="{45}" hide-count-search="{(page.state.selectedSwitch===1)}" id="jgyq6" empty-set-string="No assets found" card-click="showAssetDetail" sub-label="Try another view. If you are offline, try again when you are online.">
+  <assets-card-template slot="item" show-chevron="true" chevron-kind="ghost" id="xx9jk" on-chevron-click="showAssetDetail" on-chevron-click-arg="{item}">
+    <wrapped-text slot="slot1" size="large" label="{item.computedAssetDescription}" id="rnbgv" />
+    <box slot="slot2" hidden="{!item._imagelibref}" direction="column" padding-bottom=".5" fill-child="true" background-color="field-02" vertical-align="center" horizontal-align="center" fill-parent="true" id="xqbk7">
+      <image use-thumbnail="true" height="150" width="150" allow-popup="false" src="{item._imagelibref}" external="false" id="ev27g" placeholder="true"/>
+    </box>
+    <box slot="slot2" hidden="{item._imagelibref}" direction="column" padding-top="-0.3" padding-bottom=".5" fill-child="true" background-color="field-02" vertical-align="center" horizontal-align="center" fill-parent="true" id="v8pj6">
+      <image height="150" width="150" src="{item._imagelibref}" placeholder="true" id="qjy2k"/>
+    </box>
+    <field slot="slot5" padding="bottom" value="{item.formattedaddress}" label="Service address" id="kwnxk" />
+    <button-group slot="slot8" padding="false" id="zxejr">
+      <button kind="secondary" icon="Carbon:location" id="gr6pb" disabled="{!item.autolocate}" disconnected="{!app.state.isMapValid}"
+       disconnected-message="Map is not configured" on-click="openAssetCard" on-click-arg="{{'item': item, 'prevPage': 'mapassetlist'}}"/>
+      <button kind="secondary" icon="maximo:gauge"  hidden="{item.computedDisableMeter}" on-click="openMeterDrawer" on-click-arg="{{'item': item,'datasource': assetmetersds}}" id="bag6e"/>
+      <button kind="secondary" icon="maximo:inspections" id="bjnqn" disabled="true" />
+    </button-group>
+  </assets-card-template>
+</card-group>
