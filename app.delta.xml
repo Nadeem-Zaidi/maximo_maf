@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<updatescript version="">
+	<app apptype="maf" id="TEST">
+		<modify control="techmobile">
+			<set property="id" value="TEST"/>
+		</modify>
+		<add before="v_5ez" container="TEST" control="templates">
+			<set property="id" value="wyezx"/>
+		</add>
+		<add container="wyezx" control="template">
+			<set property="id" value="z_v5d"/>
+			<set property="name" value="refapp-pivot-template"/>
+		</add>
+		<add container="z_v5d" control="template-content">
+			<set property="id" value="yq_b6"/>
+		</add>
+		<add container="yq_b6" control="box">
+			<set property="background-color" value="ui-01"/>
+			<set property="children-hide-overflow" value="true"/>
+			<set property="direction" value="column"/>
+			<set property="fill-parent" value="true"/>
+			<set property="id" value="pw82w"/>
+		</add>
+		<add container="pw82w" control="template-slot">
+			<set property="id" value="y7jm7"/>
+			<set property="name" value="children"/>
+		</add>
+		<add container="wyezx" control="template">
+			<set property="id" value="wwdjg"/>
+			<set property="name" value="refapp-pivot-row-template"/>
+		</add>
+		<add container="wwdjg" control="template-param">
+			<set property="id" value="bj95b"/>
+			<set property="name" value="cols"/>
+			<set property="required" value="true"/>
+			<set property="type" value="number"/>
+		</add>
+		<add container="wwdjg" control="template-param">
+			<set property="id" value="verkv"/>
+			<set property="name" value="label"/>
+			<set property="required" value="true"/>
+			<set property="type" value="string"/>
+		</add>
+		<add container="wwdjg" control="template-content">
+			<set property="id" value="wzwv5"/>
+		</add>
+		<add container="wzwv5" control="border-layout">
+			<set property="fill-parent" value="true"/>
+			<set property="id" value="mx5rv"/>
+			<set property="middle-border" value="true"/>
+			<set property="padding" value="false"/>
+		</add>
+		<add container="mx5rv" control="start">
+			<set property="background-color" value="ui-02"/>
+			<set property="id" value="nmnz6"/>
+			<set property="shrink" value="1"/>
+			<set property="width" value="35"/>
+		</add>
+		<add container="nmnz6" control="box">
+			<set property="children-hide-overflow" value="false"/>
+			<set property="direction" value="column"/>
+			<set property="fill-parent" value="true"/>
+			<set property="id" value="xexgm"/>
+			<set property="padding-bottom" value=".5"/>
+			<set property="padding-top" value=".5"/>
+		</add>
+		<add container="xexgm" control="label">
+			<set property="id" value="e9nn8"/>
+			<set property="label" value="{template.label}"/>
+			<set property="theme" value="header-x-small"/>
+		</add>
+		<add container="xexgm" control="template-slot">
+			<set property="id" value="w38ma"/>
+			<set property="name" value="labelInfo"/>
+		</add>
+		<add container="mx5rv" control="middle">
+			<set property="direction" value="row"/>
+			<set property="id" value="jk45z"/>
+			<set property="shrink" value="1"/>
+			<set property="width" value="65"/>
+		</add>
+		<add container="jk45z" control="box">
+			<set property="children-hide-overflow" value="true"/>
+			<set property="fill-parent" value="true"/>
+			<set property="hidden" value="{template.cols&lt;1}"/>
+			<set property="id" value="wzbv9"/>
+			<set property="padding-bottom" value=".5"/>
+			<set property="padding-top" value=".5"/>
+			<set property="size" value="{100/template.cols}"/>
+		</add>
+		<add container="wzbv9" control="template-slot">
+			<set property="id" value="bb745"/>
+			<set property="name" value="col1"/>
+		</add>
+		<add container="jk45z" control="box">
+			<set property="children-hide-overflow" value="true"/>
+			<set property="fill-parent" value="true"/>
+			<set property="hidden" value="{template.cols&lt;2}"/>
+			<set property="id" value="z5z8m"/>
+			<set property="padding-bottom" value=".5"/>
+			<set property="padding-top" value=".5"/>
+			<set property="size" value="{100/template.cols}"/>
+		</add>
+		<add container="z5z8m" control="template-slot">
+			<set property="id" value="exaj4"/>
+			<set property="name" value="col2"/>
+		</add>
+		<add container="jk45z" control="box">
+			<set property="children-hide-overflow" value="true"/>
+			<set property="fill-parent" value="true"/>
+			<set property="hidden" value="{template.cols&lt;3}"/>
+			<set property="id" value="gde2e"/>
+			<set property="padding-bottom" value=".5"/>
+			<set property="padding-top" value=".5"/>
+			<set property="size" value="{100/template.cols}"/>
+		</add>
+		<add container="gde2e" control="template-slot">
+			<set property="id" value="mva4_"/>
+			<set property="name" value="col3"/>
+		</add>
+		<add container="jk45z" control="box">
+			<set property="children-hide-overflow" value="true"/>
+			<set property="fill-parent" value="true"/>
+			<set property="hidden" value="{template.cols&lt;4}"/>
+			<set property="id" value="a7r9k"/>
+			<set property="padding-bottom" value=".5"/>
+			<set property="padding-top" value=".5"/>
+			<set property="size" value="{100/template.cols}"/>
+		</add>
+		<add container="a7r9k" control="template-slot">
+			<set property="id" value="vmrqr"/>
+			<set property="name" value="col4"/>
+		</add>
+		<add before="wohazardmaterials" container="woDetailds" control="maximo-datasource">
+			<set property="controller" value="MyController"/>
+			<set property="id" value="transportticket"/>
+			<set property="notify-when-parent-loads" value="true"/>
+			<set property="object-name" value="transportticket"/>
+			<set property="relationship" value="transporttickets.mxtransportticket"/>
+			<set property="selection-mode" value="none"/>
+		</add>
+		<add container="transportticket" control="schema">
+			<set property="id" value="a1_aamez"/>
+		</add>
+		<add container="a1_aamez" control="attribute">
+			<set property="id" value="a1_x3xn4"/>
+			<set property="name" value="assetnum"/>
+		</add>
+		<add container="a1_aamez" control="attribute">
+			<set property="id" value="a1_xn6ke"/>
+			<set property="name" value="description"/>
+		</add>
+		<add container="a1_aamez" control="attribute">
+			<set property="id" value="a1_wb986"/>
+			<set property="name" value="description_longdescription"/>
+		</add>
+		<add container="a1_aamez" control="attribute">
+			<set property="id" value="a1_rpryk"/>
+			<set property="name" value="hasld"/>
+		</add>
+		<add container="a1_aamez" control="attribute">
+			<set property="id" value="a1_ew2ya"/>
+			<set property="name" value="hold"/>
+		</add>
+		<add container="a1_aamez" control="attribute">
+			<set property="id" value="a1_d57v_"/>
+			<set property="name" value="location"/>
+		</add>
+		<add container="a1_aamez" control="attribute">
+			<set property="id" value="a1_zknwv"/>
+			<set property="name" value="orgid"/>
+		</add>
+		<add container="a1_aamez" control="attribute">
+			<set property="id" value="a1_a8v9j"/>
+			<set property="name" value="saddrcode"/>
+		</add>
+		<add container="a1_aamez" control="attribute">
+			<set property="id" value="a1_m9q4y"/>
+			<set property="name" value="siteid"/>
+		</add>
+		<add container="a1_aamez" control="attribute">
+			<set property="id" value="a1_eqv"/>
+			<set property="name" value="status"/>
+		</add>
+		<add container="a1_aamez" control="attribute">
+			<set property="id" value="a1_b8kqv"/>
+			<set property="name" value="transportticketid"/>
+		</add>
+		<add container="a1_aamez" control="attribute">
+			<set property="id" value="a1_a7gwm"/>
+			<set property="name" value="wonum"/>
+		</add>
+		<add container="a1_aamez" control="attribute">
+			<set property="id" value="a1_a3rky"/>
+			<set property="name" value="wstart"/>
+		</add>
+		<add container="d_693" control="attribute">
+			<set property="id" value="gezrn"/>
+			<set property="name" value="assetspec"/>
+		</add>
+		<add container="gezrn" control="attribute">
+			<set property="id" value="g6jj9"/>
+			<set property="name" value="_dbcount--assetspeccount"/>
+		</add>
+		<add before="gezrn" container="d_693" control="attribute">
+			<set property="id" value="n49y8"/>
+			<set property="name" value="rel.assetspec{assetattrid,measureunitid,numvalue,alnvalue,assetattribute.description--assetattributedesc,displaysequence}"/>
+		</add>
+		<add before="w886y" container="nmvrw" control="state">
+			<set property="id" value="a1_q_kpm"/>
+			<set property="name" value="hidingwospec"/>
+			<set property="type" value="object"/>
+		</add>
+		<add before="a1_q_kpm" container="nmvrw" control="state">
+			<set property="id" value="a1_bpwqj"/>
+			<set property="name" value="holdingwospec"/>
+			<set property="type" value="object"/>
+		</add>
+		<modify control="n_pxp">
+			<clear property="sortable"/>
+		</modify>
+		<add before="slidingwomaterials" container="wnynq" control="sliding-drawer">
+			<set property="align" value="start"/>
+			<set property="content-padding" value="false"/>
+			<set property="header-text" value="WOSPECDATA"/>
+			<set property="id" value="wospecdialog"/>
+		</add>
+		<add container="wospecdialog" control="box">
+			<set property="direction" value="column"/>
+			<set property="id" value="a1_jwq87"/>
+		</add>
+		<add container="a1_jwq87" control="label">
+			<set property="id" value="a1_vd3ej"/>
+			<set property="label" value="select workorder spec"/>
+			<set property="padding" value="default"/>
+			<set property="theme" value="20-regular"/>
+		</add>
+		<modify control="pb_mv">
+			<set property="disabled" value="{page.state.loadingTasks}"/>
+		</modify>
+		<add before="woDetailResource" container="workOrderDetails" control="maximo-datasource">
+			<set property="cache-expiry-ms" value="1"/>
+			<set property="id" value="wospecdummyload"/>
+			<set property="id-attribute" value="workorderspecid"/>
+			<set property="object-structure" value="MXWOSPEC"/>
+			<set property="order-by" value="displaysequence"/>
+			<set property="pre-load" value="true"/>
+			<set property="saved-query" value="wospecdummy"/>
+			<set property="selection-mode" value="none"/>
+		</add>
+		<add container="wospecdummyload" control="schema">
+			<set property="id" value="a1_kv253"/>
+		</add>
+		<add container="a1_kv253" control="attribute">
+			<set property="id" value="a1_bgna3"/>
+			<set property="name" value="workorderspecid"/>
+		</add>
+		<add container="a1_kv253" control="attribute">
+			<set property="id" value="a1_qqgde"/>
+			<set property="name" value="assetattrid"/>
+		</add>
+		<add container="a1_kv253" control="attribute">
+			<set property="id" value="a1_e9adn"/>
+			<set property="name" value="measureunitid"/>
+		</add>
+		<add container="a1_kv253" control="attribute">
+			<set property="id" value="a1_ewd_7"/>
+			<set property="name" value="numvalue"/>
+			<set property="scale" value="2"/>
+		</add>
+		<add container="a1_kv253" control="attribute">
+			<set property="id" value="a1_ngyyr"/>
+			<set property="name" value="alnvalue"/>
+		</add>
+		<add container="a1_kv253" control="attribute">
+			<set property="id" value="a1_d33dg"/>
+			<set property="name" value="datevalue"/>
+		</add>
+		<add container="a1_kv253" control="attribute">
+			<set property="id" value="a1_pnjjx"/>
+			<set property="name" value="assetattribute.description--assetattributedesc"/>
+		</add>
+		<add container="a1_kv253" control="attribute">
+			<set property="id" value="a1_k4w4d"/>
+			<set property="name" value="displaysequence"/>
+		</add>
+		<add before="vaq3z" container="qmvzy" control="attribute">
+			<set property="id" value="a1_eeq9y"/>
+			<set property="name" value="asset"/>
+		</add>
+		<add container="a1_eeq9y" control="attribute">
+			<set property="id" value="a1_e568j"/>
+			<set property="name" value="assetnum--assetnummm"/>
+		</add>
+		<add container="a1_eeq9y" control="attribute">
+			<set property="id" value="a1_kqjj2"/>
+			<set property="name" value="description--assetdesccc"/>
+		</add>
+		<add container="a1_eeq9y" control="attribute">
+			<set property="id" value="a1_rn7vx"/>
+			<set property="name" value="purchaseprice--assetpp"/>
+		</add>
+		<add before="gmp_2" container="qmvzy" control="attribute">
+			<set property="id" value="a1_w5n4m"/>
+			<set property="name" value="testc"/>
+		</add>
+		<modify control="woSpecificationDrawer">
+			<set property="on-open-action" value="savethestatehere"/>
+			<set property="on-open-action-arg" value="{{'page':page,'app':app,'wospds':woSpecification}}"/>
+		</modify>
+		<modify control="aarem">
+			<set property="hidden" value="{item.assetattrid === 'SIZE'}"/>
+		</modify>
+		<add container="q5zmb" control="smart-input">
+			<set property="id" value="a1_xzvnj"/>
+			<set property="input-kind" value="ALN"/>
+			<set property="value" value="{item.numvalue}"/>
+		</add>
+		<add before="a1_xzvnj" container="q5zmb" control="smart-input">
+			<set property="id" value="a1_bnbyw"/>
+			<set property="input-kind" value="ALN"/>
+			<set property="value" value="{item.alnvalue}"/>
+		</add>
+		<add container="e_e34" control="button-group">
+			<set property="id" value="g84rj"/>
+		</add>
+		<add container="g84rj" control="button">
+			<set property="icon" value="carbon:checkmark--outline"/>
+			<set property="id" value="e9v9e"/>
+			<set property="kind" value="secondary"/>
+			<set property="on-click" value="savethissd"/>
+			<set property="on-click-arg" value="{{'page':page,'app':app,'ds':woSpecification}}"/>
+		</add>
+		<modify control="qzeaq">
+			<set property="loading" value="{page.state.loading || page.state.workloading}"/>
+		</modify>
+		<modify control="dkqr7">
+			<set property="loading" value="{page.state.loading || page.state.workloading}"/>
+		</modify>
+		<modify control="mrw6w">
+			<set property="loading" value="{page.state.loading || page.state.workloading}"/>
+		</modify>
+		<modify control="e5ppv">
+			<set property="loading" value="{page.state.loading || page.state.workloading}"/>
+		</modify>
+		<modify control="e4ppv">
+			<set property="loading" value="{page.state.loading || page.state.workloading}"/>
+		</modify>
+		<modify control="grxqe">
+			<set property="loading" value="{page.state.loading || page.state.workloading}"/>
+		</modify>
+		<modify control="pxaxy">
+			<set property="loading" value="{page.state.loading || page.state.workloading}"/>
+		</modify>
+		<modify control="jq254">
+			<set property="loading" value="{page.state.loading || page.state.workloading}"/>
+		</modify>
+		<add before="z7rk8" container="r5eaq" control="refapp-pivot-template">
+			<set property="id" value="j6pb9"/>
+		</add>
+		<add container="j6pb9" control="refapp-pivot-row-template">
+			<set property="cols" value="{page.state.templateCols}"/>
+			<set property="id" value="k8g7k"/>
+			<set property="label" value="Row 1 using templates with a very long label that should truncate"/>
+		</add>
+		<add container="k8g7k" control="label">
+			<set property="id" value="xjpba"/>
+			<set property="label" value="Label extra info line 1"/>
+			<set property="slot" value="labelInfo"/>
+		</add>
+		<add container="k8g7k" control="label">
+			<set property="id" value="nnnmz"/>
+			<set property="label" value="Label extra info line 2"/>
+			<set property="padding" value="bottom"/>
+			<set property="slot" value="labelInfo"/>
+		</add>
+		<add container="k8g7k" control="label">
+			<set property="id" value="kxdp7"/>
+			<set property="label" value="Sometext r1 c1"/>
+			<set property="slot" value="col1"/>
+		</add>
+		<add container="k8g7k" control="label">
+			<set property="id" value="m9anb"/>
+			<set property="label" value="Sometext r1 c2"/>
+			<set property="slot" value="col2"/>
+		</add>
+		<add container="k8g7k" control="label">
+			<set property="id" value="gn3m5"/>
+			<set property="label" value="Sometext r1 c3"/>
+			<set property="slot" value="col3"/>
+		</add>
+		<add container="k8g7k" control="label">
+			<set property="id" value="q_8np"/>
+			<set property="label" value="Sometext r1 c4"/>
+			<set property="slot" value="col4"/>
+		</add>
+		<add container="j6pb9" control="refapp-pivot-row-template">
+			<set property="cols" value="{page.state.templateCols}"/>
+			<set property="id" value="q_meq"/>
+			<set property="label" value="Row 2 using templates"/>
+		</add>
+		<add container="q_meq" control="label">
+			<set property="id" value="db4bn"/>
+			<set property="label" value="Sometext r2 c1"/>
+			<set property="slot" value="col1"/>
+		</add>
+		<add container="q_meq" control="label">
+			<set property="id" value="pz64p"/>
+			<set property="label" value="Sometext r2 c2"/>
+			<set property="slot" value="col2"/>
+		</add>
+		<add container="q_meq" control="label">
+			<set property="id" value="d5amg"/>
+			<set property="label" value="Sometext r2 c3"/>
+			<set property="slot" value="col3"/>
+		</add>
+		<add container="q_meq" control="label">
+			<set property="id" value="j6_bn"/>
+			<set property="label" value="Sometext r1 c4"/>
+			<set property="slot" value="col4"/>
+		</add>
+		<add before="j6pb9" container="r5eaq" control="box">
+			<set property="children-sizes" value="25,25,50"/>
+			<set property="direction" value="column"/>
+			<set property="id" value="a1_krj9w"/>
+		</add>
+		<add container="a1_krj9w" control="box">
+			<set property="background-color" value="support-01"/>
+			<set property="id" value="a1_qy8zn"/>
+		</add>
+		<add container="a1_qy8zn" control="label">
+			<set property="id" value="a1_wkw32"/>
+			<set property="label" value="BOX1"/>
+		</add>
+		<add container="a1_qy8zn" control="field">
+			<set property="id" value="a1_enmwa"/>
+			<set property="value" value="{woDetailResource.item.assetnum}"/>
+		</add>
+		<add container="a1_krj9w" control="box">
+			<set property="background-color" value="support-02"/>
+			<set property="children-sizes" value="50,50"/>
+			<set property="id" value="a1_jjgq4"/>
+		</add>
+		<add container="a1_jjgq4" control="label">
+			<set property="id" value="a1_jka4y"/>
+			<set property="label" value="BOX2"/>
+		</add>
+		<add container="a1_jjgq4" control="field">
+			<set property="id" value="a1_jznr6"/>
+			<set property="value" value="{woDetailResource.item.locationdesc}"/>
+		</add>
+		<add container="a1_jjgq4" control="box">
+			<set property="id" value="a1_zddbd"/>
+		</add>
+		<add container="a1_zddbd" control="label">
+			<set property="id" value="a1_e8qqz"/>
+			<set property="label" value="BOX 2 - 1"/>
+		</add>
+		<add container="a1_zddbd" control="field">
+			<set property="id" value="a1_gjj3_"/>
+			<set property="value" value="{woDetailResource.item.assetpp}"/>
+		</add>
+		<add container="a1_jjgq4" control="box">
+			<set property="id" value="a1_ryzj_"/>
+		</add>
+		<add container="a1_ryzj_" control="label">
+			<set property="id" value="a1_ekye7"/>
+			<set property="label" value="BOX 2 - 2"/>
+		</add>
+		<add container="a1_krj9w" control="box">
+			<set property="background-color" value="support-03"/>
+			<set property="id" value="a1_qe8kb"/>
+		</add>
+		<add container="a1_qe8kb" control="label">
+			<set property="id" value="a1_e8_dm"/>
+			<set property="label" value="BOX3"/>
+		</add>
+		<add container="a1_qe8kb" control="field">
+			<set property="id" value="a1_v5dey"/>
+			<set property="value" value="{transportticket.item.transportticketid}"/>
+		</add>
+		<add container="a1_qe8kb" control="field">
+			<set property="id" value="a1_v5dex"/>
+			<set property="value" value="{transportticket.state.totalCount}"/>
+		</add>
+		<add before="a1_krj9w" container="r5eaq" control="border-layout">
+			<set property="id" value="a1_qb9er"/>
+		</add>
+		<add container="a1_qb9er" control="top">
+			<set property="background-color" value="support-01"/>
+			<set property="id" value="a1_e5gpw"/>
+		</add>
+		<add container="a1_e5gpw" control="label">
+			<set property="id" value="a1_qjrzk"/>
+			<set property="label" value="TOP"/>
+		</add>
+		<add container="a1_qb9er" control="start">
+			<set property="background-color" value="support-03"/>
+			<set property="id" value="a1_eg8q3"/>
+		</add>
+		<add container="a1_eg8q3" control="label">
+			<set property="id" value="a1_jdzw5"/>
+			<set property="label" value="start"/>
+		</add>
+		<add container="a1_qb9er" control="middle">
+			<set property="background-color" value="support-05"/>
+			<set property="id" value="a1_maxqp"/>
+		</add>
+		<add container="a1_maxqp" control="label">
+			<set property="id" value="a1_anbmz"/>
+			<set property="label" value="middle"/>
+		</add>
+		<add container="a1_maxqp" control="border-layout">
+			<set property="id" value="a1_kxg4d"/>
+		</add>
+		<add container="a1_kxg4d" control="top">
+			<set property="background-color" value="support-01"/>
+			<set property="id" value="a1_dbwbd"/>
+		</add>
+		<add container="a1_dbwbd" control="label">
+			<set property="id" value="a1_bzzrz"/>
+			<set property="label" value="MIDDLE TOP"/>
+		</add>
+		<add container="a1_kxg4d" control="bottom">
+			<set property="background-color" value="support-09"/>
+			<set property="id" value="a1_aqby3"/>
+		</add>
+		<add container="a1_aqby3" control="label">
+			<set property="id" value="a1_grkwy"/>
+			<set property="label" value="MIDDLE BOTTOM"/>
+		</add>
+		<add container="a1_qb9er" control="end">
+			<set property="background-color" value="support-04"/>
+			<set property="id" value="a1_rexgb"/>
+		</add>
+		<add container="a1_rexgb" control="label">
+			<set property="id" value="a1_ben6p"/>
+			<set property="label" value="end"/>
+		</add>
+		<add container="a1_qb9er" control="bottom">
+			<set property="background-color" value="support-02"/>
+			<set property="id" value="a1_jq4rg"/>
+		</add>
+		<add container="a1_jq4rg" control="label">
+			<set property="id" value="a1_aq65e"/>
+			<set property="label" value="BOTTOM"/>
+		</add>
+		<add before="a1_qb9er" container="r5eaq" control="box">
+			<set property="background-color" value="support-03"/>
+			<set property="id" value="a1_prm6q"/>
+		</add>
+		<add container="a1_prm6q" control="label">
+			<set property="id" value="a1_p3ekz"/>
+			<set property="label" value="Sample Box"/>
+		</add>
+		<add container="a1_prm6q" control="field">
+			<set property="id" value="a1_kbxyk"/>
+			<set property="value" value="{woDetailResource.item.wonum}"/>
+		</add>
+		<add container="a1_prm6q" control="field">
+			<set property="id" value="a1_mzbd4"/>
+			<set property="value" value="{woDetailResource.item.testc}"/>
+		</add>
+		<add before="a1_prm6q" container="r5eaq" control="button">
+			<set property="id" value="a1_adp5k"/>
+			<set property="label" value="Specification"/>
+			<set property="on-click" value="showSpecifications"/>
+		</add>
+		<add before="a1_adp5k" container="r5eaq" control="button">
+			<set property="id" value="a1_dv9z89"/>
+			<set property="label" value="WOSPEC"/>
+			<set property="on-click" value="wospecdialogc"/>
+			<set property="on-click-arg" value="{page}"/>
+		</add>
+		<add before="a1_dv9z89" container="r5eaq" control="button">
+			<set property="id" value="a1_q4wb7"/>
+			<set property="label" value="Sample Button "/>
+			<set property="on-click" value="{console.log('Nadeem and Kartik')}"/>
+		</add>
+		<add before="a1_q4wb7" container="r5eaq" control="label">
+			<set property="id" value="a1_xqbrx"/>
+			<set property="label" value="Hello World"/>
+		</add>
+		<modify control="yrx49">
+			<set property="value" value="{ (woDetailResource.item.reportedbyperson.primaryphone === undefined) ? woDetailResource.item.phone : woDetailResource.item.reportedbyperson.primaryphone}"/>
+		</modify>
+		<modify control="naq94">
+			<set property="name" value="binnum"/>
+		</modify>
+		<modify control="vbwyk">
+			<set property="value" value="{item.binnum}"/>
+		</modify>
+		<modify control="z7ej9">
+			<clear property="loading"/>
+		</modify>
+		<remove container="j2d__" control="kx2qj"/>
+		<remove container="w8_wa" control="jxaze"/>
+		<remove container="w8_wa" control="kzykr"/>
+		<remove container="w8_wa" control="xy3jm"/>
+		<remove container="w8_wa" control="kw3_g"/>
+		<remove container="n5_2r" control="record_not_available_device"/>
+	</app>
+</updatescript>
