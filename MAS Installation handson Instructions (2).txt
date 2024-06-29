@@ -1,0 +1,363 @@
+IBM container software library URL for getting entitlement key
+https://myibm.ibm.com/products-services/containerlibrary
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE2OTkyODU4NTAsImp0aSI6Ijc1MTY3ODcwYjc3NzRjZjdiNjg0MzJlNDNjZmMxMjdjIn0.P-U5hbcUiE92BRNWQNV7i-dx0aO7hXoJHUmzM_zYb_4
+
+IBM license key center URL(generate license.dat file)
+https://licensing.subscribenet.com/control/ibmr/login
+
+
+1. We need Linux VM(bastion host or jumpbox) to connect to Openshift cluster
+
+2. Login to Linux VM using user with ppk file(SSH key)
+
+3. dont change user to root if you have logged in with some other user , instead use sudo while running command to get admin rights
+
+========Linux VM - set path=====================================
+##### Setup path 
+echo $PATH
+export PATH=$PATH:/root
+export PATH=$PATH:/usr/bin	
+
+##### Install tools required for installation (python39 is required for one click automation)######
+
+sudo yum update -y
+
+---install python---------
+sudo yum install python3.9 -y
+
+--check python version, it should be 3.9
+python3 --version
+
+----install docker----------
+sudo yum install docker -y
+
+
+##### Install Openshift Comamnd Line Tool(version compatible for OpenShift 4.10) #####
+
+sudo wget -q https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/4.10.45/openshift-client-linux.tar.gz
+sudo tar -zxf openshift-client-linux.tar.gz
+sudo mv oc kubectl /usr/local/bin/
+rm -rf openshift-client-linux.tar.gz
+oc version --client
+kubectl version --client=true
+docker --version
+
+##### Install IBM Cloud API #####
+
+curl -sL https://raw.githubusercontent.com/IBM-Cloud/ibm-cloud-developer-tools/master/linux-installer/idt-installer | bash
+ibmcloud version
+ibmcloud --help
+
+##### Install Ansible - required for one click automation)######
+
+
+python3 -m pip install ansible junit_xml pymongo xmljson jmespath kubernetes==12.0.1 openshift==0.12.1
+ansible --version
+ansible-playbook --version
+
+sudo updatedb
+
+sudo yum clean all -y
+
+##### Install the Ansible Collection  #####
+ansible-galaxy collection install ibm-mas_devops-18.15.0.tar.gz  ## dowload the tarball file with name in the command and use it with the preceeding command that is ancible-glaxy
+
+
+
+
+##### Login to Openshift cluster ######
+oc login --token=sha256~NcHMJI3aZPRRQDvA_K0JqX-x8lbFxl_MHtLC-fJnlqQ --server=https://c111-e.us-east.containers.cloud.ibm.com:30391
+
+
+oc login --token=sha256~Ou_OBF4WwDo3ZsATPogXFeohNRS_rdHK4KBp2_ZtUU0 --server=https://api.tzrosa-9h5c5m3e.7skh.p1.openshiftapps.com:6443
+
+#### Permission granting for directories###
+chmod -R 777 /home/itzuser/license
+chmod -R 777 /home/itzuser/msconfig 
+
+
+##### OneClick Install for MAS Core - run a playbook  #####
+
+
+Install IBM Operator Catalogs (1 minute)
+Install IBM Common Services (3 minutes)
+Install Certificate Manager Operator (3 minutes)
+Install Service Binding Operator (2 minutes)
+Configure Cluster Monitoring (1 minute)
+Install Mongodb Operator and Create a Cluster (10 minutes)
+Install and bootstrap IBM Suite License Service (10 minutes)
+Install IBM User Data Services (30 minutes)
+Generate a MAS Workspace Configuration (1 minute)
+Configure Cloud Internet Services Integration for Maximo Application Suite (Optional, 1 minute)
+Install Maximo Application Suite Core Services (1 minute)
+Configure Maximo Application Suite (1 minute)
+Verify the Install and Configuration of Maximo Application Suite (25 minutes)
+
+#eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE3MDQ2MzQzMjQsImp0aSI6IjhiMjdmMzI3YmZiYjRkYmRhZTgwNmE0ZmQ1MDVlNTc2In0.yfBZGi2ibN2s4gOewsqXDVB4TB_uC3LDO_rfmHNGBJU
+export IBM_ENTITLEMENT_KEY=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE2NzI5OTU2MzUsImp0aSI6ImM4MmEyYzU5ODA0NjQwMjViODlmNWZlYTI2Zjk5YjM3In0.xdKln4pfhZpUhXyxsP6NgiXRzSANmGrC0HpfBgBpZTI
+export MAS_INSTANCE_ID=masdemo
+export MAS_CONFIG_DIR=/home/itzuser/msconfig
+export SLS_LICENSE_ID=license.dat
+export SLS_LICENSE_FILE=/home/itzuser/license/license.dat
+export UDS_CONTACT_EMAIL=chinnabhupal.mekala@infosys.com
+export UDS_CONTACT_FIRSTNAME=Chinnabhupal
+export UDS_CONTACT_LASTNAME=Mekala
+export MONGODB_STORAGE_CLASS=ibmc-block-gold
+export UDS_STORAGE_CLASS=ibmc-block-bronze
+
+
+export IBM_ENTITLEMENT_KEY=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE2OTkyODU4NTAsImp0aSI6Ijc1MTY3ODcwYjc3NzRjZjdiNjg0MzJlNDNjZmMxMjdjIn0.P-U5hbcUiE92BRNWQNV7i-dx0aO7hXoJHUmzM_zYb_4
+export MAS_INSTANCE_ID=masdemo
+export MAS_CONFIG_DIR=~/itzuser/msconfig
+export SLS_LICENSE_ID=license.dat
+export SLS_LICENSE_FILE=~/itzuser/license/license.dat
+export UDS_CONTACT_EMAIL=venkata.puraanam@infosys.com
+export UDS_CONTACT_FIRSTNAME=venkata
+export UDS_CONTACT_LASTNAME=puraanam
+
+
+
+##only for aws
+export MONGODB_STORAGE_CLASS=gp3-csi
+export UDS_STORAGE_CLASS=gp3-csi
+
+
+
+##Run playbook for mas core installation
+ansible-playbook ibm.mas_devops.oneclick_core
+
+After successful MAS installation,below message is displayed. Initial core suite setup with UDS, SLS and MONGO end point is done.
+
+"Maximo Application Suite is Ready, use the superuser credentials to authenticate",
+        "Admin Dashboard ... https://admin.masdemo.eaisscm-us-south-1-bx2-16-cf9f8ca045414b660f1902950c58d3d6-i000.us-south.containers.appdomain.cloud",
+        "Username .......... V9D8TKBq4OWGsKFpccDsknUVGWzcLQqB",
+        "Password .......... ARYT8wRHEppVFw0NyOhIOq9zEen2Y5LQ"
+	username : maxadmin
+	password : manage2023manage2023
+MAS URL = https://masdev.manage.masdemo.eaisscm-us-south-1-bx2-16-cf9f8ca045414b660f1902950c58d3d6-i000.us-south.containers.appdomain.cloud/maximo
+
+
+
+
+TASK [ibm.mas_devops.suite_verify : Maximo Application Suite Authentication Summary:] ***********************************************************************
+ok: [localhost] => {
+    "msg": [
+        "Maximo Application Suite is Ready, use the superuser credentials to authenticate",
+        "Admin Dashboard ... https://admin.masdemo.itzroks-6630039q7f-b0sx7d-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud",
+        "Username .......... QU1WFz4RpvaNzsBYXElapkehldzjY7r7",
+        "Password .......... uwiclPBpfiYLA7zxCihyiZN36Zc8Gu6l"
+    ]
+}
+
+
+
+##### Edit installation-pull-secrets, pull-secret, add below credentials, reboot/reload nodes ######
+
+Registry Server Address = cp.icr.io
+Username = cp
+Password = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE2OTkyODU4NTAsImp0aSI6Ijc1MTY3ODcwYjc3NzRjZjdiNjg0MzJlNDNjZmMxMjdjIn0.P-U5hbcUiE92BRNWQNV7i-dx0aO7hXoJHUmzM_zYb_4
+
+
+
+##### OneClick Install DB2 installation  #####
+
+export DB2_INSTANCE_NAME=db2u-manage
+export IBM_ENTITLEMENT_KEY=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE2OTkyODU4NTAsImp0aSI6Ijc1MTY3ODcwYjc3NzRjZjdiNjg0MzJlNDNjZmMxMjdjIn0.P-U5hbcUiE92BRNWQNV7i-dx0aO7hXoJHUmzM_zYb_4
+export DB2_META_STORAGE_CLASS=ibmc-file-gold
+export DB2_DATA_STORAGE_CLASS=ibmc-block-gold
+export DB2_BACKUP_STORAGE_CLASS=ibmc-file-gold
+export DB2_LOGS_STORAGE_CLASS=ibmc-block-gold
+export DB2_TEMP_STORAGE_CLASS=ibmc-block-gold
+export MAS_INSTANCE_ID=masdemo
+export MAS_CONFIG_DIR=/home/itzuser/msconfig
+
+ansible localhost -m include_role -a name=ibm.mas_devops.db2
+
+===output ====================================================
+
+localhost | CHANGED => {
+    "changed": true,
+    "checksum": "43dd396bf09e0f9cc7e49edf69b352f0aadf57e3",
+    "dest": "/root/masconfig/jdbc-db2u-manage-db2u.yml",
+    "gid": 0,
+    "group": "root",
+    "md5sum": "f6accfb028779a090f246f2c9caaf0c7",
+    "mode": "0600",
+    "owner": "root",
+    "secontext": "system_u:object_r:admin_home_t:s0",
+    "size": 2217,
+    "src": "/root/.ansible/tmp/ansible-tmp-1684480134.3702343-29457-79317098715397/source",
+    "state": "file",
+    "uid": 0
+
+===========================================================================================
+
+***********************************************************************************************************************************************************************
+oc get db2ucluster -n db2u db2w-shared -o jsonpath='{.status.state} {"\n"}'
+
+Ready
+Running steps of setting schema for manage installation manually as role suite_db2_setup_for_manage failed during one click automation 
+
+--clone the mas-ocp-lab directory(no longer required)
+git clone https://github.com/aroute/mas-ocp-lab.git
+
+
+
+--Navigate to mas-ocp-lab directory
+cd mas-ocp-lab/
+
+--Select project db2u
+oc project db2u
+
+--Get pods for DB2 instance
+oc get pods c-db2u-manage-db2u-0
+
+--Copy db2_manage_upd.sh from mas-ocp-lab directory into tmp folder of DB2WH pod
+oc cp db2_manage_update.sh c-db2u-manage-db2u-0:/tmp/
+
+
+--Login as user db2inst1
+oc rsh pod/c-db2u-manage-db2u-0 su - db2inst1
+
+--COPY db2_manage_upd.sh filr
+cp /tmp/db2_manage_update.sh .
+
+--Give read/write permission for db2_manage_upd.sh file
+chmod +x db2_manage_update.sh
+
+--Run db2_manage_upd.sh file
+./db2_manage_update.sh
+
+#!/usr/bin/bash
+
+
+---Link for preparing database for manage----------------------
+
+https://www.ibm.com/docs/en/mas-cd/continuous-delivery?topic=install-database-configuration-details-maximo-manage
+
+###########Runing Role --> ibm.mas_devops.suite_config###########
+
+Login to admin console and deploy applications
+Update database connection information
+Activate manage
+
+
+
+TASK [ibm.mas_devops.suite_verify : Maximo Application Suite Authentication Summary:] ***********************************************************************
+ok: [localhost] => {
+    "msg": [
+        "Maximo Application Suite is Ready, use the superuser credentials to authenticate",
+        "Admin Dashboard ... https://admin.masdemo.itzroks-6630039q7f-b0sx7d-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud",
+        "Username .......... QU1WFz4RpvaNzsBYXElapkehldzjY7r7",
+        "Password .......... uwiclPBpfiYLA7zxCihyiZN36Zc8Gu6l"
+    ]
+}
+
+
+
+docker login cp.icr.io --username cp --password eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE3MDQ2MzQzMjQsImp0aSI6IjhiMjdmMzI3YmZiYjRkYmRhZTgwNmE0ZmQ1MDVlNTc2In0.yfBZGi2ibN2s4gOewsqXDVB4TB_uC3LDO_rfmHNGBJU
+
+docker pull cp.icr.io/cp/manage/maf-tools:8.11.0
+
+docker run -it --privileged -p 3001:3001 -p 3006:3006 -v maximo_workspace_directory:/graphite/.workspace -it cp.icr.io/cp/manage/maf-tools:8.11
+
+docker run -it --privileged -p 3001:3001 -p 3006:3006 -v /home/admin/Desktop/maf:/graphite/.workspace -it cp.icr.io/cp/manage/maf-tools:8.11
+
+
+docker run -it --privileged --env NODE_TLS_REJECT_UNAUTHORIZED=0 -p 3001:3001 -p 3006:3006 -v /home/admin/Desktop/maf:/graphite/.workspace -it cp.icr.io/cp/manage/maf-tools:8.11
+
+https://masdev.manage.masdemo.itzroks-6630039q7f-b0sx7d-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud\maximo
+
+
+
+
+a-masdemo-unbiqnmaguqe
+
+
+tUF8N6lYkQFMn0bdwG3VEUx5KVfBoIzjly0EpAbOfN8ABzm3BuFWF2P7h-EVS-4GMhwfP63or98QpUb562K60A
+
+
+docker run -it --privileged --env NODE_TLS_REJECT_UNAUTHORIZED=0 -p 3001:3001 -p 3006:3006 -v /home/admin/Desktop/maf:/graphite/.workspace -it -e CHOKIDAR_USEPOLLING=true cp.icr.io/cp/manage/maf-tools:8.11
+
+
+https://masdev.manage.masdemo.itzroks-6630039q7f-b0sx7d-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/maximo
+
+
+8ro48pcsfu614siropbsr6jir6ng257v0m55euuj
+
+http://localhost/maximo/api/os/oslcmafappdata/_VEVDSE1PQklMRS8yMDI0LTAxLTA5VDIxOjE2OjUwKzAwOjAw?action=wsmethod:cloneApp&lean=1&appId=nnnnnnnnnnnnnnnnnn&description=Technician
+
+
+
+https://masdev.manage.masdemo.itzroks-6630039q7f-b0sx7d-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/maximo/api/os/oslcmafappdata/_VEVDSE1PQklMRS8yMDI0LTAxLTA5VDIxOjE2OjUwKzAwOjAw?action=wsmethod:cloneApp&lean=1&appId=nnnnnnnnnnnnnnnnnn&description=Technician
+
+
+
+http://localhost/maximo/oslc/
+
+http://localhost/maxrest/oslc
+
+http://localhost/maximo/oslc/
+
+
+
+https://masdev.manage.masdemo.itzroks-6630039q7f-b0sx7d-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/maximo/oslc/
+
+https://masdev.manage.masdemo.itzroks-6630039q7f-b0sx7d-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/maxrest/oslc
+
+
+
+https://dev.to/ibmdeveloper/simple-guide-to-deploying-a-node-server-to-red-hat-openshift-aa9
+
+
+
+
+$ curl "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m"
+
+{
+  "current": {
+    "time": "2022-01-01T15:00"
+    "temperature_2m": 2.4,
+    "wind_speed_10m": 11.9,
+  },
+  "hourly": {
+    "time": ["2022-07-01T00:00","2022-07-01T01:00", ...]
+    "wind_speed_10m": [3.16,3.02,3.3,3.14,3.2,2.95, ...],
+    "temperature_2m": [13.7,13.3,12.8,12.3,11.8, ...],
+    "relative_humidity_2m": [82,83,86,85,88,88,84,76, ...],
+  }
+}
+
+
+https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m
+
+
+
+ORGID='SHEPD' and LOCTYPE='SUBSTATION' and OBJECT='LOCATIONS' and
+ACTIVE='1'  
+
+***********************************************************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
