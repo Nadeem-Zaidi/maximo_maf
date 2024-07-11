@@ -108,3 +108,4 @@ INCREMENT MAS-Premium-Authorized ibmratl 1.0 31-mar-2024 1 \
 
 
 icr.io/cpopen/ibm-maximo-operator-catalog@sha256:e74f646327e728aa523199e9dfb2e95efb67385755c3ac9f0763ab6563e63843
+'icr.io/cpopen/ibm-maximo-operator-catalog:v8-231031-amd64'
