@@ -103,3 +103,8 @@ INCREMENT MAS-Premium-Authorized ibmratl 1.0 31-mar-2024 1 \
 	VENDOR_STRING=IBM:t,AppPoints,1.0,MAS-Premium-Authorized,5 \
 	ISSUED=05-Jan-2024 SIGN="00B6 F81D E1C9 6FA0 4EC3 25A3 7481 \
 	FB00 7A6B BF7D 6895 209B 59B2 2EC8 4EFF"
+
+
+
+
+icr.io/cpopen/ibm-maximo-operator-catalog@sha256:e74f646327e728aa523199e9dfb2e95efb67385755c3ac9f0763ab6563e63843
